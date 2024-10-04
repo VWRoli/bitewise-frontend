@@ -10,11 +10,18 @@ import {
 interface IProps {
   label: string;
   id: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   type: 'text' | 'password' | 'email';
+  onIconClick?: () => void;
 }
 
-const CustomFormControl = ({ label, id, icon, type = 'text' }: IProps) => {
+const CustomFormControl = ({
+  label,
+  id,
+  icon,
+  type = 'text',
+  onIconClick = () => {},
+}: IProps) => {
   return (
     <FormControl variant="outlined" fullWidth>
       <InputLabel htmlFor={id}>{label}</InputLabel>
@@ -23,7 +30,11 @@ const CustomFormControl = ({ label, id, icon, type = 'text' }: IProps) => {
         type={type}
         endAdornment={
           <InputAdornment position="end">
-            <IconButton aria-label="check" edge="end">
+            <IconButton
+              aria-label="check"
+              edge="end"
+              onClick={() => onIconClick()}
+            >
               {icon}
             </IconButton>
           </InputAdornment>

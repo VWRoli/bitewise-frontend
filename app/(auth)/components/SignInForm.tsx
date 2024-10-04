@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CustomFormControl from '@/app/modules/auth/components/CustomFormControl';
+import CustomFormControl from '@/app/(auth)/components/CustomFormControl';
 
 const SignInForm = () => {
   return (

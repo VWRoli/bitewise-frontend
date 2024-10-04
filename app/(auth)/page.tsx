@@ -1,5 +1,5 @@
-import AuthForm from '@/app/modules/auth/components/AuthForm';
-import AuthImageFrame from '@/app/modules/auth/components/AuthImageFrame';
+import AuthForm from '@/app/(auth)/components/AuthForm';
+import AuthImageFrame from '@/app/(auth)/components/AuthImageFrame';
 
 export default function Auth() {
   return (

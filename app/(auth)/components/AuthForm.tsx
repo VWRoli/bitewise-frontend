@@ -1,15 +1,15 @@
 'use client';
 
 import { Divider, IconButton, Tab, Tabs } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import AppleIcon from '@mui/icons-material/Apple';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import SignInForm from '@/app/modules/auth/components/SignInForm';
-import SignUpForm from '@/app/modules/auth/components/SignUpForm';
+import SignUpForm from '@/app/(auth)/components/SignUpForm';
+import SignInForm from '@/app/(auth)/components/SignInForm';
 
 const AuthForm = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
