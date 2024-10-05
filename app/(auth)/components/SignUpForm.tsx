@@ -1,7 +1,10 @@
+'use client';
 import { defaultSignUpValues } from '@/app/(auth)/constants';
+import { ISignUp } from '@/app/(auth)/interfaces';
+import { register } from '@/app/(auth)/services';
 import { passwordRules } from '@/app/(auth)/utils';
-import { Button } from '@mui/material';
-import React from 'react';
+import LoadingButton from '@mui/lab/LoadingButton';
+import React, { useState } from 'react';
 import {
   FormContainer,
   PasswordElement,
@@ -10,10 +13,21 @@ import {
 } from 'react-hook-form-mui';
 
 const SignUpForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const handleSuccess = async (data: ISignUp) => {
+    try {
+      setIsLoading(true);
+      await register(data);
+      setIsLoading(false);
+    } catch (error: any) {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <FormContainer
       defaultValues={defaultSignUpValues}
-      onSuccess={(data) => console.log(data)}
+      onSuccess={(data) => handleSuccess(data)}
       onError={(error) => console.log(error)}
     >
       <div className="flex flex-col gap-4 w-full">
@@ -23,6 +37,7 @@ const SignUpForm = () => {
           type={'email'}
           label={'Email Address'}
           name={'email'}
+          disabled={isLoading}
         />
         <PasswordElement
           label={'Password'}
@@ -30,6 +45,7 @@ const SignUpForm = () => {
           fullWidth
           name={'password'}
           rules={passwordRules}
+          disabled={isLoading}
         />
         <PasswordRepeatElement
           passwordFieldName={'password'}
@@ -38,11 +54,17 @@ const SignUpForm = () => {
           label={'Confirm Password'}
           required
           rules={passwordRules}
+          disabled={isLoading}
         />
 
-        <Button variant="contained" fullWidth type="submit">
+        <LoadingButton
+          loading={isLoading}
+          variant="contained"
+          fullWidth
+          type="submit"
+        >
           Sign Up
-        </Button>
+        </LoadingButton>
       </div>
     </FormContainer>
   );
