@@ -7,11 +7,12 @@ import AppleIcon from '@mui/icons-material/Apple';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import SignUpForm from '@/app/(auth)/components/SignUpForm';
 import SignInForm from '@/app/(auth)/components/SignInForm';
+import { AuthView } from '@/app/(auth)/enum';
 
 const AuthForm = () => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState<AuthView>(AuthView.SIGN_IN);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 

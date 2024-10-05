@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
-import { getPathName } from '@/app/dashboard/helpers';
+import { getPathName } from '@/app/dashboard/utils';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
