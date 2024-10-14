@@ -8,10 +8,11 @@ import {
 } from '@mui/material';
 import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { getPathName } from '@/app/dashboard/utils';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { signOut } from 'next-auth/react';
 
 interface IProps {
   mobileOpen: boolean;
@@ -19,6 +20,7 @@ interface IProps {
   setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const CustomAppBar = ({ mobileOpen, isClosing, setMobileOpen }: IProps) => {
+  const router = useRouter();
   const fullPathName = usePathname();
   const handleDrawerToggle = () => {
     if (!isClosing) {
@@ -26,6 +28,12 @@ const CustomAppBar = ({ mobileOpen, isClosing, setMobileOpen }: IProps) => {
     }
   };
   const pathName = getPathName(fullPathName);
+
+  const handleLogout = async () => {
+    await signOut().then(() => {
+      router.push('/');
+    });
+  };
 
   return (
     <>
@@ -49,7 +57,11 @@ const CustomAppBar = ({ mobileOpen, isClosing, setMobileOpen }: IProps) => {
           </IconButton>
           <h4 className="first-letter:uppercase">{pathName}</h4>
           <div>
-            <Button variant="text" className="text-white">
+            <Button
+              variant="text"
+              className="text-white"
+              onClick={handleLogout}
+            >
               Log Out
             </Button>
             <IconButton
