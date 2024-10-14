@@ -1,4 +1,4 @@
-import { ISignIn, IUser } from '@/app/(auth)/interfaces';
+import { ISignIn, IUser, ISession } from '@/app/(auth)/interfaces';
 import { login } from '@/app/(auth)/services/sign-up';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
@@ -28,9 +28,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }): Promise<ISession> {
       if (token?.id) {
-        session.user.id = token.id;
+        session.user.id = token.id as string;
       }
       return session;
     },

@@ -32,7 +32,6 @@ const SignUpForm = ({ isLoading, setIsLoading }: IFormProps) => {
     <FormContainer
       defaultValues={defaultSignUpValues}
       onSuccess={(data) => handleSuccess(data)}
-      onError={(error) => console.log(error)}
     >
       <div className="flex flex-col gap-4 w-full">
         <TextFieldElement

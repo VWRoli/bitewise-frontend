@@ -50,7 +50,6 @@ const SignInForm = ({ isLoading, setIsLoading }: IFormProps) => {
     <FormContainer
       defaultValues={defaultSignInValues}
       onSuccess={handleSuccess}
-      onError={(error) => console.log(error)}
     >
       <div className="flex flex-col gap-4 w-full">
         {step === ESignInSteps.STEP_0 ? (

@@ -36,7 +36,7 @@ export const login = async (userData: ISignIn): Promise<IUser> => {
       body: JSON.stringify(userData),
     });
     const responseData = await response.json();
-    console.log(responseData);
+
     if (!response.ok) {
       throw new Error(responseData.message || 'Login failed.');
     }
