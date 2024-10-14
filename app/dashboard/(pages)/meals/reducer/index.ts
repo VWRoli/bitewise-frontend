@@ -1,14 +1,14 @@
 import { ACTION_TYPES } from '@/app/common/enums';
 import { IActionType } from '@/app/common/interfaces';
-import { INITIAL_STATE } from '@/app/dashboard/(pages)/ingredients/constants';
-import { IIngredientState } from '@/app/dashboard/(pages)/ingredients/interfaces';
+import { INITIAL_STATE } from '@/app/dashboard/(pages)/meals/constants';
+import { IMealState } from '@/app/dashboard/(pages)/meals/interfaces';
 
-export const ingredientReducer = (
+export const mealReducer = (
   state = INITIAL_STATE,
   action: IActionType,
-): IIngredientState => {
+): IMealState => {
   switch (action.type) {
-    // Fetching Ingredients
+    // Fetching Meals
     case ACTION_TYPES.FETCH_START:
       return {
         ...state,
@@ -19,7 +19,7 @@ export const ingredientReducer = (
       return {
         ...state,
         isLoading: false,
-        ingredients: action.payload,
+        meals: action.payload,
       };
     case ACTION_TYPES.FETCH_ERROR:
       return {
@@ -28,7 +28,7 @@ export const ingredientReducer = (
         isError: true,
       };
 
-    // Creating an Ingredient
+    // Creating a Meal
     case ACTION_TYPES.CREATE_START:
       return {
         ...state,
@@ -39,7 +39,7 @@ export const ingredientReducer = (
       return {
         ...state,
         isLoading: false,
-        ingredients: [...state.ingredients, action.payload],
+        meals: [...state.meals, action.payload],
       };
     case ACTION_TYPES.CREATE_ERROR:
       return {
@@ -48,7 +48,7 @@ export const ingredientReducer = (
         isError: true,
       };
 
-    // Updating an Ingredient
+    // Updating a Meal
     case ACTION_TYPES.UPDATE_START:
       return {
         ...state,
@@ -59,8 +59,8 @@ export const ingredientReducer = (
       return {
         ...state,
         isLoading: false,
-        ingredients: state.ingredients.map((ingredient) =>
-          ingredient.id === action.payload.id ? action.payload : ingredient,
+        meals: state.meals.map((meal) =>
+          meal.id === action.payload.id ? action.payload : meal,
         ),
       };
     case ACTION_TYPES.UPDATE_ERROR:
@@ -70,7 +70,7 @@ export const ingredientReducer = (
         isError: true,
       };
 
-    // Deleting an Ingredient
+    // Deleting an Meal
     case ACTION_TYPES.DELETE_START:
       return {
         ...state,
@@ -81,9 +81,7 @@ export const ingredientReducer = (
       return {
         ...state,
         isLoading: false,
-        ingredients: state.ingredients.filter(
-          (ingredient) => ingredient.id !== action.payload,
-        ),
+        meals: state.meals.filter((meal) => meal.id !== action.payload),
       };
     case ACTION_TYPES.DELETE_ERROR:
       return {

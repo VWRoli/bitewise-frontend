@@ -1,10 +1,9 @@
-import { ACTION_TYPES } from '@/app/dashboard/(pages)/ingredients/enums';
 import { ICreateIngredient } from '@/app/dashboard/(pages)/ingredients/interfaces';
-
 import * as api from '@/app/dashboard/(pages)/ingredients/api';
 import { toaster } from '@/app/common/components/CustomToast';
 import { AxiosError } from 'axios';
-import { IActionType } from '@/app/dashboard/(pages)/ingredients/reducer';
+import { ACTION_TYPES } from '@/app/common/enums';
+import { IActionType } from '@/app/common/interfaces';
 
 export const handleCreateIngredient = async (
   dispatch: React.Dispatch<IActionType>,

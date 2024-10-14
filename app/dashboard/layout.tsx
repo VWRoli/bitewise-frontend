@@ -12,7 +12,9 @@ export default function Layout({
 }>) {
   const status = useAuthRedirect();
 
-  status === 'loading' && <LoadingPage />;
+  if (status === 'loading') {
+    return <LoadingPage />;
+  }
 
   return (
     <>

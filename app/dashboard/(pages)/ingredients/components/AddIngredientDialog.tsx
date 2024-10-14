@@ -16,15 +16,12 @@ import { LoadingButton } from '@mui/lab';
 import CustomTextField from '@/app/dashboard/components/CustomTextField';
 import { ADD_INGRENDIENT_FIELDS } from '@/app/dashboard/(pages)/ingredients/constants';
 
-interface AddIngredientDialogProps {
+export interface AddDialogProps {
   open: boolean;
   onClose: () => void;
 }
 
-const AddIngredientDialog: React.FC<AddIngredientDialogProps> = ({
-  open,
-  onClose,
-}) => {
+const AddIngredientDialog: React.FC<AddDialogProps> = ({ open, onClose }) => {
   const { data: session } = useSession();
   const { state, dispatch } = useIngredientsContext();
 

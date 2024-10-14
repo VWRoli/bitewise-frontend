@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Divider, Grid2, Typography } from '@mui/material';
+import { Card, CardContent, Grid2, Typography } from '@mui/material';
 import { IIngredient } from '@/app/dashboard/(pages)/ingredients/interfaces';
 
 interface IngredientCardProps {

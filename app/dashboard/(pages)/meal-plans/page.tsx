@@ -5,6 +5,8 @@ import LoadingPage from '@/app/common/components/LoadingPage';
 export default function Page() {
   const status = useAuthRedirect();
 
-  status === 'loading' && <LoadingPage />;
+  if (status === 'loading') {
+    return <LoadingPage />;
+  }
   return <>Meal PLans</>;
 }

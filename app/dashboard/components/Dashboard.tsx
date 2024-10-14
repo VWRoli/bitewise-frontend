@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import CustomAppBar from '@/app/dashboard/components/CustomAppBar';
 import CustomDrawer from '@/app/dashboard/components/CustomDrawer';
 
-export default function Dashboard({ children }: React.PropsWithChildren) {
+export default function Dashboard() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
