@@ -1,10 +1,11 @@
 'use client';
+import { IFormProps } from '@/app/(auth)/components/AuthForm';
 import { defaultSignUpValues } from '@/app/(auth)/constants';
 import { ISignUp } from '@/app/(auth)/interfaces';
 import { register } from '@/app/(auth)/services';
 import { passwordRules } from '@/app/(auth)/utils';
 import LoadingButton from '@mui/lab/LoadingButton';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FormContainer,
   PasswordElement,
@@ -12,8 +13,7 @@ import {
   TextFieldElement,
 } from 'react-hook-form-mui';
 
-const SignUpForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
+const SignUpForm = ({ isLoading, setIsLoading }: IFormProps) => {
   const handleSuccess = async (data: ISignUp) => {
     try {
       setIsLoading(true);

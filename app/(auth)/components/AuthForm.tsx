@@ -9,7 +9,12 @@ import SignUpForm from '@/app/(auth)/components/SignUpForm';
 import SignInForm from '@/app/(auth)/components/SignInForm';
 import { AuthView } from '@/app/(auth)/enum';
 
+export interface IFormProps {
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
 const AuthForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState<AuthView>(AuthView.SIGN_IN);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -21,11 +26,20 @@ const AuthForm = () => {
       <div>Logo</div>
       <h1 className="text-2xl xl:text-3xl font-bold">Welcome Back</h1>
       <div>Welcome back, please enter your details</div>
-      <Tabs value={value} onChange={handleChange} centered>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        centered
+        className={`${isLoading ? 'opacity-50 pointer-events-none' : ''}`}
+      >
         <Tab label="Sign In" />
         <Tab label="Sign Up" />
       </Tabs>
-      {value ? <SignUpForm /> : <SignInForm />}
+      {value ? (
+        <SignUpForm isLoading={isLoading} setIsLoading={setIsLoading} />
+      ) : (
+        <SignInForm isLoading={isLoading} setIsLoading={setIsLoading} />
+      )}
       <Divider
         aria-hidden="true"
         component="div"

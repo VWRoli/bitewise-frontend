@@ -2,7 +2,6 @@ import { defaultSignInValues } from '@/app/(auth)/constants';
 import { ESignInSteps } from '@/app/(auth)/enum';
 import { ISignIn } from '@/app/(auth)/interfaces';
 import { passwordRules } from '@/app/(auth)/utils';
-import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import {
   FormContainer,
@@ -10,34 +9,40 @@ import {
   TextFieldElement,
 } from 'react-hook-form-mui';
 import { signIn } from 'next-auth/react';
+import { toaster } from '@/app/common/components/CustomToast';
 import { useRouter } from 'next/navigation';
+import { LoadingButton } from '@mui/lab';
+import { IFormProps } from '@/app/(auth)/components/AuthForm';
 
-const SignInForm = () => {
+const SignInForm = ({ isLoading, setIsLoading }: IFormProps) => {
+  const router = useRouter();
   const [step, setStep] = useState<ESignInSteps>(ESignInSteps.STEP_0);
 
   const handleEmailValidation = (data: ISignIn) => {
     if (data.email) setStep(ESignInSteps.STEP_1);
   };
 
-  const router = useRouter();
-
   const handleSuccess = async (data: ISignIn) => {
-    if (step === ESignInSteps.STEP_0) handleEmailValidation(data);
-
-    const result = await signIn('credentials', {
-      redirect: false, // Prevent automatic page redirect on success
-      email: data.email,
-      password: data.password,
-      redirectTo: '/dashboard',
-    });
-
-    if (result?.error) {
-      console.log('Error signing in: ', result.error);
-      // Handle error (e.g., display message to the user)
+    if (step === ESignInSteps.STEP_0) {
+      handleEmailValidation(data);
     } else {
-      console.log('Signed in successfully!');
-      // Handle successful sign-in, maybe redirect or show success message
+      setIsLoading(true);
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+      });
+
+      if (result?.error) {
+        toaster.error({
+          text: 'Error signing in. Invalid credentials',
+        });
+        setIsLoading(false);
+        return;
+      }
+
       router.push('/dashboard');
+      setIsLoading(false);
     }
   };
 
@@ -54,6 +59,7 @@ const SignInForm = () => {
             fullWidth
             type={'email'}
             label={'Email Address'}
+            disabled={isLoading}
             name={'email'}
           />
         ) : (
@@ -62,13 +68,19 @@ const SignInForm = () => {
             required
             fullWidth
             name={'password'}
+            disabled={isLoading}
             rules={passwordRules}
           />
         )}
 
-        <Button variant="contained" fullWidth type="submit">
+        <LoadingButton
+          variant="contained"
+          fullWidth
+          type="submit"
+          loading={isLoading}
+        >
           {step === ESignInSteps.STEP_0 ? 'Continue' : 'Sign In'}
-        </Button>
+        </LoadingButton>
       </div>
     </FormContainer>
   );

@@ -1,4 +1,4 @@
-import { ISignIn } from '@/app/(auth)/interfaces';
+import { ISignIn, IUser } from '@/app/(auth)/interfaces';
 import { login } from '@/app/(auth)/services/sign-up';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
@@ -12,9 +12,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         const data: ISignIn = credentials as any;
-        const user = await login(data);
+        const user: IUser = await login(data);
 
-        return user; //TODO type
+        return user;
       },
     }),
   ],

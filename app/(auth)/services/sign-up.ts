@@ -1,4 +1,4 @@
-import { ISignIn, ISignUp } from '@/app/(auth)/interfaces';
+import { ISignIn, ISignUp, IUser } from '@/app/(auth)/interfaces';
 import { toaster } from '@/app/common/components/CustomToast';
 import { API_URL } from '@/app/common/config';
 
@@ -26,7 +26,7 @@ export const register = async (userData: ISignUp) => {
   }
 };
 
-export const login = async (userData: ISignIn) => {
+export const login = async (userData: ISignIn): Promise<IUser> => {
   try {
     const response = await fetch(`${API_URL}/auth/signin`, {
       method: 'POST',
@@ -36,12 +36,12 @@ export const login = async (userData: ISignIn) => {
       body: JSON.stringify(userData),
     });
     const responseData = await response.json();
-
+    console.log(responseData);
     if (!response.ok) {
       throw new Error(responseData.message || 'Login failed.');
     }
 
-    return responseData;
+    return responseData as IUser;
   } catch (error: any) {
     throw error;
   }
