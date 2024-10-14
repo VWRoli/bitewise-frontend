@@ -5,6 +5,7 @@ import { ISignUp } from '@/app/(auth)/interfaces';
 import { register } from '@/app/(auth)/services';
 import { passwordRules } from '@/app/(auth)/utils';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import {
   FormContainer,
@@ -14,10 +15,13 @@ import {
 } from 'react-hook-form-mui';
 
 const SignUpForm = ({ isLoading, setIsLoading }: IFormProps) => {
+  const router = useRouter();
+
   const handleSuccess = async (data: ISignUp) => {
     try {
       setIsLoading(true);
       await register(data);
+      router.push('/dashboard');
       setIsLoading(false);
     } catch (error: any) {
       setIsLoading(false);

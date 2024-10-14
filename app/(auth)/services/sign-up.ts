@@ -11,7 +11,7 @@ export const register = async (userData: ISignUp) => {
       },
       body: JSON.stringify(userData),
     });
-    //TODO: update to receive user object
+
     if (!response.ok) {
       const responseData = await response.json();
 
