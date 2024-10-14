@@ -1,7 +1,6 @@
 import MenuList from '@/app/dashboard/components/MenuList';
 import { DRAWER_WIDTH } from '@/app/dashboard/constants';
 import { Box, Drawer } from '@mui/material';
-import { useSession } from 'next-auth/react';
 import React from 'react';
 
 interface IProps {
