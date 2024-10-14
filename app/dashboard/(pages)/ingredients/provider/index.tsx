@@ -1,6 +1,6 @@
-import { IngredientContext } from '@/app/contexts';
 import { INITIAL_STATE } from '@/app/dashboard/(pages)/ingredients/constants';
-import { ingredientReducer } from '@/app/reducers';
+import { IngredientContext } from '@/app/dashboard/(pages)/ingredients/context';
+import { ingredientReducer } from '@/app/dashboard/(pages)/ingredients/reducer';
 import { PropsWithChildren, useReducer } from 'react';
 
 export const IngredientsProvider: React.FC<PropsWithChildren> = ({

@@ -1,6 +1,7 @@
 'use client';
-import { IngredientsProvider } from '@/app/Providers/IngredientsProvider';
-import { ToastProvider } from '@/app/Providers/ToastProvider';
+
+import { IngredientsProvider } from '@/app/dashboard/(pages)/ingredients/provider';
+import { ToastProvider } from '@/app/common/Providers/ToastProvider';
 import { SessionProvider } from 'next-auth/react';
 import { PropsWithChildren } from 'react';
 

@@ -1,6 +1,6 @@
 import { INITIAL_STATE } from '@/app/dashboard/(pages)/ingredients/constants';
 import { IIngredientState } from '@/app/dashboard/(pages)/ingredients/interfaces';
-import { IActionType } from '@/app/reducers';
+import { IActionType } from '@/app/dashboard/(pages)/ingredients/reducer';
 import React, { useContext } from 'react';
 
 interface ValueTypes {
@@ -15,6 +15,6 @@ const defaultValue: ValueTypes = {
 
 export const IngredientContext = React.createContext(defaultValue);
 
-export const useBudgetsContext = () => {
+export const useIngredientsContext = () => {
   return useContext(IngredientContext);
 };

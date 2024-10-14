@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   Button,
-  TextField,
   MenuItem,
 } from '@mui/material';
 import { ICreateIngredient } from '@/app/dashboard/(pages)/ingredients/interfaces';
 import { EUnit } from '@/app/dashboard/(pages)/ingredients/enums';
 import { useSession } from 'next-auth/react';
+import { handleCreateIngredient } from '@/app/dashboard/(pages)/ingredients/actions';
+import { useIngredientsContext } from '@/app/dashboard/(pages)/ingredients/context';
+import { LoadingButton } from '@mui/lab';
+import CustomTextField from '@/app/dashboard/components/CustomTextField';
+import { ADD_INGRENDIENT_FIELDS } from '@/app/dashboard/(pages)/ingredients/constants';
 
 interface AddIngredientDialogProps {
   open: boolean;
@@ -22,39 +26,51 @@ const AddIngredientDialog: React.FC<AddIngredientDialogProps> = ({
   onClose,
 }) => {
   const { data: session } = useSession();
+  const { state, dispatch } = useIngredientsContext();
 
   const [ingredient, setIngredient] = useState<ICreateIngredient>({
-    name: '',
-    protein: 0,
-    totalFat: 0,
-    saturatedFat: 0,
-    totalCarbohydrates: 0,
-    sugar: 0,
-    dietaryFiber: 0,
-    calories: 0,
+    name: 'Example Ingredient',
+    protein: 10,
+    totalFat: 5,
+    saturatedFat: 2,
+    totalCarbohydrates: 20,
+    sugar: 5,
+    dietaryFiber: 3,
+    calories: 150,
     unit: EUnit.HUNDRED_GRAMS,
-    price: 0,
+    price: 1.99,
     userId: +(session?.user?.id || 0) as number,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const isValid = Object.values(ingredient).every(
+      (value) => value !== '' && value !== 0,
+    );
+    setIsFormValid(isValid);
+  }, [ingredient]);
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setIngredient({
       ...ingredient,
       [name]: name === 'unit' || name === 'name' ? value : parseFloat(value),
     });
-  };
+  }, []);
 
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
     if (parseFloat(e.target.value) === 0) {
       setIngredient({
         ...ingredient,
         [e.target.name]: '',
       });
     }
-  };
+  }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    await handleCreateIngredient(dispatch, ingredient);
+
     onClose();
   };
 
@@ -62,107 +78,47 @@ const AddIngredientDialog: React.FC<AddIngredientDialogProps> = ({
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Add Ingredient</DialogTitle>
       <DialogContent>
-        <TextField
-          margin="dense"
-          label="Name"
-          name="name"
-          fullWidth
-          value={ingredient.name}
-          onChange={handleChange}
-        />
-        <TextField
-          margin="dense"
-          label="Protein"
-          name="protein"
-          type="number"
-          fullWidth
-          value={ingredient.protein}
-          onChange={handleChange}
-          onFocus={handleFocus}
-        />
-        <TextField
-          margin="dense"
-          label="Total Fat"
-          name="totalFat"
-          type="number"
-          fullWidth
-          value={ingredient.totalFat}
-          onChange={handleChange}
-          onFocus={handleFocus}
-        />
-        <TextField
-          margin="dense"
-          label="Saturated Fat"
-          name="saturatedFat"
-          type="number"
-          fullWidth
-          value={ingredient.saturatedFat}
-          onChange={handleChange}
-          onFocus={handleFocus}
-        />
-        <TextField
-          margin="dense"
-          label="Total Carbohydrates"
-          name="totalCarbohydrates"
-          type="number"
-          fullWidth
-          value={ingredient.totalCarbohydrates}
-          onChange={handleChange}
-          onFocus={handleFocus}
-        />
-        <TextField
-          margin="dense"
-          label="Sugar"
-          name="sugar"
-          type="number"
-          fullWidth
-          value={ingredient.sugar}
-          onChange={handleChange}
-          onFocus={handleFocus}
-        />
-        <TextField
-          margin="dense"
-          label="Dietary Fiber"
-          name="dietaryFiber"
-          type="number"
-          fullWidth
-          value={ingredient.dietaryFiber}
-          onChange={handleChange}
-          onFocus={handleFocus}
-        />
-        <TextField
-          margin="dense"
-          label="Calories"
-          name="calories"
-          type="number"
-          fullWidth
-          value={ingredient.calories}
-          onChange={handleChange}
-          onFocus={handleFocus}
-        />
-        <TextField
-          margin="dense"
-          label="Unit"
+        {ADD_INGRENDIENT_FIELDS.map((field) => (
+          <CustomTextField
+            key={field.name}
+            name={field.name}
+            label={field.label}
+            value={ingredient[field.name as keyof ICreateIngredient]}
+            onChange={handleChange}
+            onFocus={field.type === 'number' ? handleFocus : undefined}
+            isLoading={state.isLoading}
+            type={field.type}
+            required={field.required}
+          />
+        ))}
+        <CustomTextField
           name="unit"
-          select
-          fullWidth
+          label="Unit"
           value={ingredient.unit}
           onChange={handleChange}
+          isLoading={state.isLoading}
+          select
         >
           {Object.values(EUnit).map((unit) => (
             <MenuItem key={unit} value={unit}>
               {unit}
             </MenuItem>
           ))}
-        </TextField>
+        </CustomTextField>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleSubmit} variant="contained" color="primary">
+        <LoadingButton
+          onClick={handleSubmit}
+          variant="contained"
+          color="primary"
+          loading={state.isLoading}
+          disabled={!isFormValid}
+        >
           Add
-        </Button>
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   );
