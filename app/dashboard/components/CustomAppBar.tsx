@@ -30,9 +30,8 @@ const CustomAppBar = ({ mobileOpen, isClosing, setMobileOpen }: IProps) => {
   const pathName = getPathName(fullPathName);
 
   const handleLogout = async () => {
-    await signOut().then(() => {
-      router.push('/');
-    });
+    await signOut({ redirect: false });
+    router.push('/');
   };
 
   return (
