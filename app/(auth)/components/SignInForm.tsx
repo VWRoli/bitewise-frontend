@@ -8,14 +8,16 @@ import {
   PasswordElement,
   TextFieldElement,
 } from 'react-hook-form-mui';
-import { toaster } from '@/app/common/components/CustomToast';
 import { useRouter } from 'next/navigation';
 import { LoadingButton } from '@mui/lab';
 import { IFormProps } from '@/app/(auth)/components/AuthForm';
-import { login } from '@/app/(auth)/services';
+import { handleLogin } from '@/app/dashboard/(pages)/user/actions';
+import { useUserContext } from '@/app/dashboard/(pages)/user/context';
 
-const SignInForm = ({ isLoading, setIsLoading }: IFormProps) => {
+const SignInForm = () => {
   const router = useRouter();
+  const { state, dispatch } = useUserContext();
+
   const [step, setStep] = useState<ESignInSteps>(ESignInSteps.STEP_0);
 
   const handleEmailValidation = (data: ISignIn) => {
@@ -26,19 +28,8 @@ const SignInForm = ({ isLoading, setIsLoading }: IFormProps) => {
     if (step === ESignInSteps.STEP_0) {
       handleEmailValidation(data);
     } else {
-      setIsLoading(true);
-      const result = await login(data);
-
-      // if (result?.error) {
-      //   toaster.error({
-      //     text: 'Error signing in. Invalid credentials',
-      //   });
-      //   setIsLoading(false);
-      //   return;
-      // }
-
+      await handleLogin(dispatch, data);
       router.push('/dashboard');
-      setIsLoading(false);
     }
   };
 
@@ -54,7 +45,7 @@ const SignInForm = ({ isLoading, setIsLoading }: IFormProps) => {
             fullWidth
             type={'email'}
             label={'Email Address'}
-            disabled={isLoading}
+            disabled={state.isLoading}
             name={'email'}
           />
         ) : (
@@ -63,7 +54,7 @@ const SignInForm = ({ isLoading, setIsLoading }: IFormProps) => {
             required
             fullWidth
             name={'password'}
-            disabled={isLoading}
+            disabled={state.isLoading}
             rules={passwordRules}
           />
         )}
@@ -72,7 +63,7 @@ const SignInForm = ({ isLoading, setIsLoading }: IFormProps) => {
           variant="contained"
           fullWidth
           type="submit"
-          loading={isLoading}
+          loading={state.isLoading}
         >
           {step === ESignInSteps.STEP_0 ? 'Continue' : 'Sign In'}
         </LoadingButton>

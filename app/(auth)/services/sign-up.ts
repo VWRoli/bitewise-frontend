@@ -1,6 +1,7 @@
-import { ISignIn, ISignUp, IUser } from '@/app/(auth)/interfaces';
+import { ISignIn, ISignUp } from '@/app/(auth)/interfaces';
 import { toaster } from '@/app/common/components/CustomToast';
 import { API_URL } from '@/app/common/config';
+import { IUser } from '@/app/dashboard/(pages)/user/interfaces';
 
 export const register = async (userData: ISignUp) => {
   try {
@@ -23,29 +24,6 @@ export const register = async (userData: ISignUp) => {
     }
   } catch (error: any) {
     throw new Error('An unexpected error occurred. Please try again.');
-  }
-};
-
-export const login = async (userData: ISignIn): Promise<IUser> => {
-  try {
-    const response = await fetch(`${API_URL}/auth/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-      credentials: 'include',
-    });
-
-    const responseData = await response.json();
-
-    if (!response.ok) {
-      throw new Error(responseData.message || 'Login failed.');
-    }
-
-    return responseData as IUser;
-  } catch (error: any) {
-    throw error;
   }
 };
 

@@ -38,7 +38,7 @@ const AuthForm = () => {
       {value ? (
         <SignUpForm isLoading={isLoading} setIsLoading={setIsLoading} />
       ) : (
-        <SignInForm isLoading={isLoading} setIsLoading={setIsLoading} />
+        <SignInForm />
       )}
       <Divider
         aria-hidden="true"

@@ -1,4 +1,5 @@
 'use client';
+import { useUserContext } from '@/app/dashboard/(pages)/user/context';
 import { MENU_ITEMS, SUB_MENU_ITEMS } from '@/app/dashboard/constants';
 import { getFirstTwoCharacters } from '@/app/dashboard/utils';
 import {
@@ -8,18 +9,31 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Skeleton,
   Toolbar,
 } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 
 const MenuList = () => {
+  const { state } = useUserContext();
+  const avatarLetters = getFirstTwoCharacters(state.user?.email);
+
   return (
     <div className="h-full flex flex-col">
       <Toolbar />
       <div className="flex flex-col gap-4 items-center justify-center mb-16">
-        {/* <Avatar className="h-16 w-16 uppercase">{avatarLetters}</Avatar>
-        <div>{session?.user?.email}</div> */}
+        {state.isLoading ? (
+          <>
+            <Skeleton variant="circular" width={64} height={64} />
+            <Skeleton variant="text" className="w-[80%]" />
+          </>
+        ) : (
+          <>
+            <Avatar className="h-16 w-16 uppercase">{avatarLetters}</Avatar>
+            <div>{state?.user?.email}</div>
+          </>
+        )}
       </div>
       <List className="flex flex-col justify-between h-full">
         <div>
