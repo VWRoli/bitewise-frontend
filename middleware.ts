@@ -8,9 +8,13 @@ export const config = {
 export function middleware(request: NextRequest) {
   const url = new URL(request.url);
   const cookie = request.cookies.get('accessToken');
+  const rootPathname = url.pathname === '/';
 
-  if (!cookie && url.pathname !== '/') {
+  if (!cookie && !rootPathname) {
     return NextResponse.redirect(new URL('/', request.url));
+  }
+  if (rootPathname && cookie) {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
   }
   return NextResponse.next();
 }
