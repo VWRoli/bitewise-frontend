@@ -1,4 +1,4 @@
-import { AUTH_ACTION_TYPES } from '@/app/(auth)/enum';
+import { AUTH_ACTION_TYPES } from '@/app/(modules)/(auth)/enum';
 import { toaster } from '@/app/common/components/CustomToast';
 import { ACTION_TYPES } from '@/app/common/enums';
 import { AxiosError } from 'axios';

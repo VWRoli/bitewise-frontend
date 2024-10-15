@@ -1,10 +1,10 @@
 'use client';
 
-import { IngredientsProvider } from '@/app/dashboard/(pages)/ingredients/provider';
+import { IngredientsProvider } from '@/app/(modules)/dashboard/(pages)/ingredients/provider';
 import { ToastProvider } from '@/app/common/Providers/ToastProvider';
 import { PropsWithChildren } from 'react';
-import { MealsProvider } from '@/app/dashboard/(pages)/meals/provider';
-import { UserProvider } from '@/app/dashboard/(pages)/user/provider';
+import { MealsProvider } from '@/app/(modules)/dashboard/(pages)/meals/provider';
+import { UserProvider } from '@/app/(modules)/dashboard/(pages)/user/provider';
 
 export function Providers({ children }: PropsWithChildren) {
   return (
