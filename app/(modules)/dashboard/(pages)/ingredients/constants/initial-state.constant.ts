@@ -3,5 +3,5 @@ import { IIngredientState } from '@/app/(modules)/dashboard/(pages)/ingredients/
 export const INITIAL_STATE: IIngredientState = {
   ingredients: [],
   isError: false,
-  isLoading: false,
+  isLoading: true,
 };

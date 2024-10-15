@@ -29,12 +29,6 @@ export const ingredientReducer = (
       };
 
     // Creating an Ingredient
-    case ACTION_TYPES.CREATE_START:
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
     case ACTION_TYPES.CREATE_SUCCESS:
       return {
         ...state,
@@ -49,12 +43,6 @@ export const ingredientReducer = (
       };
 
     // Updating an Ingredient
-    case ACTION_TYPES.UPDATE_START:
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
     case ACTION_TYPES.UPDATE_SUCCESS:
       return {
         ...state,
@@ -71,12 +59,6 @@ export const ingredientReducer = (
       };
 
     // Deleting an Ingredient
-    case ACTION_TYPES.DELETE_START:
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
     case ACTION_TYPES.DELETE_SUCCESS:
       return {
         ...state,

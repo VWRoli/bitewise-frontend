@@ -9,15 +9,16 @@ export const handleCreateIngredient = async (
   formData: ICreateIngredient,
 ) => {
   try {
-    dispatch({ type: ACTION_TYPES.CREATE_START });
     const { data } = await api.createIngredient(formData);
     dispatch({ type: ACTION_TYPES.CREATE_SUCCESS, payload: data });
   } catch (error) {
+    //TODO: roll back state
+
     handleError(dispatch, ACTION_TYPES.CREATE_ERROR, error);
   }
 };
 
-export const getAllIngredients = async (
+export const handleGetAllIngredients = async (
   dispatch: React.Dispatch<IActionType>,
   userId: number,
 ) => {
@@ -30,13 +31,12 @@ export const getAllIngredients = async (
   }
 };
 
-export const updateIngredient = async (
+export const handleUpdateIngredient = async (
   dispatch: React.Dispatch<IActionType>,
   formData: ICreateIngredient,
   id: number,
 ) => {
   try {
-    dispatch({ type: ACTION_TYPES.UPDATE_START });
     const { data } = await api.updateIngredient(id, formData);
     dispatch({ type: ACTION_TYPES.UPDATE_SUCCESS, payload: data });
   } catch (error) {
@@ -44,12 +44,11 @@ export const updateIngredient = async (
   }
 };
 
-export const deleteIngredient = async (
+export const handleDeleteIngredient = async (
   dispatch: React.Dispatch<IActionType>,
   id: number,
 ) => {
   try {
-    dispatch({ type: ACTION_TYPES.DELETE_START });
     await api.deleteIngredient(id);
     dispatch({ type: ACTION_TYPES.DELETE_SUCCESS, payload: id });
   } catch (error) {
