@@ -1,13 +1,4 @@
-'use client';
-import useAuthRedirect from '@/app/(auth)/hooks/useAuthRedirect';
-import LoadingPage from '@/app/common/components/LoadingPage';
-
-export default function Page() {
-  const status = useAuthRedirect();
-
-  if (status === 'loading') {
-    return <LoadingPage />;
-  }
+export default async function Page() {
   return (
     <>
       Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard
