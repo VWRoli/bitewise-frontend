@@ -8,11 +8,11 @@ import {
   PasswordElement,
   TextFieldElement,
 } from 'react-hook-form-mui';
-import { signIn } from 'next-auth/react';
 import { toaster } from '@/app/common/components/CustomToast';
 import { useRouter } from 'next/navigation';
 import { LoadingButton } from '@mui/lab';
 import { IFormProps } from '@/app/(auth)/components/AuthForm';
+import { login } from '@/app/(auth)/services';
 
 const SignInForm = ({ isLoading, setIsLoading }: IFormProps) => {
   const router = useRouter();
@@ -27,19 +27,15 @@ const SignInForm = ({ isLoading, setIsLoading }: IFormProps) => {
       handleEmailValidation(data);
     } else {
       setIsLoading(true);
-      const result = await signIn('credentials', {
-        redirect: false,
-        email: data.email,
-        password: data.password,
-      });
+      const result = await login(data);
 
-      if (result?.error) {
-        toaster.error({
-          text: 'Error signing in. Invalid credentials',
-        });
-        setIsLoading(false);
-        return;
-      }
+      // if (result?.error) {
+      //   toaster.error({
+      //     text: 'Error signing in. Invalid credentials',
+      //   });
+      //   setIsLoading(false);
+      //   return;
+      // }
 
       router.push('/dashboard');
       setIsLoading(false);

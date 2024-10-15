@@ -10,21 +10,16 @@ import {
   ListItemText,
   Toolbar,
 } from '@mui/material';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 
 const MenuList = () => {
-  const { data: session } = useSession();
-
-  const avatarLetters = getFirstTwoCharacters(session?.user?.email as string);
-
   return (
     <div className="h-full flex flex-col">
       <Toolbar />
       <div className="flex flex-col gap-4 items-center justify-center mb-16">
-        <Avatar className="h-16 w-16 uppercase">{avatarLetters}</Avatar>
-        <div>{session?.user?.email}</div>
+        {/* <Avatar className="h-16 w-16 uppercase">{avatarLetters}</Avatar>
+        <div>{session?.user?.email}</div> */}
       </div>
       <List className="flex flex-col justify-between h-full">
         <div>

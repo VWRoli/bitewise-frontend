@@ -8,16 +8,13 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
-import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 
 const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
-  const { data: session } = useSession();
-
   const [meal, setMeal] = useState<ICreateMeal>({
     name: 'Example Meal',
     mealIngredients: [],
-    userId: +(session?.user?.id || 0) as number,
+    userId: 1, //+(session?.user?.id || 0) as number,
   });
   return (
     <Dialog open={open} onClose={onClose}>

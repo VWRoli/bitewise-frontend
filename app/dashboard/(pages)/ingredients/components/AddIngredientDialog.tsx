@@ -9,7 +9,6 @@ import {
 } from '@mui/material';
 import { ICreateIngredient } from '@/app/dashboard/(pages)/ingredients/interfaces';
 import { EUnit } from '@/app/dashboard/(pages)/ingredients/enums';
-import { useSession } from 'next-auth/react';
 import { handleCreateIngredient } from '@/app/dashboard/(pages)/ingredients/actions';
 import { useIngredientsContext } from '@/app/dashboard/(pages)/ingredients/context';
 import { LoadingButton } from '@mui/lab';
@@ -22,7 +21,6 @@ export interface AddDialogProps {
 }
 
 const AddIngredientDialog: React.FC<AddDialogProps> = ({ open, onClose }) => {
-  const { data: session } = useSession();
   const { state, dispatch } = useIngredientsContext();
 
   const [ingredient, setIngredient] = useState<ICreateIngredient>({
@@ -36,7 +34,7 @@ const AddIngredientDialog: React.FC<AddDialogProps> = ({ open, onClose }) => {
     calories: 150,
     unit: EUnit.HUNDRED_GRAMS,
     price: 1.99,
-    userId: +(session?.user?.id || 0) as number,
+    userId: 1, //+(session?.user?.id || 0) as number,
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
@@ -112,7 +110,7 @@ const AddIngredientDialog: React.FC<AddDialogProps> = ({ open, onClose }) => {
           variant="contained"
           color="primary"
           loading={state.isLoading}
-          disabled={!isFormValid}
+          // disabled={!isFormValid}
         >
           Add
         </LoadingButton>

@@ -34,7 +34,9 @@ export const login = async (userData: ISignIn): Promise<IUser> => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
+      credentials: 'include',
     });
+
     const responseData = await response.json();
 
     if (!response.ok) {
@@ -44,5 +46,29 @@ export const login = async (userData: ISignIn): Promise<IUser> => {
     return responseData as IUser;
   } catch (error: any) {
     throw error;
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await fetch(`/api/logout`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      const responseData = await response.json();
+
+      const message = `Error: ${responseData.message} (Status code: ${responseData.statusCode})`;
+      toaster.error({
+        text: message,
+      });
+      throw new Error(message);
+    }
+  } catch (error: any) {
+    throw new Error('An unexpected error occurred. Please try again.');
   }
 };

@@ -12,7 +12,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { getPathName } from '@/app/dashboard/utils';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import { signOut } from 'next-auth/react';
+import { logout } from '@/app/(auth)/services';
 
 interface IProps {
   mobileOpen: boolean;
@@ -30,7 +30,7 @@ const CustomAppBar = ({ mobileOpen, isClosing, setMobileOpen }: IProps) => {
   const pathName = getPathName(fullPathName);
 
   const handleLogout = async () => {
-    await signOut({ redirect: false });
+    await logout();
     router.push('/');
   };
 
