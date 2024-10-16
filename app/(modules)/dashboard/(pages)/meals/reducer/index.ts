@@ -29,12 +29,6 @@ export const mealReducer = (
       };
 
     // Creating a Meal
-    case ACTION_TYPES.CREATE_START:
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
     case ACTION_TYPES.CREATE_SUCCESS:
       return {
         ...state,
@@ -49,12 +43,6 @@ export const mealReducer = (
       };
 
     // Updating a Meal
-    case ACTION_TYPES.UPDATE_START:
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
     case ACTION_TYPES.UPDATE_SUCCESS:
       return {
         ...state,
@@ -71,12 +59,6 @@ export const mealReducer = (
       };
 
     // Deleting an Meal
-    case ACTION_TYPES.DELETE_START:
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
     case ACTION_TYPES.DELETE_SUCCESS:
       return {
         ...state,

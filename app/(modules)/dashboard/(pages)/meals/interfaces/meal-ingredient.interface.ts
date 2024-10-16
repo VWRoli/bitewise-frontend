@@ -1,4 +1,6 @@
-export interface IMealIngredient {
-  ingredientId: number;
-  quantity: number;
+import { ICreateMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+
+export interface IMealIngredient extends ICreateMealIngredient {
+  id: number;
+  ingredientName: string;
 }

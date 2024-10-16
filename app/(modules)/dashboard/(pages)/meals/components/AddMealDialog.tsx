@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { AddDialogProps } from '@/app/(modules)/dashboard/(pages)/ingredients/components/AddIngredientDialog';
 import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
 import { ICreateMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
@@ -11,7 +11,12 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
-import { FormProvider, useForm, useFieldArray } from 'react-hook-form';
+import {
+  FormProvider,
+  useForm,
+  useFieldArray,
+  useWatch,
+} from 'react-hook-form';
 import CustomTextField from '@/app/(modules)/dashboard/components/CustomTextField';
 import MealIngredient from '@/app/(modules)/dashboard/(pages)/meals/components/MealIngredient';
 import { handleCreateMeal } from '@/app/(modules)/dashboard/(pages)/meals/actions';
@@ -34,13 +39,21 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
     name: 'mealIngredients',
   });
 
-  const addIngredient = () => {
-    append({ ingredientId: 0, quantity: 0 });
-  };
+  const mealIngredients = useWatch({
+    control,
+    name: 'mealIngredients',
+  });
 
-  const removeIngredient = (index: number) => {
-    remove(index);
-  };
+  const addIngredient = useCallback(() => {
+    append({ ingredientId: 0, quantity: 0 });
+  }, [append]);
+
+  const removeIngredient = useCallback(
+    (index: number) => {
+      remove(index);
+    },
+    [remove],
+  );
 
   const onSubmit = async (data: ICreateMeal) => {
     await handleCreateMeal(dispatch, {
@@ -68,7 +81,7 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
               }}
             />
             <div className="flex flex-col gap-4">
-              {methods.getValues('mealIngredients').map((ingredient, index) => (
+              {mealIngredients.map((ingredient, index) => (
                 <MealIngredient
                   key={index}
                   ingredient={ingredient}

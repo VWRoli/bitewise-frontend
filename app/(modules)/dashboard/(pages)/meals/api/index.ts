@@ -6,7 +6,7 @@ const API = axios.create({ baseURL: API_URL });
 
 export const createMeal = (data: ICreateMeal) => API.post('/meal', data);
 
-export const getAllMeals = (userId: number) => API.get(`/meal/${userId}`);
+export const getAllMeals = (userId: number) => API.get(`/meal/all/${userId}`);
 
 export const updateMeal = (id: number, data: ICreateMeal) =>
   API.patch(`/meal/${id}`, data);
