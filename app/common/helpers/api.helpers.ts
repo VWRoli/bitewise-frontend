@@ -6,7 +6,7 @@ import { AxiosError } from 'axios';
 export const handleError = <T>(
   dispatch: React.Dispatch<T>,
   actionType: ACTION_TYPES | AUTH_ACTION_TYPES,
-  error: unknown,
+  error: any,
 ) => {
   dispatch({ type: actionType } as T);
 
@@ -16,7 +16,7 @@ export const handleError = <T>(
     });
   } else {
     toaster.error({
-      text: 'An unexpected error occurred',
+      text: error.message || 'An unexpected error occurred',
     });
   }
 };

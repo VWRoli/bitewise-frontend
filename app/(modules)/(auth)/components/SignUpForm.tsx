@@ -1,9 +1,10 @@
 'use client';
 
-import { IFormProps } from '@/app/(modules)/(auth)/components/AuthForm';
+import { handleRegister } from '@/app/(modules)/(auth)/actions';
 import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
 import { ISignUp } from '@/app/(modules)/(auth)/interfaces';
 import { passwordRules } from '@/app/(modules)/(auth)/utils';
+import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -14,24 +15,19 @@ import {
   TextFieldElement,
 } from 'react-hook-form-mui';
 
-const SignUpForm = ({ isLoading, setIsLoading }: IFormProps) => {
+const SignUpForm = () => {
+  const { state, dispatch } = useUserContext();
   const router = useRouter();
 
   const handleSuccess = async (data: ISignUp) => {
-    try {
-      setIsLoading(true);
-      //await register(data);
-      router.push('/dashboard');
-      setIsLoading(false);
-    } catch (_) {
-      setIsLoading(false);
-    }
+    await handleRegister(dispatch, data);
+    router.push('/dashboard');
   };
 
   return (
     <FormContainer
       defaultValues={defaultSignUpValues}
-      onSuccess={(data) => handleSuccess(data)}
+      onSuccess={handleSuccess}
     >
       <div className="flex flex-col gap-4 w-full">
         <TextFieldElement
@@ -40,7 +36,7 @@ const SignUpForm = ({ isLoading, setIsLoading }: IFormProps) => {
           type={'email'}
           label={'Email Address'}
           name={'email'}
-          disabled={isLoading}
+          disabled={state.isLoading}
         />
         <PasswordElement
           label={'Password'}
@@ -48,7 +44,7 @@ const SignUpForm = ({ isLoading, setIsLoading }: IFormProps) => {
           fullWidth
           name={'password'}
           rules={passwordRules}
-          disabled={isLoading}
+          disabled={state.isLoading}
         />
         <PasswordRepeatElement
           passwordFieldName={'password'}
@@ -57,11 +53,11 @@ const SignUpForm = ({ isLoading, setIsLoading }: IFormProps) => {
           label={'Confirm Password'}
           required
           rules={passwordRules}
-          disabled={isLoading}
+          disabled={state.isLoading}
         />
 
         <LoadingButton
-          loading={isLoading}
+          loading={state.isLoading}
           variant="contained"
           fullWidth
           type="submit"

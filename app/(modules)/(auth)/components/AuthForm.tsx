@@ -8,13 +8,10 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import SignUpForm from '@/app/(modules)/(auth)/components/SignUpForm';
 import SignInForm from '@/app/(modules)/(auth)/components/SignInForm';
 import { AuthView } from '@/app/(modules)/(auth)/enum';
+import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 
-export interface IFormProps {
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
 const AuthForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { state } = useUserContext();
   const [value, setValue] = useState<AuthView>(AuthView.SIGN_IN);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -30,16 +27,12 @@ const AuthForm = () => {
         value={value}
         onChange={handleChange}
         centered
-        className={`${isLoading ? 'opacity-50 pointer-events-none' : ''}`}
+        className={`${state.isLoading ? 'opacity-50 pointer-events-none' : ''}`}
       >
         <Tab label="Sign In" />
         <Tab label="Sign Up" />
       </Tabs>
-      {value ? (
-        <SignUpForm isLoading={isLoading} setIsLoading={setIsLoading} />
-      ) : (
-        <SignInForm />
-      )}
+      {value ? <SignUpForm /> : <SignInForm />}
       <Divider
         aria-hidden="true"
         component="div"

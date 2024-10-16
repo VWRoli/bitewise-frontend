@@ -10,8 +10,8 @@ import {
 } from 'react-hook-form-mui';
 import { useRouter } from 'next/navigation';
 import { LoadingButton } from '@mui/lab';
-import { handleLogin } from '@/app/(modules)/dashboard/(pages)/user/actions';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
+import { handleLogin } from '@/app/(modules)/(auth)/actions';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -28,7 +28,6 @@ const SignInForm = () => {
       handleEmailValidation(data);
     } else {
       await handleLogin(dispatch, data);
-      router.push('/dashboard');
     }
   };
 
