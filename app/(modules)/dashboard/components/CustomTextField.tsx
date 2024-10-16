@@ -16,6 +16,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
   isLoading,
   rules = {},
   defaultValue = '',
+  type,
   ...rest
 }) => {
   const {
@@ -40,6 +41,11 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
           error={!!fieldError}
           helperText={fieldError ? fieldError.message : ''}
           disabled={isLoading}
+          onChange={(e) => {
+            const value = e.target.value;
+            field.onChange(type === 'number' ? Number(value) : value);
+          }}
+          type={type}
           {...rest}
         />
       )}

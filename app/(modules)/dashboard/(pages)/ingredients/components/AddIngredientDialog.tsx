@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -42,12 +42,7 @@ const AddIngredientDialog: React.FC<AddDialogProps> = ({ open, onClose }) => {
     mode: 'onBlur',
   });
 
-  const {
-    handleSubmit,
-    watch,
-    formState: { errors, isValid },
-    reset,
-  } = methods;
+  const { handleSubmit, watch, reset } = methods;
 
   const ingredient = watch();
 

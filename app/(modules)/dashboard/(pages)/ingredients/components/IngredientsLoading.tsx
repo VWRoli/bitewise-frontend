@@ -1,7 +1,7 @@
 import React from 'react';
 import { Skeleton } from '@mui/material';
 
-const IngredientLoading = () => {
+const IngredientsLoading = () => {
   const skeletonItems = Array.from({ length: 5 }).map((_, index) => (
     <Skeleton
       key={index}
@@ -15,4 +15,4 @@ const IngredientLoading = () => {
   return <>{skeletonItems}</>;
 };
 
-export default IngredientLoading;
+export default IngredientsLoading;

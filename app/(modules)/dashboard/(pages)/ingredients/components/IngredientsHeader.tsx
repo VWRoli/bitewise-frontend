@@ -4,7 +4,7 @@ import AddIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/c
 import { Button, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
-const IngredientHeader = () => {
+const IngredientsHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -22,4 +22,4 @@ const IngredientHeader = () => {
   );
 };
 
-export default IngredientHeader;
+export default IngredientsHeader;

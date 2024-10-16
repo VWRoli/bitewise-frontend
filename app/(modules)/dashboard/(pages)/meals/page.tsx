@@ -1,19 +1,11 @@
-'use client';
+import MealsContent from '@/app/(modules)/dashboard/(pages)/meals/components/MealsContent';
+import MealsHeader from '@/app/(modules)/dashboard/(pages)/meals/components/MealsHeader';
 
-import DashboardFrame from '@/app/common/components/DashboardFrame';
-import AddMealDialog from '@/app/(modules)/dashboard/(pages)/meals/components/AddMealDialog';
-import { Typography } from '@mui/material';
-import { useState } from 'react';
-
-export default function Page() {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default async function Page() {
   return (
-    <DashboardFrame title="Meals" setIsOpen={setIsOpen}>
-      <section className="flex flex-col gap-2">
-        <Typography variant="h6">No meals</Typography>
-      </section>
-      <AddMealDialog open={isOpen} onClose={() => setIsOpen(false)} />
-    </DashboardFrame>
+    <div className="p-2 md:p-4 xl:p-8 flex flex-col gap-8">
+      <MealsHeader />
+      <MealsContent />
+    </div>
   );
 }

@@ -1,15 +1,15 @@
 'use client';
 import IngredientCard from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientCard';
-import IngredientLoading from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientLoading';
+import IngredientsLoading from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientsLoading';
 import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
 import { Typography } from '@mui/material';
 import React from 'react';
 
-const IngredientContent = () => {
+const IngredientsContent = () => {
   const { state } = useIngredientsContext();
 
   if (state.isLoading) {
-    return <IngredientLoading />;
+    return <IngredientsLoading />;
   }
   return (
     <section className="flex flex-col gap-4">
@@ -23,4 +23,4 @@ const IngredientContent = () => {
   );
 };
 
-export default IngredientContent;
+export default IngredientsContent;

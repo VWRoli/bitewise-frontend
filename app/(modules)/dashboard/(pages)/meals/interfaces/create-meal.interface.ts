@@ -1,5 +1,7 @@
+import { IMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+
 export interface ICreateMeal {
   name: string;
-  mealIngredients: number[];
+  mealIngredients: IMealIngredient[];
   userId: number;
 }
