@@ -1,35 +1,48 @@
 import React from 'react';
 import { TextField, TextFieldProps } from '@mui/material';
+import { Controller, useFormContext, FieldError } from 'react-hook-form';
 
 type CustomTextFieldProps = TextFieldProps & {
   name: string;
   label: string;
-  value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  rules?: object;
+  defaultValue?: string | number;
   isLoading: boolean;
 };
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({
   name,
   label,
-  value,
-  onChange,
-  onFocus,
   isLoading,
+  rules = {},
+  defaultValue = '',
   ...rest
 }) => {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+
+  const fieldError: FieldError | undefined = errors[name] as FieldError;
+
   return (
-    <TextField
-      margin="dense"
+    <Controller
       name={name}
-      label={label}
-      value={value}
-      onChange={onChange}
-      onFocus={onFocus}
-      disabled={isLoading}
-      fullWidth
-      {...rest}
+      control={control}
+      defaultValue={defaultValue}
+      rules={rules}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          label={label}
+          margin="dense"
+          fullWidth
+          error={!!fieldError}
+          helperText={fieldError ? fieldError.message : ''}
+          disabled={isLoading}
+          {...rest}
+        />
+      )}
     />
   );
 };

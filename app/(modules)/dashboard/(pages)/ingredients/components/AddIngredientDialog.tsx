@@ -14,6 +14,8 @@ import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredi
 import { LoadingButton } from '@mui/lab';
 import CustomTextField from '@/app/(modules)/dashboard/components/CustomTextField';
 import { ADD_INGRENDIENT_FIELDS } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 
 export interface AddDialogProps {
   open: boolean;
@@ -22,99 +24,99 @@ export interface AddDialogProps {
 
 const AddIngredientDialog: React.FC<AddDialogProps> = ({ open, onClose }) => {
   const { state, dispatch } = useIngredientsContext();
+  const { state: userState } = useUserContext();
 
-  const [ingredient, setIngredient] = useState<ICreateIngredient>({
-    name: 'Example Ingredient',
-    protein: 10,
-    totalFat: 5,
-    saturatedFat: 2,
-    totalCarbohydrates: 20,
-    sugar: 5,
-    dietaryFiber: 3,
-    calories: 150,
-    unit: EUnit.HUNDRED_GRAMS,
-    price: 1.99,
-    userId: 1, //+(session?.user?.id || 0) as number,
+  const methods = useForm<ICreateIngredient>({
+    defaultValues: {
+      name: 'Example Ingredient',
+      protein: 10,
+      totalFat: 5,
+      saturatedFat: 2,
+      totalCarbohydrates: 20,
+      sugar: 5,
+      dietaryFiber: 3,
+      calories: 150,
+      unit: EUnit.HUNDRED_GRAMS,
+      price: 1.99,
+    },
+    mode: 'onBlur',
   });
 
-  const [isFormValid, setIsFormValid] = useState(false);
+  const {
+    handleSubmit,
+    watch,
+    formState: { errors, isValid },
+    reset,
+  } = methods;
 
-  useEffect(() => {
-    const isValid = Object.values(ingredient).every(
-      (value) => value !== '' && value !== 0,
-    );
-    setIsFormValid(isValid);
-  }, [ingredient]);
+  const ingredient = watch();
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setIngredient({
-      ...ingredient,
-      [name]: name === 'unit' || name === 'name' ? value : parseFloat(value),
+  const onSubmit = async (data: ICreateIngredient) => {
+    await handleCreateIngredient(dispatch, {
+      ...data,
+      userId: userState.user?.id as number,
     });
-  }, []);
-
-  const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
-    if (parseFloat(e.target.value) === 0) {
-      setIngredient({
-        ...ingredient,
-        [e.target.name]: '',
-      });
-    }
-  }, []);
-
-  const handleSubmit = async () => {
-    await handleCreateIngredient(dispatch, ingredient);
-
+    reset();
     onClose();
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Add Ingredient</DialogTitle>
-      <DialogContent>
-        {ADD_INGRENDIENT_FIELDS.map((field) => (
-          <CustomTextField
-            key={field.name}
-            name={field.name}
-            label={field.label}
-            value={ingredient[field.name as keyof ICreateIngredient]}
-            onChange={handleChange}
-            onFocus={field.type === 'number' ? handleFocus : undefined}
-            isLoading={state.isLoading}
-            type={field.type}
-            required={field.required}
-          />
-        ))}
-        <CustomTextField
-          name="unit"
-          label="Unit"
-          value={ingredient.unit}
-          onChange={handleChange}
-          isLoading={state.isLoading}
-          select
-        >
-          {Object.values(EUnit).map((unit) => (
-            <MenuItem key={unit} value={unit}>
-              {unit}
-            </MenuItem>
-          ))}
-        </CustomTextField>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="primary">
-          Cancel
-        </Button>
-        <LoadingButton
-          onClick={handleSubmit}
-          variant="contained"
-          color="primary"
-          loading={state.isLoading}
-          // disabled={!isFormValid}
-        >
-          Add
-        </LoadingButton>
-      </DialogActions>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogContent>
+            {ADD_INGRENDIENT_FIELDS.map((field) => (
+              <CustomTextField
+                key={field.name}
+                name={field.name}
+                label={field.label}
+                isLoading={state.isLoading}
+                type={field.type}
+                rules={{
+                  required: field.required
+                    ? `${field.label} is required`
+                    : false,
+                  min:
+                    field.type === 'number'
+                      ? {
+                          value: 1,
+                          message: `${field.label} must be greater than 0`,
+                        }
+                      : undefined,
+                }}
+              />
+            ))}
+            <CustomTextField
+              name="unit"
+              label="Unit"
+              value={ingredient.unit}
+              isLoading={state.isLoading}
+              rules={{ required: 'Unit is required' }}
+              select
+            >
+              {Object.values(EUnit).map((unit) => (
+                <MenuItem key={unit} value={unit}>
+                  {unit}
+                </MenuItem>
+              ))}
+            </CustomTextField>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={onClose} color="primary">
+              Cancel
+            </Button>
+            <LoadingButton
+              type="submit"
+              variant="contained"
+              color="primary"
+              loading={state.isLoading}
+            >
+              Add
+            </LoadingButton>
+          </DialogActions>
+        </form>
+      </FormProvider>
     </Dialog>
   );
 };
