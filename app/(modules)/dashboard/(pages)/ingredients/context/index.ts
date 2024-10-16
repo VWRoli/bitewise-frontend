@@ -1,6 +1,6 @@
 import { INITIAL_STATE } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
 import { IIngredientState } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
-import { IActionType } from '@/app/(modules)/dashboard/(pages)/ingredients/reducer';
+import { IActionType } from '@/app/common/interfaces';
 import React, { useContext } from 'react';
 
 interface ValueTypes {

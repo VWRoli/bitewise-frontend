@@ -1,8 +1,8 @@
 'use client';
+
 import { IFormProps } from '@/app/(modules)/(auth)/components/AuthForm';
 import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
 import { ISignUp } from '@/app/(modules)/(auth)/interfaces';
-import { register } from '@/app/(modules)/(auth)/services';
 import { passwordRules } from '@/app/(modules)/(auth)/utils';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useRouter } from 'next/navigation';
@@ -20,10 +20,10 @@ const SignUpForm = ({ isLoading, setIsLoading }: IFormProps) => {
   const handleSuccess = async (data: ISignUp) => {
     try {
       setIsLoading(true);
-      await register(data);
+      //await register(data);
       router.push('/dashboard');
       setIsLoading(false);
-    } catch (error: any) {
+    } catch (_) {
       setIsLoading(false);
     }
   };

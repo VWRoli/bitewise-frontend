@@ -1,7 +1,8 @@
-import { ISignIn } from '@/app/(modules)/(auth)/interfaces';
+import { ISignIn, ISignUp } from '@/app/(modules)/(auth)/interfaces';
 import { API_URL } from '@/app/common/config';
 import { IUser } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
 import axios from 'axios';
+import { toaster } from '@/app/common/components/CustomToast';
 
 export const login = async (userData: ISignIn): Promise<IUser> => {
   try {
@@ -34,6 +35,47 @@ export const getMe = async (): Promise<IUser> => {
       throw new Error(error.response.data.message || 'Get user failed.');
     } else {
       throw new Error('Get user failed.');
+    }
+  }
+};
+
+export const register = async (userData: ISignUp) => {
+  try {
+    const response = await axios.post(`${API_URL}/auth/signup`, userData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    });
+
+    return response.data as IUser;
+  } catch (error: any) {
+    if (error.response) {
+      throw new Error(error.response.data.message || 'Registration failed.');
+    } else {
+      throw new Error('Registration failed.');
+    }
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await axios.get(`/api/logout`, {
+      withCredentials: true,
+    });
+
+    if (response.status !== 200) {
+      const message = `Error: ${response.data.message} (Status code: ${response.status})`;
+      toaster.error({
+        text: message,
+      });
+      throw new Error(message);
+    }
+  } catch (error: any) {
+    if (error.response) {
+      throw new Error(error.response.data.message || 'Logout failed.');
+    } else {
+      throw new Error('Logout failed.');
     }
   }
 };
