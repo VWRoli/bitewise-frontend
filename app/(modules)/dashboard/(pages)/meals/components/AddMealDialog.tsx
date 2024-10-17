@@ -65,6 +65,11 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
     onClose();
   };
 
+  const handleCancle = () => {
+    reset();
+    onClose();
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Add Meal</DialogTitle>
@@ -84,7 +89,7 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
               {mealIngredients.map((ingredient, index) => (
                 <MealIngredient
                   key={index}
-                  ingredient={ingredient}
+                  index={index}
                   removeIngredient={() => removeIngredient(index)}
                 />
               ))}
@@ -94,7 +99,7 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
             </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={onClose} color="primary">
+            <Button onClick={handleCancle} color="primary">
               Cancel
             </Button>
             <LoadingButton

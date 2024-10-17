@@ -1,7 +1,7 @@
 import CustomTextField from '@/app/(modules)/dashboard/components/CustomTextField';
 import { Button } from '@mui/material';
 import React from 'react';
-import { AutocompleteElement } from 'react-hook-form-mui';
+import { AutocompleteElement, useFormContext } from 'react-hook-form-mui';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
 import { convertToOptions } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
@@ -9,26 +9,23 @@ import { ICreateMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/i
 import { IOption } from '@/app/common/interfaces';
 
 interface IProps {
-  ingredient: ICreateMealIngredient;
-  removeIngredient: (ingredientId: number) => void;
+  index: number;
+  removeIngredient: (index: number) => void;
 }
-const MealIngredient = ({ ingredient, removeIngredient }: IProps) => {
+const MealIngredient = ({ index, removeIngredient }: IProps) => {
   const { state } = useIngredientsContext();
+  const { control, setValue } = useFormContext();
   const options = convertToOptions(state.ingredients);
 
-  const handleRemoveIngredient = () => {
-    removeIngredient(ingredient.ingredientId);
-  };
-
   const handleAutocompleteChange = (_: any, value: IOption | null) => {
-    ingredient.ingredientId = value ? value.id : 0;
+    setValue(`mealIngredients[${index}].ingredientId`, value ? value.id : 0);
   };
   return (
     <div className="flex gap-4 items-center">
       <div className="mb-1 mt-2">
         <AutocompleteElement
           label="Ingredient"
-          name={`mealIngredients[${ingredient.ingredientId}].ingredientId`}
+          name={`mealIngredients[${index}].ingredientId`}
           options={options}
           autocompleteProps={{
             getOptionLabel: (option) => option.label,
@@ -39,7 +36,7 @@ const MealIngredient = ({ ingredient, removeIngredient }: IProps) => {
         />
       </div>
       <CustomTextField
-        name={`mealIngredients[${ingredient.ingredientId}].quantity`}
+        name={`mealIngredients[${index}].quantity`}
         label="Quantity"
         isLoading={state.isLoading}
         type="number"
@@ -48,7 +45,7 @@ const MealIngredient = ({ ingredient, removeIngredient }: IProps) => {
         aria-label="remove-ingredient"
         color="error"
         variant="contained"
-        onClick={handleRemoveIngredient}
+        onClick={() => removeIngredient(index)}
       >
         <RemoveOutlinedIcon />
       </Button>
