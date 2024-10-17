@@ -1,6 +1,6 @@
 import { ACTION_TYPES } from '@/app/common/enums';
 
-export interface IActionType {
+export interface IActionType<T = unknown> {
   type: ACTION_TYPES;
-  payload?: any;
+  payload?: T;
 }

@@ -28,6 +28,7 @@ const SignInForm = () => {
       handleEmailValidation(data);
     } else {
       await handleLogin(dispatch, data);
+      router.push('/dashboard');
     }
   };
 

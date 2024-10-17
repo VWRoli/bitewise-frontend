@@ -1,7 +1,10 @@
 import { AUTH_ACTION_TYPES } from '@/app/(modules)/(auth)/enum';
 import { IAuthActionType } from '@/app/(modules)/(auth)/interfaces';
 import { INITIAL_STATE } from '@/app/(modules)/dashboard/(pages)/user/constants';
-import { IUserState } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
+import {
+  IUser,
+  IUserState,
+} from '@/app/(modules)/dashboard/(pages)/user/interfaces';
 
 export const userReducer = (
   state = INITIAL_STATE,
@@ -19,7 +22,7 @@ export const userReducer = (
       return {
         ...state,
         isLoading: false,
-        user: action.payload,
+        user: action.payload as IUser,
       };
     case AUTH_ACTION_TYPES.LOGIN_ERROR:
       return {
@@ -39,7 +42,7 @@ export const userReducer = (
       return {
         ...state,
         isLoading: false,
-        user: action.payload,
+        user: action.payload as IUser,
       };
     case AUTH_ACTION_TYPES.REGISTER_ERROR:
       return {
@@ -59,7 +62,7 @@ export const userReducer = (
       return {
         ...state,
         isLoading: false,
-        user: action.payload,
+        user: action.payload as IUser,
       };
     case AUTH_ACTION_TYPES.FETCH_ERROR:
       return {

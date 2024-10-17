@@ -1,7 +1,10 @@
 import { ACTION_TYPES } from '@/app/common/enums';
 import { IActionType } from '@/app/common/interfaces';
 import { INITIAL_STATE } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
-import { IIngredientState } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
+import {
+  IIngredient,
+  IIngredientState,
+} from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 
 export const ingredientReducer = (
   state = INITIAL_STATE,
@@ -19,7 +22,7 @@ export const ingredientReducer = (
       return {
         ...state,
         isLoading: false,
-        ingredients: action.payload,
+        ingredients: action.payload as IIngredient[],
       };
     case ACTION_TYPES.FETCH_ERROR:
       return {
@@ -33,7 +36,7 @@ export const ingredientReducer = (
       return {
         ...state,
         isLoading: false,
-        ingredients: [...state.ingredients, action.payload],
+        ingredients: [...state.ingredients, action.payload] as IIngredient[],
       };
     case ACTION_TYPES.CREATE_ERROR:
       return {
@@ -48,8 +51,10 @@ export const ingredientReducer = (
         ...state,
         isLoading: false,
         ingredients: state.ingredients.map((ingredient) =>
-          ingredient.id === action.payload.id ? action.payload : ingredient,
-        ),
+          ingredient.id === (action.payload as IIngredient).id
+            ? action.payload
+            : ingredient,
+        ) as IIngredient[],
       };
     case ACTION_TYPES.UPDATE_ERROR:
       return {

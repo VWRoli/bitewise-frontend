@@ -5,7 +5,7 @@ interface IProps {
   mealPlan: IMealPlan;
 }
 const MealPlanCard = ({ mealPlan }: IProps) => {
-  return <div>MealPlanCard</div>;
+  return <div>{mealPlan.id}</div>;
 };
 
 export default MealPlanCard;

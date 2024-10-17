@@ -1,4 +1,4 @@
-import { IAuthActionType, ISignIn } from '@/app/(modules)/(auth)/interfaces';
+import { IAuthActionType } from '@/app/(modules)/(auth)/interfaces';
 import * as api from '../api';
 import { handleError } from '@/app/common/helpers';
 import { AUTH_ACTION_TYPES } from '@/app/(modules)/(auth)/enum';

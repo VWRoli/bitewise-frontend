@@ -16,9 +16,11 @@ export const MealsProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     if (pathname === '/') return;
+
     if (userId) {
       handleGetAllMeals(dispatch, userId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   return (

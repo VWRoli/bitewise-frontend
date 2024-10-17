@@ -12,7 +12,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { getPathName } from '@/app/(modules)/dashboard/utils';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import { logout } from '@/app/(modules)/dashboard/(pages)/user/api';
+import { logout } from '@/app/(modules)/(auth)/api';
 
 interface IProps {
   mobileOpen: boolean;

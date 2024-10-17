@@ -16,7 +16,10 @@ const MealIngredient = ({ index, removeIngredient }: IProps) => {
   const { setValue } = useFormContext();
   const options = convertToOptions(state.ingredients);
 
-  const handleAutocompleteChange = (_: any, value: IOption | null) => {
+  const handleAutocompleteChange = (
+    _: React.SyntheticEvent,
+    value: IOption | null,
+  ) => {
     setValue(`mealIngredients[${index}].ingredientId`, value ? value.id : 0);
   };
   return (

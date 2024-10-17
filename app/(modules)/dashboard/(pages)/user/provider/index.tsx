@@ -16,6 +16,7 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
       return;
     }
     handleFetchMe(dispatch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

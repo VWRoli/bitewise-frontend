@@ -1,7 +1,10 @@
 import { ACTION_TYPES } from '@/app/common/enums';
 import { IActionType } from '@/app/common/interfaces';
 import { INITIAL_STATE } from '@/app/(modules)/dashboard/(pages)/meal-plans/constants';
-import { IMealPlanState } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
+import {
+  IMealPlan,
+  IMealPlanState,
+} from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
 
 export const mealPlanReducer = (
   state = INITIAL_STATE,
@@ -19,7 +22,7 @@ export const mealPlanReducer = (
       return {
         ...state,
         isLoading: false,
-        mealPlans: action.payload,
+        mealPlans: action.payload as IMealPlan[],
       };
     case ACTION_TYPES.FETCH_ERROR:
       return {
@@ -33,7 +36,7 @@ export const mealPlanReducer = (
       return {
         ...state,
         isLoading: false,
-        mealPlans: [...state.mealPlans, action.payload],
+        mealPlans: [...state.mealPlans, action.payload] as IMealPlan[],
       };
     case ACTION_TYPES.CREATE_ERROR:
       return {
@@ -48,8 +51,10 @@ export const mealPlanReducer = (
         ...state,
         isLoading: false,
         mealPlans: state.mealPlans.map((mealPlan) =>
-          mealPlan.id === action.payload.id ? action.payload : mealPlan,
-        ),
+          mealPlan.id === (action.payload as IMealPlan).id
+            ? action.payload
+            : mealPlan,
+        ) as IMealPlan[],
       };
     case ACTION_TYPES.UPDATE_ERROR:
       return {

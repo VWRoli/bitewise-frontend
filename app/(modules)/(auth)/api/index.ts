@@ -14,9 +14,9 @@ export const login = async (userData: ISignIn): Promise<IUser> => {
     });
 
     return response.data as IUser;
-  } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Login failed.');
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || 'Login failed.');
     } else {
       throw new Error('Login failed.');
     }
@@ -33,9 +33,9 @@ export const register = async (userData: ISignUp) => {
     });
 
     return response.data as IUser;
-  } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Registration failed.');
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || 'Registration failed.');
     } else {
       throw new Error('Registration failed.');
     }
@@ -55,9 +55,9 @@ export const logout = async () => {
       });
       throw new Error(message);
     }
-  } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Logout failed.');
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || 'Logout failed.');
     } else {
       throw new Error('Logout failed.');
     }

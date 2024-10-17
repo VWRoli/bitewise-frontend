@@ -26,7 +26,7 @@ const AddMealPlanDialog = ({ open, onClose }: AddDialogProps) => {
 
   const options = convertToOptions(mealState.meals);
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const data: ICreateMealPlan = {
       mealIds: meals,
