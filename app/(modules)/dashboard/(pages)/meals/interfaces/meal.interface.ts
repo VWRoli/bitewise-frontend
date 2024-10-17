@@ -6,7 +6,4 @@ import {
 export interface IMeal extends ICreateMeal {
   id: number;
   mealIngredients: IMealIngredient[];
-  createTimeStamp: Date;
-  updateTimeStamp: Date;
-  deleteTimeStamp: Date | null;
 }

@@ -22,7 +22,6 @@ export const IngredientsProvider: React.FC<PropsWithChildren> = ({
     if (userId) {
       handleGetAllIngredients(dispatch, userId);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   return (

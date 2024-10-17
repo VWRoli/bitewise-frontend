@@ -1,0 +1,11 @@
+import { ACTION_TYPES } from '@/app/common/enums';
+
+enum MEAL_ACTION_TYPES {
+  ENRICH_SUCCESS = 'ENRICH_SUCCESS',
+}
+
+export type EXTENDED_MEAL_ACTION_TYPES = ACTION_TYPES | MEAL_ACTION_TYPES;
+export const EXTENDED_MEAL_ACTION_TYPES = {
+  ...ACTION_TYPES,
+  ...MEAL_ACTION_TYPES,
+};

@@ -15,8 +15,8 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
       dispatch({ type: AUTH_ACTION_TYPES.FETCH_ERROR });
       return;
     }
+
     handleFetchMe(dispatch);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

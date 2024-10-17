@@ -4,3 +4,4 @@ export * from './state.interface';
 export * from './meal-ingredient.interface';
 export * from './create-meal-ingredient.interface';
 export * from './nutrient-totals.interface';
+export * from './meal-action-type.interface';

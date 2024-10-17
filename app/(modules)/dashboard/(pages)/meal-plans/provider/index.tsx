@@ -20,7 +20,6 @@ export const MealPlansProvider: React.FC<PropsWithChildren> = ({
     if (userId) {
       handleGetAllMealPlans(dispatch, userId);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   return (
