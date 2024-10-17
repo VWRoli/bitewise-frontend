@@ -16,7 +16,7 @@ const MealPlansContent = () => {
   return (
     <section className="flex flex-col gap-4">
       {state.mealPlans.length === 0 && !state.isLoading && (
-        <Typography variant="h6">No meal planss</Typography>
+        <Typography variant="h6">No meal plans</Typography>
       )}
       {state.mealPlans.map((mealPlan) => (
         <MealPlanCard key={mealPlan.id} mealPlan={mealPlan} />

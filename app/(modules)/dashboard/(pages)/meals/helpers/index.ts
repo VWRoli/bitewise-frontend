@@ -1,16 +1,7 @@
-import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import {
   IMealIngredient,
   INutrientTotals,
 } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import { IOption } from '@/app/common/interfaces';
-
-export const convertToOptions = (ingredients: IIngredient[]): IOption[] => {
-  return ingredients.map((ingredient) => ({
-    id: ingredient.id,
-    label: ingredient.name,
-  }));
-};
 
 export const getNutrientLabels = (nutrientTotals: INutrientTotals) => {
   return [

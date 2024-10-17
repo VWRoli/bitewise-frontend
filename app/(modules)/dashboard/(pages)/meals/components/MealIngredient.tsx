@@ -4,8 +4,8 @@ import React from 'react';
 import { AutocompleteElement, useFormContext } from 'react-hook-form-mui';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
-import { convertToOptions } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
 import { IOption } from '@/app/common/interfaces';
+import { convertToOptions } from '@/app/common/helpers';
 
 interface IProps {
   index: number;
@@ -13,7 +13,7 @@ interface IProps {
 }
 const MealIngredient = ({ index, removeIngredient }: IProps) => {
   const { state } = useIngredientsContext();
-  const { control, setValue } = useFormContext();
+  const { setValue } = useFormContext();
   const options = convertToOptions(state.ingredients);
 
   const handleAutocompleteChange = (_: any, value: IOption | null) => {

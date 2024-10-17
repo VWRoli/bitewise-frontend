@@ -65,7 +65,7 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
     onClose();
   };
 
-  const handleCancle = () => {
+  const handleCancel = () => {
     reset();
     onClose();
   };
@@ -103,7 +103,7 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
             </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCancle} color="primary" variant="outlined">
+            <Button onClick={handleCancel} color="primary" variant="outlined">
               Cancel
             </Button>
             <LoadingButton
