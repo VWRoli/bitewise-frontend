@@ -41,6 +41,11 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
           error={!!fieldError}
           helperText={fieldError ? fieldError.message : ''}
           disabled={isLoading}
+          onFocus={() => {
+            if (field.value === '0' || field.value === 0) {
+              field.onChange('');
+            }
+          }}
           onChange={(e) => {
             const value = e.target.value;
             field.onChange(type === 'number' ? Number(value) : value);

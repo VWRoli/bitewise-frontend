@@ -71,7 +71,7 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle>Add Meal</DialogTitle>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -93,13 +93,17 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
                   removeIngredient={() => removeIngredient(index)}
                 />
               ))}
-              <Button onClick={addIngredient} color="primary">
+              <Button
+                onClick={addIngredient}
+                color="primary"
+                variant="outlined"
+              >
                 Add Ingredient
               </Button>
             </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCancle} color="primary">
+            <Button onClick={handleCancle} color="primary" variant="outlined">
               Cancel
             </Button>
             <LoadingButton

@@ -5,7 +5,6 @@ import { AutocompleteElement, useFormContext } from 'react-hook-form-mui';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
 import { convertToOptions } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
-import { ICreateMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import { IOption } from '@/app/common/interfaces';
 
 interface IProps {

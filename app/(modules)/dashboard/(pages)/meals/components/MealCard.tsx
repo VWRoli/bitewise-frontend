@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Grid2, Typography } from '@mui/material';
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import MealCardSum from '@/app/(modules)/dashboard/(pages)/meals/components/MealCardSum';
 
 interface IProps {
   meal: IMeal;
@@ -62,6 +63,7 @@ const MealCard: React.FC<IProps> = ({ meal }) => {
             </Grid2>
           </article>
         ))}
+        <MealCardSum meal={meal} />
       </CardContent>
     </Card>
   );
