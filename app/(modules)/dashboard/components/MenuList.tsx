@@ -16,9 +16,14 @@ import {
   Toolbar,
 } from '@mui/material';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
-const MenuList = () => {
+interface IProps {
+  onClose: () => void;
+}
+const MenuList = ({ onClose }: IProps) => {
+  const pathname = usePathname();
   const { state } = useUserContext();
   const avatarLetters = getFirstTwoCharacters(state.user?.email);
 
@@ -39,11 +44,21 @@ const MenuList = () => {
         )}
       </div>
       <List className="flex flex-col justify-between h-full">
-        <div>
+        <div className="px-4 flex flex-col gap-1">
           {MENU_ITEMS.map((item) => (
             <ListItem key={item.label} disablePadding>
-              <Link href={`/dashboard${item.route}`} className="w-full">
-                <ListItemButton>
+              <Link
+                href={`/dashboard${item.route}`}
+                className="w-full"
+                onClick={onClose}
+              >
+                <ListItemButton
+                  className={`rounded-lg hover:bg-gray-700 ${
+                    pathname === `/dashboard${item.route}`
+                      ? 'bg-menu-item-active'
+                      : ''
+                  }`}
+                >
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText
                     primary={item.label}
@@ -58,7 +73,11 @@ const MenuList = () => {
         <div>
           {SUB_MENU_ITEMS.map((item) => (
             <ListItem key={item.label} disablePadding>
-              <Link href={`/dashboard${item.route}`} className="w-full">
+              <Link
+                href={`/dashboard${item.route}`}
+                className="w-full"
+                onClick={onClose}
+              >
                 <ListItemButton>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText

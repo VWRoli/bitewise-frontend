@@ -1,2 +1,2 @@
 export * from './menu-items.contant';
-export const DRAWER_WIDTH = 240;
+export * from './drawer-classes.constants';

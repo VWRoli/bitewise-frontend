@@ -1,5 +1,8 @@
 import MenuList from '@/app/(modules)/dashboard/components/MenuList';
-import { DRAWER_WIDTH } from '@/app/(modules)/dashboard/constants';
+import {
+  DRAWER_CLASSES,
+  DRAWER_WIDTH,
+} from '@/app/(modules)/dashboard/constants';
 import { Box, Drawer } from '@mui/material';
 import React from 'react';
 
@@ -26,6 +29,9 @@ const CustomDrawer = ({ mobileOpen, setMobileOpen, setIsClosing }: IProps) => {
       <Drawer
         variant="temporary"
         open={mobileOpen}
+        slotProps={{
+          backdrop: { sx: { backgroundColor: 'transparent' } },
+        }}
         onTransitionEnd={handleDrawerTransitionEnd}
         onClose={handleDrawerClose}
         ModalProps={{
@@ -33,27 +39,20 @@ const CustomDrawer = ({ mobileOpen, setMobileOpen, setIsClosing }: IProps) => {
         }}
         sx={{
           display: { xs: 'block', sm: 'none' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            width: DRAWER_WIDTH,
-          },
+          '& .MuiDrawer-paper': DRAWER_CLASSES,
         }}
       >
-        <MenuList />
+        <MenuList onClose={handleDrawerClose} />
       </Drawer>
       <Drawer
         variant="permanent"
         sx={{
           display: { xs: 'none', sm: 'block' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            maxHeight: '100%',
-            width: DRAWER_WIDTH,
-          },
+          '& .MuiDrawer-paper': DRAWER_CLASSES,
         }}
         open
       >
-        <MenuList />
+        <MenuList onClose={handleDrawerClose} />
       </Drawer>
     </Box>
   );

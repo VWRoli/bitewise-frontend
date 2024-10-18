@@ -8,7 +8,7 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="p-4">
       <Dashboard />
       <Toolbar />
       <Box
@@ -21,6 +21,6 @@ export default async function Layout({
       >
         {children}
       </Box>
-    </>
+    </div>
   );
 }
