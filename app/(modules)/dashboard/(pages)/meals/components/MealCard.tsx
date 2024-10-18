@@ -1,68 +1,92 @@
 import React from 'react';
-import { Card, CardContent, Grid2, Typography } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  Divider,
+  Grid2,
+} from '@mui/material';
+
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import MealCardSum from '@/app/(modules)/dashboard/(pages)/meals/components/MealCardSum';
 
 interface IProps {
   meal: IMeal;
 }
+
 const MealCard: React.FC<IProps> = ({ meal }) => {
   return (
-    <Card>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+    <Card sx={{ maxWidth: 400, m: 'auto', boxShadow: 3, borderRadius: 3 }}>
+      <CardContent sx={{ padding: 3 }}>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{ fontWeight: 'bold' }}
+        >
           {meal.name}
         </Typography>
+
+        <Divider sx={{ my: 2 }} />
+
         {meal.mealIngredients.map((mealIngredient) => (
-          <article key={mealIngredient.id}>
-            <Typography variant="body2" color="textSecondary">
+          <Box key={mealIngredient.id} mb={2}>
+            <Typography
+              variant="body1"
+              color="textPrimary"
+              sx={{ fontWeight: 'medium' }}
+            >
               {mealIngredient.ingredientName} - {mealIngredient.quantity} *{' '}
               {mealIngredient.unit}
             </Typography>
-            <Grid2 container spacing={2}>
+            <Grid2 container spacing={1} mt={1}>
               <Grid2>
                 <Typography variant="body2" color="textSecondary">
-                  Calories: {mealIngredient.calories} kcal
+                  Calories: <strong>{mealIngredient.calories}</strong> kcal
                 </Typography>
               </Grid2>
               <Grid2>
                 <Typography variant="body2" color="textSecondary">
-                  Protein: {mealIngredient.protein}g
+                  Protein: <strong>{mealIngredient.protein}</strong> g
                 </Typography>
               </Grid2>
               <Grid2>
                 <Typography variant="body2" color="textSecondary">
-                  Total Fat: {mealIngredient.totalFat}g
+                  Total Fat: <strong>{mealIngredient.totalFat}</strong> g
                 </Typography>
               </Grid2>
               <Grid2>
                 <Typography variant="body2" color="textSecondary">
-                  Saturated Fat: {mealIngredient.saturatedFat}g
+                  Saturated Fat: <strong>{mealIngredient.saturatedFat}</strong>{' '}
+                  g
                 </Typography>
               </Grid2>
               <Grid2>
                 <Typography variant="body2" color="textSecondary">
-                  Total Carbohydrates: {mealIngredient.totalCarbohydrates}g
+                  Carbohydrates:{' '}
+                  <strong>{mealIngredient.totalCarbohydrates}</strong> g
                 </Typography>
               </Grid2>
               <Grid2>
                 <Typography variant="body2" color="textSecondary">
-                  Sugar: {mealIngredient.sugar}g
+                  Sugar: <strong>{mealIngredient.sugar}</strong> g
                 </Typography>
               </Grid2>
               <Grid2>
                 <Typography variant="body2" color="textSecondary">
-                  Dietary Fiber: {mealIngredient.dietaryFiber}g
+                  Fiber: <strong>{mealIngredient.dietaryFiber}</strong> g
                 </Typography>
               </Grid2>
               <Grid2>
                 <Typography variant="body2" color="textSecondary">
-                  Unit: {mealIngredient.unit}
+                  Unit: <strong>{mealIngredient.unit}</strong>
                 </Typography>
               </Grid2>
             </Grid2>
-          </article>
+          </Box>
         ))}
+
         <MealCardSum meal={meal} />
       </CardContent>
     </Card>
