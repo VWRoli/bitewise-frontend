@@ -1,6 +1,4 @@
-import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import {
-  IMeal,
   IMealIngredient,
   INutrientTotals,
 } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
@@ -56,24 +54,4 @@ export const calculateNutrientTotals = (mealIngredients: IMealIngredient[]) => {
       0,
     ),
   };
-};
-
-const enrichMealIngredient = (
-  mealIngredient: IMealIngredient,
-  ingredients: IIngredient[],
-): IMealIngredient => {
-  const ingredient = ingredients.find(
-    (ing) => ing.id === mealIngredient.ingredientId,
-  );
-  return ingredient ? { ...mealIngredient, ...ingredient } : mealIngredient;
-};
-
-export const enrichMealIngredients = (
-  meal: IMeal,
-  ingredients: IIngredient[],
-): IMeal => {
-  const enrichedMealIngredients = meal.mealIngredients.map((mealIngredient) =>
-    enrichMealIngredient(mealIngredient, ingredients),
-  );
-  return { ...meal, mealIngredients: enrichedMealIngredients };
 };

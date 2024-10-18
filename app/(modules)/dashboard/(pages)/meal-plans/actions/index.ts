@@ -1,8 +1,8 @@
 import { ICreateMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
 import * as api from '@/app/(modules)/dashboard/(pages)/meal-plans/api';
-import { ACTION_TYPES } from '@/app/common/enums';
-import { IActionType } from '@/app/common/interfaces';
 import { handleError } from '@/app/common/helpers';
+import { IActionType } from '@/app/common/interfaces';
+import { ACTION_TYPES } from '@/app/common/enums';
 
 export const handleCreateMealPlan = async (
   dispatch: React.Dispatch<IActionType>,
@@ -10,7 +10,10 @@ export const handleCreateMealPlan = async (
 ) => {
   try {
     const { data } = await api.createMealPlan(formData);
-    dispatch({ type: ACTION_TYPES.CREATE_SUCCESS, payload: data });
+    dispatch({
+      type: ACTION_TYPES.CREATE_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     handleError(dispatch, ACTION_TYPES.CREATE_ERROR, error);
   }
@@ -23,7 +26,10 @@ export const handleGetAllMealPlans = async (
   try {
     dispatch({ type: ACTION_TYPES.FETCH_START });
     const { data } = await api.getAllMealPlans(userId);
-    dispatch({ type: ACTION_TYPES.FETCH_SUCCESS, payload: data });
+    dispatch({
+      type: ACTION_TYPES.FETCH_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     handleError(dispatch, ACTION_TYPES.FETCH_ERROR, error);
   }
@@ -36,7 +42,10 @@ export const handleUpdateMealPlan = async (
 ) => {
   try {
     const { data } = await api.updateMealPlan(id, formData);
-    dispatch({ type: ACTION_TYPES.UPDATE_SUCCESS, payload: data });
+    dispatch({
+      type: ACTION_TYPES.UPDATE_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     handleError(dispatch, ACTION_TYPES.UPDATE_ERROR, error);
   }
@@ -48,7 +57,10 @@ export const handleDeleteMealPlan = async (
 ) => {
   try {
     await api.deleteMealPlan(id);
-    dispatch({ type: ACTION_TYPES.DELETE_SUCCESS, payload: id });
+    dispatch({
+      type: ACTION_TYPES.DELETE_SUCCESS,
+      payload: id,
+    });
   } catch (error) {
     handleError(dispatch, ACTION_TYPES.DELETE_ERROR, error);
   }

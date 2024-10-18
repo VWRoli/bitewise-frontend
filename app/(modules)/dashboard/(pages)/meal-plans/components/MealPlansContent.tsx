@@ -8,7 +8,7 @@ import React from 'react';
 
 const MealPlansContent = () => {
   const { state } = useMealPlansContext();
-
+  console.log(state);
   if (state.isLoading) {
     return <MealPlansLoading />;
   }

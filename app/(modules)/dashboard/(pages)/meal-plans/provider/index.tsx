@@ -10,8 +10,10 @@ export const MealPlansProvider: React.FC<PropsWithChildren> = ({
   children,
 }) => {
   const { state: userState } = useUserContext();
+
   const userId = userState.user?.id;
   const pathname = usePathname();
+
   const [state, dispatch] = useReducer(mealPlanReducer, INITIAL_STATE);
 
   useEffect(() => {

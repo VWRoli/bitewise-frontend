@@ -1,10 +1,10 @@
-import { ACTION_TYPES } from '@/app/common/enums';
-import { IActionType } from '@/app/common/interfaces';
 import { INITIAL_STATE } from '@/app/(modules)/dashboard/(pages)/meal-plans/constants';
 import {
   IMealPlan,
   IMealPlanState,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
+import { ACTION_TYPES } from '@/app/common/enums';
+import { IActionType } from '@/app/common/interfaces';
 
 export const mealPlanReducer = (
   state = INITIAL_STATE,

@@ -5,7 +5,18 @@ interface IProps {
   mealPlan: IMealPlan;
 }
 const MealPlanCard = ({ mealPlan }: IProps) => {
-  return <div>{mealPlan.id}</div>;
+  return (
+    <div>
+      {mealPlan.meals.map((meal) => (
+        <div key={meal.id}>
+          <p>{meal.name}</p>
+          {meal.mealIngredients.map((ingredient) => (
+            <div key={ingredient.id}>{ingredient.id}</div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default MealPlanCard;

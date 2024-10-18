@@ -1,8 +1,4 @@
-import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
-import {
-  handleEnrichMealsWithIngredients,
-  handleGetAllMeals,
-} from '@/app/(modules)/dashboard/(pages)/meals/actions';
+import { handleGetAllMeals } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import { INITIAL_STATE } from '@/app/(modules)/dashboard/(pages)/meals/constants';
 import { MealContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
 import { mealReducer } from '@/app/(modules)/dashboard/(pages)/meals/reducer';
@@ -12,7 +8,6 @@ import { PropsWithChildren, useEffect, useReducer } from 'react';
 
 export const MealsProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { state: userState } = useUserContext();
-  const { state: ingredientsState } = useIngredientsContext();
 
   const userId = userState.user?.id;
 
@@ -26,16 +21,6 @@ export const MealsProvider: React.FC<PropsWithChildren> = ({ children }) => {
       handleGetAllMeals(dispatch, userId);
     }
   }, [userId]);
-
-  useEffect(() => {
-    if (!ingredientsState.isLoading) {
-      handleEnrichMealsWithIngredients(
-        dispatch,
-        state.meals,
-        ingredientsState.ingredients,
-      );
-    }
-  }, [ingredientsState.isLoading]);
 
   return (
     <MealContext.Provider

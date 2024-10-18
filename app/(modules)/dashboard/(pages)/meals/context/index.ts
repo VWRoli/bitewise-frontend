@@ -1,13 +1,11 @@
-import {
-  IMealActionType,
-  IMealState,
-} from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import { IMealState } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import React, { useContext } from 'react';
 import { INITIAL_STATE } from '@/app/(modules)/dashboard/(pages)/meals/constants';
+import { IActionType } from '@/app/common/interfaces';
 
 interface ValueTypes {
   state: IMealState;
-  dispatch: React.Dispatch<IMealActionType>;
+  dispatch: React.Dispatch<IActionType>;
 }
 
 const defaultValue: ValueTypes = {
