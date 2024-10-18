@@ -1,8 +1,8 @@
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
-import { IconButton, TableCell, TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import React from 'react';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Unit from '@/app/(modules)/dashboard/components/Unit';
+import IngredientActions from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientActions';
 
 interface IProps {
   row: IIngredient;
@@ -38,9 +38,7 @@ const IngredientTableRow = ({ row }: IProps) => {
         </div>
       </TableCell>
       <TableCell align="right" className="text-dark">
-        <IconButton aria-label="actions">
-          <MoreVertIcon />
-        </IconButton>
+        <IngredientActions ingredient={row} />
       </TableCell>
     </TableRow>
   );
