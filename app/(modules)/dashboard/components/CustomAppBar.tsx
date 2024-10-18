@@ -43,7 +43,7 @@ const CustomAppBar = ({ mobileOpen, isClosing, setMobileOpen }: IProps) => {
         sx={{
           width: { sm: `calc(100% - ${DRAWER_WIDTH + 16}px)` },
           ml: { sm: `${DRAWER_WIDTH + 16}px` },
-          mt: { sm: '16px' },
+          pt: { sm: '16px' },
         }}
       >
         <Toolbar className="flex justify-between">
