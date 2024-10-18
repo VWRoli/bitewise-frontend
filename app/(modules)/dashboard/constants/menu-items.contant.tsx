@@ -5,28 +5,27 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import { IMenuItems } from '@/app/(modules)/dashboard/interfaces';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import AddCardIcon from '@mui/icons-material/AddCard';
-import { grey } from '@mui/material/colors';
 
 export const MENU_ITEMS: IMenuItems[] = [
   {
     label: 'dashboard',
     route: '',
-    icon: <DashboardOutlinedIcon sx={{ color: grey[50] }} />,
+    icon: <DashboardOutlinedIcon className="text-white" />,
   },
   {
     label: 'ingredients',
     route: '/ingredients',
-    icon: <FastfoodOutlinedIcon sx={{ color: grey[50] }} />,
+    icon: <FastfoodOutlinedIcon className="text-white" />,
   },
   {
     label: 'meals',
     route: '/meals',
-    icon: <RestaurantOutlinedIcon sx={{ color: grey[50] }} />,
+    icon: <RestaurantOutlinedIcon className="text-white" />,
   },
   {
     label: 'mealPlans',
     route: '/meal-plans',
-    icon: <MenuBookIcon sx={{ color: grey[50] }} />,
+    icon: <MenuBookIcon className="text-white" />,
   },
 ];
 
@@ -34,11 +33,11 @@ export const SUB_MENU_ITEMS: IMenuItems[] = [
   {
     label: 'faq',
     route: '/faq',
-    icon: <HelpOutlineIcon sx={{ color: grey[50] }} />,
+    icon: <HelpOutlineIcon className="text-white" />,
   },
   {
     label: 'payment plans',
     route: '/payment-plans',
-    icon: <AddCardIcon sx={{ color: grey[50] }} />,
+    icon: <AddCardIcon className="text-white" />,
   },
 ];

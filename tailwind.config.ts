@@ -1,3 +1,4 @@
+import { dark, light } from '@mui/material/styles/createPalette';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -8,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        dark: '#344767',
+        light: '#f0f2f5',
+      },
       backgroundImage: {
         'menu-item-active': 'linear-gradient(195deg, #49a3f1, #1A73E8)',
       },

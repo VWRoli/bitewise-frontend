@@ -8,11 +8,12 @@ import {
 } from '@mui/material';
 import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { usePathname, useRouter } from 'next/navigation';
-import { getPathName } from '@/app/(modules)/dashboard/utils';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { useRouter } from 'next/navigation';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { logout } from '@/app/(modules)/(auth)/api';
+import CustomBreadCrumbs from '@/app/(modules)/dashboard/components/CustomBreadCrumbs';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 interface IProps {
   mobileOpen: boolean;
@@ -21,13 +22,12 @@ interface IProps {
 }
 const CustomAppBar = ({ mobileOpen, isClosing, setMobileOpen }: IProps) => {
   const router = useRouter();
-  const fullPathName = usePathname();
+
   const handleDrawerToggle = () => {
     if (!isClosing) {
       setMobileOpen(!mobileOpen);
     }
   };
-  const pathName = getPathName(fullPathName);
 
   const handleLogout = async () => {
     await logout();
@@ -39,9 +39,11 @@ const CustomAppBar = ({ mobileOpen, isClosing, setMobileOpen }: IProps) => {
       <CssBaseline />
       <AppBar
         position="fixed"
+        className="bg-light shadow-none text-dark"
         sx={{
-          width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` },
-          ml: { sm: `${DRAWER_WIDTH}px` },
+          width: { sm: `calc(100% - ${DRAWER_WIDTH + 16}px)` },
+          ml: { sm: `${DRAWER_WIDTH + 16}px` },
+          mt: { sm: '16px' },
         }}
       >
         <Toolbar className="flex justify-between">
@@ -50,32 +52,29 @@ const CustomAppBar = ({ mobileOpen, isClosing, setMobileOpen }: IProps) => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            className="mr-2 sm:hidden"
           >
             <MenuIcon />
           </IconButton>
-          <h4 className="first-letter:uppercase">{pathName}</h4>
+          <CustomBreadCrumbs />
           <div>
-            <Button
-              variant="text"
-              className="text-white"
-              onClick={handleLogout}
-            >
-              Log Out
+            <Button variant="text" className="text-dark" onClick={handleLogout}>
+              <LogoutIcon className="sm:hidden" />
+              <span className="hidden sm:inline-block">Log Out</span>
             </Button>
             <IconButton
               color="inherit"
               aria-label="notifications"
               onClick={() => console.log('// TODO: notifications')}
             >
-              <NotificationsNoneIcon />
+              <NotificationsIcon className="text-dark" />
             </IconButton>
             <IconButton
               color="inherit"
               aria-label="account info"
               onClick={() => console.log('// TODO: account')}
             >
-              <PersonOutlineIcon />
+              <AccountCircleIcon className="text-dark" />
             </IconButton>
           </div>
         </Toolbar>
