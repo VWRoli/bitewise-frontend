@@ -8,7 +8,7 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="p-4 bg-light min-h-screen">
+    <div className="p-4 bg-light min-h-screen text-dark">
       <Dashboard />
       <Toolbar />
       <Box

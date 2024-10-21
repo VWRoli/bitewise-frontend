@@ -5,8 +5,8 @@ interface IProps {
   unit: EUnit;
 }
 const Unit = ({ unit }: IProps) => {
-  const grammClasses = 'bg-gramm-unit';
-  const pieceClasses = 'bg-piece-unit';
+  const grammClasses = 'bg-green-gradient';
+  const pieceClasses = 'bg-dark-gradient';
 
   const isPiece = unit === EUnit.PIECE;
   return (
