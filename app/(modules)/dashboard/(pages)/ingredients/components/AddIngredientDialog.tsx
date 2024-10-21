@@ -7,38 +7,43 @@ import {
   Button,
   MenuItem,
 } from '@mui/material';
-import { ICreateIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
+import {
+  ICreateIngredient,
+  IIngredient,
+} from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import { EUnit } from '@/app/(modules)/dashboard/(pages)/ingredients/enums';
-import { handleCreateIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
+import {
+  handleCreateIngredient,
+  handleUpdateIngredient,
+} from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
 import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
 import { LoadingButton } from '@mui/lab';
 import CustomTextField from '@/app/(modules)/dashboard/components/CustomTextField';
-import { ADD_INGRENDIENT_FIELDS } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
+import {
+  ADD_INGRENDIENT_FIELDS,
+  DEFAULT_INGREDIENT_VALUES,
+} from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 
 export interface AddDialogProps {
   open: boolean;
   onClose: () => void;
+  ingredientEditValues?: IIngredient | null;
 }
 
-const AddIngredientDialog: React.FC<AddDialogProps> = ({ open, onClose }) => {
+const AddIngredientDialog: React.FC<AddDialogProps> = ({
+  open,
+  onClose,
+  ingredientEditValues,
+}) => {
   const { state, dispatch } = useIngredientsContext();
   const { state: userState } = useUserContext();
 
   const methods = useForm<ICreateIngredient>({
-    defaultValues: {
-      name: 'Example Ingredient',
-      protein: 10,
-      totalFat: 5,
-      saturatedFat: 2,
-      totalCarbohydrates: 20,
-      sugar: 5,
-      dietaryFiber: 3,
-      calories: 150,
-      unit: EUnit.HUNDRED_GRAMS,
-      price: 1.99,
-    },
+    defaultValues: ingredientEditValues
+      ? ingredientEditValues
+      : DEFAULT_INGREDIENT_VALUES,
     mode: 'onBlur',
   });
 
@@ -47,17 +52,23 @@ const AddIngredientDialog: React.FC<AddDialogProps> = ({ open, onClose }) => {
   const ingredient = watch();
 
   const onSubmit = async (data: ICreateIngredient) => {
-    await handleCreateIngredient(dispatch, {
-      ...data,
-      userId: userState.user?.id as number,
-    });
+    if (ingredientEditValues) {
+      await handleUpdateIngredient(dispatch, data, ingredientEditValues.id);
+    } else {
+      await handleCreateIngredient(dispatch, {
+        ...data,
+        userId: userState.user?.id as number,
+      });
+    }
     reset();
     onClose();
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add Ingredient</DialogTitle>
+      <DialogTitle>
+        {ingredientEditValues ? 'Edit' : 'Add'} Ingredient
+      </DialogTitle>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogContent>

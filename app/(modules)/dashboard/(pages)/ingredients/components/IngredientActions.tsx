@@ -5,6 +5,7 @@ import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/inter
 import DeleteDialog from '@/app/common/components/DeleteDialog';
 import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
 import { handleDeleteIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
+import EditIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/EditIngredientDialog';
 
 interface IProps {
   ingredient: IIngredient;
@@ -13,6 +14,7 @@ const IngredientActions = ({ ingredient }: IProps) => {
   const { dispatch } = useIngredientsContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -27,6 +29,11 @@ const IngredientActions = ({ ingredient }: IProps) => {
 
   const handleOnDelete = async () => {
     handleDeleteIngredient(dispatch, ingredient.id);
+    handleClose();
+  };
+
+  const handleEdit = () => {
+    setIsEditOpen(true);
     handleClose();
   };
   return (
@@ -48,7 +55,7 @@ const IngredientActions = ({ ingredient }: IProps) => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
+        <MenuItem onClick={handleEdit}>Edit</MenuItem>
         <MenuItem onClick={handleDeleteDialog}>Delete</MenuItem>
       </Menu>
       <DeleteDialog
@@ -57,6 +64,11 @@ const IngredientActions = ({ ingredient }: IProps) => {
         onConfirm={handleOnDelete}
         title="Delete Ingredient"
         subtitle={`Are you sure you want to delete ${ingredient.name}?`}
+      />
+      <EditIngredientDialog
+        isOpen={isEditOpen}
+        setIsOpen={setIsEditOpen}
+        ingredient={ingredient}
       />
     </>
   );
