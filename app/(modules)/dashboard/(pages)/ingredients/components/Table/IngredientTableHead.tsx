@@ -4,7 +4,7 @@ import React from 'react';
 const IngredientTableHead = () => {
   const cellClasses = 'text-custom text-xs';
   return (
-    <TableHead className="uppercase">
+    <TableHead className="uppercase hidden lg:table-header-group">
       <TableRow>
         <TableCell className={cellClasses}>Name</TableCell>
         <TableCell className={cellClasses} align="right">

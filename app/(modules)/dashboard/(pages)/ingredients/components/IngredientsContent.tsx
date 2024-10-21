@@ -2,8 +2,8 @@
 
 import AddIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/AddIngredientDialog';
 import IngredientsLoading from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientsLoading';
-import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientTableHead';
-import IngredientTableRow from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientTableRow';
+import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
+import IngredientTableRow from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableRow';
 import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
 import { Button, Table, TableBody, Typography } from '@mui/material';
 import React, { useState } from 'react';
@@ -40,7 +40,7 @@ const IngredientsContent = () => {
             </div>
           </div>
           <div className="h-4"></div>
-          <Table sx={{ minWidth: 650 }} aria-label="Ingredients table">
+          <Table aria-label="Ingredients table">
             <IngredientTableHead />
             <TableBody>
               {state.ingredients.map((row) => (
