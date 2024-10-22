@@ -10,50 +10,58 @@ interface IProps {
 }
 
 const MealTableRow = ({ row }: IProps) => {
+  const { mealIngredients } = row;
+
   return (
     <TableRow key={row.id}>
       <MealTableCell
-        mealIngredients={row.mealIngredients}
+        mealIngredients={mealIngredients}
         column="ingredientName"
         className="font-bold lg:!text-left"
+        mealName={row.name}
       />
 
       <MealTableCell
-        mealIngredients={row.mealIngredients}
+        mealIngredients={mealIngredients}
         column="calories"
         unit="kcal"
       />
       <MealTableCell
-        mealIngredients={row.mealIngredients}
+        mealIngredients={mealIngredients}
         column="protein"
         unit="g"
       />
       <MealTableCell
-        mealIngredients={row.mealIngredients}
+        mealIngredients={mealIngredients}
         column="totalFat"
         subColumn="saturatedFat"
         unit="g"
       />
       <MealTableCell
-        mealIngredients={row.mealIngredients}
+        mealIngredients={mealIngredients}
         column="totalCarbohydrates"
         subColumn="sugar"
         unit="g"
       />
       <MealTableCell
-        mealIngredients={row.mealIngredients}
+        mealIngredients={mealIngredients}
         column="dietaryFiber"
         unit="g"
       />
 
-      <TableCell className="lg:table-cell block lg:text-right">
-        {row.mealIngredients.map((mealIngredient) => (
-          <div key={mealIngredient.id} className="lg:flex justify-end block">
+      <TableCell className="lg:table-cell flex gap-2 items-center lg:text-right">
+        {mealIngredients.map((mealIngredient) => (
+          <div
+            key={mealIngredient.id}
+            className="lg:flex flex-1 lg:justify-end block"
+          >
             <Unit unit={mealIngredient.unit} />
           </div>
         ))}
       </TableCell>
-      <TableCell></TableCell>
+      <TableCell className="lg:table-cell block text-right">
+        <MealActions meal={row} />
+      </TableCell>
     </TableRow>
   );
 };
