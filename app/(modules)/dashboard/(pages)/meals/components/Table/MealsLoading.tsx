@@ -12,7 +12,7 @@ const MealsLoading = () => {
     />
   ));
 
-  return <>{skeletonItems}</>;
+  return <></>;
 };
 
 export default MealsLoading;

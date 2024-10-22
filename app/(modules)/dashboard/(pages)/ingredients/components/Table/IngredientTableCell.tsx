@@ -13,7 +13,7 @@ const IngredientTableCell = ({ className, rowValue, rowName }: IProps) => {
         className || ''
       }`}
     >
-      <span className="lg:hidden font-semibold text-gray-700">{rowName}</span>
+      <span className="lg:hidden font-semibold text-gray-700">{rowName}: </span>
       {rowValue}
     </TableCell>
   );

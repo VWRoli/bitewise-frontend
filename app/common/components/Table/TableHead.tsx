@@ -1,10 +1,10 @@
-import { TableCell, TableHead, TableRow } from '@mui/material';
+import { TableCell, TableHead as MuiTableHead, TableRow } from '@mui/material';
 import React from 'react';
 
-const IngredientTableHead = () => {
+const TableHead = () => {
   const cellClasses = 'text-custom text-xs';
   return (
-    <TableHead className="uppercase hidden lg:table-header-group">
+    <MuiTableHead className="uppercase hidden lg:table-header-group">
       <TableRow>
         <TableCell className={cellClasses}>Name</TableCell>
         <TableCell className={cellClasses} align="right">
@@ -27,8 +27,8 @@ const IngredientTableHead = () => {
         </TableCell>
         <TableCell className={cellClasses} align="right"></TableCell>
       </TableRow>
-    </TableHead>
+    </MuiTableHead>
   );
 };
 
-export default IngredientTableHead;
+export default TableHead;
