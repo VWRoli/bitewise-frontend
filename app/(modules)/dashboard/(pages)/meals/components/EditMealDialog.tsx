@@ -12,7 +12,7 @@ const EditMealDialog = ({ isOpen, setIsOpen, meal }: IProps) => {
     <AddMealDialog
       open={isOpen}
       onClose={() => setIsOpen(false)}
-      // mealEditValues={meal}
+      mealEditValues={meal}
     />
   );
 };

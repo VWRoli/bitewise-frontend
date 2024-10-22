@@ -26,13 +26,13 @@ import {
 import { useForm, FormProvider } from 'react-hook-form';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 
-export interface AddDialogProps {
+interface IProps {
   open: boolean;
   onClose: () => void;
   ingredientEditValues?: IIngredient | null;
 }
 
-const AddIngredientDialog: React.FC<AddDialogProps> = ({
+const AddIngredientDialog: React.FC<IProps> = ({
   open,
   onClose,
   ingredientEditValues,

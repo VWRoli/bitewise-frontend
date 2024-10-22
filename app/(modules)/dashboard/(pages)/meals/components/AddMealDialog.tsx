@@ -1,7 +1,9 @@
 import React, { useCallback } from 'react';
-import { AddDialogProps } from '@/app/(modules)/dashboard/(pages)/ingredients/components/AddIngredientDialog';
 import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
-import { ICreateMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import {
+  ICreateMeal,
+  IMeal,
+} from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import { LoadingButton } from '@mui/lab';
 import {
@@ -19,17 +21,24 @@ import {
 } from 'react-hook-form';
 import CustomTextField from '@/app/(modules)/dashboard/components/CustomTextField';
 import MealIngredient from '@/app/(modules)/dashboard/(pages)/meals/components/MealIngredient';
-import { handleCreateMeal } from '@/app/(modules)/dashboard/(pages)/meals/actions';
+import {
+  handleCreateMeal,
+  handleUpdateMeal,
+} from '@/app/(modules)/dashboard/(pages)/meals/actions';
+import { DEFAULT_MEAL } from '@/app/(modules)/dashboard/(pages)/meals/constants';
 
-const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
+interface IProps {
+  open: boolean;
+  onClose: () => void;
+  mealEditValues?: IMeal | null;
+}
+
+const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
   const { state: userState } = useUserContext();
   const { state, dispatch } = useMealsContext();
 
   const methods = useForm<ICreateMeal>({
-    defaultValues: {
-      name: 'Example Meal',
-      mealIngredients: [],
-    },
+    defaultValues: mealEditValues ? mealEditValues : DEFAULT_MEAL,
     mode: 'onBlur',
   });
 
@@ -56,10 +65,14 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
   );
 
   const onSubmit = async (data: ICreateMeal) => {
-    await handleCreateMeal(dispatch, {
-      ...data,
-      userId: userState.user?.id as number,
-    });
+    if (mealEditValues) {
+      await handleUpdateMeal(dispatch, data, mealEditValues.id);
+    } else {
+      await handleCreateMeal(dispatch, {
+        ...data,
+        userId: userState.user?.id as number,
+      });
+    }
 
     reset();
     onClose();
@@ -72,7 +85,7 @@ const AddMealDialog = ({ open, onClose }: AddDialogProps) => {
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
-      <DialogTitle>Add Meal</DialogTitle>
+      <DialogTitle>{mealEditValues ? 'Edit' : 'Add'} Meal</DialogTitle>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogContent>
