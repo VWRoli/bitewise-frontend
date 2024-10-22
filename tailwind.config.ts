@@ -12,6 +12,7 @@ const config: Config = {
         dark: '#344767',
         light: '#f0f2f5',
         custom: '#7b809a',
+        'custom-gray': '#f8f9fa',
         'mui-primary': '#1A73E8',
       },
       backgroundImage: {

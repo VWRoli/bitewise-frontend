@@ -1,5 +1,4 @@
 import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import MealCardSum from '@/app/(modules)/dashboard/(pages)/meals/components/MealCardSum';
 import {
   Box,
   Card,
@@ -48,8 +47,6 @@ const MealPlanCard = ({ mealPlan }: IProps) => {
                 </div>
 
                 <Divider sx={{ my: 2 }} />
-
-                <MealCardSum meal={meal} />
               </CardContent>
             </Grid2>
           ))}
