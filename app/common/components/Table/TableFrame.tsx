@@ -1,12 +1,13 @@
-import TableHead from '@/app/common/components/Table/TableHead';
+import TableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
 import { Button, Table, Typography } from '@mui/material';
 import React, { PropsWithChildren } from 'react';
 
 interface IProps extends PropsWithChildren {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
+  tableHead: JSX.Element;
 }
-const TableFrame = ({ setIsOpen, title, children }: IProps) => {
+const TableFrame = ({ setIsOpen, title, children, tableHead }: IProps) => {
   return (
     <div className="shadow-md bg-white rounded-xl">
       <div className="px-4">
@@ -27,7 +28,7 @@ const TableFrame = ({ setIsOpen, title, children }: IProps) => {
       </div>
       <div className="h-4"></div>
       <Table aria-label={title}>
-        <TableHead />
+        {tableHead}
         {children}
       </Table>
     </div>

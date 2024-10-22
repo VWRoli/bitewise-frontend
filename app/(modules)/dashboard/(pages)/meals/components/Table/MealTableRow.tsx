@@ -48,7 +48,7 @@ const MealTableRow = ({ row }: IProps) => {
         column="dietaryFiber"
         unit="g"
       />
-
+      <MealTableCell mealIngredients={mealIngredients} column="quantity" />
       <TableCell className="lg:table-cell flex gap-2 items-center lg:text-right">
         {mealIngredients.map((mealIngredient) => (
           <div
@@ -59,6 +59,7 @@ const MealTableRow = ({ row }: IProps) => {
           </div>
         ))}
       </TableCell>
+
       <TableCell className="lg:table-cell block text-right">
         <MealActions meal={row} />
       </TableCell>

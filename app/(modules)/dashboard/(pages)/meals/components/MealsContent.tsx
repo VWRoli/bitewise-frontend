@@ -3,6 +3,7 @@
 import { handleGetAllMeals } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import AddMealDialog from '@/app/(modules)/dashboard/(pages)/meals/components/AddMealDialog';
 import MealsLoading from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealsLoading';
+import MealTableHead from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableHead';
 import MealTableRow from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableRow';
 import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
@@ -26,7 +27,11 @@ const MealsContent = () => {
 
   return (
     <section className="flex flex-col gap-4">
-      <TableFrame title="Meals Table" setIsOpen={setIsOpen}>
+      <TableFrame
+        title="Meals Table"
+        setIsOpen={setIsOpen}
+        tableHead={<MealTableHead />}
+      >
         <TableBody>
           {state.isLoading ? (
             <MealsLoading />

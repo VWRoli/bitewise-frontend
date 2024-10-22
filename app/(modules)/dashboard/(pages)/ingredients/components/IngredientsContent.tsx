@@ -2,6 +2,7 @@
 
 import AddIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/AddIngredientDialog';
 import IngredientsLoading from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientsLoading';
+import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
 import IngredientTableRow from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableRow';
 import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
 import TableFrame from '@/app/common/components/Table/TableFrame';
@@ -18,7 +19,11 @@ const IngredientsContent = () => {
       {state.ingredients.length === 0 && !state.isLoading && (
         <Typography variant="h6">No ingredients</Typography>
       )}
-      <TableFrame title="Ingredients Table" setIsOpen={setIsOpen}>
+      <TableFrame
+        title="Ingredients Table"
+        setIsOpen={setIsOpen}
+        tableHead={<IngredientTableHead />}
+      >
         <TableBody>
           {state.isLoading && <IngredientsLoading />}
           {!state.isLoading &&
