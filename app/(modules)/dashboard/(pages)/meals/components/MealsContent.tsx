@@ -1,29 +1,37 @@
 'use client';
 
+import { handleGetAllMeals } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import AddMealDialog from '@/app/(modules)/dashboard/(pages)/meals/components/AddMealDialog';
 import MealsLoading from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealsLoading';
 import MealTableRow from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableRow';
 import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
+import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import TableFrame from '@/app/common/components/Table/TableFrame';
-import { TableBody, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { TableBody } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 
 const MealsContent = () => {
-  const { state } = useMealsContext();
+  const { state: userState } = useUserContext();
+
+  const userId = userState.user?.id;
+
+  const { dispatch, state } = useMealsContext();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (userId) {
+      handleGetAllMeals(dispatch, userId);
+    }
+  }, []);
 
   return (
     <section className="flex flex-col gap-4">
-      {state.meals.length === 0 && !state.isLoading && (
-        <Typography variant="h6">No meals</Typography>
-      )}
       <TableFrame title="Meals Table" setIsOpen={setIsOpen}>
         <TableBody>
-          {/* {state.isLoading && <MealsLoading />} */}
-          {!state.isLoading && state.meals.length ? (
-            state.meals.map((row) => <MealTableRow key={row.id} row={row} />)
+          {state.isLoading ? (
+            <MealsLoading />
           ) : (
-            <></>
+            state.meals.map((row) => <MealTableRow key={row.id} row={row} />)
           )}
         </TableBody>
       </TableFrame>

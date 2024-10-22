@@ -44,7 +44,7 @@ const MealTableCell = ({
         </div>
       ))}
       {mainValue > 0 ? (
-        <div className="bg-primary-gradient text-white shadow-sm px-1 lg:px-2 py-1 rounded-lg">
+        <div className="border-mui-primary border text-mui-primary shadow-sm px-1 lg:px-2 py-1 rounded-lg">
           <span>{mainValue}</span>
           {!isNaN(subValue) && <span>({subValue})</span>}{' '}
           {unit && <span>{unit}</span>}
@@ -53,7 +53,7 @@ const MealTableCell = ({
         <div className="flex-1"></div>
       )}
       {mealName && (
-        <div className="flex-1 bg-primary-gradient text-white shadow-sm px-1 lg:px-2 py-1 rounded-lg">
+        <div className="flex-1 border-mui-primary border text-mui-primary shadow-sm px-1 lg:px-2 py-1 rounded-lg">
           {mealName}
         </div>
       )}
