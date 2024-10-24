@@ -17,7 +17,7 @@ const MealTableRow = ({ row }: IProps) => {
       <MealTableCell
         mealIngredients={mealIngredients}
         column="ingredientName"
-        className="font-bold lg:!text-left"
+        className="lg:!text-left"
         mealName={row.name}
       />
 
@@ -58,6 +58,7 @@ const MealTableRow = ({ row }: IProps) => {
             <Unit unit={mealIngredient.unit} />
           </div>
         ))}
+        <div className="h-7"></div>
       </TableCell>
 
       <TableCell className="lg:table-cell block text-right">

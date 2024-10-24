@@ -24,7 +24,7 @@ const MealIngredient = ({ index, removeIngredient }: IProps) => {
   };
   return (
     <div className="flex gap-4 items-center">
-      <div className="mb-1 mt-2">
+      <div className="mb-1 mt-2 flex-1">
         <AutocompleteElement
           label="Ingredient"
           name={`mealIngredients[${index}].ingredientId`}
@@ -42,6 +42,7 @@ const MealIngredient = ({ index, removeIngredient }: IProps) => {
         label="Quantity"
         isLoading={state.isLoading}
         type="number"
+        className="flex-1"
       />
       <Button
         aria-label="remove-ingredient"

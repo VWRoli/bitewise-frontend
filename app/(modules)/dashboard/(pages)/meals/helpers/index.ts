@@ -4,7 +4,13 @@ export const calculateColumnSum = (
   mealIngredients: IMealIngredient[],
   column: string,
 ): number => {
-  return mealIngredients.reduce((sum, ingredient) => {
-    return sum + (parseInt(ingredient[column], 10) || 0);
+  const sum = mealIngredients.reduce((sum, ingredient) => {
+    return (
+      sum +
+      parseFloat(ingredient.quantity + '') *
+        (parseFloat(ingredient[column]) || 0)
+    );
   }, 0);
+
+  return parseFloat(sum.toFixed(1));
 };

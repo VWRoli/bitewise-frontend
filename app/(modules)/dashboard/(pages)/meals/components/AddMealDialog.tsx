@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
 import {
   ICreateMeal,
@@ -53,16 +53,14 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
     name: 'mealIngredients',
   });
 
-  const addIngredient = useCallback(() => {
-    append({ ingredientId: 0, quantity: 0 });
-  }, [append]);
+  const addIngredient = () => append({ ingredientId: 0, quantity: 0 });
 
-  const removeIngredient = useCallback(
-    (index: number) => {
-      remove(index);
-    },
-    [remove],
-  );
+  const removeIngredient = (index: number) => {
+    remove(index);
+    const mealIngredients = methods.getValues('mealIngredients');
+    mealIngredients.splice(index, 1);
+    methods.setValue('mealIngredients', [...mealIngredients]);
+  };
 
   const onSubmit = async (data: ICreateMeal) => {
     if (mealEditValues) {
