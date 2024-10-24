@@ -86,7 +86,7 @@ const AddIngredientDialog: React.FC<IProps> = ({
                   min:
                     field.type === 'number'
                       ? {
-                          value: 1,
+                          value: 0,
                           message: `${field.label} must be greater than 0`,
                         }
                       : undefined,
