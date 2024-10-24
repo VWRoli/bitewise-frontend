@@ -8,7 +8,7 @@ import MealTableRow from '@/app/(modules)/dashboard/(pages)/meals/components/Tab
 import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import TableFrame from '@/app/common/components/Table/TableFrame';
-import { TableBody } from '@mui/material';
+import { TableBody, TableCell, TableRow, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 const MealsContent = () => {
@@ -36,7 +36,21 @@ const MealsContent = () => {
           {state.isLoading ? (
             <MealsLoading />
           ) : (
-            state.meals.map((row) => <MealTableRow key={row.id} row={row} />)
+            <>
+              {state.meals.length ? (
+                state.meals.map((row) => (
+                  <MealTableRow key={row.id} row={row} />
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={9}>
+                    <Typography variant="h6" align="center">
+                      No meals
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              )}
+            </>
           )}
         </TableBody>
       </TableFrame>
