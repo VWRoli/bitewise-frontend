@@ -5,11 +5,9 @@ export const calculateColumnSum = (
   column: string,
 ): number => {
   const sum = mealIngredients.reduce((sum, ingredient) => {
-    return (
-      sum +
-      parseFloat(ingredient.quantity + '') *
-        (parseFloat(ingredient[column]) || 0)
-    );
+    const quantity = parseFloat(ingredient.quantity + '') || 0;
+    const columnValue = parseFloat(ingredient[column]) || 0;
+    return sum + quantity * columnValue;
   }, 0);
 
   return parseFloat(sum.toFixed(1));
