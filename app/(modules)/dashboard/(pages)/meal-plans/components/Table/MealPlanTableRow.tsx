@@ -15,8 +15,8 @@ const MealPlanTableRow = ({ row }: IProps) => {
     <TableRow key={row.id}>
       <TableCell className="lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2">
         <div className="flex flex-col gap-2">
-          {meals.map((meal: IMeal) => (
-            <div key={meal.id} className="px-1 lg:px-2">
+          {meals.map((meal: IMeal, index) => (
+            <div key={index} className="px-1 lg:px-2">
               {meal.name}
             </div>
           ))}

@@ -32,9 +32,8 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
   const { state, dispatch } = useMealPlansContext();
   const { state: mealState } = useMealsContext();
 
-  const [meals, setMeals] = useState<number[]>(
-    mealPlanEditValues?.meals.map((el) => el.id) || [],
-  );
+  const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
+  const [meals, setMeals] = useState<number[]>(initialMeals);
   const options = convertToOptions(mealState.meals);
 
   const selectedMeals = options.filter((option) => meals.includes(option.id));
@@ -67,7 +66,7 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
             id="meals"
             options={options}
             getOptionLabel={(option) => option.label}
-            value={selectedMeals}
+            //value={selectedMeals}
             onChange={(_, value) => setMeals(value.map((meal) => meal.id))}
             renderInput={(params) => (
               <TextField

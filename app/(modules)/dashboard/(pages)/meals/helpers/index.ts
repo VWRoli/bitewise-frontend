@@ -12,3 +12,11 @@ export const calculateColumnSum = (
 
   return parseFloat(sum.toFixed(1));
 };
+
+export const calculateMealIngredientValue = (
+  mealIngredient: IMealIngredient,
+  key: string | undefined,
+) =>
+  key
+    ? parseFloat((mealIngredient[key] * mealIngredient.quantity).toFixed(1))
+    : NaN;

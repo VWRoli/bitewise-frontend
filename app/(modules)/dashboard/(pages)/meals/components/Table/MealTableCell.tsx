@@ -1,3 +1,4 @@
+import MealIngredientCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealIngredientCell';
 import { calculateColumnSum } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
 import { IMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import { TableCell } from '@mui/material';
@@ -37,13 +38,15 @@ const MealTableCell = ({
       }`}
     >
       {mealIngredients.map((mealIngredient) => (
-        <div key={mealIngredient.id} className="pb-1 px-2 flex-1">
-          {mealIngredient[column]}{' '}
-          {subColumn && <span>({mealIngredient[subColumn]})</span>}{' '}
-          {unit && <span>{unit}</span>}
-        </div>
+        <MealIngredientCell
+          key={mealIngredient.id}
+          mealIngredient={mealIngredient}
+          column={column}
+          subColumn={subColumn}
+          unit={unit}
+        />
       ))}
-      {mainValue > 0 ? (
+      {mainValue > 0 && column !== 'quantity' ? (
         <div className="bg-custom-gray text-dark font-bold shadow-sm px-1 lg:px-2 py-1 rounded-lg">
           <span>{mainValue}</span>
           {!isNaN(subValue) && <span>({subValue})</span>}{' '}
@@ -52,6 +55,7 @@ const MealTableCell = ({
       ) : (
         <div className="flex-1"></div>
       )}
+      {column === 'quantity' && <div className="h-7"></div>}
       {mealName && (
         <div className="flex-1 bg-custom-gray text-dark font-bold shadow-sm px-1 lg:px-2 py-1 rounded-lg">
           {mealName}
