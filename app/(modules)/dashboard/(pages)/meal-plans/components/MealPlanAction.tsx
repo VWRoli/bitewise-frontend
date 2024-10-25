@@ -2,16 +2,16 @@ import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteDialog from '@/app/common/components/DeleteDialog';
-import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
-import { handleDeleteMeal } from '@/app/(modules)/dashboard/(pages)/meals/actions';
-import EditMealDialog from '@/app/(modules)/dashboard/(pages)/meals/components/EditMealDialog';
 import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
+import { handleDeleteMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
+import EditMealPlanDialog from '@/app/(modules)/dashboard/(pages)/meal-plans/components/EditMealPlanDialog';
+import { useMealPlansContext } from '@/app/(modules)/dashboard/(pages)/meal-plans/context';
 
 interface IProps {
   mealPlan: IMealPlan;
 }
 const MealPlanActions = ({ mealPlan }: IProps) => {
-  const { dispatch } = useMealsContext();
+  const { dispatch } = useMealPlansContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -28,7 +28,7 @@ const MealPlanActions = ({ mealPlan }: IProps) => {
   };
 
   const handleOnDelete = async () => {
-    //handleDeleteMeal(dispatch, meal.id);
+    handleDeleteMealPlan(dispatch, mealPlan.id);
     handleClose();
   };
 
@@ -65,11 +65,11 @@ const MealPlanActions = ({ mealPlan }: IProps) => {
         title="Delete Meal Plan"
         subtitle={`Are you sure you want to delete this meal plan?`}
       />
-      {/* <EditMealDialog
+      <EditMealPlanDialog
         isOpen={isEditOpen}
         setIsOpen={setIsEditOpen}
-        meal={mealPlan}
-      /> */}
+        mealPlan={mealPlan}
+      />
     </>
   );
 };

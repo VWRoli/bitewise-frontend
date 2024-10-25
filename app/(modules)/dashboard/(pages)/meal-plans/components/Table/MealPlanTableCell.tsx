@@ -30,7 +30,7 @@ const MealPlanTableCell = ({ meals, column, unit, subColumn }: IProps) => {
 
   return (
     <TableCell className="lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2 lg:text-right">
-      <div className="flex flex-col gap-2 ">
+      <div className="flex flex-col gap-2">
         {mealValues.map((value, index) => (
           <div key={index} className="px-1 lg:px-2">
             {value} {unit && <span>{unit}</span>}

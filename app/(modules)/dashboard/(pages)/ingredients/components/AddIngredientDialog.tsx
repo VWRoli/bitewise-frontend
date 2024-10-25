@@ -118,7 +118,7 @@ const AddIngredientDialog: React.FC<IProps> = ({
               color="primary"
               loading={state.isLoading}
             >
-              Add
+              {ingredientEditValues ? 'Edit' : 'Add'}
             </LoadingButton>
           </DialogActions>
         </form>

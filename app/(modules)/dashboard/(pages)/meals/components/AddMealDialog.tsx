@@ -123,7 +123,7 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
               color="primary"
               loading={state.isLoading}
             >
-              Add
+              {mealEditValues ? 'Edit' : 'Add'}
             </LoadingButton>
           </DialogActions>
         </form>

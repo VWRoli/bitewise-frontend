@@ -63,8 +63,9 @@ export const mealPlanReducer = (
         isError: true,
       };
 
-    // Deleting an MealPlan
+    // Deleting a MealPlan
     case ACTION_TYPES.DELETE_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
         isLoading: false,
