@@ -20,7 +20,9 @@ const MealPlanTableRow = ({ row }: IProps) => {
               {meal.name}
             </div>
           ))}
-          <div className="h-7"></div>
+          <div className="bg-dark text-light font-bold shadow-sm px-1 lg:px-2 py-1 rounded-lg">
+            {row.name}
+          </div>
         </div>
       </TableCell>
       <MealPlanTableCell meals={meals} column="calories" unit="kcal" />

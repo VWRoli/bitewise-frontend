@@ -63,7 +63,7 @@ const MealPlanActions = ({ mealPlan }: IProps) => {
         onClose={() => setIsDeleteOpen(false)}
         onConfirm={handleOnDelete}
         title="Delete Meal Plan"
-        subtitle={`Are you sure you want to delete this meal plan?`}
+        subtitle={`Are you sure you want to delete ${mealPlan.name} meal plan?`}
       />
       <EditMealPlanDialog
         isOpen={isEditOpen}

@@ -53,10 +53,17 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
       await handleCreateMealPlan(dispatch, data);
     }
     onClose();
+    reset();
+  };
+
+  const reset = () => {
+    setName('');
+    setMeals([]);
   };
 
   const handleCancel = () => {
     onClose();
+    reset();
   };
 
   return (
