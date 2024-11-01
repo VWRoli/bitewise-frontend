@@ -34,6 +34,8 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
 
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
   const [meals, setMeals] = useState<number[]>(initialMeals);
+
+  const [name, setName] = useState('');
   const options = convertToOptions(mealState.meals);
 
   const selectedMeals = options.filter((option) => meals.includes(option.id));
@@ -41,6 +43,7 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const data: ICreateMealPlan = {
+      name,
       mealIds: meals,
       userId: userState.user?.id as number,
     };
@@ -61,6 +64,12 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
       <DialogTitle>{mealPlanEditValues ? 'Edit' : 'Add'} Meal Plan</DialogTitle>
       <form onSubmit={onSubmit}>
         <DialogContent>
+          <TextField
+            variant="outlined"
+            placeholder="Meal plan name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
           <Autocomplete
             multiple
             id="meals"
