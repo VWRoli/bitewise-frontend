@@ -11,7 +11,6 @@ interface IProps {
   meal: IMeal;
 }
 const MealActions = ({ meal }: IProps) => {
-  console.log('meal', meal);
   const { dispatch } = useMealsContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);

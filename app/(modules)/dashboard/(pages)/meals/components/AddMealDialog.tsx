@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
 import {
   ICreateMeal,
@@ -12,13 +12,8 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  TextField,
 } from '@mui/material';
-import {
-  FormProvider,
-  useForm,
-  useFieldArray,
-  useWatch,
-} from 'react-hook-form';
 import CustomTextField from '@/app/(modules)/dashboard/components/CustomTextField';
 import MealIngredient from '@/app/(modules)/dashboard/(pages)/meals/components/MealIngredient';
 import {
@@ -37,101 +32,119 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
   const { state: userState } = useUserContext();
   const { state, dispatch } = useMealsContext();
 
-  const methods = useForm<ICreateMeal>({
-    defaultValues: mealEditValues || DEFAULT_MEAL,
-    mode: 'onBlur',
-  });
+  const [formData, setFormData] = useState<ICreateMeal>(
+    mealEditValues || DEFAULT_MEAL,
+  );
 
-  const { handleSubmit, reset, control } = methods;
-  const { append, remove } = useFieldArray({
-    control,
-    name: 'mealIngredients',
-  });
-
-  const mealIngredients = useWatch({
-    control,
-    name: 'mealIngredients',
-  });
-
-  const addIngredient = () => append({ ingredientId: 0, quantity: 0 });
-
-  const removeIngredient = (index: number) => {
-    remove(index);
-    const updatedIngredients = methods.getValues('mealIngredients');
-    methods.setValue('mealIngredients', [...updatedIngredients]);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const onSubmit = async (data: ICreateMeal) => {
+  const addIngredient = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      mealIngredients: [
+        ...prevData.mealIngredients,
+        { ingredientId: 0, quantity: 0 },
+      ],
+    }));
+  };
+
+  const removeIngredient = (index: number) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      mealIngredients: prevData.mealIngredients.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleIngredientChange = (index: number, key: string, value: any) => {
+    const updatedIngredients = formData.mealIngredients.map((ingredient, i) =>
+      i === index ? { ...ingredient, [key]: value } : ingredient,
+    );
+    setFormData((prevData) => ({
+      ...prevData,
+      mealIngredients: updatedIngredients,
+    }));
+  };
+
+  useEffect(() => {
+    setFormData(mealEditValues || DEFAULT_MEAL);
+  }, [mealEditValues]);
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (mealEditValues) {
-      await handleUpdateMeal(dispatch, data, mealEditValues.id);
+      await handleUpdateMeal(dispatch, formData, mealEditValues.id);
     } else {
       await handleCreateMeal(dispatch, {
-        ...data,
+        ...formData,
         userId: userState.user?.id as number,
       });
     }
 
-    reset();
+    setFormData(DEFAULT_MEAL);
     onClose();
   };
 
   const handleCancel = () => {
-    reset();
+    setFormData(DEFAULT_MEAL);
     onClose();
   };
-
-  useEffect(() => {
-    //reset form values
-    reset(mealEditValues || DEFAULT_MEAL);
-  }, [mealEditValues, reset]);
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle>{mealEditValues ? 'Edit' : 'Add'} Meal</DialogTitle>
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogContent>
-            <CustomTextField
-              name="name"
-              label="Name"
-              isLoading={state.isLoading}
-              type="text"
-              rules={{
-                required: true,
-              }}
-            />
-            <div className="flex flex-col gap-4">
-              {mealIngredients.map((_, index) => (
-                <MealIngredient
-                  key={index}
-                  index={index}
-                  removeIngredient={() => removeIngredient(index)}
-                />
-              ))}
-              <Button
-                onClick={addIngredient}
-                color="primary"
-                variant="outlined"
-              >
-                Add Ingredient
-              </Button>
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCancel} color="primary" variant="outlined">
-              Cancel
+
+      <form onSubmit={onSubmit}>
+        <DialogContent>
+          <TextField
+            label="Name"
+            variant="outlined"
+            fullWidth
+            value={formData.name}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, name: e.target.value }))
+            }
+            disabled={state.isLoading}
+          />
+          <div className="flex flex-col gap-4">
+            {formData.mealIngredients.map((ingredient, index) => (
+              <MealIngredient
+                key={index}
+                index={index}
+                isLoading={state.isLoading}
+                ingredient={ingredient}
+                onIngredientChange={(key, value) =>
+                  handleIngredientChange(index, key, value)
+                }
+                removeIngredient={() => removeIngredient(index)}
+                setFormData={setFormData}
+              />
+            ))}
+            <Button onClick={addIngredient} color="primary" variant="outlined">
+              Add Ingredient
             </Button>
-            <LoadingButton
-              type="submit"
-              variant="contained"
-              color="primary"
-              loading={state.isLoading}
-            >
-              {mealEditValues ? 'Edit' : 'Add'}
-            </LoadingButton>
-          </DialogActions>
-        </form>
-      </FormProvider>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancel} color="primary" variant="outlined">
+            Cancel
+          </Button>
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            color="primary"
+            loading={state.isLoading}
+          >
+            {mealEditValues ? 'Edit' : 'Add'}
+          </LoadingButton>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };
