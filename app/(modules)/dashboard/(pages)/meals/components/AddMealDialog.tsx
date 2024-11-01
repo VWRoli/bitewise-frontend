@@ -57,9 +57,8 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
 
   const removeIngredient = (index: number) => {
     remove(index);
-    const mealIngredients = methods.getValues('mealIngredients');
-    mealIngredients.splice(index, 1);
-    methods.setValue('mealIngredients', [...mealIngredients]);
+    const updatedIngredients = methods.getValues('mealIngredients');
+    methods.setValue('mealIngredients', [...updatedIngredients]);
   };
 
   const onSubmit = async (data: ICreateMeal) => {
