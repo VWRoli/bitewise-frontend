@@ -3,6 +3,7 @@ import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 export function flatMealIngredients(meals: IMeal[]) {
   return meals.flatMap((meal) => meal.mealIngredients);
 }
+
 export const calculateMealValue = (
   meal: IMeal,
   column: string,
@@ -12,7 +13,7 @@ export const calculateMealValue = (
     ([mainTotal, subTotal], ingredient) => {
       const baseValue = ingredient[column as keyof typeof ingredient] || 0;
       const subValue = subColumn
-        ? baseValue[subColumn as keyof typeof baseValue] || 0
+        ? ingredient[subColumn as keyof typeof ingredient] || 0
         : 0;
 
       const mainCalculatedValue =
