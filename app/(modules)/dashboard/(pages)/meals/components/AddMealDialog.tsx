@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
 import {
   ICreateMeal,
@@ -38,7 +38,7 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
   const { state, dispatch } = useMealsContext();
 
   const methods = useForm<ICreateMeal>({
-    defaultValues: mealEditValues ? mealEditValues : DEFAULT_MEAL,
+    defaultValues: mealEditValues || DEFAULT_MEAL,
     mode: 'onBlur',
   });
 
@@ -81,6 +81,11 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
     onClose();
   };
 
+  useEffect(() => {
+    //reset form values
+    reset(mealEditValues || DEFAULT_MEAL);
+  }, [mealEditValues, reset]);
+
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle>{mealEditValues ? 'Edit' : 'Add'} Meal</DialogTitle>
@@ -97,7 +102,7 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
               }}
             />
             <div className="flex flex-col gap-4">
-              {mealIngredients.map((ingredient, index) => (
+              {mealIngredients.map((_, index) => (
                 <MealIngredient
                   key={index}
                   index={index}
