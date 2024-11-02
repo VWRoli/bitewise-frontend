@@ -85,3 +85,22 @@ export function categorizeBodyFat(
   );
   return category ? category.category : 'Unknown Category';
 }
+
+export function calculateBodyFatMass(
+  bodyWeight: number,
+  bodyFatPercentage: number,
+): number {
+  const result = bodyWeight * (bodyFatPercentage / 100);
+
+  return Math.round(result * 10) / 10;
+}
+
+export function calculateLeanBodyMass(
+  bodyWeight: number,
+  bodyFatPercentage: number,
+): number {
+  const bodyFatMass = calculateBodyFatMass(bodyWeight, bodyFatPercentage);
+  const result = bodyWeight - bodyFatMass;
+
+  return Math.round(result * 10) / 10;
+}

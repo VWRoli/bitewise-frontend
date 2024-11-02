@@ -10,3 +10,11 @@ export interface IBodyFatValues {
   waist: number;
   hip: number;
 }
+
+export interface IBodyFatResults {
+  bodyFatPercentage: number;
+  bodyFatCategory: string;
+  bodyFatMass: number;
+  leanBodyMass: number;
+  bmiBodyFatResult: number;
+}
