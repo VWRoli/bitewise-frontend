@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMealPlansContext } from '@/app/(modules)/dashboard/(pages)/meal-plans/context';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import { LoadingButton } from '@mui/lab';
@@ -35,13 +35,27 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
   const [meals, setMeals] = useState<number[]>(initialMeals);
 
-  const [name, setName] = useState('');
+  const [nameRequiredError, setNameRequiredError] = useState(false);
+
+  const initialName = mealPlanEditValues?.name || '';
+  const [name, setName] = useState(initialName);
   const options = convertToOptions(mealState.meals);
 
-  const selectedMeals = options.filter((option) => meals.includes(option.id));
+  const mealsWithDuplicates = meals.map((mealId) =>
+    options.find((option) => option.id === mealId),
+  );
+  const selectedMeals = mealsWithDuplicates.filter(
+    (meal) => meal !== undefined,
+  ) as (typeof options)[0][];
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+
+    if (name === '') {
+      setNameRequiredError(true);
+      return;
+    }
+
     const data: ICreateMealPlan = {
       name,
       mealIds: meals,
@@ -55,6 +69,12 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
     onClose();
     reset();
   };
+
+  useEffect(() => {
+    setName(initialName);
+    setMeals(initialMeals);
+    setNameRequiredError(false);
+  }, [mealPlanEditValues]);
 
   const reset = () => {
     setName('');
@@ -72,17 +92,29 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
       <form onSubmit={onSubmit}>
         <DialogContent className="flex flex-col gap-4">
           <TextField
+            label="Name"
             variant="outlined"
             placeholder="Meal plan name"
+            fullWidth
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value === '') {
+                setNameRequiredError(true);
+              }
+              setName(e.target.value);
+              setNameRequiredError(false);
+            }}
+            error={nameRequiredError}
+            helperText={nameRequiredError && 'Name is required'}
+            disabled={state.isLoading}
           />
+
           <Autocomplete
             multiple
             id="meals"
             options={options}
             getOptionLabel={(option) => option.label}
-            //value={selectedMeals}
+            //defaultValue={selectedMeals}
             onChange={(_, value) => setMeals(value.map((meal) => meal.id))}
             renderInput={(params) => (
               <TextField
