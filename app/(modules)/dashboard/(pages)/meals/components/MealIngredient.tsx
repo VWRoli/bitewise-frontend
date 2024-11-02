@@ -63,6 +63,7 @@ const MealIngredient = ({
         value={ingredient.quantity}
         onChange={handleQuantityChange}
         disabled={isLoading}
+        type="number"
         onFocus={() => {
           if (ingredient.quantity === 0) {
             setFormData((prevData: any) => ({

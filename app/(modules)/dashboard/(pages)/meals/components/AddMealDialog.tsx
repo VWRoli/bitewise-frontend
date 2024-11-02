@@ -14,7 +14,6 @@ import {
   DialogTitle,
   TextField,
 } from '@mui/material';
-import CustomTextField from '@/app/(modules)/dashboard/components/CustomTextField';
 import MealIngredient from '@/app/(modules)/dashboard/(pages)/meals/components/MealIngredient';
 import {
   handleCreateMeal,
@@ -32,17 +31,9 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
   const { state: userState } = useUserContext();
   const { state, dispatch } = useMealsContext();
 
-  const [formData, setFormData] = useState<ICreateMeal>(
-    mealEditValues || DEFAULT_MEAL,
-  );
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const initialFormData = mealEditValues || DEFAULT_MEAL;
+  const [formData, setFormData] = useState<ICreateMeal>(initialFormData);
+  const [nameRequiredError, setNameRequiredError] = useState(false);
 
   const addIngredient = () => {
     setFormData((prevData) => ({
@@ -78,6 +69,11 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (formData.name === '') {
+      setNameRequiredError(true);
+      return;
+    }
+
     if (mealEditValues) {
       await handleUpdateMeal(dispatch, formData, mealEditValues.id);
     } else {
@@ -87,12 +83,16 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
       });
     }
 
-    setFormData(DEFAULT_MEAL);
-    onClose();
+    reset();
   };
 
   const handleCancel = () => {
+    reset();
+  };
+
+  const reset = () => {
     setFormData(DEFAULT_MEAL);
+    setNameRequiredError(false);
     onClose();
   };
 
@@ -101,15 +101,24 @@ const AddMealDialog = ({ open, onClose, mealEditValues }: IProps) => {
       <DialogTitle>{mealEditValues ? 'Edit' : 'Add'} Meal</DialogTitle>
 
       <form onSubmit={onSubmit}>
-        <DialogContent>
+        <DialogContent className="flex flex-col gap-4">
           <TextField
             label="Name"
             variant="outlined"
             fullWidth
             value={formData.name}
-            onChange={(e) =>
-              setFormData((prev) => ({ ...prev, name: e.target.value }))
-            }
+            onChange={(e) => {
+              if (e.target.value === '') {
+                setNameRequiredError(true);
+              }
+              setFormData((prevData) => ({
+                ...prevData,
+                name: e.target.value,
+              }));
+              setNameRequiredError(false);
+            }}
+            error={nameRequiredError}
+            helperText={nameRequiredError && 'Name is required'}
             disabled={state.isLoading}
           />
           <div className="flex flex-col gap-4">

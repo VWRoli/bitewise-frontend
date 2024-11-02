@@ -70,7 +70,7 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
     <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle>{mealPlanEditValues ? 'Edit' : 'Add'} Meal Plan</DialogTitle>
       <form onSubmit={onSubmit}>
-        <DialogContent>
+        <DialogContent className="flex flex-col gap-4">
           <TextField
             variant="outlined"
             placeholder="Meal plan name"
