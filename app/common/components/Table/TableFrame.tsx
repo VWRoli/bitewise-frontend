@@ -1,4 +1,3 @@
-import TableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
 import { Button, Table, Typography } from '@mui/material';
 import React, { PropsWithChildren } from 'react';
 

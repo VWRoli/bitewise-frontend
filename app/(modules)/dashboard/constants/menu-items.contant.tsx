@@ -3,7 +3,7 @@ import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import { IMenuItems } from '@/app/(modules)/dashboard/interfaces';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import AddCardIcon from '@mui/icons-material/AddCard';
 
 export const MENU_ITEMS: IMenuItems[] = [
@@ -31,9 +31,9 @@ export const MENU_ITEMS: IMenuItems[] = [
 
 export const SUB_MENU_ITEMS: IMenuItems[] = [
   {
-    label: 'faq',
-    route: '/faq',
-    icon: <HelpOutlineIcon className="text-white" />,
+    label: 'calculators',
+    route: '/calculators',
+    icon: <CalculateOutlinedIcon className="text-white" />,
   },
   {
     label: 'payment plans',
