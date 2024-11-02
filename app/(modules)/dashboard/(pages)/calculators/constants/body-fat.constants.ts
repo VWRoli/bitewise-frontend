@@ -33,3 +33,20 @@ export const DEFAULT_VALUES: IBodyFatValues = {
   waist: 96,
   hip: 92,
 };
+
+export const BODY_FAT_CATEGORIES = {
+  [EGender.FEMALE]: [
+    { category: 'Essential Fat', min: 10, max: 13 },
+    { category: 'Athletes', min: 14, max: 20 },
+    { category: 'Fitness', min: 21, max: 24 },
+    { category: 'Average', min: 25, max: 31 },
+    { category: 'Obese', min: 32, max: Infinity },
+  ],
+  [EGender.MALE]: [
+    { category: 'Essential Fat', min: 2, max: 5 },
+    { category: 'Athletes', min: 6, max: 13 },
+    { category: 'Fitness', min: 14, max: 17 },
+    { category: 'Average', min: 18, max: 24 },
+    { category: 'Obese', min: 25, max: Infinity },
+  ],
+};

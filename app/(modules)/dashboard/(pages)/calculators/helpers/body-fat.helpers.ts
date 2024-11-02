@@ -1,8 +1,10 @@
+import { BODY_FAT_CATEGORIES } from '@/app/(modules)/dashboard/(pages)/calculators/constants';
 import { EGender } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
+import { calculateBMI } from '@/app/(modules)/dashboard/(pages)/calculators/helpers';
 import { IBodyFatValues } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 import { toaster } from '@/app/common/components/CustomToast';
 
-export function calculateBodyFatPercentage(values: IBodyFatValues) {
+export function calculateBodyFatPercentage(values: IBodyFatValues): number {
   const { gender, height, neck, waist, hip } = values;
   let bodyFatPercentage;
 
@@ -20,7 +22,7 @@ export function calculateBodyFatPercentage(values: IBodyFatValues) {
       toaster.error({
         text: 'Hip measurement is required for calculating female body fat percentage.',
       });
-      return;
+      return 0;
     }
     bodyFatPercentage =
       495 /
@@ -32,8 +34,54 @@ export function calculateBodyFatPercentage(values: IBodyFatValues) {
     toaster.error({
       text: "Gender must be 'male' or 'female'.",
     });
-    return;
+    return 0;
   }
 
-  return bodyFatPercentage.toFixed(2);
+  return Math.round(bodyFatPercentage * 10) / 10;
+}
+
+export function calculateBodyFatWithBMI(values: IBodyFatValues): number {
+  const { weight, height, age, gender } = values;
+  const bmi = calculateBMI(weight, height);
+
+  let bodyFatPercentage;
+
+  if (gender === 'male' && age >= 18) {
+    // Adult male formula
+    bodyFatPercentage = 1.2 * bmi + 0.23 * age - 16.2;
+  } else if (gender === 'female' && age >= 18) {
+    // Adult female formula
+    bodyFatPercentage = 1.2 * bmi + 0.23 * age - 5.4;
+  } else if (gender === 'male' && age < 18) {
+    // Boys formula
+    bodyFatPercentage = 1.51 * bmi - 0.7 * age - 2.2;
+  } else if (gender === 'female' && age < 18) {
+    // Girls formula
+    bodyFatPercentage = 1.51 * bmi - 0.7 * age + 1.4;
+  } else {
+    toaster.error({
+      text: 'Invalid input for gender or age',
+    });
+    return 0;
+  }
+
+  return Math.round(bodyFatPercentage * 10) / 10;
+}
+
+export function categorizeBodyFat(
+  gender: EGender,
+  bodyFatPercentage: number,
+): string {
+  const categories = BODY_FAT_CATEGORIES[gender];
+  if (!categories) {
+    toaster.error({
+      text: `Invalid gender. Choose 'FEMALE' or 'MALE'.`,
+    });
+    return 'Unknown Category';
+  }
+
+  const category = categories.find(
+    (range) => bodyFatPercentage >= range.min && bodyFatPercentage <= range.max,
+  );
+  return category ? category.category : 'Unknown Category';
 }
