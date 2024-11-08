@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import BodyFatTooltipTable from '@/app/(modules)/dashboard/(pages)/calculators/components/BodyFatCalculator/BodyFatTooltipTable';
 
 interface IProps {
   results: IBodyFatResults | null;
@@ -21,7 +22,7 @@ const BodyFatResults = (props: IProps) => {
   } = props.results || {};
 
   return (
-    <TableContainer component={Paper} className="max-w-[80%] mx-auto">
+    <TableContainer component={Paper} className="max-w-[90%] mx-auto">
       <Table>
         <TableHead className="bg-dark text-light font-bold">
           <TableRow>
@@ -35,7 +36,10 @@ const BodyFatResults = (props: IProps) => {
             <TableCell>{bodyFatPercentage} %</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Body Fat Category</TableCell>
+            <TableCell className="flex gap-1">
+              Body Fat Category
+              <BodyFatTooltipTable />
+            </TableCell>
             <TableCell>{bodyFatCategory}</TableCell>
           </TableRow>
           <TableRow>

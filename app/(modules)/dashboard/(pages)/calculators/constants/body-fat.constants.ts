@@ -24,7 +24,7 @@ export const BODY_FAT_CALCULATOR_INPUTS = [
   },
 ];
 
-export const DEFAULT_VALUES: IBodyFatValues = {
+export const DEFAULT_BODY_FAT_VALUES: IBodyFatValues = {
   gender: EGender.MALE,
   age: 25,
   weight: 70,
