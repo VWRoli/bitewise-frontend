@@ -16,7 +16,7 @@ const BmiResults = (props: IProps) => {
   const { bmi, bmiCategory } = props.results || {};
 
   return (
-    <TableContainer component={Paper} className="max-w-[80%] mx-auto">
+    <TableContainer component={Paper} className="max-w-[90%] mx-auto">
       <Table>
         <TableHead className="bg-dark text-light font-bold">
           <TableRow>
