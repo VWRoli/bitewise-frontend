@@ -5,20 +5,18 @@ import FastfoodOutlinedIcon from '@mui/icons-material/FastfoodOutlined';
 import AvTimerOutlinedIcon from '@mui/icons-material/AvTimerOutlined';
 import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
-import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
 import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
 
 const Statistics = () => {
-  const { state: ingredientsState } = useIngredientsContext();
   const { state: mealsState } = useMealsContext();
   return (
     <section className="flex flex-col lg:flex-row gap-8">
-      <StatisticsCard
+      {/* <StatisticsCard
         title="Ingredients"
         value={ingredientsState.ingredients.length}
         iconBgColor="bg-dark-gradient"
         icon={<FastfoodOutlinedIcon className="text-white" />}
-      />
+      /> */}
       <StatisticsCard
         title="Meals"
         value={mealsState.meals.length}

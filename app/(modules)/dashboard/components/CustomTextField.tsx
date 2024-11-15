@@ -7,13 +7,11 @@ type CustomTextFieldProps = TextFieldProps & {
   label: string;
   rules?: object;
   defaultValue?: string | number;
-  isLoading: boolean;
 };
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({
   name,
   label,
-  isLoading,
   rules = {},
   defaultValue = '',
   type,
@@ -40,7 +38,6 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
           fullWidth
           error={!!fieldError}
           helperText={fieldError ? fieldError.message : ''}
-          disabled={isLoading}
           onFocus={() => {
             if (field.value === '0' || field.value === 0) {
               field.onChange('');

@@ -1,12 +1,12 @@
-import { Button, Table, Typography } from '@mui/material';
-import React, { PropsWithChildren } from 'react';
+import { Table, Typography } from '@mui/material';
+import React, { PropsWithChildren, useState } from 'react';
 
 interface IProps extends PropsWithChildren {
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  addModal: React.ReactNode;
   title: string;
-  tableHead: JSX.Element;
+  tableHead: React.ReactNode;
 }
-const TableFrame = ({ setIsOpen, title, children, tableHead }: IProps) => {
+const TableFrame = async ({ title, children, tableHead, addModal }: IProps) => {
   return (
     <div className="shadow-md bg-white rounded-xl">
       <div className="px-4">
@@ -14,15 +14,7 @@ const TableFrame = ({ setIsOpen, title, children, tableHead }: IProps) => {
           <Typography variant="h6" className="text-base text-white">
             {title}
           </Typography>
-          <div className="text-white">
-            <Button
-              variant="outlined"
-              color="inherit"
-              onClick={() => setIsOpen(true)}
-            >
-              Add
-            </Button>
-          </div>
+          {addModal}
         </div>
       </div>
       <div className="h-4"></div>

@@ -1,55 +1,97 @@
-import { ICreateIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
-import * as api from '@/app/(modules)/dashboard/(pages)/ingredients/api';
-import { ACTION_TYPES } from '@/app/common/enums';
-import { IActionType } from '@/app/common/interfaces';
-import { handleError } from '@/app/common/helpers';
+'use server';
 
-export const handleCreateIngredient = async (
-  dispatch: React.Dispatch<IActionType>,
-  formData: ICreateIngredient,
-) => {
-  try {
-    const { data } = await api.createIngredient(formData);
-    dispatch({ type: ACTION_TYPES.CREATE_SUCCESS, payload: data });
-  } catch (error) {
-    handleError(dispatch, ACTION_TYPES.CREATE_ERROR, error);
-  }
-};
+import {
+  ICreateIngredient,
+  IIngredient,
+} from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
+import { API_URL } from '@/app/common/config';
+import { IError } from '@/app/common/interfaces/error.interface';
+import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
 
-export const handleGetAllIngredients = async (
-  dispatch: React.Dispatch<IActionType>,
-  userId: number,
-) => {
-  try {
-    dispatch({ type: ACTION_TYPES.FETCH_START });
-    const { data } = await api.getAllIngredients(userId);
-    dispatch({ type: ACTION_TYPES.FETCH_SUCCESS, payload: data });
-  } catch (error) {
-    handleError(dispatch, ACTION_TYPES.FETCH_ERROR, error);
-  }
-};
+const cookieStore = cookies();
+const accessToken = cookieStore.get('accessToken')?.value;
 
-export const handleUpdateIngredient = async (
-  dispatch: React.Dispatch<IActionType>,
-  formData: ICreateIngredient,
-  id: number,
-) => {
-  try {
-    const { data } = await api.updateIngredient(id, formData);
-    dispatch({ type: ACTION_TYPES.UPDATE_SUCCESS, payload: data });
-  } catch (error) {
-    handleError(dispatch, ACTION_TYPES.UPDATE_ERROR, error);
-  }
-};
+//TODO: this type
+type FetchIngredientsResult =
+  | { data: IIngredient[]; error?: undefined }
+  | IError;
 
-export const handleDeleteIngredient = async (
-  dispatch: React.Dispatch<IActionType>,
-  id: number,
-) => {
+export async function fetchIngredients(): Promise<FetchIngredientsResult> {
   try {
-    await api.deleteIngredient(id);
-    dispatch({ type: ACTION_TYPES.DELETE_SUCCESS, payload: id });
+    const res = await fetch(`${API_URL}/ingredient`, {
+      cache: 'no-store',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+
+    const data: IIngredient[] = await res.json();
+    return { data };
   } catch (error) {
-    handleError(dispatch, ACTION_TYPES.DELETE_ERROR, error);
+    return { error };
   }
-};
+}
+
+export async function createIngredient(ingredient: ICreateIngredient) {
+  try {
+    const res = await fetch(`${API_URL}/ingredient`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(ingredient),
+    });
+
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+
+    const data: IIngredient = await res.json();
+
+    revalidatePath('/dashboard/ingredients');
+
+    return { data };
+  } catch (err) {
+    //TODO: proper error handing
+    const error = JSON.parse(JSON.stringify(err));
+
+    return { error };
+  }
+}
+export async function updateIngredient(ingredient: IIngredient) {
+  try {
+    const res = await fetch(`${API_URL}/ingredient/${ingredient.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+
+    revalidatePath('/dashboard/ingredients');
+  } catch (error) {
+    return { error };
+  }
+}
+
+export async function deleteIngredient(ingredientId: number) {
+  //TODO: validate input with zod or yup?
+  try {
+    const res = await fetch(`${API_URL}/ingredient/${ingredientId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+
+    revalidatePath('/dashboard/ingredients');
+  } catch (error) {
+    return { error };
+  }
+}

@@ -1,17 +1,17 @@
+'use client';
+
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import DeleteDialog from '@/app/common/components/DeleteDialog';
-import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
-import { handleDeleteIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
 import EditIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/EditIngredientDialog';
+import { deleteIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
 
 interface IProps {
   ingredient: IIngredient;
 }
 const IngredientActions = ({ ingredient }: IProps) => {
-  const { dispatch } = useIngredientsContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -28,8 +28,8 @@ const IngredientActions = ({ ingredient }: IProps) => {
   };
 
   const handleOnDelete = async () => {
-    handleDeleteIngredient(dispatch, ingredient.id);
     handleClose();
+    deleteIngredient(ingredient.id);
   };
 
   const handleEdit = () => {
