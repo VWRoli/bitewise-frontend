@@ -49,7 +49,7 @@ export const Pagination = async (props: IProps) => {
         className="relative z-0 inline-flex -space-x-px rounded-md"
       >
         <ButtonGroup>
-          {pages.map((page, i) => (
+          {pages.map((page) => (
             <Link
               key={page}
               className={`${page === currentPage ? 'pointer-events-none' : ''}`}

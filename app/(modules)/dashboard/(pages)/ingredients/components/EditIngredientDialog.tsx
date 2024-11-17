@@ -8,6 +8,7 @@ interface IProps {
   ingredient: IIngredient;
 }
 const EditIngredientDialog = ({ ingredient }: IProps) => {
+  //TODO: Fix edit ingredient
   return <AddIngredientDialog ingredientEditValues={ingredient} />;
 };
 

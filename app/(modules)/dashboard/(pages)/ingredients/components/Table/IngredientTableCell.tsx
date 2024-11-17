@@ -9,7 +9,8 @@ interface IProps {
 const IngredientTableCell = ({ className, rowValue, rowName }: IProps) => {
   return (
     <TableCell
-      className={`lg:table-cell block text-dark lg:py-4 py-2 px-4 lg:text-right ${
+      size="small"
+      className={`lg:table-cell block text-dark px-4 lg:text-right ${
         className || ''
       }`}
     >
