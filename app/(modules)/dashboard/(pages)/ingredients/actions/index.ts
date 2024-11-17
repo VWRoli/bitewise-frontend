@@ -5,10 +5,16 @@ import {
   IIngredient,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import { apiRequest } from '@/app/(modules)/dashboard/utils';
+import { IQueryParams } from '@/app/common/interfaces';
 import { revalidatePath } from 'next/cache';
 
-export async function fetchIngredients() {
-  return apiRequest<IIngredient[]>('ingredient', 'GET');
+export async function fetchIngredients(params: IQueryParams) {
+  return apiRequest<{ data: IIngredient[]; count: number }>(
+    'ingredient',
+    'GET',
+    undefined,
+    params,
+  );
 }
 
 export async function createIngredient(ingredient: ICreateIngredient) {
