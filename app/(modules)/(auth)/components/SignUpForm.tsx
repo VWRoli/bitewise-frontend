@@ -1,10 +1,8 @@
 'use client';
 
-import { handleRegister } from '@/app/(modules)/(auth)/actions';
 import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
 import { ISignUp } from '@/app/(modules)/(auth)/interfaces';
 import { passwordRules } from '@/app/(modules)/(auth)/utils';
-import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -14,13 +12,13 @@ import {
   PasswordRepeatElement,
   TextFieldElement,
 } from 'react-hook-form-mui';
+import * as api from '../api';
 
 const SignUpForm = () => {
-  const { state, dispatch } = useUserContext();
   const router = useRouter();
 
   const handleSuccess = async (data: ISignUp) => {
-    await handleRegister(dispatch, data);
+    await api.register(data);
     router.push('/dashboard');
   };
 
@@ -36,7 +34,6 @@ const SignUpForm = () => {
           type={'email'}
           label={'Email Address'}
           name={'email'}
-          disabled={state.isLoading}
         />
         <PasswordElement
           label={'Password'}
@@ -44,7 +41,6 @@ const SignUpForm = () => {
           fullWidth
           name={'password'}
           rules={passwordRules}
-          disabled={state.isLoading}
         />
         <PasswordRepeatElement
           passwordFieldName={'password'}
@@ -53,15 +49,9 @@ const SignUpForm = () => {
           label={'Confirm Password'}
           required
           rules={passwordRules}
-          disabled={state.isLoading}
         />
 
-        <LoadingButton
-          loading={state.isLoading}
-          variant="contained"
-          fullWidth
-          type="submit"
-        >
+        <LoadingButton variant="contained" fullWidth type="submit">
           Sign Up
         </LoadingButton>
       </div>

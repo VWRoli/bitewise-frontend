@@ -1,3 +1,5 @@
+'use client';
+
 import { defaultSignInValues } from '@/app/(modules)/(auth)/constants';
 import { ESignInSteps } from '@/app/(modules)/(auth)/enum';
 import { ISignIn } from '@/app/(modules)/(auth)/interfaces';
@@ -9,13 +11,11 @@ import {
   TextFieldElement,
 } from 'react-hook-form-mui';
 import { useRouter } from 'next/navigation';
-import { LoadingButton } from '@mui/lab';
-import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
-import { handleLogin } from '@/app/(modules)/(auth)/actions';
+import * as api from '../api';
+import { Button } from '@mui/material';
 
 const SignInForm = () => {
   const router = useRouter();
-  const { state, dispatch } = useUserContext();
 
   const [step, setStep] = useState<ESignInSteps>(ESignInSteps.STEP_0);
 
@@ -27,7 +27,7 @@ const SignInForm = () => {
     if (step === ESignInSteps.STEP_0) {
       handleEmailValidation(data);
     } else {
-      await handleLogin(dispatch, data);
+      await api.login(data);
       router.push('/dashboard');
     }
   };
@@ -44,7 +44,6 @@ const SignInForm = () => {
             fullWidth
             type={'email'}
             label={'Email Address'}
-            disabled={state.isLoading}
             name={'email'}
           />
         ) : (
@@ -53,19 +52,13 @@ const SignInForm = () => {
             required
             fullWidth
             name={'password'}
-            disabled={state.isLoading}
             rules={passwordRules}
           />
         )}
 
-        <LoadingButton
-          variant="contained"
-          fullWidth
-          type="submit"
-          loading={state.isLoading}
-        >
+        <Button variant="contained" fullWidth type="submit">
           {step === ESignInSteps.STEP_0 ? 'Continue' : 'Sign In'}
-        </LoadingButton>
+        </Button>
       </div>
     </FormContainer>
   );

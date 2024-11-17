@@ -8,10 +8,8 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import SignUpForm from '@/app/(modules)/(auth)/components/SignUpForm';
 import SignInForm from '@/app/(modules)/(auth)/components/SignInForm';
 import { AuthView } from '@/app/(modules)/(auth)/enum';
-import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 
 const AuthForm = () => {
-  const { state } = useUserContext();
   const [value, setValue] = useState<AuthView>(AuthView.SIGN_IN);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -23,12 +21,7 @@ const AuthForm = () => {
       <div>Logo</div>
       <h1 className="text-2xl xl:text-3xl font-bold">Welcome Back</h1>
       <div>Welcome back, please enter your details</div>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        centered
-        className={`${state.isLoading ? 'opacity-50 pointer-events-none' : ''}`}
-      >
+      <Tabs value={value} onChange={handleChange} centered>
         <Tab label="Sign In" />
         <Tab label="Sign Up" />
       </Tabs>
