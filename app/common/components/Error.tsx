@@ -8,9 +8,7 @@ interface IProps {
 const CustomError = ({ result }: IProps) => {
   return (
     <Typography variant="h6" align="center" color="error">
-      {result.error instanceof Error
-        ? result.error.message
-        : 'An unexpected error occurred'}
+      {(result.error as any).message}
     </Typography>
   );
 };

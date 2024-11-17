@@ -1,10 +1,11 @@
 'use client';
-import React, { useState } from 'react';
+
+import React, { PropsWithChildren, useState } from 'react';
 import Box from '@mui/material/Box';
 import CustomAppBar from '@/app/(modules)/dashboard/components/CustomAppBar';
 import CustomDrawer from '@/app/(modules)/dashboard/components/CustomDrawer';
 
-export default function Dashboard() {
+export default function Dashboard({ children }: PropsWithChildren) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -19,7 +20,9 @@ export default function Dashboard() {
         mobileOpen={mobileOpen}
         setMobileOpen={setMobileOpen}
         setIsClosing={setIsClosing}
-      />
+      >
+        {children}
+      </CustomDrawer>
     </Box>
   );
 }

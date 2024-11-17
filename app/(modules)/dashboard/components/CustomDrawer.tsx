@@ -1,17 +1,24 @@
+'use client';
+
 import MenuList from '@/app/(modules)/dashboard/components/MenuList';
 import {
   DRAWER_CLASSES,
   DRAWER_WIDTH,
 } from '@/app/(modules)/dashboard/constants';
-import { Box, Drawer } from '@mui/material';
-import React from 'react';
+import { Box, Drawer, Toolbar } from '@mui/material';
+import React, { PropsWithChildren } from 'react';
 
-interface IProps {
+interface IProps extends PropsWithChildren {
   mobileOpen: boolean;
   setIsClosing: React.Dispatch<React.SetStateAction<boolean>>;
   setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const CustomDrawer = ({ mobileOpen, setMobileOpen, setIsClosing }: IProps) => {
+const CustomDrawer = ({
+  mobileOpen,
+  setMobileOpen,
+  setIsClosing,
+  children,
+}: IProps) => {
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -42,6 +49,8 @@ const CustomDrawer = ({ mobileOpen, setMobileOpen, setIsClosing }: IProps) => {
           '& .MuiDrawer-paper': DRAWER_CLASSES,
         }}
       >
+        <Toolbar />
+        {children}
         <MenuList onClose={handleDrawerClose} />
       </Drawer>
       <Drawer
@@ -52,6 +61,8 @@ const CustomDrawer = ({ mobileOpen, setMobileOpen, setIsClosing }: IProps) => {
         }}
         open
       >
+        <Toolbar />
+        {children}
         <MenuList onClose={handleDrawerClose} />
       </Drawer>
     </Box>
