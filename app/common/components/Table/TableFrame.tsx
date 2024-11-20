@@ -1,5 +1,5 @@
 import { Table, Typography } from '@mui/material';
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 interface IProps extends PropsWithChildren {
   addModal: React.ReactNode;
