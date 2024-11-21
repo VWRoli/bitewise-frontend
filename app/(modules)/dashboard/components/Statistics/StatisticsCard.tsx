@@ -1,3 +1,4 @@
+import { cn } from '@/app/common/lib/tw-merge';
 import { Card, Divider, Paper, Typography } from '@mui/material';
 import React from 'react';
 
@@ -12,7 +13,10 @@ const StatisticsCard = ({ title, value, icon, iconBgColor }: IProps) => {
     <div className="shadow-statistics-card bg-white rounded-xl w-full">
       <article className="pt-2 px-4">
         <div
-          className={`shadow-md w-16 h-16 rounded-xl flex items-center justify-center -mt-6 ${iconBgColor}`}
+          className={cn(
+            'shadow-md w-16 h-16 rounded-xl flex items-center justify-center -mt-6',
+            iconBgColor,
+          )}
         >
           {icon}
         </div>

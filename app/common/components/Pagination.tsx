@@ -1,3 +1,4 @@
+import { cn } from '@/app/common/lib/tw-merge';
 import { Button, ButtonGroup } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
@@ -36,7 +37,7 @@ export const Pagination = async (props: IProps) => {
   return (
     <div className="flex items-center justify-center space-x-6 text-black">
       <Link
-        className={`${currentPage === 1 ? 'pointer-events-none' : ''}`}
+        className={cn(currentPage === 1 && 'pointer-events-none')}
         href={`?page=${currentPage - 1}`}
       >
         <Button variant="contained" disabled={currentPage === 1}>
@@ -52,7 +53,7 @@ export const Pagination = async (props: IProps) => {
           {pages.map((page) => (
             <Link
               key={page}
-              className={`${page === currentPage ? 'pointer-events-none' : ''}`}
+              className={cn(page === currentPage && 'pointer-events-none')}
               href={`?page=${page}`}
             >
               <Button variant={page === currentPage ? 'contained' : 'outlined'}>
@@ -65,7 +66,7 @@ export const Pagination = async (props: IProps) => {
 
       <Link
         href={`?page=${currentPage + 1}`}
-        className={`${!hasNextPage ? 'pointer-events-none' : ''}`}
+        className={cn(!hasNextPage && 'pointer-events-none')}
       >
         <Button variant="contained" disabled={!hasNextPage}>
           Next

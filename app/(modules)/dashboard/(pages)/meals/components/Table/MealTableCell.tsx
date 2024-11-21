@@ -1,6 +1,7 @@
 import MealIngredientCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealIngredientCell';
 import { calculateColumnSum } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
 import { IMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import { cn } from '@/app/common/lib/tw-merge';
 import { TableCell } from '@mui/material';
 import React, { useMemo } from 'react';
 
@@ -33,9 +34,10 @@ const MealTableCell = ({
 
   return (
     <TableCell
-      className={`lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2 lg:text-right ${
-        className || ''
-      }`}
+      className={cn(
+        'lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2 lg:text-right',
+        className,
+      )}
     >
       {mealIngredients.map((mealIngredient) => (
         <MealIngredientCell
