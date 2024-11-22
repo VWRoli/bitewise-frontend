@@ -31,6 +31,6 @@ export async function updateMeal(meal: IMeal) {
 
 export async function deleteMeal(mealId: number) {
   const result = await apiRequest<null>(`meal/${mealId}`, 'DELETE');
-  if (result.data) revalidatePath('/dashboard/meals');
+  if (result) revalidatePath('/dashboard/meals');
   return result;
 }

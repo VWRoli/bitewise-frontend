@@ -7,6 +7,7 @@ import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/inter
 import DeleteDialog from '@/app/common/components/DeleteDialog';
 import EditIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/EditIngredientDialog';
 import { deleteIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
+import { toaster } from '@/app/common/components/CustomToast';
 
 interface IProps {
   ingredient: IIngredient;
@@ -28,8 +29,16 @@ const IngredientActions = ({ ingredient }: IProps) => {
   };
 
   const handleOnDelete = async () => {
+    const res = await deleteIngredient(ingredient.id);
+
+    if (Object.keys(res).length === 0) {
+      toaster.success({ text: 'Ingredient deleted successfully.' });
+    } else {
+      toaster.error({
+        text: res.error || 'Unknown error',
+      });
+    }
     handleClose();
-    deleteIngredient(ingredient.id);
   };
 
   const handleEdit = () => {

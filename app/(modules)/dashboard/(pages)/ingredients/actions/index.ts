@@ -38,7 +38,7 @@ export async function updateIngredient(ingredient: IIngredient) {
 }
 
 export async function deleteIngredient(ingredientId: number) {
-  const result = await apiRequest<null>(`ingredient/${ingredientId}`, 'DELETE');
-  if (result.data) revalidatePath('/dashboard/ingredients');
+  const result = await apiRequest<void>(`ingredient/${ingredientId}`, 'DELETE');
+  if (result) revalidatePath('/dashboard/ingredients');
   return result;
 }

@@ -1,4 +1,4 @@
 export interface IApiResponse<T> {
-  data?: T;
+  data?: T extends void ? undefined : T;
   error?: string;
 }

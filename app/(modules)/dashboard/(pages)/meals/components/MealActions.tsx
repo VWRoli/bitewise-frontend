@@ -27,8 +27,8 @@ const MealActions = ({ meal }: IProps) => {
   };
 
   const handleOnDelete = async () => {
+    await deleteMeal(meal.id);
     handleClose();
-    deleteMeal(meal.id);
   };
 
   const handleEdit = () => {

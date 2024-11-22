@@ -38,6 +38,10 @@ export async function apiRequest<T>(
       throw new Error(`${res.status} ${res.statusText}`);
     }
 
+    if (res.status === 204) {
+      return { data: undefined as T extends void ? undefined : T };
+    }
+
     const data = await res.json();
     return { data };
   } catch (error: unknown) {
