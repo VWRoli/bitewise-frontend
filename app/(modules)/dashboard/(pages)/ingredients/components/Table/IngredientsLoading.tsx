@@ -3,9 +3,10 @@ import { Skeleton, TableBody, TableCell, TableRow } from '@mui/material';
 import IngredientsLoadingCell from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientsLoadingCell';
 import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
 import TableFrame from '@/app/common/components/Table/TableFrame';
+import { INGREDTENTS_PAGE_SIZE } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
 
 const IngredientsLoading = () => {
-  const rows = Array.from({ length: 5 });
+  const rows = Array.from({ length: INGREDTENTS_PAGE_SIZE });
 
   return (
     <TableFrame

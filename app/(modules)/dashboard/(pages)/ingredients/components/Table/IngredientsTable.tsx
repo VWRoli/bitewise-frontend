@@ -2,7 +2,7 @@ import { fetchIngredients } from '@/app/(modules)/dashboard/(pages)/ingredients/
 import AddIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/AddIngredientDialog';
 import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
 import IngredientTableRow from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableRow';
-import { PAGE_SIZE } from '@/app/(modules)/dashboard/constants';
+import { INGREDTENTS_PAGE_SIZE } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
 import { IPageProps } from '@/app/(modules)/dashboard/interfaces';
 import EmptyTable from '@/app/common/components/EmptyTable';
 import CustomError from '@/app/common/components/Error';
@@ -16,8 +16,8 @@ const IngredientsTable = async (props: IPageProps) => {
   const pageNumber = Number(props?.searchParams?.page || 1);
 
   const params = {
-    limit: PAGE_SIZE,
-    offset: (pageNumber - 1) * PAGE_SIZE,
+    limit: INGREDTENTS_PAGE_SIZE,
+    offset: (pageNumber - 1) * INGREDTENTS_PAGE_SIZE,
   };
 
   const result = await fetchIngredients(params);
@@ -25,8 +25,8 @@ const IngredientsTable = async (props: IPageProps) => {
   const total = result.data?.count || 0;
 
   const metadata = {
-    hasNextPage: params.offset + PAGE_SIZE < total,
-    totalPages: Math.ceil(total / PAGE_SIZE),
+    hasNextPage: params.offset + INGREDTENTS_PAGE_SIZE < total,
+    totalPages: Math.ceil(total / INGREDTENTS_PAGE_SIZE),
   };
 
   if (result.error) {

@@ -3,9 +3,10 @@ import { Skeleton, TableBody, TableCell, TableRow } from '@mui/material';
 import MealsLoadingCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealsLoadingCell';
 import TableFrame from '@/app/common/components/Table/TableFrame';
 import MealTableHead from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableHead';
+import { PAGE_SIZE } from '@/app/(modules)/dashboard/constants';
 
 const MealsLoading = () => {
-  const rows = Array.from({ length: 5 });
+  const rows = Array.from({ length: PAGE_SIZE });
 
   return (
     <TableFrame
