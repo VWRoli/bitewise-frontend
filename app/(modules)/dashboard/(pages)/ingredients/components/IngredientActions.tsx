@@ -11,8 +11,9 @@ import { toaster } from '@/app/common/components/CustomToast';
 
 interface IProps {
   ingredient: IIngredient;
+  userId: number;
 }
-const IngredientActions = ({ ingredient }: IProps) => {
+const IngredientActions = ({ ingredient, userId }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
@@ -41,9 +42,6 @@ const IngredientActions = ({ ingredient }: IProps) => {
     handleClose();
   };
 
-  const handleEdit = () => {
-    handleClose();
-  };
   return (
     <>
       <IconButton aria-label="actions" onClick={handleClick}>
@@ -63,7 +61,12 @@ const IngredientActions = ({ ingredient }: IProps) => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <EditIngredientDialog
+          ingredient={ingredient}
+          userId={userId}
+          onMenuClose={handleClose}
+        />
+
         <MenuItem onClick={handleDeleteDialog}>Delete</MenuItem>
       </Menu>
       <DeleteDialog
@@ -73,7 +76,6 @@ const IngredientActions = ({ ingredient }: IProps) => {
         title="Delete Ingredient"
         subtitle={`Are you sure you want to delete ${ingredient.name}?`}
       />
-      <EditIngredientDialog ingredient={ingredient} />
     </>
   );
 };

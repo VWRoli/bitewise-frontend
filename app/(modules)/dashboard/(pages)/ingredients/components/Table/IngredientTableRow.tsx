@@ -4,12 +4,15 @@ import React from 'react';
 import Unit from '@/app/(modules)/dashboard/components/Unit';
 import IngredientActions from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientActions';
 import IngredientTableCell from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableCell';
+import { fetchMe } from '@/app/(modules)/dashboard/(pages)/user/actions';
 
 interface IProps {
   row: IIngredient;
 }
 
-const IngredientTableRow = ({ row }: IProps) => {
+const IngredientTableRow = async ({ row }: IProps) => {
+  const user = await fetchMe();
+
   return (
     <TableRow
       key={row.id}
@@ -51,7 +54,12 @@ const IngredientTableRow = ({ row }: IProps) => {
       <IngredientTableCell
         rowName="Actions"
         className="text-right"
-        rowValue={<IngredientActions ingredient={row} />}
+        rowValue={
+          <IngredientActions
+            ingredient={row}
+            userId={user.data?.id as number}
+          />
+        }
       />
     </TableRow>
   );

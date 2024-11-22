@@ -20,18 +20,21 @@ import {
   DEFAULT_INGREDIENT_VALUES,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
 import { useForm, FormProvider } from 'react-hook-form';
-import { createIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
-import { toaster } from '@/app/common/components/CustomToast';
+import {
+  createIngredient,
+  updateIngredient,
+} from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
+import { sendToasts } from '@/app/(modules)/dashboard/(pages)/ingredients/helpers';
 
 interface IProps {
   userId: number;
   ingredientEditValues?: IIngredient | null;
+  onMenuClose?: () => void;
 }
 
-const AddIngredientDialog: React.FC<IProps> = ({
-  ingredientEditValues,
-  userId,
-}) => {
+const AddIngredientDialog: React.FC<IProps> = (props) => {
+  const { ingredientEditValues, userId, onMenuClose } = props;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const methods = useForm<ICreateIngredient>({
@@ -46,32 +49,36 @@ const AddIngredientDialog: React.FC<IProps> = ({
   const ingredient = watch();
 
   const onSubmit = async (data: ICreateIngredient) => {
+    let result;
+
     if (ingredientEditValues) {
-      //await handleUpdateIngredient(dispatch, data, ingredientEditValues.id);
+      result = await updateIngredient(data, ingredientEditValues.id);
     } else {
-      const result = await createIngredient({
+      result = await createIngredient({
         ...data,
         userId,
       });
-      if (result.error) {
-        toaster.error({
-          text: result.error,
-        });
-        return;
-      } else {
-        toaster.success({
-          text: 'Ingredient added successfully!',
-        });
-      }
     }
+
+    sendToasts(ingredientEditValues, result);
+
     reset();
     handleClose();
   };
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    onMenuClose && onMenuClose();
+    setIsOpen(false);
+  };
+
+  const handleEditOpen = () => {
+    setIsOpen(true);
+  };
 
   return (
     <>
-      {!ingredientEditValues && (
+      {ingredientEditValues ? (
+        <MenuItem onClick={handleEditOpen}>Edit</MenuItem>
+      ) : (
         <div className="text-white">
           <Button
             variant="outlined"
@@ -82,6 +89,7 @@ const AddIngredientDialog: React.FC<IProps> = ({
           </Button>
         </div>
       )}
+
       <Dialog open={isOpen} onClose={handleClose}>
         <DialogTitle>
           {ingredientEditValues ? 'Edit' : 'Add'} Ingredient

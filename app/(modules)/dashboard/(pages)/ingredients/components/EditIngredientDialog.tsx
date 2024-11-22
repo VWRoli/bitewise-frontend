@@ -5,11 +5,18 @@ import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/inter
 import React from 'react';
 
 interface IProps {
+  userId: number;
   ingredient: IIngredient;
+  onMenuClose: () => void;
 }
-const EditIngredientDialog = ({ ingredient }: IProps) => {
-  //TODO: Fix edit ingredient
-  return <AddIngredientDialog ingredientEditValues={ingredient} />;
+const EditIngredientDialog = ({ ingredient, userId, onMenuClose }: IProps) => {
+  return (
+    <AddIngredientDialog
+      ingredientEditValues={ingredient}
+      userId={userId}
+      onMenuClose={onMenuClose}
+    />
+  );
 };
 
 export default EditIngredientDialog;

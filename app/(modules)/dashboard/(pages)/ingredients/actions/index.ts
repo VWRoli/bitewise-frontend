@@ -27,9 +27,12 @@ export async function createIngredient(ingredient: ICreateIngredient) {
   return result;
 }
 
-export async function updateIngredient(ingredient: IIngredient) {
+export async function updateIngredient(
+  ingredient: ICreateIngredient,
+  ingredientId: number,
+) {
   const result = await apiRequest<IIngredient>(
-    `ingredient/${ingredient.id}`,
+    `ingredient/${ingredientId}`,
     'PATCH',
     ingredient,
   );
