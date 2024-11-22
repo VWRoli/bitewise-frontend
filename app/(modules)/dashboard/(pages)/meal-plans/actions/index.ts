@@ -1,67 +1,40 @@
-import { ICreateMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import * as api from '@/app/(modules)/dashboard/(pages)/meal-plans/api';
-import { handleError } from '@/app/common/helpers';
-import { IActionType } from '@/app/common/interfaces';
-import { ACTION_TYPES } from '@/app/common/enums';
+'use server';
 
-export const handleCreateMealPlan = async (
-  dispatch: React.Dispatch<IActionType>,
-  formData: ICreateMealPlan,
-) => {
-  try {
-    const { data } = await api.createMealPlan(formData);
-    dispatch({
-      type: ACTION_TYPES.CREATE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    handleError(dispatch, ACTION_TYPES.CREATE_ERROR, error);
-  }
-};
+import {
+  ICreateMealPlan,
+  IMealPlan,
+} from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
+import { apiRequest } from '@/app/(modules)/dashboard/utils';
+import { IQueryParams } from '@/app/common/interfaces';
+import { revalidatePath } from 'next/cache';
 
-export const handleGetAllMealPlans = async (
-  dispatch: React.Dispatch<IActionType>,
-  userId: number,
-) => {
-  try {
-    dispatch({ type: ACTION_TYPES.FETCH_START });
-    const { data } = await api.getAllMealPlans(userId);
-    dispatch({
-      type: ACTION_TYPES.FETCH_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    handleError(dispatch, ACTION_TYPES.FETCH_ERROR, error);
-  }
-};
+export async function fetchMealPlans(params: IQueryParams) {
+  return apiRequest<{ data: IMealPlan[]; count: number }>(
+    'meal-plan',
+    'GET',
+    undefined,
+    params,
+  );
+}
 
-export const handleUpdateMealPlan = async (
-  dispatch: React.Dispatch<IActionType>,
-  formData: ICreateMealPlan,
-  id: number,
-) => {
-  try {
-    const { data } = await api.updateMealPlan(id, formData);
-    dispatch({
-      type: ACTION_TYPES.UPDATE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    handleError(dispatch, ACTION_TYPES.UPDATE_ERROR, error);
-  }
-};
+export async function createMealPlan(mealPlan: ICreateMealPlan) {
+  const result = await apiRequest<IMealPlan>('meal-plan', 'POST', mealPlan);
+  if (result.data) revalidatePath('/dashboard/meal-plans');
+  return result;
+}
 
-export const handleDeleteMealPlan = async (
-  dispatch: React.Dispatch<IActionType>,
-  id: number,
-) => {
-  try {
-    await api.deleteMealPlan(id);
-    dispatch({
-      type: ACTION_TYPES.DELETE_SUCCESS,
-      payload: id,
-    });
-  } catch (error) {
-    handleError(dispatch, ACTION_TYPES.DELETE_ERROR, error);
-  }
-};
+export async function updateMealPlan(mealPlan: IMealPlan) {
+  const result = await apiRequest<IMealPlan>(
+    `meal-plan/${mealPlan.id}`,
+    'PATCH',
+    mealPlan,
+  );
+  if (result.data) revalidatePath('/dashboard/meal-plans');
+  return result;
+}
+
+export async function deleteMealPlan(mealPlanId: number) {
+  const result = await apiRequest<null>(`meal-plan/${mealPlanId}`, 'DELETE');
+  if (result.data) revalidatePath('/dashboard/meal-plans');
+  return result;
+}

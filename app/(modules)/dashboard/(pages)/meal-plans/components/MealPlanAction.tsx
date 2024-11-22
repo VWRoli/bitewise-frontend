@@ -1,17 +1,17 @@
+'use client';
+
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteDialog from '@/app/common/components/DeleteDialog';
 import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import { handleDeleteMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
 import EditMealPlanDialog from '@/app/(modules)/dashboard/(pages)/meal-plans/components/EditMealPlanDialog';
-import { useMealPlansContext } from '@/app/(modules)/dashboard/(pages)/meal-plans/context';
+import { deleteMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
 
 interface IProps {
   mealPlan: IMealPlan;
 }
 const MealPlanActions = ({ mealPlan }: IProps) => {
-  const { dispatch } = useMealPlansContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -28,7 +28,7 @@ const MealPlanActions = ({ mealPlan }: IProps) => {
   };
 
   const handleOnDelete = async () => {
-    handleDeleteMealPlan(dispatch, mealPlan.id);
+    await deleteMealPlan(mealPlan.id);
     handleClose();
   };
 

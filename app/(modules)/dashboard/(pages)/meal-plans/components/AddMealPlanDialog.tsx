@@ -1,7 +1,5 @@
+'use client';
 import React, { useEffect, useState } from 'react';
-import { useMealPlansContext } from '@/app/(modules)/dashboard/(pages)/meal-plans/context';
-import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
-import { LoadingButton } from '@mui/lab';
 import {
   Autocomplete,
   Button,
@@ -15,22 +13,14 @@ import {
   ICreateMealPlan,
   IMealPlan,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import {
-  handleCreateMealPlan,
-  handleUpdateMealPlan,
-} from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
-import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
 import { convertToOptions } from '@/app/common/helpers';
+import { IOption } from '@/app/common/interfaces';
 
 interface IProps {
-  open: boolean;
-  onClose: () => void;
   mealPlanEditValues?: IMealPlan | null;
 }
-const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
-  const { state: userState } = useUserContext();
-  const { state, dispatch } = useMealPlansContext();
-  const { state: mealState } = useMealsContext();
+const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
   const [meals, setMeals] = useState<number[]>(initialMeals);
@@ -39,7 +29,7 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
 
   const initialName = mealPlanEditValues?.name || '';
   const [name, setName] = useState(initialName);
-  const options = convertToOptions(mealState.meals);
+  const options: IOption[] = []; //convertToOptions(meals);
 
   const mealsWithDuplicates = meals.map((mealId) =>
     options.find((option) => option.id === mealId),
@@ -59,14 +49,14 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
     const data: ICreateMealPlan = {
       name,
       mealIds: meals,
-      userId: userState.user?.id as number,
+      userId: 1, //userState.user?.id as number,
     };
     if (mealPlanEditValues) {
-      await handleUpdateMealPlan(dispatch, data, mealPlanEditValues.id);
+      // await handleUpdateMealPlan(dispatch, data, mealPlanEditValues.id);
     } else {
-      await handleCreateMealPlan(dispatch, data);
+      //await handleCreateMealPlan(dispatch, data);
     }
-    onClose();
+    handleClose();
     reset();
   };
 
@@ -82,12 +72,14 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
   };
 
   const handleCancel = () => {
-    onClose();
+    handleClose();
     reset();
   };
 
+  const handleClose = () => setIsOpen(false);
+
   return (
-    <Dialog open={open} onClose={onClose} fullWidth>
+    <Dialog open={isOpen} onClose={handleClose} fullWidth>
       <DialogTitle>{mealPlanEditValues ? 'Edit' : 'Add'} Meal Plan</DialogTitle>
       <form onSubmit={onSubmit}>
         <DialogContent className="flex flex-col gap-4">
@@ -106,7 +98,6 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
             }}
             error={nameRequiredError}
             helperText={nameRequiredError && 'Name is required'}
-            disabled={state.isLoading}
           />
 
           <Autocomplete
@@ -130,14 +121,9 @@ const AddMealPlanDialog = ({ open, onClose, mealPlanEditValues }: IProps) => {
           <Button onClick={handleCancel} color="primary" variant="outlined">
             Cancel
           </Button>
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            color="primary"
-            loading={state.isLoading}
-          >
+          <Button type="submit" variant="contained" color="primary">
             {mealPlanEditValues ? 'Edit' : 'Add'}
-          </LoadingButton>
+          </Button>
         </DialogActions>
       </form>
     </Dialog>
