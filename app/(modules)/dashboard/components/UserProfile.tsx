@@ -1,4 +1,4 @@
-import { fetchUser } from '@/app/(modules)/dashboard/actions';
+import { fetchMe } from '@/app/(modules)/dashboard/(pages)/user/actions';
 import { getFirstTwoCharacters } from '@/app/(modules)/dashboard/utils';
 import CustomError from '@/app/common/components/Error';
 import { IError } from '@/app/common/interfaces/error.interface';
@@ -6,7 +6,7 @@ import { Avatar } from '@mui/material';
 import React from 'react';
 
 const UserProfile = async () => {
-  const result = await fetchUser();
+  const result = await fetchMe();
 
   if (result.error) {
     return (

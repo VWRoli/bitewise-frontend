@@ -1,3 +1,4 @@
+import { fetchMe } from '@/app/(modules)/dashboard/(pages)/user/actions';
 import Dashboard from '@/app/(modules)/dashboard/components/Dashboard';
 import UserProfile from '@/app/(modules)/dashboard/components/UserProfile';
 import { DRAWER_WIDTH } from '@/app/(modules)/dashboard/constants';
@@ -8,6 +9,8 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await fetchMe();
+
   return (
     <div className="p-4 bg-light min-h-screen text-dark">
       <Dashboard>

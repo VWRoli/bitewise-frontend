@@ -17,9 +17,10 @@ import { convertToOptions } from '@/app/common/helpers';
 import { IOption } from '@/app/common/interfaces';
 
 interface IProps {
+  userId: number;
   mealPlanEditValues?: IMealPlan | null;
 }
-const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
+const AddMealPlanDialog = ({ mealPlanEditValues, userId }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
@@ -49,7 +50,7 @@ const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
     const data: ICreateMealPlan = {
       name,
       mealIds: meals,
-      userId: 1, //userState.user?.id as number,
+      userId,
     };
     if (mealPlanEditValues) {
       // await handleUpdateMealPlan(dispatch, data, mealPlanEditValues.id);

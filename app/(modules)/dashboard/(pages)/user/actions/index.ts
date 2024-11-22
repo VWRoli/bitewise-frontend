@@ -1,16 +1,6 @@
-import { IAuthActionType } from '@/app/(modules)/(auth)/interfaces';
-import * as api from '../api';
-import { handleError } from '@/app/common/helpers';
-import { AUTH_ACTION_TYPES } from '@/app/(modules)/(auth)/enum';
+import { apiRequest } from '@/app/(modules)/dashboard/utils';
+import { IUser } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
 
-export const handleFetchMe = async (
-  dispatch: React.Dispatch<IAuthActionType>,
-) => {
-  try {
-    dispatch({ type: AUTH_ACTION_TYPES.FETCH_START });
-    const user = await api.getMe();
-    dispatch({ type: AUTH_ACTION_TYPES.FETCH_SUCCESS, payload: user });
-  } catch (error) {
-    handleError(dispatch, AUTH_ACTION_TYPES.FETCH_ERROR, error);
-  }
-};
+export async function fetchMe() {
+  return apiRequest<IUser>('users/me', 'GET');
+}

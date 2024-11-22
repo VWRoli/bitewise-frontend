@@ -2,6 +2,7 @@ import { fetchMealPlans } from '@/app/(modules)/dashboard/(pages)/meal-plans/act
 import AddMealPlanDialog from '@/app/(modules)/dashboard/(pages)/meal-plans/components/AddMealPlanDialog';
 import MealPlanTableHead from '@/app/(modules)/dashboard/(pages)/meal-plans/components/Table/MealPlanTableHead';
 import MealPlanTableRow from '@/app/(modules)/dashboard/(pages)/meal-plans/components/Table/MealPlanTableRow';
+import { fetchMe } from '@/app/(modules)/dashboard/(pages)/user/actions';
 import { PAGE_SIZE } from '@/app/(modules)/dashboard/constants';
 import { IPageProps } from '@/app/(modules)/dashboard/interfaces';
 import EmptyTable from '@/app/common/components/EmptyTable';
@@ -21,6 +22,7 @@ const MealPlansTable = async (props: IPageProps) => {
   };
 
   const result = await fetchMealPlans(params);
+  const user = await fetchMe();
 
   const total = result.data?.count || 0;
 
@@ -46,7 +48,7 @@ const MealPlansTable = async (props: IPageProps) => {
       <TableFrame
         title={`Meal Plans (${result.data?.count})`}
         tableHead={<MealPlanTableHead />}
-        addModal={<AddMealPlanDialog />}
+        addModal={<AddMealPlanDialog userId={user.data?.id as number} />}
       >
         <TableBody>
           {meals?.length ? (

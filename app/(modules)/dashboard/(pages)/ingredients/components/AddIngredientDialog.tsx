@@ -25,10 +25,14 @@ import { IError } from '@/app/common/interfaces/error.interface';
 import CustomError from '@/app/common/components/Error';
 
 interface IProps {
+  userId: number;
   ingredientEditValues?: IIngredient | null;
 }
 
-const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
+const AddIngredientDialog: React.FC<IProps> = ({
+  ingredientEditValues,
+  userId,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState<IError | null>(null);
 
@@ -49,7 +53,7 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
     } else {
       const result = await createIngredient({
         ...data,
-        userId: 1, //TODO: need user id
+        userId,
       });
       if (result.error) {
         setError(result as IError);
