@@ -21,8 +21,7 @@ import {
 } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
 import { useForm, FormProvider } from 'react-hook-form';
 import { createIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
-import { IError } from '@/app/common/interfaces/error.interface';
-import CustomError from '@/app/common/components/Error';
+import { toaster } from '@/app/common/components/CustomToast';
 
 interface IProps {
   userId: number;
@@ -34,7 +33,6 @@ const AddIngredientDialog: React.FC<IProps> = ({
   userId,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [error, setError] = useState<IError | null>(null);
 
   const methods = useForm<ICreateIngredient>({
     defaultValues: ingredientEditValues
@@ -56,8 +54,14 @@ const AddIngredientDialog: React.FC<IProps> = ({
         userId,
       });
       if (result.error) {
-        setError(result as IError);
+        toaster.error({
+          text: result.error,
+        });
         return;
+      } else {
+        toaster.success({
+          text: 'Ingredient added successfully!',
+        });
       }
     }
     reset();
@@ -120,7 +124,6 @@ const AddIngredientDialog: React.FC<IProps> = ({
               </CustomTextField>
             </DialogContent>
             <DialogActions>
-              {error && <CustomError result={error} />}
               <Button onClick={handleClose} color="primary">
                 Cancel
               </Button>

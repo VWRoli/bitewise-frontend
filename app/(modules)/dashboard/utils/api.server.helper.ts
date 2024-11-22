@@ -1,6 +1,7 @@
 'use server';
 
 import { IApiResponse } from '@/app/(modules)/dashboard/interfaces';
+import { getErrorMessage } from '@/app/(modules)/dashboard/utils/api.client.helper';
 import { API_URL } from '@/app/common/config';
 import { buildQueryParams } from '@/app/common/helpers';
 import { IQueryParams } from '@/app/common/interfaces';
@@ -17,7 +18,7 @@ export async function apiRequest<T>(
 ): Promise<IApiResponse<T>> {
   try {
     if (!accessToken) {
-      return { error: { message: 'Access token is missing', status: 401 } };
+      throw new Error('Unauthorized');
     }
 
     const queryString = params ? `?${buildQueryParams(params)}` : '';
@@ -39,13 +40,9 @@ export async function apiRequest<T>(
 
     const data = await res.json();
     return { data };
-  } catch (error) {
+  } catch (error: unknown) {
     return {
-      error: {
-        message:
-          error instanceof Error ? error.message : 'An unknown error occurred',
-        status: error instanceof Response ? error.status : undefined,
-      },
+      error: getErrorMessage(error),
     };
   }
 }
