@@ -1,3 +1,4 @@
+import { getPagesToShow } from '@/app/common/helpers';
 import { cn } from '@/app/common/lib/tw-merge';
 import { Button, ButtonGroup } from '@mui/material';
 import Link from 'next/link';
@@ -14,25 +15,7 @@ export const Pagination = async (props: IProps) => {
 
   const currentPage = Math.min(Math.max(Number(page), 1), totalPages);
 
-  const getPagesToShow = () => {
-    let startPage = currentPage - 2;
-    let endPage = currentPage + 2;
-
-    if (currentPage <= 3) {
-      startPage = 1;
-      endPage = 5;
-    } else if (currentPage >= totalPages - 2) {
-      startPage = totalPages - 4;
-      endPage = totalPages;
-    }
-
-    return Array.from(
-      { length: endPage - startPage + 1 },
-      (_, i) => startPage + i,
-    );
-  };
-
-  const pages = getPagesToShow();
+  const pages = getPagesToShow(currentPage, totalPages);
 
   return (
     <div className="flex items-center justify-center space-x-6 text-black">
