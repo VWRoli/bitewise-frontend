@@ -18,11 +18,10 @@ import { DEFAULT_MEAL } from '@/app/(modules)/dashboard/(pages)/meals/constants'
 import { IError } from '@/app/common/interfaces/error.interface';
 
 interface IProps {
-  userId: number;
   mealEditValues?: IMeal | null;
 }
 
-const AddMealDialog = ({ mealEditValues, userId }: IProps) => {
+const AddMealDialog = ({ mealEditValues }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState<IError | null>(null);
 

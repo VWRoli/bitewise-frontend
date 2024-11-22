@@ -25,15 +25,17 @@ import {
   updateIngredient,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
 import { sendToasts } from '@/app/(modules)/dashboard/(pages)/ingredients/helpers';
+import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 
 interface IProps {
-  userId: number;
   ingredientEditValues?: IIngredient | null;
   onMenuClose?: () => void;
 }
 
 const AddIngredientDialog: React.FC<IProps> = (props) => {
-  const { ingredientEditValues, userId, onMenuClose } = props;
+  const { ingredientEditValues, onMenuClose } = props;
+
+  const { user } = useUserContext();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,7 +58,7 @@ const AddIngredientDialog: React.FC<IProps> = (props) => {
     } else {
       result = await createIngredient({
         ...data,
-        userId,
+        userId: user?.id,
       });
     }
 

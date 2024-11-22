@@ -22,7 +22,7 @@ const IngredientsTable = async (props: IPageProps) => {
   };
 
   const result = await fetchIngredients(params);
-  const user = await fetchMe();
+
   const total = result.data?.count || 0;
 
   const metadata = {
@@ -47,7 +47,7 @@ const IngredientsTable = async (props: IPageProps) => {
       <TableFrame
         title={`Ingredients (${result.data?.count})`}
         tableHead={<IngredientTableHead />}
-        addModal={<AddIngredientDialog userId={user.data?.id as number} />}
+        addModal={<AddIngredientDialog />}
       >
         <TableBody>
           {ingredients?.length ? (

@@ -22,7 +22,6 @@ const MealsTable = async (props: IPageProps) => {
   };
 
   const result = await fetchMeals(params);
-  const user = await fetchMe();
 
   const total = result.data?.count || 0;
 
@@ -48,7 +47,7 @@ const MealsTable = async (props: IPageProps) => {
       <TableFrame
         title={`Meals (${result.data?.count})`}
         tableHead={<MealTableHead />}
-        addModal={<AddMealDialog userId={user.data?.id as number} />}
+        addModal={<AddMealDialog />}
       >
         <TableBody>
           {meals?.length ? (

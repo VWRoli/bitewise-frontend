@@ -11,9 +11,8 @@ import { toaster } from '@/app/common/components/CustomToast';
 
 interface IProps {
   ingredient: IIngredient;
-  userId: number;
 }
-const IngredientActions = ({ ingredient, userId }: IProps) => {
+const IngredientActions = ({ ingredient }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
@@ -63,7 +62,6 @@ const IngredientActions = ({ ingredient, userId }: IProps) => {
       >
         <EditIngredientDialog
           ingredient={ingredient}
-          userId={userId}
           onMenuClose={handleClose}
         />
 
