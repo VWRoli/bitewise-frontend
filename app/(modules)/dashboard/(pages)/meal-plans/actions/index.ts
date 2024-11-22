@@ -23,9 +23,12 @@ export async function createMealPlan(mealPlan: ICreateMealPlan) {
   return result;
 }
 
-export async function updateMealPlan(mealPlan: IMealPlan) {
+export async function updateMealPlan(
+  mealPlan: ICreateMealPlan,
+  mealPlanId: number,
+) {
   const result = await apiRequest<IMealPlan>(
-    `meal-plan/${mealPlan.id}`,
+    `meal-plan/${mealPlanId}`,
     'PATCH',
     mealPlan,
   );

@@ -7,19 +7,33 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  MenuItem,
   TextField,
 } from '@mui/material';
 import {
   ICreateMealPlan,
   IMealPlan,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import { convertToOptions } from '@/app/common/helpers';
+import { convertToOptions, createOrUpdateToasts } from '@/app/common/helpers';
 import { IOption } from '@/app/common/interfaces';
+import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
+import {
+  createMealPlan,
+  updateMealPlan,
+} from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
+import { EActionType } from '@/app/common/enums';
 
 interface IProps {
+  allMeals: IMeal[];
   mealPlanEditValues?: IMealPlan | null;
+  onMenuClose?: () => void;
 }
-const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
+const AddMealPlanDialog = ({
+  mealPlanEditValues,
+  onMenuClose,
+  allMeals,
+}: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
@@ -29,14 +43,16 @@ const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
 
   const initialName = mealPlanEditValues?.name || '';
   const [name, setName] = useState(initialName);
-  const options: IOption[] = []; //convertToOptions(meals);
+  const options: IOption[] = convertToOptions(allMeals);
 
   const mealsWithDuplicates = meals.map((mealId) =>
     options.find((option) => option.id === mealId),
   );
-  const selectedMeals = mealsWithDuplicates.filter(
-    (meal) => meal !== undefined,
-  ) as (typeof options)[0][];
+  // const selectedMeals = mealsWithDuplicates.filter(
+  //   (meal) => meal !== undefined,
+  // ) as (typeof options)[0][];
+
+  const { user } = useUserContext();
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -49,13 +65,22 @@ const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
     const data: ICreateMealPlan = {
       name,
       mealIds: meals,
-      userId: 0,
+      userId: user?.id,
     };
+
+    let result;
+
     if (mealPlanEditValues) {
-      // await handleUpdateMealPlan(dispatch, data, mealPlanEditValues.id);
+      result = await updateMealPlan(data, mealPlanEditValues.id);
     } else {
-      //await handleCreateMealPlan(dispatch, data);
+      result = await createMealPlan(data);
     }
+
+    createOrUpdateToasts(
+      mealPlanEditValues ? EActionType.UPDATE : EActionType.CREATE,
+      result,
+    );
+
     handleClose();
     reset();
   };
@@ -78,55 +103,72 @@ const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
 
   const handleClose = () => setIsOpen(false);
 
-  return (
-    <Dialog open={isOpen} onClose={handleClose} fullWidth>
-      <DialogTitle>{mealPlanEditValues ? 'Edit' : 'Add'} Meal Plan</DialogTitle>
-      <form onSubmit={onSubmit}>
-        <DialogContent className="flex flex-col gap-4">
-          <TextField
-            label="Name"
-            variant="outlined"
-            placeholder="Meal plan name"
-            fullWidth
-            value={name}
-            onChange={(e) => {
-              if (e.target.value === '') {
-                setNameRequiredError(true);
-              }
-              setName(e.target.value);
-              setNameRequiredError(false);
-            }}
-            error={nameRequiredError}
-            helperText={nameRequiredError && 'Name is required'}
-          />
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
 
-          <Autocomplete
-            multiple
-            id="meals"
-            options={options}
-            getOptionLabel={(option) => option.label}
-            //defaultValue={selectedMeals}
-            onChange={(_, value) => setMeals(value.map((meal) => meal.id))}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Meals"
-                placeholder="Select meals"
-              />
-            )}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCancel} color="primary" variant="outlined">
-            Cancel
+  return (
+    <>
+      {mealPlanEditValues ? (
+        <MenuItem onClick={handleOpen}>Edit</MenuItem>
+      ) : (
+        <div className="text-white">
+          <Button variant="outlined" color="inherit" onClick={handleOpen}>
+            Add
           </Button>
-          <Button type="submit" variant="contained" color="primary">
-            {mealPlanEditValues ? 'Edit' : 'Add'}
-          </Button>
-        </DialogActions>
-      </form>
-    </Dialog>
+        </div>
+      )}
+      <Dialog open={isOpen} onClose={handleClose} fullWidth>
+        <DialogTitle>
+          {mealPlanEditValues ? 'Edit' : 'Add'} Meal Plan
+        </DialogTitle>
+        <form onSubmit={onSubmit}>
+          <DialogContent className="flex flex-col gap-4">
+            <TextField
+              label="Name"
+              variant="outlined"
+              placeholder="Meal plan name"
+              fullWidth
+              value={name}
+              onChange={(e) => {
+                if (e.target.value === '') {
+                  setNameRequiredError(true);
+                }
+                setName(e.target.value);
+                setNameRequiredError(false);
+              }}
+              error={nameRequiredError}
+              helperText={nameRequiredError && 'Name is required'}
+            />
+
+            <Autocomplete
+              multiple
+              id="meals"
+              options={options}
+              getOptionLabel={(option) => option.label}
+              // defaultValue={selectedMeals}
+              onChange={(_, value) => setMeals(value.map((meal) => meal.id))}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Meals"
+                  placeholder="Select meals"
+                />
+              )}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCancel} color="primary" variant="outlined">
+              Cancel
+            </Button>
+            <Button type="submit" variant="contained" color="primary">
+              {mealPlanEditValues ? 'Edit' : 'Add'}
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+    </>
   );
 };
 

@@ -59,7 +59,9 @@ const IngredientsTable = async (props: IPageProps) => {
           )}
         </TableBody>
       </TableFrame>
-      <Pagination {...props.searchParams} {...metadata} />
+      {!!ingredients.length && (
+        <Pagination {...props.searchParams} {...metadata} />
+      )}
     </>
   );
 };

@@ -7,14 +7,16 @@ import DeleteDialog from '@/app/common/components/DeleteDialog';
 import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
 import EditMealPlanDialog from '@/app/(modules)/dashboard/(pages)/meal-plans/components/EditMealPlanDialog';
 import { deleteMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
+import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 
 interface IProps {
   mealPlan: IMealPlan;
+  allMeals: IMeal[];
 }
-const MealPlanActions = ({ mealPlan }: IProps) => {
+const MealPlanActions = ({ mealPlan, allMeals }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -32,10 +34,6 @@ const MealPlanActions = ({ mealPlan }: IProps) => {
     handleClose();
   };
 
-  const handleEdit = () => {
-    setIsEditOpen(true);
-    handleClose();
-  };
   return (
     <>
       <IconButton aria-label="actions" onClick={handleClick}>
@@ -55,7 +53,11 @@ const MealPlanActions = ({ mealPlan }: IProps) => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        {/*TODO: fix edit <EditMealPlanDialog
+          allMeals={allMeals}
+          mealPlan={mealPlan}
+          onMenuClose={handleClose}
+        /> */}
         <MenuItem onClick={handleDeleteDialog}>Delete</MenuItem>
       </Menu>
       <DeleteDialog
@@ -64,11 +66,6 @@ const MealPlanActions = ({ mealPlan }: IProps) => {
         onConfirm={handleOnDelete}
         title="Delete Meal Plan"
         subtitle={`Are you sure you want to delete ${mealPlan.name} meal plan?`}
-      />
-      <EditMealPlanDialog
-        isOpen={isEditOpen}
-        setIsOpen={setIsEditOpen}
-        mealPlan={mealPlan}
       />
     </>
   );

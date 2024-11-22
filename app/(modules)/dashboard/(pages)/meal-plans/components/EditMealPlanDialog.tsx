@@ -1,18 +1,19 @@
 import AddMealPlanDialog from '@/app/(modules)/dashboard/(pages)/meal-plans/components/AddMealPlanDialog';
 import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
+import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import React from 'react';
 
 interface IProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  allMeals: IMeal[];
+  onMenuClose: () => void;
   mealPlan: IMealPlan;
 }
 
-const EditMealPlanDialog = ({ isOpen, setIsOpen, mealPlan }: IProps) => {
+const EditMealPlanDialog = ({ allMeals, onMenuClose, mealPlan }: IProps) => {
   return (
     <AddMealPlanDialog
-      open={isOpen}
-      onClose={() => setIsOpen(false)}
+      allMeals={allMeals}
+      onMenuClose={onMenuClose}
       mealPlanEditValues={mealPlan}
     />
   );
