@@ -9,7 +9,7 @@ const MealsLoading = () => {
 
   return (
     <TableFrame
-      title="Meals Table"
+      title="Meals"
       tableHead={<MealTableHead />}
       addModal={<div className="h-9" />}
     >

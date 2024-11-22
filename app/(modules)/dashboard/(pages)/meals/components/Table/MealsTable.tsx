@@ -44,7 +44,7 @@ const MealsTable = async (props: IPageProps) => {
   return (
     <>
       <TableFrame
-        title="Meals Table"
+        title={`Meals (${result.data?.count})`}
         tableHead={<MealTableHead />}
         addModal={<AddMealDialog />}
       >
