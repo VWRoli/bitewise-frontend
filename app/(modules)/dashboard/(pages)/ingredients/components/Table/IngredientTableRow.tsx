@@ -17,7 +17,7 @@ const IngredientTableRow = ({ row }: IProps) => {
     >
       <IngredientTableCell
         rowName="Name"
-        className="!text-left lg:font-semibold"
+        className="lg:text-left lg:font-semibold"
         rowValue={row.name}
       />
       <IngredientTableCell

@@ -11,7 +11,7 @@ const IngredientsLoading = () => {
     <TableFrame
       title="Ingredients Table"
       tableHead={<IngredientTableHead />}
-      addModal={<></>}
+      addModal={<div className="h-9" />}
     >
       <TableBody>
         {rows.map((_, index) => (

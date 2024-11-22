@@ -17,7 +17,7 @@ const MealTableRow = ({ row }: IProps) => {
       <MealTableCell
         mealIngredients={mealIngredients}
         column="ingredientName"
-        className="lg:!text-left"
+        className="lg:text-left"
         mealName={row.name}
       />
 

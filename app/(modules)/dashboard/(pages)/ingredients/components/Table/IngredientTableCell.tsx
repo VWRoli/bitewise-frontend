@@ -1,3 +1,4 @@
+import { cn } from '@/app/common/lib/tw-merge';
 import { TableCell } from '@mui/material';
 import React from 'react';
 
@@ -10,9 +11,10 @@ const IngredientTableCell = ({ className, rowValue, rowName }: IProps) => {
   return (
     <TableCell
       size="small"
-      className={`lg:table-cell block text-dark px-4 lg:text-right ${
-        className || ''
-      }`}
+      className={cn(
+        'lg:table-cell block text-dark px-4 lg:text-right py-2',
+        className,
+      )}
     >
       <span className="lg:hidden font-semibold text-gray-700">{rowName}: </span>
       {rowValue}

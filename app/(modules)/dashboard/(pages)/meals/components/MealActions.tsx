@@ -1,20 +1,19 @@
+'use client';
+
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import DeleteDialog from '@/app/common/components/DeleteDialog';
-import { useMealsContext } from '@/app/(modules)/dashboard/(pages)/meals/context';
-import { handleDeleteMeal } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import EditMealDialog from '@/app/(modules)/dashboard/(pages)/meals/components/EditMealDialog';
+import { deleteMeal } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 
 interface IProps {
   meal: IMeal;
 }
 const MealActions = ({ meal }: IProps) => {
-  const { dispatch } = useMealsContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -28,12 +27,11 @@ const MealActions = ({ meal }: IProps) => {
   };
 
   const handleOnDelete = async () => {
-    handleDeleteMeal(dispatch, meal.id);
     handleClose();
+    deleteMeal(meal.id);
   };
 
   const handleEdit = () => {
-    setIsEditOpen(true);
     handleClose();
   };
   return (
@@ -65,11 +63,7 @@ const MealActions = ({ meal }: IProps) => {
         title="Delete Meal"
         subtitle={`Are you sure you want to delete ${meal.name}?`}
       />
-      <EditMealDialog
-        isOpen={isEditOpen}
-        setIsOpen={setIsEditOpen}
-        meal={meal}
-      />
+      <EditMealDialog meal={meal} />
     </>
   );
 };

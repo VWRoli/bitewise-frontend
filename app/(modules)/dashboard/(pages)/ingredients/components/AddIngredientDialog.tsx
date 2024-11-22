@@ -63,15 +63,17 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
 
   return (
     <>
-      <div className="text-white">
-        <Button
-          variant="outlined"
-          color="inherit"
-          onClick={() => setIsOpen(true)}
-        >
-          Add
-        </Button>
-      </div>
+      {!ingredientEditValues && (
+        <div className="text-white">
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={() => setIsOpen(true)}
+          >
+            Add
+          </Button>
+        </div>
+      )}
       <Dialog open={isOpen} onClose={handleClose}>
         <DialogTitle>
           {ingredientEditValues ? 'Edit' : 'Add'} Ingredient

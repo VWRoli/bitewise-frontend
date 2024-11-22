@@ -3,7 +3,6 @@ import { Button } from '@mui/material';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { useIngredientsContext } from '@/app/(modules)/dashboard/(pages)/ingredients/context';
 import { IOption } from '@/app/common/interfaces';
 import { convertToOptions } from '@/app/common/helpers';
 
@@ -17,7 +16,6 @@ interface IProps {
   ingredient: IIngredient;
   onIngredientChange: (key: string, value: any) => void;
   removeIngredient: () => void;
-  isLoading: boolean;
   setFormData: (value: any) => void;
 }
 
@@ -26,11 +24,9 @@ const MealIngredient = ({
   ingredient,
   onIngredientChange,
   removeIngredient,
-  isLoading,
   setFormData,
 }: IProps) => {
-  const { state } = useIngredientsContext();
-  const options = convertToOptions(state.ingredients);
+  const options = convertToOptions(ingredients);
 
   const handleAutocompleteChange = (
     _: React.SyntheticEvent,
@@ -62,7 +58,6 @@ const MealIngredient = ({
         label="Quantity"
         value={ingredient.quantity}
         onChange={handleQuantityChange}
-        disabled={isLoading}
         type="number"
         onFocus={() => {
           if (ingredient.quantity === 0) {

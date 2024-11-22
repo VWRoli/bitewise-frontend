@@ -1,7 +1,7 @@
-import { fetchIngredients } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
-import AddIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/AddIngredientDialog';
-import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
-import IngredientTableRow from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableRow';
+import { fetchMeals } from '@/app/(modules)/dashboard/(pages)/meals/actions';
+import AddMealDialog from '@/app/(modules)/dashboard/(pages)/meals/components/AddMealDialog';
+import MealTableHead from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableHead';
+import MealTableRow from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableRow';
 import { PAGE_SIZE } from '@/app/(modules)/dashboard/constants';
 import { IPageProps } from '@/app/(modules)/dashboard/interfaces';
 import EmptyTable from '@/app/common/components/EmptyTable';
@@ -12,7 +12,7 @@ import { IError } from '@/app/common/interfaces/error.interface';
 import { TableBody } from '@mui/material';
 import React from 'react';
 
-const IngredientsTable = async (props: IPageProps) => {
+const MealsTable = async (props: IPageProps) => {
   const pageNumber = Number(props?.searchParams?.page || 1);
 
   const params = {
@@ -20,7 +20,7 @@ const IngredientsTable = async (props: IPageProps) => {
     offset: (pageNumber - 1) * PAGE_SIZE,
   };
 
-  const result = await fetchIngredients(params);
+  const result = await fetchMeals(params);
 
   const total = result.data?.count || 0;
 
@@ -39,22 +39,20 @@ const IngredientsTable = async (props: IPageProps) => {
     );
   }
 
-  const ingredients = result.data?.data || [];
+  const meals = result.data?.data || [];
 
   return (
     <>
       <TableFrame
-        title="Ingredients Table"
-        tableHead={<IngredientTableHead />}
-        addModal={<AddIngredientDialog />}
+        title="Meals Table"
+        tableHead={<MealTableHead />}
+        addModal={<AddMealDialog />}
       >
         <TableBody>
-          {ingredients?.length ? (
-            ingredients.map((row) => (
-              <IngredientTableRow key={row.id} row={row} />
-            ))
+          {meals?.length ? (
+            meals.map((row) => <MealTableRow key={row.id} row={row} />)
           ) : (
-            <EmptyTable>No ingredients available</EmptyTable>
+            <EmptyTable>No meals available</EmptyTable>
           )}
         </TableBody>
       </TableFrame>
@@ -63,4 +61,4 @@ const IngredientsTable = async (props: IPageProps) => {
   );
 };
 
-export default IngredientsTable;
+export default MealsTable;
