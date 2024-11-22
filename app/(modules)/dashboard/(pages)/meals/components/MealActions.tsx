@@ -7,11 +7,13 @@ import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import DeleteDialog from '@/app/common/components/DeleteDialog';
 import EditMealDialog from '@/app/(modules)/dashboard/(pages)/meals/components/EditMealDialog';
 import { deleteMeal } from '@/app/(modules)/dashboard/(pages)/meals/actions';
+import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 
 interface IProps {
   meal: IMeal;
+  ingredients: IIngredient[];
 }
-const MealActions = ({ meal }: IProps) => {
+const MealActions = ({ meal, ingredients }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const open = Boolean(anchorEl);
@@ -31,9 +33,6 @@ const MealActions = ({ meal }: IProps) => {
     handleClose();
   };
 
-  const handleEdit = () => {
-    handleClose();
-  };
   return (
     <>
       <IconButton aria-label="actions" onClick={handleClick}>
@@ -53,7 +52,11 @@ const MealActions = ({ meal }: IProps) => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <EditMealDialog
+          meal={meal}
+          ingredients={ingredients}
+          onMenuClose={handleClose}
+        />
         <MenuItem onClick={handleDeleteDialog}>Delete</MenuItem>
       </Menu>
       <DeleteDialog
@@ -63,7 +66,6 @@ const MealActions = ({ meal }: IProps) => {
         title="Delete Meal"
         subtitle={`Are you sure you want to delete ${meal.name}?`}
       />
-      <EditMealDialog meal={meal} />
     </>
   );
 };

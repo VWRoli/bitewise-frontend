@@ -24,8 +24,9 @@ import {
   createIngredient,
   updateIngredient,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
-import { sendToasts } from '@/app/(modules)/dashboard/(pages)/ingredients/helpers';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
+import { createOrUpdateToasts } from '@/app/common/helpers';
+import { EActionType } from '@/app/common/enums';
 
 interface IProps {
   ingredientEditValues?: IIngredient | null;
@@ -62,7 +63,10 @@ const AddIngredientDialog: React.FC<IProps> = (props) => {
       });
     }
 
-    sendToasts(ingredientEditValues, result);
+    createOrUpdateToasts(
+      ingredientEditValues ? EActionType.UPDATE : EActionType.CREATE,
+      result,
+    );
 
     reset();
     handleClose();
@@ -72,21 +76,17 @@ const AddIngredientDialog: React.FC<IProps> = (props) => {
     setIsOpen(false);
   };
 
-  const handleEditOpen = () => {
+  const handleOpen = () => {
     setIsOpen(true);
   };
 
   return (
     <>
       {ingredientEditValues ? (
-        <MenuItem onClick={handleEditOpen}>Edit</MenuItem>
+        <MenuItem onClick={handleOpen}>Edit</MenuItem>
       ) : (
         <div className="text-white">
-          <Button
-            variant="outlined"
-            color="inherit"
-            onClick={() => setIsOpen(true)}
-          >
+          <Button variant="outlined" color="inherit" onClick={handleOpen}>
             Add
           </Button>
         </div>

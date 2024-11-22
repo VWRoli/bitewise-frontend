@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Button } from '@mui/material';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
@@ -5,15 +7,17 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { IOption } from '@/app/common/interfaces';
 import { convertToOptions } from '@/app/common/helpers';
+import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 
-interface IIngredient {
+interface IMealIngredient {
   ingredientId: number;
   quantity: number;
 }
 
 interface IProps {
   index: number;
-  ingredient: IIngredient;
+  ingredient: IMealIngredient;
+  allIngredients: IIngredient[];
   onIngredientChange: (key: string, value: any) => void;
   removeIngredient: () => void;
   setFormData: (value: any) => void;
@@ -25,8 +29,9 @@ const MealIngredient = ({
   onIngredientChange,
   removeIngredient,
   setFormData,
+  allIngredients,
 }: IProps) => {
-  const options = convertToOptions(ingredients);
+  const options = convertToOptions(allIngredients);
 
   const handleAutocompleteChange = (
     _: React.SyntheticEvent,

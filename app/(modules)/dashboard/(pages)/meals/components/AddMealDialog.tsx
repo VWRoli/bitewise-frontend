@@ -11,23 +11,35 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  MenuItem,
   TextField,
 } from '@mui/material';
 import MealIngredient from '@/app/(modules)/dashboard/(pages)/meals/components/MealIngredient';
 import { DEFAULT_MEAL } from '@/app/(modules)/dashboard/(pages)/meals/constants';
-import { IError } from '@/app/common/interfaces/error.interface';
+import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
+import {
+  createMeal,
+  updateMeal,
+} from '@/app/(modules)/dashboard/(pages)/meals/actions';
+import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
+import { createOrUpdateToasts } from '@/app/common/helpers';
+import { EActionType } from '@/app/common/enums';
 
 interface IProps {
+  ingredients: IIngredient[];
   mealEditValues?: IMeal | null;
+  onMenuClose?: () => void;
 }
 
-const AddMealDialog = ({ mealEditValues }: IProps) => {
+const AddMealDialog = (props: IProps) => {
+  const { mealEditValues, ingredients, onMenuClose } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [error, setError] = useState<IError | null>(null);
 
   const initialFormData = mealEditValues || DEFAULT_MEAL;
   const [formData, setFormData] = useState<ICreateMeal>(initialFormData);
   const [nameRequiredError, setNameRequiredError] = useState(false);
+
+  const { user } = useUserContext();
 
   const addIngredient = () => {
     setFormData((prevData) => ({
@@ -62,20 +74,21 @@ const AddMealDialog = ({ mealEditValues }: IProps) => {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (formData.name === '') {
-      setNameRequiredError(true);
-      return;
-    }
+    let result;
 
     if (mealEditValues) {
-      //await handleUpdateMeal(dispatch, formData, mealEditValues.id);
+      result = await updateMeal(formData, mealEditValues.id);
     } else {
-      // await handleCreateMeal(dispatch, {
-      //   ...formData,
-      //   userId,
-      // });
+      result = await createMeal({
+        ...formData,
+        userId: user?.id,
+      });
     }
+
+    createOrUpdateToasts(
+      mealEditValues ? EActionType.UPDATE : EActionType.CREATE,
+      result,
+    );
 
     reset();
   };
@@ -90,21 +103,27 @@ const AddMealDialog = ({ mealEditValues }: IProps) => {
     handleClose();
   };
 
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    onMenuClose && onMenuClose();
+    setIsOpen(false);
+  };
+
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
 
   return (
     <>
-      {!mealEditValues && (
+      {mealEditValues ? (
+        <MenuItem onClick={handleOpen}>Edit</MenuItem>
+      ) : (
         <div className="text-white">
-          <Button
-            variant="outlined"
-            color="inherit"
-            onClick={() => setIsOpen(true)}
-          >
+          <Button variant="outlined" color="inherit" onClick={handleOpen}>
             Add
           </Button>
         </div>
       )}
+
       <Dialog open={isOpen} onClose={handleClose} fullWidth>
         <DialogTitle>{mealEditValues ? 'Edit' : 'Add'} Meal</DialogTitle>
 
@@ -137,6 +156,7 @@ const AddMealDialog = ({ mealEditValues }: IProps) => {
                   onIngredientChange={(key, value) =>
                     handleIngredientChange(index, key, value)
                   }
+                  allIngredients={ingredients}
                   removeIngredient={() => removeIngredient(index)}
                   setFormData={setFormData}
                 />

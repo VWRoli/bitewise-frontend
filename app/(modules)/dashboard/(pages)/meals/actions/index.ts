@@ -23,8 +23,8 @@ export async function createMeal(meal: ICreateMeal) {
   return result;
 }
 
-export async function updateMeal(meal: IMeal) {
-  const result = await apiRequest<IMeal>(`meal/${meal.id}`, 'PATCH', meal);
+export async function updateMeal(meal: ICreateMeal, mealId: number) {
+  const result = await apiRequest<IMeal>(`meal/${mealId}`, 'PATCH', meal);
   if (result.data) revalidatePath('/dashboard/meals');
   return result;
 }

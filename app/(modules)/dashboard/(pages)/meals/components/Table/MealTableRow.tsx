@@ -4,13 +4,16 @@ import React from 'react';
 import Unit from '@/app/(modules)/dashboard/components/Unit';
 import MealActions from '@/app/(modules)/dashboard/(pages)/meals/components/MealActions';
 import MealTableCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableCell';
+import { fetchIngredients } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
 
 interface IProps {
   row: IMeal;
 }
 
-const MealTableRow = ({ row }: IProps) => {
+const MealTableRow = async ({ row }: IProps) => {
   const { mealIngredients } = row;
+
+  const ingredientsResult = await fetchIngredients({});
 
   return (
     <TableRow key={row.id}>
@@ -62,7 +65,10 @@ const MealTableRow = ({ row }: IProps) => {
       </TableCell>
 
       <TableCell className="lg:table-cell block text-right">
-        <MealActions meal={row} />
+        <MealActions
+          meal={row}
+          ingredients={ingredientsResult.data?.data || []}
+        />
       </TableCell>
     </TableRow>
   );
