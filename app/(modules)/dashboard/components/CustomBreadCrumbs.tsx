@@ -1,9 +1,16 @@
-import { Breadcrumbs } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
 import Link from 'next/link';
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import { removeDashFromString } from '@/app/(modules)/dashboard/utils';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { House } from 'lucide-react';
 
 const CustomBreadCrumbs = () => {
   const fullPathName = usePathname();
@@ -11,24 +18,40 @@ const CustomBreadCrumbs = () => {
   const breadcrumbs = fullPathName.split('/').splice(1);
 
   return (
-    <Breadcrumbs separator="/" aria-label="breadcrumb" className="text-dark">
-      {breadcrumbs.map((breadcrumb, index) => (
-        <div key={index}>
-          {breadcrumb !== 'dashboard' ? (
-            <Link href={`/dashboard/${breadcrumb}`}>
-              <p className="first-letter:uppercase">
-                {removeDashFromString(breadcrumb)}
-              </p>
-            </Link>
-          ) : (
-            <Link href="/dashboard">
-              <HomeIcon fontSize="inherit" className="text-dark" />
-            </Link>
-          )}
-        </div>
-      ))}
-      ;
-    </Breadcrumbs>
+    <Breadcrumb>
+      <BreadcrumbList>
+        {breadcrumbs.map((breadcrumb, index) => {
+          const isDashboard = breadcrumb === 'dashboard';
+          const isLast = index === breadcrumbs.length - 1;
+          const href = `/${breadcrumbs.slice(0, index + 1).join('/')}`;
+
+          return (
+            <React.Fragment key={index}>
+              <BreadcrumbItem>
+                {isDashboard ? (
+                  <BreadcrumbLink asChild>
+                    <Link href={`/dashboard`}>
+                      <House size={16} />
+                    </Link>
+                  </BreadcrumbLink>
+                ) : isLast ? (
+                  <BreadcrumbPage className="first-letter:uppercase">
+                    {removeDashFromString(breadcrumb)}
+                  </BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink asChild>
+                    <Link href={href} className="first-letter:uppercase">
+                      {removeDashFromString(breadcrumb)}
+                    </Link>
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+              {!isLast && <BreadcrumbSeparator />}
+            </React.Fragment>
+          );
+        })}
+      </BreadcrumbList>
+    </Breadcrumb>
   );
 };
 

@@ -1,5 +1,5 @@
 import { EUnit } from '@/app/(modules)/dashboard/(pages)/ingredients/enums';
-import { cn } from '@/app/common/lib/tw-merge';
+import { cn } from '@/lib/utils';
 import React from 'react';
 
 interface IProps {

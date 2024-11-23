@@ -2,7 +2,7 @@
 
 import { IApiResponse } from '@/app/(modules)/dashboard/interfaces';
 import { getErrorMessage } from '@/app/(modules)/dashboard/utils/api.client.helper';
-import { API_URL } from '@/app/common/config';
+import { API_URL } from '@/utils/config';
 import { buildQueryParams } from '@/app/common/helpers';
 import { IQueryParams } from '@/app/common/interfaces';
 import { cookies } from 'next/headers';

@@ -1,5 +1,5 @@
 import { ISignIn, ISignUp } from '@/app/(modules)/(auth)/interfaces';
-import { API_URL } from '@/app/common/config';
+import { API_URL } from '@/utils/config';
 import { IUser } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
 import axios from 'axios';
 import { toaster } from '@/app/common/components/CustomToast';
