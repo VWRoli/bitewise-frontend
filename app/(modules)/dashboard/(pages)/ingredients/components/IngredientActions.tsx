@@ -4,10 +4,10 @@ import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
-import DeleteDialog from '@/app/common/components/DeleteDialog';
+import DeleteDialog from '@/app/components/DeleteDialog';
 import EditIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/EditIngredientDialog';
 import { deleteIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
-import { toaster } from '@/app/common/components/CustomToast';
+import { toaster } from '@/app/components/CustomToast';
 
 interface IProps {
   ingredient: IIngredient;

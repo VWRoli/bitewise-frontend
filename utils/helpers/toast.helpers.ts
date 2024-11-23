@@ -1,5 +1,5 @@
-import { toaster } from '@/app/common/components/CustomToast';
-import { EActionType } from '@/app/common/enums';
+import { toaster } from '@/app/components/CustomToast';
+import { EActionType } from '@/utils/enums';
 
 export const createOrUpdateToasts = (action: EActionType, result: any) => {
   const actionStr = action === EActionType.UPDATE ? 'Updated' : 'Added';

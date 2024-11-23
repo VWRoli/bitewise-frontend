@@ -3,7 +3,7 @@
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import DeleteDialog from '@/app/common/components/DeleteDialog';
+import DeleteDialog from '@/app/components/DeleteDialog';
 import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
 import EditMealPlanDialog from '@/app/(modules)/dashboard/(pages)/meal-plans/components/EditMealPlanDialog';
 import { deleteMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';

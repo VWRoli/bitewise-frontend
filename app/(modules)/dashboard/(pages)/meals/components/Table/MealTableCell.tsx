@@ -1,7 +1,7 @@
 import MealIngredientCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealIngredientCell';
 import { calculateColumnSum } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
 import { IMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import { cn } from '@/app/common/lib/tw-merge';
+import { cn } from '@/lib';
 import { TableCell } from '@mui/material';
 import React, { useMemo } from 'react';
 

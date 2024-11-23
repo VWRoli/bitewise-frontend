@@ -5,8 +5,8 @@ import { Button } from '@mui/material';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { IOption } from '@/app/common/interfaces';
-import { convertToOptions } from '@/app/common/helpers';
+import { IOption } from '@/utils/interfaces';
+import { convertToOptions } from '@/utils/helpers';
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 
 interface IMealIngredient {

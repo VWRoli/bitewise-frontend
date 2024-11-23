@@ -4,7 +4,7 @@ import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import DeleteDialog from '@/app/common/components/DeleteDialog';
+import DeleteDialog from '@/app/components/DeleteDialog';
 import EditMealDialog from '@/app/(modules)/dashboard/(pages)/meals/components/EditMealDialog';
 import { deleteMeal } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';

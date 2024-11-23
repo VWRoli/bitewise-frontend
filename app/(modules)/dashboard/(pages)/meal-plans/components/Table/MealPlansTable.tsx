@@ -6,11 +6,11 @@ import { fetchMeals } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import { fetchMe } from '@/app/(modules)/dashboard/(pages)/user/actions';
 import { PAGE_SIZE } from '@/app/(modules)/dashboard/constants';
 import { IPageProps } from '@/app/(modules)/dashboard/interfaces';
-import EmptyTable from '@/app/common/components/EmptyTable';
-import CustomError from '@/app/common/components/Error';
-import { Pagination } from '@/app/common/components/Pagination';
-import TableFrame from '@/app/common/components/Table/TableFrame';
-import { IError } from '@/app/common/interfaces/error.interface';
+import EmptyTable from '@/app/components/EmptyTable';
+import CustomError from '@/app/components/Error';
+import { Pagination } from '@/app/components/Pagination';
+import TableFrame from '@/app/components/Table/TableFrame';
+import { IError } from '@/utils/interfaces/error.interface';
 import { TableBody } from '@mui/material';
 import React from 'react';
 

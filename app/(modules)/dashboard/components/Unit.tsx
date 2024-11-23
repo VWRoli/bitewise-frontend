@@ -1,5 +1,5 @@
 import { EUnit } from '@/app/(modules)/dashboard/(pages)/ingredients/enums';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib';
 import React from 'react';
 
 interface IProps {

@@ -3,8 +3,8 @@
 import { IApiResponse } from '@/app/(modules)/dashboard/interfaces';
 import { getErrorMessage } from '@/app/(modules)/dashboard/utils/api.client.helper';
 import { API_URL } from '@/utils/config';
-import { buildQueryParams } from '@/app/common/helpers';
-import { IQueryParams } from '@/app/common/interfaces';
+import { buildQueryParams } from '@/utils/helpers';
+import { IQueryParams } from '@/utils/interfaces';
 import { cookies } from 'next/headers';
 
 const cookieStore = cookies();

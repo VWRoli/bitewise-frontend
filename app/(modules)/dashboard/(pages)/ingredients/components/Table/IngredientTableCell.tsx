@@ -1,4 +1,4 @@
-import { cn } from '@/app/common/lib/tw-merge';
+import { cn } from '@/lib';
 import { TableCell } from '@mui/material';
 import React from 'react';
 

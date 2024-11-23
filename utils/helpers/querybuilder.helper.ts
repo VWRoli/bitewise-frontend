@@ -1,4 +1,4 @@
-import { IQueryParams } from '@/app/common/interfaces';
+import { IQueryParams } from '@/utils/interfaces';
 
 export const buildQueryParams = (params: IQueryParams) => {
   if (!params) return '';

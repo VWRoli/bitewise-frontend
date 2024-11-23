@@ -25,8 +25,8 @@ import {
   updateIngredient,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
-import { createOrUpdateToasts } from '@/app/common/helpers';
-import { EActionType } from '@/app/common/enums';
+import { createOrUpdateToasts } from '@/utils/helpers';
+import { EActionType } from '@/utils/enums';
 
 interface IProps {
   ingredientEditValues?: IIngredient | null;

@@ -2,7 +2,7 @@ import { ISignIn, ISignUp } from '@/app/(modules)/(auth)/interfaces';
 import { API_URL } from '@/utils/config';
 import { IUser } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
 import axios from 'axios';
-import { toaster } from '@/app/common/components/CustomToast';
+import { toaster } from '@/app/components/CustomToast';
 
 export const login = async (userData: ISignIn): Promise<IUser> => {
   try {

@@ -5,7 +5,7 @@ import {
   IIngredient,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import { apiRequest } from '@/app/(modules)/dashboard/utils';
-import { IQueryParams } from '@/app/common/interfaces';
+import { IQueryParams } from '@/utils/interfaces';
 import { revalidatePath } from 'next/cache';
 
 export async function fetchIngredients(params: IQueryParams) {

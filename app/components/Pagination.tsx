@@ -1,5 +1,5 @@
-import { getPagesToShow } from '@/app/common/helpers';
-import { cn } from '@/app/common/lib/tw-merge';
+import { getPagesToShow } from '@/utils/helpers';
+import { cn } from '@/lib';
 import { Button, ButtonGroup } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';

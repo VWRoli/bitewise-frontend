@@ -2,7 +2,7 @@ import { BODY_FAT_CATEGORIES } from '@/app/(modules)/dashboard/(pages)/calculato
 import { EGender } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
 import { calculateBMI } from '@/app/(modules)/dashboard/(pages)/calculators/helpers';
 import { IBodyFatValues } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
-import { toaster } from '@/app/common/components/CustomToast';
+import { toaster } from '@/app/components/CustomToast';
 
 export function calculateBodyFatPercentage(values: IBodyFatValues): number {
   const { gender, height, neck, waist, hip } = values;

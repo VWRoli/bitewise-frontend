@@ -1,4 +1,4 @@
-import { ITableHeadData } from '@/app/common/interfaces';
+import { ITableHeadData } from '@/utils/interfaces';
 
 export const INGREDIENT_TABLE_HEAD_DATA: ITableHeadData[] = [
   { id: 'name', label: 'Name', align: 'left' },

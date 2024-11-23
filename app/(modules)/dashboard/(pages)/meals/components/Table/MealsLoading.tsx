@@ -1,7 +1,7 @@
 import React from 'react';
 import { Skeleton, TableBody, TableCell, TableRow } from '@mui/material';
 import MealsLoadingCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealsLoadingCell';
-import TableFrame from '@/app/common/components/Table/TableFrame';
+import TableFrame from '@/app/components/Table/TableFrame';
 import MealTableHead from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableHead';
 import { PAGE_SIZE } from '@/app/(modules)/dashboard/constants';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Skeleton, TableBody, TableCell, TableRow } from '@mui/material';
 import IngredientsLoadingCell from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientsLoadingCell';
 import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
-import TableFrame from '@/app/common/components/Table/TableFrame';
+import TableFrame from '@/app/components/Table/TableFrame';
 import { INGREDTENTS_PAGE_SIZE } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
 
 const IngredientsLoading = () => {

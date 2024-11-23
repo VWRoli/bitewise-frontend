@@ -8,7 +8,7 @@ import {
   EGender,
 } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
 import { ICalorieValues } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
-import { makeStringReadable } from '@/app/common/helpers';
+import { makeStringReadable } from '@/utils/helpers';
 import {
   Button,
   FormControl,

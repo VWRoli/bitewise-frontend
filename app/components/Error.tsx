@@ -1,4 +1,4 @@
-import { IError } from '@/app/common/interfaces/error.interface';
+import { IError } from '@/utils/interfaces/error.interface';
 import { Typography } from '@mui/material';
 import React from 'react';
 
