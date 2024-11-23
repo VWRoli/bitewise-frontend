@@ -1,5 +1,5 @@
 import { cn } from '@/lib';
-import { TableCell } from '@mui/material';
+import { TableCell } from '@/components/ui/table';
 import React from 'react';
 
 interface IProps {
@@ -10,7 +10,6 @@ interface IProps {
 const IngredientTableCell = ({ className, rowValue, rowName }: IProps) => {
   return (
     <TableCell
-      size="small"
       className={cn(
         'lg:table-cell block text-dark px-4 lg:text-right py-2',
         className,

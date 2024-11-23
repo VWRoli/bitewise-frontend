@@ -1,12 +1,10 @@
-import { Skeleton, TableCell } from '@mui/material';
-import React from 'react';
+import { TableCell } from '@/components/ui/table';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const IngredientsLoadingCell = () => {
   return (
     <TableCell className="lg:table-cell block text-dark lg:py-4 py-2 px-4 lg:text-right">
-      <div className="flex lg:justify-end">
-        <Skeleton variant="text" width="60%" />
-      </div>
+      <Skeleton className="w-[60%] h-6" />
     </TableCell>
   );
 };

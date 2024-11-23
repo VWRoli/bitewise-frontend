@@ -3,7 +3,6 @@ import AddMealPlanDialog from '@/app/(modules)/dashboard/(pages)/meal-plans/comp
 import MealPlanTableHead from '@/app/(modules)/dashboard/(pages)/meal-plans/components/Table/MealPlanTableHead';
 import MealPlanTableRow from '@/app/(modules)/dashboard/(pages)/meal-plans/components/Table/MealPlanTableRow';
 import { fetchMeals } from '@/app/(modules)/dashboard/(pages)/meals/actions';
-import { fetchMe } from '@/app/(modules)/dashboard/(pages)/user/actions';
 import { PAGE_SIZE } from '@/app/(modules)/dashboard/constants';
 import { IPageProps } from '@/app/(modules)/dashboard/interfaces';
 import EmptyTable from '@/app/components/EmptyTable';
@@ -11,8 +10,7 @@ import CustomError from '@/app/components/Error';
 import { Pagination } from '@/app/components/Pagination';
 import TableFrame from '@/app/components/Table/TableFrame';
 import { IError } from '@/utils/interfaces/error.interface';
-import { TableBody } from '@mui/material';
-import React from 'react';
+import { TableBody } from '@/components/ui/table';
 
 const MealPlansTable = async (props: IPageProps) => {
   const pageNumber = Number(props?.searchParams?.page || 1);

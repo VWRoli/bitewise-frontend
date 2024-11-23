@@ -1,6 +1,5 @@
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import { TableCell, TableRow } from '@mui/material';
-import React from 'react';
+import { TableCell, TableRow } from '@/components/ui/table';
 import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
 import MealPlanTableCell from '@/app/(modules)/dashboard/(pages)/meal-plans/components/Table/MealPlanTableCell';
 import MealPlanActions from '@/app/(modules)/dashboard/(pages)/meal-plans/components/MealPlanAction';
@@ -42,7 +41,7 @@ const MealPlanTableRow = ({ row }: IProps) => {
       <MealPlanTableCell meals={meals} column="dietaryFiber" unit="g" />
 
       <TableCell className="lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2 lg:text-right">
-        <MealPlanActions mealPlan={row} />
+        <MealPlanActions mealPlan={row} allMeals={[]} /> //TODO:
       </TableCell>
     </TableRow>
   );

@@ -1,23 +1,18 @@
 import { MEAL_TABLE_HEAD_DATA } from '@/app/(modules)/dashboard/(pages)/meals/constants';
-import { TableCell, TableHead as MuiTableHead, TableRow } from '@mui/material';
+import { TableHeader, TableHead, TableRow } from '@/components/ui/table';
 import React from 'react';
 
 const MealTableHead = () => {
-  const cellClasses = 'text-custom text-xs';
   return (
-    <MuiTableHead className="uppercase hidden lg:table-header-group">
+    <TableHeader className="uppercase hidden lg:table-header-group">
       <TableRow>
         {MEAL_TABLE_HEAD_DATA.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            className={cellClasses}
-            align={headCell.align}
-          >
+          <TableHead key={headCell.id} align={headCell.align}>
             {headCell.label}
-          </TableCell>
+          </TableHead>
         ))}
       </TableRow>
-    </MuiTableHead>
+    </TableHeader>
   );
 };
 

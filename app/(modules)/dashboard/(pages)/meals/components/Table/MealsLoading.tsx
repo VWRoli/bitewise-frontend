@@ -1,5 +1,5 @@
-import React from 'react';
-import { Skeleton, TableBody, TableCell, TableRow } from '@mui/material';
+import { TableBody, TableCell, TableRow } from '@/components/ui/table';
+import { Skeleton } from '@/components/ui/skeleton';
 import MealsLoadingCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealsLoadingCell';
 import TableFrame from '@/app/components/Table/TableFrame';
 import MealTableHead from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableHead';
@@ -21,9 +21,9 @@ const MealsLoading = () => {
             className="border-b last:border-b-0 lg:table-row block lg:border-none text-left"
           >
             <TableCell className="lg:table-cell block text-dark lg:py-4 py-2 px-4 lg:text-right">
-              <Skeleton variant="text" width="80%" />
-              <Skeleton variant="text" width="80%" />
-              <Skeleton variant="text" width="80%" />
+              <Skeleton className="w-[80%] h-6" />
+              <Skeleton className="w-[80%] h-6" />
+              <Skeleton className="w-[80%] h-6" />
             </TableCell>
             <MealsLoadingCell />
             <MealsLoadingCell />
@@ -33,8 +33,8 @@ const MealsLoading = () => {
 
             <TableCell className="lg:table-cell block text-dark lg:py-4 py-2 px-4 lg:text-right">
               <div className="flex lg:justify-end">
-                <Skeleton variant="rectangular" width={40} height={24} />
-                <Skeleton variant="rectangular" width={40} height={24} />
+                <Skeleton className="w-10 h-6" />
+                <Skeleton className="w-10 h-6" />
               </div>
             </TableCell>
             <TableCell></TableCell>

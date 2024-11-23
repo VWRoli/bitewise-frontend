@@ -3,14 +3,13 @@ import AddIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/c
 import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
 import IngredientTableRow from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableRow';
 import { INGREDTENTS_PAGE_SIZE } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
-import { fetchMe } from '@/app/(modules)/dashboard/(pages)/user/actions';
 import { IPageProps } from '@/app/(modules)/dashboard/interfaces';
 import EmptyTable from '@/app/components/EmptyTable';
 import CustomError from '@/app/components/Error';
 import { Pagination } from '@/app/components/Pagination';
 import TableFrame from '@/app/components/Table/TableFrame';
 import { IError } from '@/utils/interfaces/error.interface';
-import { TableBody } from '@mui/material';
+import { TableBody } from '@/components/ui/table';
 import React from 'react';
 
 const IngredientsTable = async (props: IPageProps) => {

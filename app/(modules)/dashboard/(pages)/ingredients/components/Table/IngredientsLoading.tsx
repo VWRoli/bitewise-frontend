@@ -1,5 +1,5 @@
-import React from 'react';
-import { Skeleton, TableBody, TableCell, TableRow } from '@mui/material';
+import { TableCell, TableBody, TableRow } from '@/components/ui/table';
+import { Skeleton } from '@/components/ui/skeleton';
 import IngredientsLoadingCell from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientsLoadingCell';
 import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
 import TableFrame from '@/app/components/Table/TableFrame';
@@ -21,7 +21,7 @@ const IngredientsLoading = () => {
             className="border-b last:border-b-0 lg:table-row block lg:border-none text-left"
           >
             <TableCell className="lg:table-cell block text-dark lg:py-4 py-2 px-4 lg:text-right">
-              <Skeleton variant="text" width="80%" />
+              <Skeleton className="w-[80%] h-6" />
             </TableCell>
             <IngredientsLoadingCell />
             <IngredientsLoadingCell />
@@ -31,7 +31,7 @@ const IngredientsLoading = () => {
 
             <TableCell className="lg:table-cell block text-dark lg:py-4 py-2 px-4 lg:text-right">
               <div className="flex lg:justify-end">
-                <Skeleton variant="rectangular" width={40} height={24} />
+                <Skeleton className="w-10 h-6" />
               </div>
             </TableCell>
             <TableCell></TableCell>

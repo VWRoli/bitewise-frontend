@@ -1,5 +1,5 @@
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
-import { TableRow } from '@mui/material';
+import { TableRow } from '@/components/ui/table';
 import React from 'react';
 import Unit from '@/app/(modules)/dashboard/components/Unit';
 import IngredientActions from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientActions';

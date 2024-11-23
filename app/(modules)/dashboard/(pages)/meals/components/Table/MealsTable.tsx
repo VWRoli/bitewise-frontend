@@ -10,7 +10,7 @@ import CustomError from '@/app/components/Error';
 import { Pagination } from '@/app/components/Pagination';
 import TableFrame from '@/app/components/Table/TableFrame';
 import { IError } from '@/utils/interfaces/error.interface';
-import { TableBody } from '@mui/material';
+import { TableBody } from '@/components/ui/table';
 import React from 'react';
 
 const MealsTable = async (props: IPageProps) => {
