@@ -1,85 +1,75 @@
-import CalculatorInput from '@/app/(modules)/dashboard/(pages)/calculators/components/CalculatorInput';
-import { BMI_CALCULATOR_INPUTS } from '@/app/(modules)/dashboard/(pages)/calculators/constants';
-import { EGender } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
+'use client';
+
+import {
+  BMI_CALCULATOR_INPUTS,
+  DEFAULT_BMI_VALUES,
+} from '@/app/(modules)/dashboard/(pages)/calculators/constants';
 import { IBmiValues } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 import {
-  Button,
+  Form,
   FormControl,
-  FormControlLabel,
+  FormField,
+  FormItem,
   FormLabel,
-  Radio,
-  RadioGroup,
-} from '@mui/material';
-import React from 'react';
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import GenderField from '@/app/(modules)/dashboard/(pages)/calculators/components/GenderField';
+import CalculatorFooter from '@/app/(modules)/dashboard/(pages)/calculators/components/CalculatorFooter';
+import { bmiSchema } from '@/app/(modules)/dashboard/(pages)/calculators/validations';
 
 interface IProps {
-  handleCalculate: (e: React.FormEvent<HTMLFormElement>) => void;
-  values: IBmiValues;
-  setValues: React.Dispatch<React.SetStateAction<IBmiValues>>;
+  handleCalculate: (values: IBmiValues) => void;
 }
-const BmiForm = ({ handleCalculate, values, setValues }: IProps) => {
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues((prev) => ({
-      ...prev,
-      gender: (event.target as HTMLInputElement).value as EGender,
-    }));
-  };
+const BmiForm = ({ handleCalculate }: IProps) => {
+  const form = useForm<z.infer<typeof bmiSchema>>({
+    resolver: zodResolver(bmiSchema),
+    defaultValues: DEFAULT_BMI_VALUES,
+  });
 
-  const handleClear = () => {
-    setValues({
-      gender: EGender.MALE,
-      age: 0,
-      weight: 0,
-      height: 0,
-    });
-  };
+  function onSubmit(values: z.infer<typeof bmiSchema>) {
+    handleCalculate(values);
+  }
+
+  const handleClear = () => form.reset();
 
   return (
-    <form className="flex flex-col gap-2 px-4 pb-4" onSubmit={handleCalculate}>
-      <FormControl>
-        <FormLabel id="body-fat-calculator-gender">Gender</FormLabel>
-        <RadioGroup
-          aria-labelledby="body-fat-calculator-gender"
-          defaultValue={EGender.MALE}
-          name="radio-buttons-group"
-          row
-          onChange={handleRadioChange}
-        >
-          <FormControlLabel
-            value={EGender.FEMALE}
-            control={<Radio />}
-            label="Female"
-            checked={values.gender === EGender.FEMALE}
-          />
-          <FormControlLabel
-            value={EGender.MALE}
-            control={<Radio />}
-            label="Male"
-            checked={values.gender === EGender.MALE}
-          />
-        </RadioGroup>
-      </FormControl>
-      {BMI_CALCULATOR_INPUTS.map((input) => (
-        <CalculatorInput
-          key={input.label}
-          {...input}
-          value={values[input.label]}
-          handleChange={(e) =>
-            setValues((prev) => ({
-              ...prev,
-              [input.label]: +e.target.value,
-            }))
-          }
-        />
-      ))}
+    <Form {...form}>
+      <form
+        className="flex flex-col gap-2 px-4 pb-4"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <GenderField form={form} />
 
-      <Button variant="contained" color="primary" type="submit">
-        Calculate
-      </Button>
-      <Button variant="text" color="primary" onClick={handleClear}>
-        Clear
-      </Button>
-    </form>
+        {BMI_CALCULATOR_INPUTS.map((input) => (
+          <FormField
+            key={input.label}
+            control={form.control}
+            name={input.label as keyof IBmiValues}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel asChild>
+                  <p className="first-letter:uppercase">{input.label}</p>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    {...field}
+                    onChange={(event) => field.onChange(+event.target.value)}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ))}
+
+        <CalculatorFooter onClear={handleClear} />
+      </form>
+    </Form>
   );
 };
 

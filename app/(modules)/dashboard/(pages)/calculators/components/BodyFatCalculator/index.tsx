@@ -13,9 +13,8 @@ import {
   IBodyFatResults,
   IBodyFatValues,
 } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
-import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
-import { ListRestart } from 'lucide-react';
+import ResultsWrapper from '@/app/(modules)/dashboard/(pages)/calculators/components/ResultsWrapper';
 
 const BodyFatCalculator = () => {
   const [results, setResults] = useState<IBodyFatResults | null>(null);
@@ -51,18 +50,9 @@ const BodyFatCalculator = () => {
         <div className="h-4"></div>
         <BodyFatForm handleCalculate={handleCalculate} />
         {results && (
-          <div
-            className={`transition-all duration-500 ease-in-out ${
-              results ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
-            } overflow-hidden`}
-          >
-            <div className="bg-white rounded-xl absolute bottom-0 left-0 h-[97%] w-full z-10 flex flex-col justify-center items-center gap-8">
-              <BodyFatResults results={results} />
-              <Button variant="outline" onClick={reset}>
-                <ListRestart /> Calculate again
-              </Button>
-            </div>
-          </div>
+          <ResultsWrapper reset={reset} transition={!!results}>
+            <BodyFatResults results={results} />
+          </ResultsWrapper>
         )}
       </div>
     </div>

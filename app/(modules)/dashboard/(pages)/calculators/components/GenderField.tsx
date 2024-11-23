@@ -8,29 +8,17 @@ import {
 } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import React from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import { FieldValues, UseFormReturn, Path } from 'react-hook-form';
 
-interface IProps {
-  form: UseFormReturn<
-    {
-      gender: EGender;
-      age: number;
-      weight: number;
-      height: number;
-      neck: number;
-      waist: number;
-      hip: number;
-    },
-    any,
-    undefined
-  >;
+interface IProps<T extends FieldValues> {
+  form: UseFormReturn<T>;
 }
 
-const GenderField = ({ form }: IProps) => {
+const GenderField = <T extends { gender: EGender }>({ form }: IProps<T>) => {
   return (
     <FormField
       control={form.control}
-      name="gender"
+      name={'gender' as Path<T>}
       render={({ field }) => (
         <FormItem className="space-y-3">
           <FormLabel>Gender</FormLabel>

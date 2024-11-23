@@ -21,6 +21,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { bodyFatSchema } from '@/app/(modules)/dashboard/(pages)/calculators/validations';
 import GenderField from '@/app/(modules)/dashboard/(pages)/calculators/components/GenderField';
+import CalculatorFooter from '@/app/(modules)/dashboard/(pages)/calculators/components/CalculatorFooter';
 
 interface IProps {
   handleCalculate: (values: IBodyFatValues) => void;
@@ -37,7 +38,8 @@ const BodyFatForm = ({ handleCalculate }: IProps) => {
     handleCalculate(values);
   }
 
-  const handleClear = () => {};
+  const handleClear = () => form.reset();
+
   return (
     <Form {...form}>
       <form
@@ -86,12 +88,7 @@ const BodyFatForm = ({ handleCalculate }: IProps) => {
           />
         )}
 
-        <Button variant="default" type="submit">
-          Calculate
-        </Button>
-        <Button variant="ghost" onClick={handleClear}>
-          Clear
-        </Button>
+        <CalculatorFooter onClear={handleClear} />
       </form>
     </Form>
   );
