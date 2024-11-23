@@ -1,38 +1,43 @@
-'use client';
 import StatisticsCard from '@/app/(modules)/dashboard/components/Statistics/StatisticsCard';
-import React from 'react';
-import FastfoodOutlinedIcon from '@mui/icons-material/FastfoodOutlined';
-import AvTimerOutlinedIcon from '@mui/icons-material/AvTimerOutlined';
-import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
-import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
+import {
+  ShoppingBasket,
+  NotebookPen,
+  CookingPot,
+  HandPlatter,
+} from 'lucide-react';
+import { fetchIngredients } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
+import { fetchMeals } from '@/app/(modules)/dashboard/(pages)/meals/actions';
+import { fetchMealPlans } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
 
-const Statistics = () => {
+const Statistics = async () => {
+  const [ingredientsResult, mealsResult, mealPlansResult] = await Promise.all([
+    fetchIngredients({}),
+    fetchMeals({}),
+    fetchMealPlans({}),
+  ]);
+
+  const ingredients = ingredientsResult.data;
+  const meals = mealsResult.data;
+  const mealPlans = mealPlansResult.data;
+
   return (
     <section className="flex flex-col lg:flex-row gap-8">
-      {/* <StatisticsCard
-        title="Ingredients"
-        value={ingredientsState.ingredients.length}
-        iconBgColor="bg-dark-gradient"
-        icon={<FastfoodOutlinedIcon className="text-white" />}
-      /> */}
-      {/* <StatisticsCard
-        title="Meals"
-        value={mealsState.meals.length}
-        iconBgColor="bg-primary-gradient"
-        icon={<RestaurantOutlinedIcon className="text-white" />}
-      /> */}
       <StatisticsCard
-        title="Calories Today"
-        value={100}
-        iconBgColor="bg-green-gradient"
-        icon={<AvTimerOutlinedIcon className="text-white" />}
+        title="Total Ingredients"
+        value={ingredients?.data.length || 0}
+        icon={<ShoppingBasket />}
       />
       <StatisticsCard
-        title="Spent Today"
-        value={100}
-        iconBgColor="bg-pink-gradient"
-        icon={<MonetizationOnOutlinedIcon className="text-white" />}
+        title="Total Meals"
+        value={meals?.data.length || 0}
+        icon={<HandPlatter />}
       />
+      <StatisticsCard
+        title="Total Meal Plans"
+        value={mealPlans?.data.length || 0}
+        icon={<NotebookPen />}
+      />
+      <StatisticsCard title="Total Recipes" value={100} icon={<CookingPot />} />
     </section>
   );
 };
