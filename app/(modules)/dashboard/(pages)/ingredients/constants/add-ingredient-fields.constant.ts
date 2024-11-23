@@ -1,25 +1,10 @@
 export const ADD_INGRENDIENT_FIELDS = [
-  { name: 'name', label: 'Name', type: 'text', required: true },
-  { name: 'protein', label: 'Protein', type: 'number', required: true },
-  { name: 'totalFat', label: 'Total Fat', type: 'number', required: true },
-  {
-    name: 'saturatedFat',
-    label: 'Saturated Fat',
-    type: 'number',
-    required: true,
-  },
-  {
-    name: 'totalCarbohydrates',
-    label: 'Total Carbohydrates',
-    type: 'number',
-    required: true,
-  },
-  { name: 'sugar', label: 'Sugar', type: 'number', required: true },
-  {
-    name: 'dietaryFiber',
-    label: 'Dietary Fiber',
-    type: 'number',
-    required: true,
-  },
-  { name: 'calories', label: 'Calories', type: 'number', required: true },
+  { label: 'name', type: 'text' },
+  { label: 'protein', type: 'number' },
+  { label: 'totalFat', type: 'number' },
+  { label: 'saturatedFat', type: 'number' },
+  { label: 'totalCarbohydrates', type: 'number' },
+  { label: 'sugar', type: 'number' },
+  { label: 'dietaryFiber', type: 'number' },
+  { label: 'calories', type: 'number' },
 ];

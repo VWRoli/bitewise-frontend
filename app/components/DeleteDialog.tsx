@@ -1,43 +1,41 @@
-'use client';
 import {
-  Alert,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from '@mui/material';
-import React from 'react';
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 
 interface IProps {
-  open: boolean;
-  onClose: () => void;
   onConfirm: () => void;
   title: string;
   subtitle: string;
 }
 
 const DeleteDialog = (props: IProps) => {
-  const { open, onClose, onConfirm, title, subtitle } = props;
-  const handleConfirm = () => {
-    onConfirm();
-    onClose();
-  };
+  const { onConfirm, title, subtitle } = props;
+  const handleConfirm = () => onConfirm();
+
   return (
-    <Dialog fullWidth open={open} onClose={() => onClose()}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        <Alert severity="error">{subtitle}</Alert>
-      </DialogContent>
-      <DialogActions>
-        <Button variant="outlined" onClick={() => onClose()}>
-          Cancel
-        </Button>
-        <Button variant="contained" onClick={handleConfirm}>
-          Confirm
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <AlertDialog>
+      <AlertDialogTrigger>Delete</AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{subtitle}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleConfirm}>
+            Continue
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

@@ -23,6 +23,7 @@ export async function createIngredient(ingredient: ICreateIngredient) {
     'POST',
     ingredient,
   );
+
   if (result.data) revalidatePath('/dashboard/ingredients');
   return result;
 }

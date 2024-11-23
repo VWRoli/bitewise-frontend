@@ -6,15 +6,9 @@ import React from 'react';
 
 interface IProps {
   ingredient: IIngredient;
-  onMenuClose: () => void;
 }
-const EditIngredientDialog = ({ ingredient, onMenuClose }: IProps) => {
-  return (
-    <AddIngredientDialog
-      ingredientEditValues={ingredient}
-      onMenuClose={onMenuClose}
-    />
-  );
+const EditIngredientDialog = ({ ingredient }: IProps) => {
+  return <AddIngredientDialog ingredientEditValues={ingredient} />;
 };
 
 export default EditIngredientDialog;

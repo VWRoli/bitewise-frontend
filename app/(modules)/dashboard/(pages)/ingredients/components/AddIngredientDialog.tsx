@@ -2,24 +2,17 @@
 
 import React, { useState } from 'react';
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  MenuItem,
-} from '@mui/material';
-import {
   ICreateIngredient,
   IIngredient,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import { EUnit } from '@/app/(modules)/dashboard/(pages)/ingredients/enums';
-import CustomTextField from '@/app/(modules)/dashboard/components/CustomTextField';
 import {
   ADD_INGRENDIENT_FIELDS,
   DEFAULT_INGREDIENT_VALUES,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
-import { useForm, FormProvider } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   createIngredient,
   updateIngredient,
@@ -27,40 +20,63 @@ import {
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import { createOrUpdateToasts } from '@/utils/helpers';
 import { EActionType } from '@/utils/enums';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { ingredientSchema } from '@/app/(modules)/dashboard/(pages)/ingredients/validations';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface IProps {
   ingredientEditValues?: IIngredient | null;
-  onMenuClose?: () => void;
 }
 
-const AddIngredientDialog: React.FC<IProps> = (props) => {
-  const { ingredientEditValues, onMenuClose } = props;
-
-  const { user } = useUserContext();
-
+const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const methods = useForm<ICreateIngredient>({
+  const form = useForm<z.infer<typeof ingredientSchema>>({
+    resolver: zodResolver(ingredientSchema),
     defaultValues: ingredientEditValues
       ? ingredientEditValues
       : DEFAULT_INGREDIENT_VALUES,
-    mode: 'onBlur',
   });
 
-  const { handleSubmit, watch, reset } = methods;
+  const { user } = useUserContext();
 
-  const ingredient = watch();
-
-  const onSubmit = async (data: ICreateIngredient) => {
+  async function onSubmit(values: z.infer<typeof ingredientSchema>) {
     let result;
 
     if (ingredientEditValues) {
-      result = await updateIngredient(data, ingredientEditValues.id);
+      result = await updateIngredient(
+        values as ICreateIngredient,
+        ingredientEditValues.id,
+      );
     } else {
       result = await createIngredient({
-        ...data,
+        ...values,
+        price: 0, //TODO: implement later on
         userId: user?.id,
-      });
+      } as ICreateIngredient);
     }
 
     createOrUpdateToasts(
@@ -68,83 +84,108 @@ const AddIngredientDialog: React.FC<IProps> = (props) => {
       result,
     );
 
-    reset();
-    handleClose();
-  };
-  const handleClose = () => {
-    onMenuClose && onMenuClose();
-    setIsOpen(false);
-  };
-
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
+    if (!result.error) {
+      form.reset();
+      setIsOpen(false);
+    }
+  }
 
   return (
-    <>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       {ingredientEditValues ? (
-        <MenuItem onClick={handleOpen}>Edit</MenuItem>
+        <DialogTrigger onClick={() => setIsOpen(true)}>Edit</DialogTrigger>
       ) : (
-        <div className="text-white">
-          <Button variant="outlined" color="inherit" onClick={handleOpen}>
+        <DialogTrigger asChild>
+          <Button variant="outline" onClick={() => setIsOpen(true)}>
             Add
           </Button>
-        </div>
+        </DialogTrigger>
       )}
+      <DialogContent>
+        <Form {...form}>
+          <form
+            className="flex flex-col gap-2 px-4 pb-4"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <DialogHeader>
+              <DialogTitle>
+                {ingredientEditValues ? 'Edit' : 'Add'} Ingredient
+              </DialogTitle>
+            </DialogHeader>
+            {ADD_INGRENDIENT_FIELDS.map((input) => (
+              <FormField
+                key={input.label}
+                control={form.control}
+                name={input.label as keyof z.infer<typeof ingredientSchema>}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel asChild>
+                      <p className="first-letter:uppercase">{input.label}</p>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type={input.type}
+                        {...field}
+                        onChange={(event) =>
+                          field.onChange(
+                            input.type === 'number'
+                              ? +event.target.value
+                              : event.target.value,
+                          )
+                        }
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ))}
+            <FormField
+              control={form.control}
+              name="unit"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Unit</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={String(field.value)}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select unit" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Object.values(EUnit).map((unit) => (
+                        <SelectItem key={unit} value={unit}>
+                          {unit}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Close
+                </Button>
+              </DialogClose>
 
-      <Dialog open={isOpen} onClose={handleClose}>
-        <DialogTitle>
-          {ingredientEditValues ? 'Edit' : 'Add'} Ingredient
-        </DialogTitle>
-        <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <DialogContent>
-              {ADD_INGRENDIENT_FIELDS.map((field) => (
-                <CustomTextField
-                  key={field.name}
-                  name={field.name}
-                  label={field.label}
-                  type={field.type}
-                  rules={{
-                    required: field.required
-                      ? `${field.label} is required`
-                      : false,
-                    min:
-                      field.type === 'number'
-                        ? {
-                            value: 0,
-                            message: `${field.label} must be greater than 0`,
-                          }
-                        : undefined,
-                  }}
-                />
-              ))}
-              <CustomTextField
-                name="unit"
-                label="Unit"
-                value={ingredient.unit}
-                rules={{ required: 'Unit is required' }}
-                select
-              >
-                {Object.values(EUnit).map((unit) => (
-                  <MenuItem key={unit} value={unit}>
-                    {unit}
-                  </MenuItem>
-                ))}
-              </CustomTextField>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button type="submit" variant="contained" color="primary">
+              <Button type="submit" variant="default">
                 {ingredientEditValues ? 'Edit' : 'Add'}
               </Button>
-            </DialogActions>
+            </DialogFooter>
           </form>
-        </FormProvider>
-      </Dialog>
-    </>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

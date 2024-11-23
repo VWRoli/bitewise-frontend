@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   ICalorieResults,
   ICalorieValues,
@@ -18,10 +18,6 @@ const CalorieCalculator = () => {
 
     setResults({ ...result });
   };
-
-  useEffect(() => {
-    console.log(results);
-  }, [results]);
 
   const reset = () => setResults(null);
 

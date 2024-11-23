@@ -84,7 +84,7 @@ const CalorieForm = ({ handleCalculate }: IProps) => {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select activity level" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>

@@ -9,7 +9,7 @@ export interface ICreateIngredient {
   sugar: number;
   dietaryFiber: number;
   calories: number;
-  price: number;
+  //price: number;
   unit: EUnit;
   userId: number;
 }

@@ -47,10 +47,9 @@ const IngredientTableRow = async ({ row }: IProps) => {
           </div>
         }
       />
-
       <IngredientTableCell
         rowName="Actions"
-        className="text-right"
+        className="text-right flex justify-end"
         rowValue={<IngredientActions ingredient={row} />}
       />
     </TableRow>
