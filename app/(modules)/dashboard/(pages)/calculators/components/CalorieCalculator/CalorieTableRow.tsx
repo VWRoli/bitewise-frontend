@@ -1,5 +1,4 @@
-import { TableCell, TableRow } from '@mui/material';
-import React from 'react';
+import { TableCell, TableRow } from '@/components/ui/table';
 
 interface IProps {
   label: string;

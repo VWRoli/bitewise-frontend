@@ -34,8 +34,6 @@ const BmiForm = ({ handleCalculate }: IProps) => {
     handleCalculate(values);
   }
 
-  const handleClear = () => form.reset();
-
   return (
     <Form {...form}>
       <form
@@ -67,7 +65,7 @@ const BmiForm = ({ handleCalculate }: IProps) => {
           />
         ))}
 
-        <CalculatorFooter onClear={handleClear} />
+        <CalculatorFooter onClear={() => form.reset()} />
       </form>
     </Form>
   );

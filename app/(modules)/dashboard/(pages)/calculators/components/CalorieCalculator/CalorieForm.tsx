@@ -1,7 +1,10 @@
-import CalculatorInput from '@/app/(modules)/dashboard/(pages)/calculators/components/CalculatorInput';
+'use client';
+
+import CalculatorFooter from '@/app/(modules)/dashboard/(pages)/calculators/components/CalculatorFooter';
+import GenderField from '@/app/(modules)/dashboard/(pages)/calculators/components/GenderField';
 import {
-  BMI_CALCULATOR_INPUTS,
   CALORIE_CALCULATOR_INPUTS,
+  DEFAULT_CALORIE_VALUES,
 } from '@/app/(modules)/dashboard/(pages)/calculators/constants';
 import {
   EActivityLevel,
@@ -9,108 +12,97 @@ import {
 } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
 import { ICalorieValues } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 import { makeStringReadable } from '@/utils/helpers';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  Button,
+  Form,
   FormControl,
-  FormControlLabel,
+  FormField,
+  FormItem,
   FormLabel,
-  MenuItem,
-  Radio,
-  RadioGroup,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { calorieSchema } from '@/app/(modules)/dashboard/(pages)/calculators/validations';
+import {
   Select,
-  SelectChangeEvent,
-} from '@mui/material';
-import React from 'react';
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface IProps {
-  handleCalculate: (e: React.FormEvent<HTMLFormElement>) => void;
-  values: ICalorieValues;
-  setValues: React.Dispatch<React.SetStateAction<ICalorieValues>>;
+  handleCalculate: (values: ICalorieValues) => void;
 }
-const CalorieForm = ({ handleCalculate, values, setValues }: IProps) => {
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues((prev) => ({
-      ...prev,
-      gender: (event.target as HTMLInputElement).value as EGender,
-    }));
-  };
+const CalorieForm = ({ handleCalculate }: IProps) => {
+  const form = useForm<z.infer<typeof calorieSchema>>({
+    resolver: zodResolver(calorieSchema),
+    defaultValues: DEFAULT_CALORIE_VALUES,
+  });
 
-  const handleClear = () => {
-    setValues({
-      gender: EGender.MALE,
-      age: 0,
-      weight: 0,
-      height: 0,
-      activityLevel: EActivityLevel.SEDENTARY,
-    });
-  };
-
-  const handleActivityChange = (event: SelectChangeEvent<EActivityLevel>) => {
-    setValues((prev) => ({
-      ...prev,
-      activityLevel: event.target.value as EActivityLevel,
-    }));
-  };
+  function onSubmit(values: z.infer<typeof calorieSchema>) {
+    handleCalculate(values);
+  }
 
   return (
-    <form className="flex flex-col gap-2 px-4 pb-4" onSubmit={handleCalculate}>
-      <FormControl>
-        <FormLabel id="body-fat-calculator-gender">Gender</FormLabel>
-        <RadioGroup
-          aria-labelledby="body-fat-calculator-gender"
-          defaultValue={EGender.MALE}
-          name="radio-buttons-group"
-          row
-          onChange={handleRadioChange}
-        >
-          <FormControlLabel
-            value={EGender.FEMALE}
-            control={<Radio />}
-            label="Female"
-            checked={values.gender === EGender.FEMALE}
-          />
-          <FormControlLabel
-            value={EGender.MALE}
-            control={<Radio />}
-            label="Male"
-            checked={values.gender === EGender.MALE}
-          />
-        </RadioGroup>
-      </FormControl>
-      {CALORIE_CALCULATOR_INPUTS.map((input) => (
-        <CalculatorInput
-          key={input.label}
-          {...input}
-          value={values[input.label]}
-          handleChange={(e) =>
-            setValues((prev) => ({
-              ...prev,
-              [input.label]: +e.target.value,
-            }))
-          }
-        />
-      ))}
-      <Select
-        labelId="activity-label"
-        id="activity"
-        value={values.activityLevel}
-        label="Activity"
-        onChange={handleActivityChange}
+    <Form {...form}>
+      <form
+        className="flex flex-col gap-2 px-4 pb-4"
+        onSubmit={form.handleSubmit(onSubmit)}
       >
-        {Object.values(EActivityLevel).map((level) => (
-          <MenuItem key={level} value={level}>
-            {makeStringReadable(level)}
-          </MenuItem>
+        <GenderField form={form} />
+        {CALORIE_CALCULATOR_INPUTS.map((input) => (
+          <FormField
+            key={input.label}
+            control={form.control}
+            name={input.label as keyof ICalorieValues}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel asChild>
+                  <p className="first-letter:uppercase">{input.label}</p>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    {...field}
+                    onChange={(event) => field.onChange(+event.target.value)}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         ))}
-      </Select>
+        <FormField
+          control={form.control}
+          name="activityLevel"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Activity</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a verified email to display" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {Object.values(EActivityLevel).map((level) => (
+                    <SelectItem key={level} value={level}>
+                      {makeStringReadable(level)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-      <Button variant="contained" color="primary" type="submit">
-        Calculate
-      </Button>
-      <Button variant="text" color="primary" onClick={handleClear}>
-        Clear
-      </Button>
-    </form>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <CalculatorFooter onClear={() => form.reset()} />
+      </form>
+    </Form>
   );
 };
 

@@ -15,7 +15,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -37,8 +36,6 @@ const BodyFatForm = ({ handleCalculate }: IProps) => {
   function onSubmit(values: z.infer<typeof bodyFatSchema>) {
     handleCalculate(values);
   }
-
-  const handleClear = () => form.reset();
 
   return (
     <Form {...form}>
@@ -88,7 +85,7 @@ const BodyFatForm = ({ handleCalculate }: IProps) => {
           />
         )}
 
-        <CalculatorFooter onClear={handleClear} />
+        <CalculatorFooter onClear={() => form.reset()} />
       </form>
     </Form>
   );

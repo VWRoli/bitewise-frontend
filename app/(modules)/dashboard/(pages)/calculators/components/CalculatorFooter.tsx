@@ -9,8 +9,8 @@ const CalculatorFooter = ({ onClear }: IProps) => {
       <Button variant="default" type="submit">
         Calculate
       </Button>
-      <Button variant="ghost" onClick={onClear}>
-        Clear
+      <Button type="button" variant="ghost" onClick={onClear}>
+        Reset
       </Button>
     </>
   );

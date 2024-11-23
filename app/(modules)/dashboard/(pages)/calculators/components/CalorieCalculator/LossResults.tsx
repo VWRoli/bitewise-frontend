@@ -1,7 +1,6 @@
 import { ICalorieResultsProps } from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/CalorieResults';
 import CalorieTableRow from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/CalorieTableRow';
-import { Table, TableBody } from '@mui/material';
-import React from 'react';
+import { Table, TableBody } from '@/components/ui/table';
 
 const LossResults = (props: ICalorieResultsProps) => {
   const { mildWeightLoss, weightLoss, extremeWeightLoss, maintainWeight } =
