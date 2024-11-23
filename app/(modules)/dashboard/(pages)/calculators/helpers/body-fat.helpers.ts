@@ -73,6 +73,7 @@ export function categorizeBodyFat(
   bodyFatPercentage: number,
 ): string {
   const categories = BODY_FAT_CATEGORIES[gender];
+
   if (!categories) {
     toaster.error({
       text: `Invalid gender. Choose 'FEMALE' or 'MALE'.`,

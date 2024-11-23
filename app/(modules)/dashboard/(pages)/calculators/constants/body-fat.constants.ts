@@ -36,17 +36,17 @@ export const DEFAULT_BODY_FAT_VALUES: IBodyFatValues = {
 
 export const BODY_FAT_CATEGORIES = {
   [EGender.FEMALE]: [
-    { category: 'Essential Fat', min: 10, max: 13 },
-    { category: 'Athletes', min: 14, max: 20 },
-    { category: 'Fitness', min: 21, max: 24 },
-    { category: 'Average', min: 25, max: 31 },
-    { category: 'Obese', min: 32, max: Infinity },
+    { category: 'Essential Fat', min: 10, max: 13.5 },
+    { category: 'Athletes', min: 13.6, max: 20.5 },
+    { category: 'Fitness', min: 20.6, max: 24.5 },
+    { category: 'Average', min: 24.6, max: 31.5 },
+    { category: 'Obese', min: 31.6, max: Infinity },
   ],
   [EGender.MALE]: [
-    { category: 'Essential Fat', min: 2, max: 5 },
-    { category: 'Athletes', min: 6, max: 13 },
-    { category: 'Fitness', min: 14, max: 17 },
-    { category: 'Average', min: 18, max: 24 },
-    { category: 'Obese', min: 25, max: Infinity },
+    { category: 'Essential Fat', min: 2, max: 5.5 },
+    { category: 'Athletes', min: 5.6, max: 13.5 },
+    { category: 'Fitness', min: 13.6, max: 17.5 },
+    { category: 'Average', min: 17.6, max: 24.5 },
+    { category: 'Obese', min: 24.6, max: Infinity },
   ],
 };

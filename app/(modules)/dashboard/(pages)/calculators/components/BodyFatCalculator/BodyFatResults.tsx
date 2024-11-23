@@ -1,12 +1,13 @@
 import { IBodyFatResults } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
-import React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableHeader,
+} from '@/components/ui/table';
+import { Card } from '@/components/ui/card';
 import BodyFatTooltipTable from '@/app/(modules)/dashboard/(pages)/calculators/components/BodyFatCalculator/BodyFatTooltipTable';
 
 interface IProps {
@@ -22,14 +23,14 @@ const BodyFatResults = (props: IProps) => {
   } = props.results || {};
 
   return (
-    <TableContainer component={Paper} className="max-w-[90%] mx-auto">
+    <Card className="max-w-[90%] mx-auto rounded-none">
       <Table>
-        <TableHead className="bg-dark text-light font-bold">
+        <TableHeader className="bg-dark text-light font-bold">
           <TableRow>
-            <TableCell className="text-light font-bold">Metric</TableCell>
-            <TableCell className="text-light font-bold">Value</TableCell>
+            <TableHead className="text-light font-bold">Metric</TableHead>
+            <TableHead className="text-light font-bold">Value</TableHead>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
           <TableRow>
             <TableCell>Body Fat Percentage</TableCell>
@@ -56,7 +57,7 @@ const BodyFatResults = (props: IProps) => {
           </TableRow>
         </TableBody>
       </Table>
-    </TableContainer>
+    </Card>
   );
 };
 
