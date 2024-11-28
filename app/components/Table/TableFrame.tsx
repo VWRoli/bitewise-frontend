@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { Table } from '@/components/ui/table';
+import { Table } from '@/app/components/ui/table';
 
 interface IProps extends PropsWithChildren {
   addModal: React.ReactNode;

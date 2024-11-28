@@ -1,5 +1,5 @@
 import { MEAL_PLAN_TABLE_HEAD_DATA } from '@/app/(modules)/dashboard/(pages)/meal-plans/constants';
-import { TableHeader, TableHead, TableRow } from '@/components/ui/table';
+import { TableHeader, TableHead, TableRow } from '@/app/components/ui/table';
 import React from 'react';
 
 const MealPlanTableHead = () => {

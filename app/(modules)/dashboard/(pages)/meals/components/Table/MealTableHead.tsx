@@ -1,5 +1,5 @@
 import { MEAL_TABLE_HEAD_DATA } from '@/app/(modules)/dashboard/(pages)/meals/constants';
-import { TableHeader, TableHead, TableRow } from '@/components/ui/table';
+import { TableHeader, TableHead, TableRow } from '@/app/components/ui/table';
 import React from 'react';
 
 const MealTableHead = () => {

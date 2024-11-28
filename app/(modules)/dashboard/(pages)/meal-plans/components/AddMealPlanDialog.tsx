@@ -14,15 +14,15 @@ import {
   ICreateMealPlan,
   IMealPlan,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import { convertToOptions, createOrUpdateToasts } from '@/utils/helpers';
-import { IOption } from '@/utils/interfaces';
+import { convertToOptions, createOrUpdateToasts } from '@/app/utils/helpers';
+import { IOption } from '@/app/utils/interfaces';
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import {
   createMealPlan,
   updateMealPlan,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
-import { EActionType } from '@/utils/enums';
+import { EActionType } from '@/app/utils/enums';
 
 interface IProps {
   allMeals: IMeal[];

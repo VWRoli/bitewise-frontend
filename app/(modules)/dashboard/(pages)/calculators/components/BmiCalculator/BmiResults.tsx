@@ -1,6 +1,6 @@
 import { IBmiResults } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 import BmiTooltipTable from '@/app/(modules)/dashboard/(pages)/calculators/components/BmiCalculator/BmiTooltipTable';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/app/components/ui/card';
 import {
   Table,
   TableBody,
@@ -8,7 +8,7 @@ import {
   TableHead,
   TableRow,
   TableHeader,
-} from '@/components/ui/table';
+} from '@/app/components/ui/table';
 
 interface IProps {
   results: IBmiResults | null;

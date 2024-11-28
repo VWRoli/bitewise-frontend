@@ -1,5 +1,5 @@
 import { INGREDIENT_TABLE_HEAD_DATA } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
-import { TableHeader, TableHead, TableRow } from '@/components/ui/table';
+import { TableHeader, TableHead, TableRow } from '@/app/components/ui/table';
 
 const IngredientTableHead = () => {
   return (

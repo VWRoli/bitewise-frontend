@@ -5,7 +5,7 @@ import {
   IMealPlan,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
 import { apiRequest } from '@/app/(modules)/dashboard/utils';
-import { IQueryParams } from '@/utils/interfaces';
+import { IQueryParams } from '@/app/utils/interfaces';
 import { revalidatePath } from 'next/cache';
 
 export async function fetchMealPlans(params: IQueryParams) {

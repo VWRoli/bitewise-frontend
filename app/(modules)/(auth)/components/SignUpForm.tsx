@@ -2,10 +2,7 @@
 
 import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
 import { ISignUp } from '@/app/(modules)/(auth)/interfaces';
-import { passwordRules } from '@/app/(modules)/(auth)/utils';
-import LoadingButton from '@mui/lab/LoadingButton';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 import {
   FormContainer,
   PasswordElement,
@@ -13,6 +10,7 @@ import {
   TextFieldElement,
 } from 'react-hook-form-mui';
 import * as api from '../api';
+import { Button } from '@/app/components/ui/button';
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -40,7 +38,7 @@ const SignUpForm = () => {
           required
           fullWidth
           name={'password'}
-          rules={passwordRules}
+          //  rules={passwordRules}
         />
         <PasswordRepeatElement
           passwordFieldName={'password'}
@@ -48,12 +46,12 @@ const SignUpForm = () => {
           fullWidth
           label={'Confirm Password'}
           required
-          rules={passwordRules}
+          // rules={passwordRules}
         />
 
-        <LoadingButton variant="contained" fullWidth type="submit">
+        <Button variant="default" className="w-full" type="submit">
           Sign Up
-        </LoadingButton>
+        </Button>
       </div>
     </FormContainer>
   );

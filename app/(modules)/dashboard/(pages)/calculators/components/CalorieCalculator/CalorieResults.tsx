@@ -4,8 +4,8 @@ import { ICalorieResults } from '@/app/(modules)/dashboard/(pages)/calculators/i
 import React, { useState } from 'react';
 import LossResults from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/LossResults';
 import GainResults from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/GainResults';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/app/components/ui/card';
+import { Button } from '@/app/components/ui/button';
 
 export interface ICalorieResultsProps {
   results: ICalorieResults | null;

@@ -1,5 +1,5 @@
-import { TableCell } from '@/components/ui/table';
-import { Skeleton } from '@/components/ui/skeleton';
+import { TableCell } from '@/app/components/ui/table';
+import { Skeleton } from '@/app/components/ui/skeleton';
 
 const IngredientsLoadingCell = () => {
   return (

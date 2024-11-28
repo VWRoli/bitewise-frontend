@@ -1,11 +1,11 @@
 'use client'; //TODO: could be server side if logout will be redone to server function
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/app/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { logout } from '@/app/(modules)/(auth)/api';
 import CustomBreadCrumbs from '@/app/(modules)/dashboard/components/CustomBreadCrumbs';
 import { Bell, CircleUserRound, LogOut } from 'lucide-react';
-import { SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarTrigger } from '@/app/components/ui/sidebar';
 
 const AppBar = () => {
   const router = useRouter();

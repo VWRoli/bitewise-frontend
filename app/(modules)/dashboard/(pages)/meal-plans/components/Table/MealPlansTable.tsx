@@ -9,8 +9,8 @@ import EmptyTable from '@/app/components/EmptyTable';
 import CustomError from '@/app/components/Error';
 import { Pagination } from '@/app/components/Pagination';
 import TableFrame from '@/app/components/Table/TableFrame';
-import { IError } from '@/utils/interfaces/error.interface';
-import { TableBody } from '@/components/ui/table';
+import { IError } from '@/app/utils/interfaces/error.interface';
+import { TableBody } from '@/app/components/ui/table';
 
 const MealPlansTable = async (props: IPageProps) => {
   const pageNumber = Number(props?.searchParams?.page || 1);

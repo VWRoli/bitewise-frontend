@@ -4,7 +4,7 @@ import {
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/helpers';
 import { calculateColumnSum } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import { TableCell } from '@/components/ui/table';
+import { TableCell } from '@/app/components/ui/table';
 import React, { useMemo } from 'react';
 
 interface IProps {

@@ -9,7 +9,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
+} from '@/app/components/ui/breadcrumb';
 import { House } from 'lucide-react';
 
 const CustomBreadCrumbs = () => {

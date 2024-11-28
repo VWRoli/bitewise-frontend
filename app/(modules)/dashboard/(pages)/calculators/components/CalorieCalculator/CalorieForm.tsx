@@ -11,7 +11,7 @@ import {
   EGender,
 } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
 import { ICalorieValues } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
-import { makeStringReadable } from '@/utils/helpers';
+import { makeStringReadable } from '@/app/utils/helpers';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,8 +22,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/app/components/ui/form';
+import { Input } from '@/app/components/ui/input';
 import { calorieSchema } from '@/app/(modules)/dashboard/(pages)/calculators/validations';
 import {
   Select,
@@ -31,7 +31,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/app/components/ui/select';
 
 interface IProps {
   handleCalculate: (values: ICalorieValues) => void;

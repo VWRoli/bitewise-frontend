@@ -1,5 +1,5 @@
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import { TableCell, TableRow } from '@/components/ui/table';
+import { TableCell, TableRow } from '@/app/components/ui/table';
 import Unit from '@/app/(modules)/dashboard/components/Unit';
 import MealActions from '@/app/(modules)/dashboard/(pages)/meals/components/MealActions';
 import MealTableCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableCell';

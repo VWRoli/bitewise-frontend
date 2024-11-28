@@ -13,8 +13,8 @@ import {
   updateMeal,
 } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
-import { createOrUpdateToasts } from '@/utils/helpers';
-import { EActionType } from '@/utils/enums';
+import { createOrUpdateToasts } from '@/app/utils/helpers';
+import { EActionType } from '@/app/utils/enums';
 import {
   Dialog,
   DialogClose,
@@ -24,8 +24,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+} from '@/app/components/ui/dialog';
+import { Button } from '@/app/components/ui/button';
 import {
   Form,
   FormControl,
@@ -33,12 +33,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/app/components/ui/form';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { mealSchema } from '@/app/(modules)/dashboard/(pages)/meals/validations';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/app/components/ui/input';
 
 interface IProps {
   ingredients: IIngredient[];

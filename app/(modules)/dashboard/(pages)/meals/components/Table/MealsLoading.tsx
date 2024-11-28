@@ -1,5 +1,5 @@
-import { TableBody, TableCell, TableRow } from '@/components/ui/table';
-import { Skeleton } from '@/components/ui/skeleton';
+import { TableBody, TableCell, TableRow } from '@/app/components/ui/table';
+import { Skeleton } from '@/app/components/ui/skeleton';
 import MealsLoadingCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealsLoadingCell';
 import TableFrame from '@/app/components/Table/TableFrame';
 import MealTableHead from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableHead';

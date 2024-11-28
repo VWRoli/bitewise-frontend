@@ -5,7 +5,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { Providers } from '@/providers';
+import { Providers } from '@/app/providers';
 
 export const metadata: Metadata = {
   title: 'BiteWise - The Meal Planner',

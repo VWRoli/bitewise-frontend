@@ -1,5 +1,5 @@
-import { TableCell, TableBody, TableRow } from '@/components/ui/table';
-import { Skeleton } from '@/components/ui/skeleton';
+import { TableCell, TableBody, TableRow } from '@/app/components/ui/table';
+import { Skeleton } from '@/app/components/ui/skeleton';
 import IngredientsLoadingCell from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientsLoadingCell';
 import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
 import TableFrame from '@/app/components/Table/TableFrame';

@@ -1,4 +1,4 @@
-import { IError } from '@/utils/interfaces/error.interface';
+import { IError } from '@/app/utils/interfaces/error.interface';
 
 interface IProps {
   result: IError;

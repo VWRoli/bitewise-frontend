@@ -7,7 +7,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/components/ui/sidebar';
+} from '@/app/components/ui/sidebar';
 import {
   MENU_ITEMS,
   SUB_MENU_ITEMS,

@@ -18,8 +18,8 @@ import {
   updateIngredient,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
-import { createOrUpdateToasts } from '@/utils/helpers';
-import { EActionType } from '@/utils/enums';
+import { createOrUpdateToasts } from '@/app/utils/helpers';
+import { EActionType } from '@/app/utils/enums';
 import {
   Dialog,
   DialogClose,
@@ -29,8 +29,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+} from '@/app/components/ui/dialog';
+import { Button } from '@/app/components/ui/button';
 import { ingredientSchema } from '@/app/(modules)/dashboard/(pages)/ingredients/validations';
 import {
   Form,
@@ -39,15 +39,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/app/components/ui/form';
+import { Input } from '@/app/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/app/components/ui/select';
 
 interface IProps {
   ingredientEditValues?: IIngredient | null;

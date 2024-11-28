@@ -1,8 +1,8 @@
 import MealIngredientCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealIngredientCell';
 import { calculateColumnSum } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
 import { IMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import { cn } from '@/lib';
-import { TableCell } from '@/components/ui/table';
+import { cn } from '@/app/lib';
+import { TableCell } from '@/app/components/ui/table';
 import React, { useMemo } from 'react';
 
 interface IProps {

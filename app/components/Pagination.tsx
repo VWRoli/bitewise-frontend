@@ -1,5 +1,5 @@
-import { getPagesToShow } from '@/utils/helpers';
-import { cn } from '@/lib';
+import { getPagesToShow } from '@/app/utils/helpers';
+import { cn } from '@/app/lib';
 import React from 'react';
 import {
   Pagination as ShadcnPagination,
@@ -8,7 +8,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
+} from '@/app/components/ui/pagination';
 
 interface IProps {
   page?: string;

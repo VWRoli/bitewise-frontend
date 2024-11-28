@@ -6,8 +6,8 @@ import {
   TableHead,
   TableRow,
   TableHeader,
-} from '@/components/ui/table';
-import { Card } from '@/components/ui/card';
+} from '@/app/components/ui/table';
+import { Card } from '@/app/components/ui/card';
 import BodyFatTooltipTable from '@/app/(modules)/dashboard/(pages)/calculators/components/BodyFatCalculator/BodyFatTooltipTable';
 
 interface IProps {

@@ -6,13 +6,13 @@ import {
   TableHead,
   TableRow,
   TableHeader,
-} from '@/components/ui/table';
+} from '@/app/components/ui/table';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from '@/app/components/ui/tooltip';
 
 const BmiTooltipTable = () => {
   return (

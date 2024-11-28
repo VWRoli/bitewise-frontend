@@ -3,18 +3,18 @@
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { IOption } from '@/utils/interfaces';
-import { convertToOptions } from '@/utils/helpers';
+import { IOption } from '@/app/utils/interfaces';
+import { convertToOptions } from '@/app/utils/helpers';
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import { Delete } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/app/components/ui/button';
 import {
   FormControl,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/app/components/ui/form';
+import { Input } from '@/app/components/ui/input';
 import { Controller, useFormContext, UseFormSetValue } from 'react-hook-form';
 
 interface IMealIngredient {
@@ -43,7 +43,7 @@ const MealIngredient = ({
     _: React.SyntheticEvent,
     value: IOption | null,
   ) => {
-    console.log('run');
+    //TODO: fix fieldarray
     setValue(`mealIngredients[${index}].ingredientId`, value ? value.id : 0);
   };
 

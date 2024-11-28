@@ -10,7 +10,7 @@ import {
   MenubarMenu,
   MenubarSeparator,
   MenubarTrigger,
-} from '@/components/ui/menubar';
+} from '@/app/components/ui/menubar';
 import { EllipsisVertical } from 'lucide-react';
 import EditIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/EditIngredientDialog';
 

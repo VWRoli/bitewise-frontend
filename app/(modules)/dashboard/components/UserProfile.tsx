@@ -2,7 +2,11 @@
 
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import { getFirstTwoCharacters } from '@/app/(modules)/dashboard/utils';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/app/components/ui/avatar';
 import React from 'react';
 
 const UserProfile = () => {
