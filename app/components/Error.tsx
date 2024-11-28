@@ -1,15 +1,13 @@
 import { IError } from '@/utils/interfaces/error.interface';
-import { Typography } from '@mui/material';
-import React from 'react';
 
 interface IProps {
   result: IError;
 }
 const CustomError = ({ result }: IProps) => {
   return (
-    <Typography variant="h6" align="center" color="error">
+    <h6 className="text-xl font-bold text-center text-red-500">
       {(result.error as any).message}
-    </Typography>
+    </h6>
   );
 };
 

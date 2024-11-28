@@ -5,15 +5,6 @@ import {
   ICreateMeal,
   IMeal,
 } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  MenuItem,
-  TextField,
-} from '@mui/material';
 import MealIngredient from '@/app/(modules)/dashboard/(pages)/meals/components/MealIngredient';
 import { DEFAULT_MEAL } from '@/app/(modules)/dashboard/(pages)/meals/constants';
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
@@ -24,63 +15,70 @@ import {
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import { createOrUpdateToasts } from '@/utils/helpers';
 import { EActionType } from '@/utils/enums';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { useFieldArray, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { mealSchema } from '@/app/(modules)/dashboard/(pages)/meals/validations';
+import { Input } from '@/components/ui/input';
 
 interface IProps {
   ingredients: IIngredient[];
   mealEditValues?: IMeal | null;
-  onMenuClose?: () => void;
 }
 
 const AddMealDialog = (props: IProps) => {
-  const { mealEditValues, ingredients, onMenuClose } = props;
+  const { mealEditValues, ingredients } = props;
   const [isOpen, setIsOpen] = useState(false);
 
   const initialFormData = mealEditValues || DEFAULT_MEAL;
-  const [formData, setFormData] = useState<ICreateMeal>(initialFormData);
-  const [nameRequiredError, setNameRequiredError] = useState(false);
+
+  const form = useForm<z.infer<typeof mealSchema>>({
+    resolver: zodResolver(mealSchema),
+    defaultValues: initialFormData,
+  });
 
   const { user } = useUserContext();
 
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: 'mealIngredients',
+  });
+
   const addIngredient = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      mealIngredients: [
-        ...prevData.mealIngredients,
-        { ingredientId: 0, quantity: 0 },
-      ],
-    }));
-  };
-
-  const removeIngredient = (index: number) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      mealIngredients: prevData.mealIngredients.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleIngredientChange = (index: number, key: string, value: any) => {
-    const updatedIngredients = formData.mealIngredients.map((ingredient, i) =>
-      i === index ? { ...ingredient, [key]: value } : ingredient,
-    );
-    setFormData((prevData) => ({
-      ...prevData,
-      mealIngredients: updatedIngredients,
-    }));
+    append({ ingredientId: 0, quantity: 0 });
   };
 
   useEffect(() => {
-    setFormData(mealEditValues || DEFAULT_MEAL);
-  }, [mealEditValues]);
+    console.log(fields);
+  }, [fields]);
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (values: z.infer<typeof mealSchema>) => {
     let result;
 
     if (mealEditValues) {
-      result = await updateMeal(formData, mealEditValues.id);
+      result = await updateMeal(values as ICreateMeal, mealEditValues.id);
     } else {
       result = await createMeal({
-        ...formData,
+        ...values,
         userId: user?.id,
       });
     }
@@ -90,95 +88,80 @@ const AddMealDialog = (props: IProps) => {
       result,
     );
 
-    reset();
-  };
-
-  const handleCancel = () => {
-    reset();
-  };
-
-  const reset = () => {
-    setFormData(DEFAULT_MEAL);
-    setNameRequiredError(false);
-    handleClose();
-  };
-
-  const handleClose = () => {
-    onMenuClose && onMenuClose();
-    setIsOpen(false);
-  };
-
-  const handleOpen = () => {
-    setIsOpen(true);
+    if (!result.error) {
+      form.reset();
+      setIsOpen(false);
+    }
   };
 
   return (
     <>
-      {mealEditValues ? (
-        <MenuItem onClick={handleOpen}>Edit</MenuItem>
-      ) : (
-        <div className="text-white">
-          <Button variant="outlined" color="inherit" onClick={handleOpen}>
-            Add
-          </Button>
-        </div>
-      )}
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        {mealEditValues ? (
+          <DialogTrigger onClick={() => setIsOpen(true)}>Edit</DialogTrigger>
+        ) : (
+          <DialogTrigger asChild>
+            <Button variant="outline" onClick={() => setIsOpen(true)}>
+              Add
+            </Button>
+          </DialogTrigger>
+        )}
 
-      <Dialog open={isOpen} onClose={handleClose} fullWidth>
-        <DialogTitle>{mealEditValues ? 'Edit' : 'Add'} Meal</DialogTitle>
-
-        <form onSubmit={onSubmit}>
-          <DialogContent className="flex flex-col gap-4">
-            <TextField
-              label="Name"
-              variant="outlined"
-              fullWidth
-              value={formData.name}
-              onChange={(e) => {
-                if (e.target.value === '') {
-                  setNameRequiredError(true);
-                }
-                setFormData((prevData) => ({
-                  ...prevData,
-                  name: e.target.value,
-                }));
-                setNameRequiredError(false);
-              }}
-              error={nameRequiredError}
-              helperText={nameRequiredError && 'Name is required'}
-            />
-            <div className="flex flex-col gap-4">
-              {formData.mealIngredients.map((ingredient, index) => (
+        <DialogContent>
+          <Form {...form}>
+            <form
+              className="flex flex-col gap-2 px-4 pb-4"
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
+              <DialogHeader>
+                <DialogTitle>
+                  {mealEditValues ? 'Edit' : 'Add'} Meal
+                </DialogTitle>
+                <DialogDescription />
+              </DialogHeader>
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input type="text" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {fields.map((ingredient, index) => (
                 <MealIngredient
-                  key={index}
+                  key={ingredient.id}
                   index={index}
                   ingredient={ingredient}
-                  onIngredientChange={(key, value) =>
-                    handleIngredientChange(index, key, value)
-                  }
                   allIngredients={ingredients}
-                  removeIngredient={() => removeIngredient(index)}
-                  setFormData={setFormData}
+                  removeIngredient={() => remove(index)}
                 />
               ))}
-              <Button
-                onClick={addIngredient}
-                color="primary"
-                variant="outlined"
-              >
+              <Button onClick={addIngredient} variant="default">
                 Add Ingredient
               </Button>
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCancel} color="primary" variant="outlined">
-              Cancel
-            </Button>
-            <Button type="submit" variant="contained" color="primary">
-              {mealEditValues ? 'Edit' : 'Add'}
-            </Button>
-          </DialogActions>
-        </form>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Close
+                  </Button>
+                </DialogClose>
+
+                <Button type="submit" variant="default">
+                  {mealEditValues ? 'Edit' : 'Add'}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
       </Dialog>
     </>
   );

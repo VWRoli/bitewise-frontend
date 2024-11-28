@@ -24,6 +24,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -54,6 +55,7 @@ interface IProps {
 
 const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const form = useForm<z.infer<typeof ingredientSchema>>({
     resolver: zodResolver(ingredientSchema),
     defaultValues: ingredientEditValues
@@ -111,6 +113,7 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
               <DialogTitle>
                 {ingredientEditValues ? 'Edit' : 'Add'} Ingredient
               </DialogTitle>
+              <DialogDescription />
             </DialogHeader>
             {ADD_INGRENDIENT_FIELDS.map((input) => (
               <FormField
