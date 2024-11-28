@@ -67,7 +67,7 @@ const SignInForm = () => {
             )}
           />
         ) : (
-          <PasswordInput form={form} label="Password" />
+          <PasswordInput form={form} label="Password" name="password" />
         )}
 
         <Button variant="default" className="w-full" type={'submit'}>

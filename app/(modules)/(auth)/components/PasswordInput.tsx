@@ -13,14 +13,15 @@ import { useState } from 'react';
 interface IProps {
   form: any;
   label: string;
+  name: string;
 }
-const PasswordInput = ({ form, label }: IProps) => {
+const PasswordInput = ({ form, label, name }: IProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <FormField
       control={form.control}
-      name={'password'}
+      name={name}
       render={({ field }) => (
         <FormItem>
           <FormLabel asChild>
