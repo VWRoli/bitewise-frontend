@@ -31,7 +31,7 @@ import {
 } from '@/app/components/ui/dialog';
 import { Button } from '@/app/components/ui/button';
 import {
-  IngredientSchema,
+  TIngredientSchema,
   ingredientSchema,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/validations';
 import {
@@ -59,7 +59,7 @@ interface IProps {
 const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const form = useForm<IngredientSchema>({
+  const form = useForm<TIngredientSchema>({
     resolver: zodResolver(ingredientSchema),
     defaultValues: ingredientEditValues
       ? ingredientEditValues
@@ -68,7 +68,7 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
 
   const { user } = useUserContext();
 
-  async function onSubmit(values: IngredientSchema) {
+  async function onSubmit(values: TIngredientSchema) {
     let result;
 
     if (ingredientEditValues) {
@@ -122,7 +122,7 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
               <FormField
                 key={input.label}
                 control={form.control}
-                name={input.label as keyof IngredientSchema}
+                name={input.label as keyof TIngredientSchema}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel asChild>

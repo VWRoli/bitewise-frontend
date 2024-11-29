@@ -32,7 +32,7 @@ import { Form } from '@/app/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  MealPlanSchema,
+  TMealPlanSchema,
   mealPlanSchema,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/validations';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
@@ -47,7 +47,7 @@ const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
   const [meals, setMeals] = useState<number[]>(initialMeals);
 
-  const form = useForm<MealPlanSchema>({
+  const form = useForm<TMealPlanSchema>({
     resolver: zodResolver(mealPlanSchema),
     defaultValues: {},
   });

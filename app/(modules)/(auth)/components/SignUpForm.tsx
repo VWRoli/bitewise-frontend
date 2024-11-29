@@ -3,7 +3,10 @@
 import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
 import { useRouter } from 'next/navigation';
 import * as api from '../api';
-import { SignupSchema, signupSchema } from '@/app/(modules)/(auth)/validations';
+import {
+  TSignupSchema,
+  signupSchema,
+} from '@/app/(modules)/(auth)/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/app/components/ui/form';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
@@ -16,12 +19,12 @@ const SignUpForm = () => {
   const router = useRouter();
   const { toast } = useToast();
 
-  const form = useForm<SignupSchema>({
+  const form = useForm<TSignupSchema>({
     resolver: zodResolver(signupSchema),
     defaultValues: defaultSignUpValues,
   });
 
-  async function onSubmit(values: SignupSchema) {
+  async function onSubmit(values: TSignupSchema) {
     try {
       await api.register(values);
       router.push('/dashboard');

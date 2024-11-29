@@ -37,7 +37,7 @@ import {
 import { useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  MealSchema,
+  TMealSchema,
   mealSchema,
 } from '@/app/(modules)/dashboard/(pages)/meals/validations';
 import { Input } from '@/app/components/ui/input';
@@ -57,7 +57,7 @@ const AddMealDialog = (props: IProps) => {
 
   const initialFormData = mealEditValues || DEFAULT_MEAL;
 
-  const form = useForm<MealSchema>({
+  const form = useForm<TMealSchema>({
     resolver: zodResolver(mealSchema),
     defaultValues: initialFormData,
   });
@@ -78,7 +78,7 @@ const AddMealDialog = (props: IProps) => {
     console.log(form.formState.errors);
   }, [form.formState.errors]);
 
-  const onSubmit = async (values: MealSchema) => {
+  const onSubmit = async (values: TMealSchema) => {
     let result;
     console.log('am i called?');
     if (form.formState.errors) {

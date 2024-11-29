@@ -23,4 +23,4 @@ export const ingredientSchema = z.object({
   unit: z.nativeEnum(EUnit),
 });
 
-export type IngredientSchema = z.infer<typeof ingredientSchema>;
+export type TIngredientSchema = z.infer<typeof ingredientSchema>;

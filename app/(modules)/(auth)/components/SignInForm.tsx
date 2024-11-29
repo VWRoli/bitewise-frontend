@@ -7,7 +7,10 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import * as api from '../api';
 import { useForm } from 'react-hook-form';
-import { SignInSchema, signinSchema } from '@/app/(modules)/(auth)/validations';
+import {
+  TSignInSchema,
+  signinSchema,
+} from '@/app/(modules)/(auth)/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/app/components/ui/form';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
@@ -22,14 +25,14 @@ const SignInForm = () => {
 
   const schema = signinSchema(step);
 
-  const form = useForm<SignInSchema>({
+  const form = useForm<TSignInSchema>({
     resolver: zodResolver(schema),
     defaultValues: defaultSignInValues,
   });
 
   const isFirstStep = step === ESignInSteps.STEP_0;
 
-  async function onSubmit(values: SignInSchema) {
+  async function onSubmit(values: TSignInSchema) {
     if (step === ESignInSteps.STEP_0) {
       setStep(ESignInSteps.STEP_1);
     } else {
