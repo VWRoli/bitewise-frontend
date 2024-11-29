@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ICreateMealPlan,
   IMealPlan,
@@ -14,9 +14,6 @@ import {
   updateMealPlan,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
 import { EActionType } from '@/app/utils/enums';
-import { Label } from '@/app/components/ui/label';
-import { Combobox } from '@/app/components/Combobox';
-import { Input } from '@/app/components/ui/input';
 import {
   Dialog,
   DialogContent,
@@ -26,7 +23,15 @@ import {
   DialogTrigger,
 } from '@/app/components/ui/dialog';
 import { Button } from '@/app/components/ui/button';
-import { Form } from '@/app/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/app/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -34,6 +39,8 @@ import {
   mealPlanSchema,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/validations';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
+import InputField from '@/app/components/form/InputField';
+import { InputTags } from '@/app/components/form/InputTags';
 
 interface IProps {
   allMeals: IMeal[];
@@ -43,28 +50,34 @@ const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
-  const [meals, setMeals] = useState<number[]>(initialMeals);
 
   const form = useForm<TMealPlanSchema>({
     resolver: zodResolver(mealPlanSchema),
-    defaultValues: {},
+    defaultValues: {
+      name: '',
+      mealIds: initialMeals,
+    },
   });
 
   const options: IOption[] = convertToOptions(allMeals);
 
-  const mealsWithDuplicates = meals.map((mealId) =>
-    options.find((option) => option.value === mealId),
-  );
+  // const mealsWithDuplicates = meals.map((mealId) =>
+  //   options.find((option) => option.value === mealId),
+  // );
+
+  useEffect(() => {
+    console.log(form.formState.errors);
+  }, [form.formState.errors]);
+
   // const selectedMeals = mealsWithDuplicates.filter(
   //   (meal) => meal !== undefined,
   // ) as (typeof options)[0][];
 
   const { user } = useUserContext();
 
-  const onSubmit = async () => {
+  const onSubmit = async (values: TMealPlanSchema) => {
     const data: ICreateMealPlan = {
-      name: '',
-      mealIds: meals,
+      ...values,
       userId: user?.id,
     };
 
@@ -106,15 +119,27 @@ const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
               <DialogDescription />
             </DialogHeader>
 
-            <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Name" type="text" />
-            </div>
+            <InputField
+              form={form}
+              label="Meal plan name"
+              name="name"
+              type="text"
+            />
+            <FormField
+              control={form.control}
+              name="mealIds"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Add meal(s)</FormLabel>
+                  <FormControl>
+                    <InputTags {...field} />
+                  </FormControl>
+                  <FormDescription>...</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="meals">Meals</Label>
-              <Combobox options={options} placeholder="Select meals..." />
-            </div>
             <FormDialogFooter
               form={form}
               submitLabel={mealPlanEditValues ? 'Edit' : 'Add'}

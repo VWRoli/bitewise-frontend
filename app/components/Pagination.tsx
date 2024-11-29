@@ -45,7 +45,7 @@ export const Pagination = async (props: IProps) => {
               className={cn(
                 'px-4 py-2 rounded-md transition-colors',
                 page === currentPage
-                  ? 'bg-stone-500 text-white font-semibold'
+                  ? 'bg-primary text-white font-semibold'
                   : 'hover:bg-gray-100 bg-white text-black',
               )}
             >
