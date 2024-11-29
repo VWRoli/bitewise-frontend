@@ -12,9 +12,15 @@ import {
   FormMessage,
 } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
-import { Controller, useFormContext, UseFormSetValue } from 'react-hook-form';
+import {
+  Controller,
+  useFormContext,
+  UseFormReturn,
+  UseFormSetValue,
+} from 'react-hook-form';
 import { Combobox } from '@/app/components/Combobox';
 import { Label } from '@/app/components/ui/label';
+import InputField from '@/app/components/form/InputField';
 
 interface IMealIngredient {
   ingredientId: number;
@@ -23,48 +29,44 @@ interface IMealIngredient {
 
 interface IProps {
   index: number;
-  ingredient: IMealIngredient;
   allIngredients: IIngredient[];
-  removeIngredient: () => void;
+  form: UseFormReturn<any, any, undefined>;
+  onRemove: () => void;
 }
 
 const MealIngredient = ({
   index,
-  ingredient,
-  removeIngredient,
+
   allIngredients,
+  form,
+  onRemove,
 }: IProps) => {
-  const { control, setValue } = useFormContext();
-
   const options = convertToOptions(allIngredients);
-
-  const handleAutocompleteChange = (
-    _: React.SyntheticEvent,
-    value: IOption | null,
-  ) => {
-    //TODO: fix fieldarray
-    setValue(`mealIngredients[${index}].ingredientId`, value ? value.value : 0);
-  };
-
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(`mealIngredients[${index}].quantity`, Number(e.target.value));
-  };
 
   return (
     <div className="flex gap-4 items-center">
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="meal">Meal</Label>
-        <Combobox options={options} placeholder="Select meal..." />
+        <Label htmlFor={`mealIngredients.${index}.ingredientId`}>Meal</Label>
+        <Combobox
+          form={form}
+          name={`mealIngredients.${index}.ingredientId`}
+          options={options}
+          placeholder="Select meal..."
+        />
       </div>
-      <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="quantity">Quantity</Label>
-        <Input id="quantity" placeholder="Quantity" type="number" />
-      </div>
+
+      <InputField
+        id={`mealIngredients.${index}.quantity`}
+        form={form}
+        label="Quantity"
+        {...form.register(`mealIngredients.${index}.quantity`)}
+        type="number"
+      />
 
       <Button
         aria-label="remove-ingredient"
         variant="destructive"
-        onClick={removeIngredient}
+        onClick={() => onRemove()}
       >
         <Delete />
       </Button>

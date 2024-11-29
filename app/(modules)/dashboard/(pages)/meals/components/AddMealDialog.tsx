@@ -13,7 +13,7 @@ import {
   updateMeal,
 } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
-import { convertToOptions, createOrUpdateToasts } from '@/app/utils/helpers';
+import { createOrUpdateToasts } from '@/app/utils/helpers';
 import { EActionType } from '@/app/utils/enums';
 import {
   Dialog,
@@ -31,10 +31,6 @@ import {
   TMealSchema,
   mealSchema,
 } from '@/app/(modules)/dashboard/(pages)/meals/validations';
-import { Input } from '@/app/components/ui/input';
-import { Label } from '@/app/components/ui/label';
-import { Combobox } from '@/app/components/Combobox';
-import { Delete } from 'lucide-react';
 import InputField from '@/app/components/form/InputField';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 
@@ -59,9 +55,8 @@ const AddMealDialog = (props: IProps) => {
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: 'mealIngredients',
-  }); //
+  });
 
-  const options = convertToOptions(ingredients);
   const addIngredient = () => {
     append({ ingredientId: 0, quantity: 0 });
   };
@@ -72,12 +67,7 @@ const AddMealDialog = (props: IProps) => {
 
   const onSubmit = async (values: TMealSchema) => {
     let result;
-    console.log('am i called?');
-    if (form.formState.errors) {
-      console.log('Form Validation Errors:', form.formState.errors);
-    }
 
-    console.log('values', values);
     if (mealEditValues) {
       result = await updateMeal(values as ICreateMeal, mealEditValues.id);
     } else {
@@ -127,25 +117,14 @@ const AddMealDialog = (props: IProps) => {
               type="text"
             />
 
-            {fields.map((ingredient) => (
-              <div className="flex gap-4 items-center" key={ingredient.id}>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
-                  <Label htmlFor="meal">Meal</Label>
-                  <Combobox options={options} placeholder="Select meal..." />
-                </div>
-                <div className="grid w-full max-w-sm items-center gap-1.5">
-                  <Label htmlFor="quantity">Quantity</Label>
-                  <Input id="quantity" placeholder="Quantity" type="number" />
-                </div>
-
-                <Button
-                  aria-label="remove-ingredient"
-                  variant="destructive"
-                  onClick={() => remove()}
-                >
-                  <Delete />
-                </Button>
-              </div>
+            {fields.map((ingredient, index) => (
+              <MealIngredient
+                key={ingredient.id}
+                index={index}
+                form={form}
+                allIngredients={ingredients}
+                onRemove={remove}
+              />
             ))}
             <Button onClick={addIngredient} variant="default">
               Add Ingredient
