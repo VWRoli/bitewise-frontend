@@ -13,7 +13,7 @@ import {
   updateMeal,
 } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
-import { createOrUpdateToasts } from '@/app/utils/helpers';
+import { convertToOptions, createOrUpdateToasts } from '@/app/utils/helpers';
 import { EActionType } from '@/app/utils/enums';
 import {
   Dialog,
@@ -35,10 +35,16 @@ import {
   FormMessage,
 } from '@/app/components/ui/form';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { mealSchema } from '@/app/(modules)/dashboard/(pages)/meals/validations';
+import {
+  MealSchema,
+  mealSchema,
+} from '@/app/(modules)/dashboard/(pages)/meals/validations';
 import { Input } from '@/app/components/ui/input';
+import { Label } from '@/app/components/ui/label';
+import { Combobox } from '@/app/components/Combobox';
+import { Delete } from 'lucide-react';
+import LoadingButton from '@/app/components/buttons/LoadingButton';
 
 interface IProps {
   ingredients: IIngredient[];
@@ -51,7 +57,7 @@ const AddMealDialog = (props: IProps) => {
 
   const initialFormData = mealEditValues || DEFAULT_MEAL;
 
-  const form = useForm<z.infer<typeof mealSchema>>({
+  const form = useForm<MealSchema>({
     resolver: zodResolver(mealSchema),
     defaultValues: initialFormData,
   });
@@ -61,19 +67,25 @@ const AddMealDialog = (props: IProps) => {
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: 'mealIngredients',
-  });
+  }); //
 
+  const options = convertToOptions(ingredients);
   const addIngredient = () => {
     append({ ingredientId: 0, quantity: 0 });
   };
 
   useEffect(() => {
-    console.log(fields);
-  }, [fields]);
+    console.log(form.formState.errors);
+  }, [form.formState.errors]);
 
-  const onSubmit = async (values: z.infer<typeof mealSchema>) => {
+  const onSubmit = async (values: MealSchema) => {
     let result;
+    console.log('am i called?');
+    if (form.formState.errors) {
+      console.log('Form Validation Errors:', form.formState.errors);
+    }
 
+    console.log('values', values);
     if (mealEditValues) {
       result = await updateMeal(values as ICreateMeal, mealEditValues.id);
     } else {
@@ -129,14 +141,25 @@ const AddMealDialog = (props: IProps) => {
                 </FormItem>
               )}
             />
-            {fields.map((ingredient, index) => (
-              <MealIngredient
-                key={ingredient.id}
-                index={index}
-                ingredient={ingredient}
-                allIngredients={ingredients}
-                removeIngredient={() => remove(index)}
-              />
+            {fields.map((ingredient) => (
+              <div className="flex gap-4 items-center" key={ingredient.id}>
+                <div className="grid w-full max-w-sm items-center gap-1.5">
+                  <Label htmlFor="meal">Meal</Label>
+                  <Combobox options={options} placeholder="Select meal..." />
+                </div>
+                <div className="grid w-full max-w-sm items-center gap-1.5">
+                  <Label htmlFor="quantity">Quantity</Label>
+                  <Input id="quantity" placeholder="Quantity" type="number" />
+                </div>
+
+                <Button
+                  aria-label="remove-ingredient"
+                  variant="destructive"
+                  onClick={() => remove()}
+                >
+                  <Delete />
+                </Button>
+              </div>
             ))}
             <Button onClick={addIngredient} variant="default">
               Add Ingredient
@@ -152,9 +175,13 @@ const AddMealDialog = (props: IProps) => {
                 </Button>
               </DialogClose>
 
-              <Button type="submit" variant="default">
+              <LoadingButton
+                loading={form.formState.isSubmitting}
+                type="submit"
+                variant="default"
+              >
                 {mealEditValues ? 'Edit' : 'Add'}
-              </Button>
+              </LoadingButton>
             </DialogFooter>
           </form>
         </Form>

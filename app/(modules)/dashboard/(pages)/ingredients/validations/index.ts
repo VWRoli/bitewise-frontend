@@ -22,3 +22,5 @@ export const ingredientSchema = z.object({
     .min(0, { message: 'Calories must be a positive number' }),
   unit: z.nativeEnum(EUnit),
 });
+
+export type IngredientSchema = z.infer<typeof ingredientSchema>;

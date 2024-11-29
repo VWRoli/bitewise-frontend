@@ -30,9 +30,12 @@ import {
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { mealPlanSchema } from '@/app/(modules)/dashboard/(pages)/meal-plans/validations';
+import {
+  MealPlanSchema,
+  mealPlanSchema,
+} from '@/app/(modules)/dashboard/(pages)/meal-plans/validations';
+import LoadingButton from '@/app/components/buttons/LoadingButton';
 
 interface IProps {
   allMeals: IMeal[];
@@ -44,7 +47,7 @@ const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
   const [meals, setMeals] = useState<number[]>(initialMeals);
 
-  const form = useForm<z.infer<typeof mealPlanSchema>>({
+  const form = useForm<MealPlanSchema>({
     resolver: zodResolver(mealPlanSchema),
     defaultValues: {},
   });
@@ -126,9 +129,13 @@ const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
                 </Button>
               </DialogClose>
 
-              <Button type="submit" variant="default">
+              <LoadingButton
+                loading={form.formState.isSubmitting}
+                type="submit"
+                variant="default"
+              >
                 {mealPlanEditValues ? 'Edit' : 'Add'}
-              </Button>
+              </LoadingButton>
             </DialogFooter>
           </form>
         </Form>

@@ -7,8 +7,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import * as api from '../api';
 import { useForm } from 'react-hook-form';
-import { signinSchema } from '@/app/(modules)/(auth)/validations';
-import { z } from 'zod';
+import { SignInSchema, signinSchema } from '@/app/(modules)/(auth)/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/app/components/ui/form';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
@@ -20,22 +19,20 @@ const SignInForm = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [step, setStep] = useState<ESignInSteps>(ESignInSteps.STEP_0);
-  const [isLoading, setIsLoading] = useState(false);
 
   const schema = signinSchema(step);
 
-  const form = useForm<z.infer<typeof schema>>({
+  const form = useForm<SignInSchema>({
     resolver: zodResolver(schema),
     defaultValues: defaultSignInValues,
   });
 
   const isFirstStep = step === ESignInSteps.STEP_0;
 
-  async function onSubmit(values: z.infer<typeof schema>) {
+  async function onSubmit(values: SignInSchema) {
     if (step === ESignInSteps.STEP_0) {
       setStep(ESignInSteps.STEP_1);
     } else {
-      setIsLoading(true);
       try {
         await api.login(values as ISignIn);
         router.push('/dashboard');
@@ -44,7 +41,6 @@ const SignInForm = () => {
           variant: 'error',
           description: error.message,
         });
-        setIsLoading(false);
       }
     }
   }
@@ -70,7 +66,7 @@ const SignInForm = () => {
           variant="default"
           className="w-full"
           type={'submit'}
-          loading={isLoading}
+          loading={form.formState.isSubmitting}
         >
           {isFirstStep ? 'Continue' : 'Sign In'}
         </LoadingButton>

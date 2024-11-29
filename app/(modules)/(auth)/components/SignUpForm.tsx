@@ -3,31 +3,25 @@
 import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
 import { useRouter } from 'next/navigation';
 import * as api from '../api';
-import { Button } from '@/app/components/ui/button';
-import { signupSchema } from '@/app/(modules)/(auth)/validations';
-import { z } from 'zod';
+import { SignupSchema, signupSchema } from '@/app/(modules)/(auth)/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/app/components/ui/form';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
 import { useForm } from 'react-hook-form';
 import InputField from '@/app/components/form/InputField';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
-import { useState } from 'react';
 import { useToast } from '@/app/hooks/use-toast';
 
 const SignUpForm = () => {
   const router = useRouter();
   const { toast } = useToast();
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const form = useForm<z.infer<typeof signupSchema>>({
+  const form = useForm<SignupSchema>({
     resolver: zodResolver(signupSchema),
     defaultValues: defaultSignUpValues,
   });
 
-  async function onSubmit(values: z.infer<typeof signupSchema>) {
-    setIsLoading(true);
+  async function onSubmit(values: SignupSchema) {
     try {
       await api.register(values);
       router.push('/dashboard');
@@ -36,7 +30,6 @@ const SignUpForm = () => {
         variant: 'error',
         description: error.message,
       });
-      setIsLoading(false);
     }
   }
 
@@ -64,7 +57,7 @@ const SignUpForm = () => {
           variant="default"
           className="w-full"
           type="submit"
-          loading={isLoading}
+          loading={form.formState.isSubmitting}
         >
           Sign Up
         </LoadingButton>

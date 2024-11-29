@@ -11,7 +11,6 @@ import {
   DEFAULT_INGREDIENT_VALUES,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   createIngredient,
@@ -31,7 +30,10 @@ import {
   DialogTrigger,
 } from '@/app/components/ui/dialog';
 import { Button } from '@/app/components/ui/button';
-import { ingredientSchema } from '@/app/(modules)/dashboard/(pages)/ingredients/validations';
+import {
+  IngredientSchema,
+  ingredientSchema,
+} from '@/app/(modules)/dashboard/(pages)/ingredients/validations';
 import {
   Form,
   FormControl,
@@ -48,6 +50,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/components/ui/select';
+import LoadingButton from '@/app/components/buttons/LoadingButton';
 
 interface IProps {
   ingredientEditValues?: IIngredient | null;
@@ -56,7 +59,7 @@ interface IProps {
 const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const form = useForm<z.infer<typeof ingredientSchema>>({
+  const form = useForm<IngredientSchema>({
     resolver: zodResolver(ingredientSchema),
     defaultValues: ingredientEditValues
       ? ingredientEditValues
@@ -65,7 +68,7 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
 
   const { user } = useUserContext();
 
-  async function onSubmit(values: z.infer<typeof ingredientSchema>) {
+  async function onSubmit(values: IngredientSchema) {
     let result;
 
     if (ingredientEditValues) {
@@ -119,7 +122,7 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
               <FormField
                 key={input.label}
                 control={form.control}
-                name={input.label as keyof z.infer<typeof ingredientSchema>}
+                name={input.label as keyof IngredientSchema}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel asChild>
@@ -181,9 +184,13 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
                 </Button>
               </DialogClose>
 
-              <Button type="submit" variant="default">
+              <LoadingButton
+                loading={form.formState.isSubmitting}
+                type="submit"
+                variant="default"
+              >
                 {ingredientEditValues ? 'Edit' : 'Add'}
-              </Button>
+              </LoadingButton>
             </DialogFooter>
           </form>
         </Form>

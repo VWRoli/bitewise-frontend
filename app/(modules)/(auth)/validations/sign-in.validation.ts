@@ -12,3 +12,5 @@ const step2Schema = z.object({
 
 export const signinSchema = (step: ESignInSteps) =>
   step === ESignInSteps.STEP_0 ? step1Schema : step2Schema;
+
+export type SignInSchema = z.infer<typeof step1Schema | typeof step2Schema>;
