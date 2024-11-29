@@ -21,10 +21,8 @@ import { createOrUpdateToasts } from '@/app/utils/helpers';
 import { EActionType } from '@/app/utils/enums';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -34,23 +32,11 @@ import {
   TIngredientSchema,
   ingredientSchema,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/validations';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/app/components/ui/form';
-import { Input } from '@/app/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/app/components/ui/select';
-import LoadingButton from '@/app/components/buttons/LoadingButton';
+import { Form } from '@/app/components/ui/form';
+import { SelectItem } from '@/app/components/ui/select';
+import InputField from '@/app/components/form/InputField';
+import SelectField from '@/app/components/form/Select';
+import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 
 interface IProps {
   ingredientEditValues?: IIngredient | null;
@@ -119,79 +105,31 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
               <DialogDescription />
             </DialogHeader>
             {ADD_INGRENDIENT_FIELDS.map((input) => (
-              <FormField
+              <InputField
                 key={input.label}
-                control={form.control}
+                form={form}
+                label={input.label}
                 name={input.label as keyof TIngredientSchema}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel asChild>
-                      <p className="first-letter:uppercase">{input.label}</p>
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type={input.type}
-                        {...field}
-                        onChange={(event) =>
-                          field.onChange(
-                            input.type === 'number'
-                              ? +event.target.value
-                              : event.target.value,
-                          )
-                        }
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                type={input.type}
               />
             ))}
-            <FormField
-              control={form.control}
+            <SelectField
               name="unit"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Unit</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={String(field.value)}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select unit" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Object.values(EUnit).map((unit) => (
-                        <SelectItem key={unit} value={unit}>
-                          {unit}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
+              form={form}
+              label="Unit"
+              placeholder="Select unit..."
+            >
+              {Object.values(EUnit).map((unit) => (
+                <SelectItem key={unit} value={unit}>
+                  {unit}
+                </SelectItem>
+              ))}
+            </SelectField>
+            <FormDialogFooter
+              form={form}
+              submitLabel={ingredientEditValues ? 'Edit' : 'Add'}
+              onClose={() => setIsOpen(false)}
             />
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Close
-                </Button>
-              </DialogClose>
-
-              <LoadingButton
-                loading={form.formState.isSubmitting}
-                type="submit"
-                variant="default"
-              >
-                {ingredientEditValues ? 'Edit' : 'Add'}
-              </LoadingButton>
-            </DialogFooter>
           </form>
         </Form>
       </DialogContent>

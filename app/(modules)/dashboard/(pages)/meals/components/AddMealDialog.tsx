@@ -17,23 +17,14 @@ import { convertToOptions, createOrUpdateToasts } from '@/app/utils/helpers';
 import { EActionType } from '@/app/utils/enums';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/app/components/ui/dialog';
 import { Button } from '@/app/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/app/components/ui/form';
+import { Form } from '@/app/components/ui/form';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -44,7 +35,8 @@ import { Input } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';
 import { Combobox } from '@/app/components/Combobox';
 import { Delete } from 'lucide-react';
-import LoadingButton from '@/app/components/buttons/LoadingButton';
+import InputField from '@/app/components/form/InputField';
+import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 
 interface IProps {
   ingredients: IIngredient[];
@@ -128,19 +120,13 @@ const AddMealDialog = (props: IProps) => {
               <DialogTitle>{mealEditValues ? 'Edit' : 'Add'} Meal</DialogTitle>
               <DialogDescription />
             </DialogHeader>
-            <FormField
-              control={form.control}
+            <InputField
+              form={form}
+              label="Email Address"
               name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input type="text" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              type="text"
             />
+
             {fields.map((ingredient) => (
               <div className="flex gap-4 items-center" key={ingredient.id}>
                 <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -164,25 +150,11 @@ const AddMealDialog = (props: IProps) => {
             <Button onClick={addIngredient} variant="default">
               Add Ingredient
             </Button>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Close
-                </Button>
-              </DialogClose>
-
-              <LoadingButton
-                loading={form.formState.isSubmitting}
-                type="submit"
-                variant="default"
-              >
-                {mealEditValues ? 'Edit' : 'Add'}
-              </LoadingButton>
-            </DialogFooter>
+            <FormDialogFooter
+              form={form}
+              submitLabel={mealEditValues ? 'Edit' : 'Add'}
+              onClose={() => setIsOpen(false)}
+            />
           </form>
         </Form>
       </DialogContent>

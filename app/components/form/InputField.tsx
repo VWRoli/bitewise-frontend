@@ -27,7 +27,15 @@ const InputField = ({ form, label, name, type }: IProps) => {
             <p className="first-letter:uppercase">{label}</p>
           </FormLabel>
           <FormControl>
-            <Input type={type} {...field} />
+            <Input
+              type={type}
+              {...field}
+              onChange={(event) =>
+                field.onChange(
+                  type === 'number' ? +event.target.value : event.target.value,
+                )
+              }
+            />
           </FormControl>
           <FormMessage />
         </FormItem>

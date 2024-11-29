@@ -19,10 +19,8 @@ import { Combobox } from '@/app/components/Combobox';
 import { Input } from '@/app/components/ui/input';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -35,7 +33,7 @@ import {
   TMealPlanSchema,
   mealPlanSchema,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/validations';
-import LoadingButton from '@/app/components/buttons/LoadingButton';
+import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 
 interface IProps {
   allMeals: IMeal[];
@@ -117,26 +115,11 @@ const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
               <Label htmlFor="meals">Meals</Label>
               <Combobox options={options} placeholder="Select meals..." />
             </div>
-
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Close
-                </Button>
-              </DialogClose>
-
-              <LoadingButton
-                loading={form.formState.isSubmitting}
-                type="submit"
-                variant="default"
-              >
-                {mealPlanEditValues ? 'Edit' : 'Add'}
-              </LoadingButton>
-            </DialogFooter>
+            <FormDialogFooter
+              form={form}
+              submitLabel={mealPlanEditValues ? 'Edit' : 'Add'}
+              onClose={() => setIsOpen(false)}
+            />
           </form>
         </Form>
       </DialogContent>
