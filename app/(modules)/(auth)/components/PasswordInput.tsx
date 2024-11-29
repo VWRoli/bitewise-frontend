@@ -9,9 +9,10 @@ import {
 import { Input } from '@/app/components/ui/input';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useState } from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
-  form: any;
+  form: UseFormReturn<any, any, undefined>;
   label: string;
   name: string;
 }

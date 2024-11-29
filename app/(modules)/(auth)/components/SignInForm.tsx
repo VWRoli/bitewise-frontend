@@ -6,25 +6,19 @@ import { ISignIn } from '@/app/(modules)/(auth)/interfaces';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import * as api from '../api';
-import { Button } from '@/app/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { signinSchema } from '@/app/(modules)/(auth)/validations';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/app/components/ui/form';
-import { Input } from '@/app/components/ui/input';
+import { Form } from '@/app/components/ui/form';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
+import InputField from '@/app/components/form/InputField';
+import LoadingButton from '@/app/components/common/LoadingButton';
 
 const SignInForm = () => {
   const router = useRouter();
   const [step, setStep] = useState<ESignInSteps>(ESignInSteps.STEP_0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const schema = signinSchema(step);
 
@@ -39,8 +33,13 @@ const SignInForm = () => {
     if (step === ESignInSteps.STEP_0) {
       setStep(ESignInSteps.STEP_1);
     } else {
-      await api.login(values as ISignIn);
-      router.push('/dashboard');
+      setIsLoading(true);
+      try {
+        await api.login(values as ISignIn);
+        router.push('/dashboard');
+      } catch (error) {
+        setIsLoading(false);
+      }
     }
   }
 
@@ -51,28 +50,24 @@ const SignInForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         {isFirstStep ? (
-          <FormField
-            control={form.control}
-            name={'email'}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel asChild>
-                  <p className="first-letter:uppercase">Email Address</p>
-                </FormLabel>
-                <FormControl>
-                  <Input type="email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+          <InputField
+            form={form}
+            label="Email Address"
+            name="email"
+            type="email"
           />
         ) : (
           <PasswordInput form={form} label="Password" name="password" />
         )}
 
-        <Button variant="default" className="w-full" type={'submit'}>
+        <LoadingButton
+          variant="default"
+          className="w-full"
+          type={'submit'}
+          loading={isLoading}
+        >
           {isFirstStep ? 'Continue' : 'Sign In'}
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );

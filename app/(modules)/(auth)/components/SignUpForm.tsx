@@ -11,9 +11,12 @@ import { Form } from '@/app/components/ui/form';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
 import { useForm } from 'react-hook-form';
 import InputField from '@/app/components/form/InputField';
+import LoadingButton from '@/app/components/common/LoadingButton';
+import { useState } from 'react';
 
 const SignUpForm = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
@@ -21,8 +24,13 @@ const SignUpForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof signupSchema>) {
-    await api.register(values);
-    router.push('/dashboard');
+    setIsLoading(true);
+    try {
+      await api.register(values);
+      router.push('/dashboard');
+    } catch (error) {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -45,9 +53,14 @@ const SignUpForm = () => {
           name="confirmPassword"
         />
 
-        <Button variant="default" className="w-full" type="submit">
+        <LoadingButton
+          variant="default"
+          className="w-full"
+          type="submit"
+          loading={isLoading}
+        >
           Sign Up
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );
