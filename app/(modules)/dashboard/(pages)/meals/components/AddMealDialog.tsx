@@ -95,75 +95,71 @@ const AddMealDialog = (props: IProps) => {
   };
 
   return (
-    <>
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        {mealEditValues ? (
-          <DialogTrigger onClick={() => setIsOpen(true)}>Edit</DialogTrigger>
-        ) : (
-          <DialogTrigger asChild>
-            <Button variant="outline" onClick={() => setIsOpen(true)}>
-              Add
-            </Button>
-          </DialogTrigger>
-        )}
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      {mealEditValues ? (
+        <DialogTrigger onClick={() => setIsOpen(true)}>Edit</DialogTrigger>
+      ) : (
+        <DialogTrigger asChild>
+          <Button variant="outline" onClick={() => setIsOpen(true)}>
+            Add
+          </Button>
+        </DialogTrigger>
+      )}
 
-        <DialogContent>
-          <Form {...form}>
-            <form
-              className="flex flex-col gap-2 px-4 pb-4"
-              onSubmit={form.handleSubmit(onSubmit)}
-            >
-              <DialogHeader>
-                <DialogTitle>
-                  {mealEditValues ? 'Edit' : 'Add'} Meal
-                </DialogTitle>
-                <DialogDescription />
-              </DialogHeader>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input type="text" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+      <DialogContent>
+        <Form {...form}>
+          <form
+            className="flex flex-col gap-2 px-4 pb-4"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <DialogHeader>
+              <DialogTitle>{mealEditValues ? 'Edit' : 'Add'} Meal</DialogTitle>
+              <DialogDescription />
+            </DialogHeader>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input type="text" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {fields.map((ingredient, index) => (
+              <MealIngredient
+                key={ingredient.id}
+                index={index}
+                ingredient={ingredient}
+                allIngredients={ingredients}
+                removeIngredient={() => remove(index)}
               />
-              {fields.map((ingredient, index) => (
-                <MealIngredient
-                  key={ingredient.id}
-                  index={index}
-                  ingredient={ingredient}
-                  allIngredients={ingredients}
-                  removeIngredient={() => remove(index)}
-                />
-              ))}
-              <Button onClick={addIngredient} variant="default">
-                Add Ingredient
-              </Button>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Close
-                  </Button>
-                </DialogClose>
-
-                <Button type="submit" variant="default">
-                  {mealEditValues ? 'Edit' : 'Add'}
+            ))}
+            <Button onClick={addIngredient} variant="default">
+              Add Ingredient
+            </Button>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Close
                 </Button>
-              </DialogFooter>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
-    </>
+              </DialogClose>
+
+              <Button type="submit" variant="default">
+                {mealEditValues ? 'Edit' : 'Add'}
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

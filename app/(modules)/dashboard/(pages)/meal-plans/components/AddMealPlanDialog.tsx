@@ -1,15 +1,6 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import {
-  Autocomplete,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  MenuItem,
-  TextField,
-} from '@mui/material';
+
+import React, { useState } from 'react';
 import {
   ICreateMealPlan,
   IMealPlan,
@@ -23,30 +14,45 @@ import {
   updateMealPlan,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
 import { EActionType } from '@/app/utils/enums';
+import { Label } from '@/app/components/ui/label';
+import { Combobox } from '@/app/components/common/Combobox';
+import { Input } from '@/app/components/ui/input';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/app/components/ui/dialog';
+import { Button } from '@/app/components/ui/button';
+import { Form } from '@/app/components/ui/form';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { mealPlanSchema } from '@/app/(modules)/dashboard/(pages)/meal-plans/validations';
 
 interface IProps {
   allMeals: IMeal[];
   mealPlanEditValues?: IMealPlan | null;
-  onMenuClose?: () => void;
 }
-const AddMealPlanDialog = ({
-  mealPlanEditValues,
-  onMenuClose,
-  allMeals,
-}: IProps) => {
+const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
   const [meals, setMeals] = useState<number[]>(initialMeals);
 
-  const [nameRequiredError, setNameRequiredError] = useState(false);
+  const form = useForm<z.infer<typeof mealPlanSchema>>({
+    resolver: zodResolver(mealPlanSchema),
+    defaultValues: {},
+  });
 
-  const initialName = mealPlanEditValues?.name || '';
-  const [name, setName] = useState(initialName);
   const options: IOption[] = convertToOptions(allMeals);
 
   const mealsWithDuplicates = meals.map((mealId) =>
-    options.find((option) => option.id === mealId),
+    options.find((option) => option.value === mealId),
   );
   // const selectedMeals = mealsWithDuplicates.filter(
   //   (meal) => meal !== undefined,
@@ -54,16 +60,9 @@ const AddMealPlanDialog = ({
 
   const { user } = useUserContext();
 
-  const onSubmit = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-
-    if (name === '') {
-      setNameRequiredError(true);
-      return;
-    }
-
+  const onSubmit = async () => {
     const data: ICreateMealPlan = {
-      name,
+      name: '',
       mealIds: meals,
       userId: user?.id,
     };
@@ -80,95 +79,61 @@ const AddMealPlanDialog = ({
       mealPlanEditValues ? EActionType.UPDATE : EActionType.CREATE,
       result,
     );
-
-    handleClose();
-    reset();
-  };
-
-  useEffect(() => {
-    setName(initialName);
-    setMeals(initialMeals);
-    setNameRequiredError(false);
-  }, [mealPlanEditValues]);
-
-  const reset = () => {
-    setName('');
-    setMeals([]);
-  };
-
-  const handleCancel = () => {
-    handleClose();
-    reset();
-  };
-
-  const handleClose = () => setIsOpen(false);
-
-  const handleOpen = () => {
-    setIsOpen(true);
   };
 
   return (
-    <>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       {mealPlanEditValues ? (
-        <MenuItem onClick={handleOpen}>Edit</MenuItem>
+        <DialogTrigger onClick={() => setIsOpen(true)}>Edit</DialogTrigger>
       ) : (
-        <div className="text-white">
-          <Button variant="outlined" color="inherit" onClick={handleOpen}>
+        <DialogTrigger asChild>
+          <Button variant="outline" onClick={() => setIsOpen(true)}>
             Add
           </Button>
-        </div>
+        </DialogTrigger>
       )}
-      <Dialog open={isOpen} onClose={handleClose} fullWidth>
-        <DialogTitle>
-          {mealPlanEditValues ? 'Edit' : 'Add'} Meal Plan
-        </DialogTitle>
-        <form onSubmit={onSubmit}>
-          <DialogContent className="flex flex-col gap-4">
-            <TextField
-              label="Name"
-              variant="outlined"
-              placeholder="Meal plan name"
-              fullWidth
-              value={name}
-              onChange={(e) => {
-                if (e.target.value === '') {
-                  setNameRequiredError(true);
-                }
-                setName(e.target.value);
-                setNameRequiredError(false);
-              }}
-              error={nameRequiredError}
-              helperText={nameRequiredError && 'Name is required'}
-            />
+      <DialogContent>
+        <Form {...form}>
+          <form
+            className="flex flex-col gap-2 px-4 pb-4"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <DialogHeader>
+              <DialogTitle>
+                {mealPlanEditValues ? 'Edit' : 'Add'} Meal Plan
+              </DialogTitle>
+              <DialogDescription />
+            </DialogHeader>
 
-            <Autocomplete
-              multiple
-              id="meals"
-              options={options}
-              getOptionLabel={(option) => option.label}
-              // defaultValue={selectedMeals}
-              onChange={(_, value) => setMeals(value.map((meal) => meal.id))}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="outlined"
-                  label="Meals"
-                  placeholder="Select meals"
-                />
-              )}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCancel} color="primary" variant="outlined">
-              Cancel
-            </Button>
-            <Button type="submit" variant="contained" color="primary">
-              {mealPlanEditValues ? 'Edit' : 'Add'}
-            </Button>
-          </DialogActions>
-        </form>
-      </Dialog>
-    </>
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" placeholder="Name" type="text" />
+            </div>
+
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="meals">Meals</Label>
+              <Combobox options={options} placeholder="Select meals..." />
+            </div>
+
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Close
+                </Button>
+              </DialogClose>
+
+              <Button type="submit" variant="default">
+                {mealPlanEditValues ? 'Edit' : 'Add'}
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

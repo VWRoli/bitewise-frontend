@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import DeleteDialog from '@/app/components/DeleteDialog';
 import EditMealDialog from '@/app/(modules)/dashboard/(pages)/meals/components/EditMealDialog';

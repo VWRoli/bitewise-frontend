@@ -6,7 +6,7 @@ export const convertToOptions = (
   ingredients: IIngredient[] | IMeal[],
 ): IOption[] => {
   return ingredients.map((ingredient) => ({
-    id: ingredient.id,
+    value: ingredient.id,
     label: ingredient.name,
   }));
 };
