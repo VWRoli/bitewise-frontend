@@ -13,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/app/components/ui/form';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
 import InputField from '@/app/components/form/InputField';
-import LoadingButton from '@/app/components/common/LoadingButton';
+import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { useToast } from '@/app/hooks/use-toast';
 
 const SignInForm = () => {

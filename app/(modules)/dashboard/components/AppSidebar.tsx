@@ -1,3 +1,4 @@
+'use client';
 import {
   Sidebar,
   SidebarContent,
@@ -14,6 +15,7 @@ import {
 } from '@/app/(modules)/dashboard/constants';
 import Link from 'next/link';
 import UserProfile from '@/app/(modules)/dashboard/components/UserProfile';
+import MenuItem from '@/app/(modules)/dashboard/components/MenuItem';
 
 export function AppSidebar() {
   return (
@@ -27,18 +29,7 @@ export function AppSidebar() {
               {MENU_ITEMS.map((item) => {
                 const route = `/dashboard${item.route}`;
 
-                return (
-                  <SidebarMenuItem key={item.label}>
-                    <SidebarMenuButton asChild>
-                      <Link href={route}>
-                        <item.icon />
-                        <span className="first-letter:uppercase">
-                          {item.label}
-                        </span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
+                return <MenuItem key={item.label} item={item} route={route} />;
               })}
             </SidebarMenu>
           </SidebarGroupContent>

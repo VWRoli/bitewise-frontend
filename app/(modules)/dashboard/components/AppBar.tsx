@@ -6,7 +6,7 @@ import { logout } from '@/app/(modules)/(auth)/api';
 import CustomBreadCrumbs from '@/app/(modules)/dashboard/components/CustomBreadCrumbs';
 import { Bell, CircleUserRound, LogOut } from 'lucide-react';
 import { SidebarTrigger } from '@/app/components/ui/sidebar';
-import LoadingButton from '@/app/components/common/LoadingButton';
+import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { useState } from 'react';
 import { useToast } from '@/app/hooks/use-toast';
 

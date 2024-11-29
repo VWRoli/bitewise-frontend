@@ -15,7 +15,7 @@ import {
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
 import { EActionType } from '@/app/utils/enums';
 import { Label } from '@/app/components/ui/label';
-import { Combobox } from '@/app/components/common/Combobox';
+import { Combobox } from '@/app/components/Combobox';
 import { Input } from '@/app/components/ui/input';
 import {
   Dialog,

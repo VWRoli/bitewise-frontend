@@ -13,7 +13,7 @@ import {
 } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
 import { Controller, useFormContext, UseFormSetValue } from 'react-hook-form';
-import { Combobox } from '@/app/components/common/Combobox';
+import { Combobox } from '@/app/components/Combobox';
 import { Label } from '@/app/components/ui/label';
 
 interface IMealIngredient {

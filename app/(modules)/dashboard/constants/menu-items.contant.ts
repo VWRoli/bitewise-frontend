@@ -1,4 +1,4 @@
-import { IMenuItems } from '@/app/(modules)/dashboard/interfaces';
+import { IMenuItem } from '@/app/(modules)/dashboard/interfaces';
 import {
   LayoutDashboard,
   ShoppingBasket,
@@ -8,7 +8,7 @@ import {
   CreditCard,
 } from 'lucide-react';
 
-export const MENU_ITEMS: IMenuItems[] = [
+export const MENU_ITEMS: IMenuItem[] = [
   {
     label: 'dashboard',
     route: '',
@@ -31,7 +31,7 @@ export const MENU_ITEMS: IMenuItems[] = [
   },
 ];
 
-export const SUB_MENU_ITEMS: IMenuItems[] = [
+export const SUB_MENU_ITEMS: IMenuItem[] = [
   {
     label: 'calculators',
     route: '/calculators',
