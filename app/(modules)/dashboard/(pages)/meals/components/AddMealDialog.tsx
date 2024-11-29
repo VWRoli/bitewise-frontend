@@ -110,12 +110,7 @@ const AddMealDialog = (props: IProps) => {
               <DialogTitle>{mealEditValues ? 'Edit' : 'Add'} Meal</DialogTitle>
               <DialogDescription />
             </DialogHeader>
-            <InputField
-              form={form}
-              label="Email Address"
-              name="name"
-              type="text"
-            />
+            <InputField form={form} label="Meal Name" name="name" type="text" />
 
             {fields.map((ingredient, index) => (
               <MealIngredient

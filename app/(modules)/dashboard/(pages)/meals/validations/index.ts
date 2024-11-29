@@ -6,7 +6,7 @@ const mealIngredientSchema = z.object({
 });
 
 export const mealSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
+  name: z.string().min(1, 'Meal name is required'),
   mealIngredients: z
     .array(mealIngredientSchema)
     .min(1, 'At least one ingredient is required'),
