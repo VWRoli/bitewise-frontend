@@ -3,7 +3,6 @@
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import DeleteDialog from '@/app/components/DeleteDialog';
 import { deleteIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
-import { toaster } from '@/app/components/CustomToast';
 import {
   Menubar,
   MenubarContent,
@@ -13,19 +12,25 @@ import {
 } from '@/app/components/ui/menubar';
 import { EllipsisVertical } from 'lucide-react';
 import EditIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/EditIngredientDialog';
+import { useToast } from '@/app/hooks/use-toast';
 
 interface IProps {
   ingredient: IIngredient;
 }
 const IngredientActions = ({ ingredient }: IProps) => {
+  const { toast } = useToast();
   const handleOnDelete = async () => {
     const res = await deleteIngredient(ingredient.id);
 
     if (Object.keys(res).length === 0) {
-      toaster.success({ text: 'Ingredient deleted successfully.' });
+      toast({
+        variant: 'success',
+        description: 'Ingredient deleted successfully.',
+      });
     } else {
-      toaster.error({
-        text: res.error || 'Unknown error',
+      toast({
+        variant: 'error',
+        description: res.error || 'Unknown error',
       });
     }
   };

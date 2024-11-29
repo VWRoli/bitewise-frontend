@@ -1,17 +1,19 @@
-import { toaster } from '@/app/components/CustomToast';
+import { toast } from '@/app/hooks/use-toast';
 import { EActionType } from '@/app/utils/enums';
 
 export const createOrUpdateToasts = (action: EActionType, result: any) => {
   const actionStr = action === EActionType.UPDATE ? 'Updated' : 'Added';
 
   if (result.error) {
-    toaster.error({
-      text: result.error,
+    toast({
+      variant: 'error',
+      description: result.error,
     });
     return;
   } else {
-    toaster.success({
-      text: `${actionStr} successfully!`,
+    toast({
+      variant: 'success',
+      description: `${actionStr} successfully!`,
     });
   }
 };

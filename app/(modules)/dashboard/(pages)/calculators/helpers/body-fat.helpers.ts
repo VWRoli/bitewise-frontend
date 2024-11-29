@@ -2,7 +2,7 @@ import { BODY_FAT_CATEGORIES } from '@/app/(modules)/dashboard/(pages)/calculato
 import { EGender } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
 import { calculateBMI } from '@/app/(modules)/dashboard/(pages)/calculators/helpers';
 import { IBodyFatValues } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
-import { toaster } from '@/app/components/CustomToast';
+import { toast } from '@/app/hooks/use-toast';
 
 export function calculateBodyFatPercentage(values: IBodyFatValues): number {
   const { gender, height, neck, waist, hip } = values;
@@ -19,8 +19,10 @@ export function calculateBodyFatPercentage(values: IBodyFatValues): number {
   } else if (gender === EGender.FEMALE) {
     // Formula for women (requires hip measurement)
     if (hip === 0) {
-      toaster.error({
-        text: 'Hip measurement is required for calculating female body fat percentage.',
+      toast({
+        variant: 'error',
+        description:
+          'Hip measurement is required for calculating female body fat percentage.',
       });
       return 0;
     }
@@ -31,8 +33,9 @@ export function calculateBodyFatPercentage(values: IBodyFatValues): number {
           0.221 * Math.log10(height)) -
       450;
   } else {
-    toaster.error({
-      text: "Gender must be 'male' or 'female'.",
+    toast({
+      variant: 'error',
+      description: "Gender must be 'male' or 'female'.",
     });
     return 0;
   }
@@ -59,8 +62,9 @@ export function calculateBodyFatWithBMI(values: IBodyFatValues): number {
     // Girls formula
     bodyFatPercentage = 1.51 * bmi - 0.7 * age + 1.4;
   } else {
-    toaster.error({
-      text: 'Invalid input for gender or age',
+    toast({
+      variant: 'error',
+      description: 'Invalid input for gender or age',
     });
     return 0;
   }
@@ -75,8 +79,9 @@ export function categorizeBodyFat(
   const categories = BODY_FAT_CATEGORIES[gender];
 
   if (!categories) {
-    toaster.error({
-      text: `Invalid gender. Choose 'FEMALE' or 'MALE'.`,
+    toast({
+      variant: 'error',
+      description: `Invalid gender. Choose 'FEMALE' or 'MALE'.`,
     });
     return 'Unknown Category';
   }

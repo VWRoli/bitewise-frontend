@@ -8,9 +8,11 @@ import { Bell, CircleUserRound, LogOut } from 'lucide-react';
 import { SidebarTrigger } from '@/app/components/ui/sidebar';
 import LoadingButton from '@/app/components/common/LoadingButton';
 import { useState } from 'react';
+import { useToast } from '@/app/hooks/use-toast';
 
 const AppBar = () => {
   const router = useRouter();
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = async () => {
@@ -18,8 +20,12 @@ const AppBar = () => {
     try {
       await logout();
       router.push('/');
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
+      toast({
+        variant: 'error',
+        description: (error?.message as string) || 'Uknown Error',
+      });
     }
   };
 

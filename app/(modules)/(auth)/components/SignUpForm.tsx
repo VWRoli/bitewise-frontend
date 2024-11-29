@@ -13,9 +13,12 @@ import { useForm } from 'react-hook-form';
 import InputField from '@/app/components/form/InputField';
 import LoadingButton from '@/app/components/common/LoadingButton';
 import { useState } from 'react';
+import { useToast } from '@/app/hooks/use-toast';
 
 const SignUpForm = () => {
   const router = useRouter();
+  const { toast } = useToast();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signupSchema>>({
@@ -28,7 +31,11 @@ const SignUpForm = () => {
     try {
       await api.register(values);
       router.push('/dashboard');
-    } catch (error) {
+    } catch (error: any) {
+      toast({
+        variant: 'error',
+        description: error.message,
+      });
       setIsLoading(false);
     }
   }

@@ -1,9 +1,15 @@
+import { API_URL } from '@/app/utils/config';
 import axios from 'axios';
 
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.withCredentials = true;
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true,
+});
 
-axios.interceptors.request.use(
+axiosInstance.interceptors.request.use(
   async function (config) {
     return config;
   },
@@ -12,4 +18,4 @@ axios.interceptors.request.use(
   },
 );
 
-export default axios;
+export default axiosInstance;

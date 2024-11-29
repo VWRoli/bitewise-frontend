@@ -14,9 +14,11 @@ import { Form } from '@/app/components/ui/form';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
 import InputField from '@/app/components/form/InputField';
 import LoadingButton from '@/app/components/common/LoadingButton';
+import { useToast } from '@/app/hooks/use-toast';
 
 const SignInForm = () => {
   const router = useRouter();
+  const { toast } = useToast();
   const [step, setStep] = useState<ESignInSteps>(ESignInSteps.STEP_0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,7 +39,11 @@ const SignInForm = () => {
       try {
         await api.login(values as ISignIn);
         router.push('/dashboard');
-      } catch (error) {
+      } catch (error: any) {
+        toast({
+          variant: 'error',
+          description: error.message,
+        });
         setIsLoading(false);
       }
     }

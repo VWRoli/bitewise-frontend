@@ -41,7 +41,7 @@ const MealPlanTableRow = ({ row }: IProps) => {
       <MealPlanTableCell meals={meals} column="dietaryFiber" unit="g" />
 
       <TableCell className="lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2 lg:text-right">
-        <MealPlanActions mealPlan={row} allMeals={[]} /> //TODO:
+        <MealPlanActions mealPlan={row} allMeals={[]} />
       </TableCell>
     </TableRow>
   );
