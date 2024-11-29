@@ -7,15 +7,14 @@ import { buildQueryParams } from '@/app/utils/helpers';
 import { IQueryParams } from '@/app/utils/interfaces';
 import { cookies } from 'next/headers';
 
-const cookieStore = cookies();
-const accessToken = cookieStore.get('accessToken')?.value;
-
 export async function apiRequest<T>(
   endpoint: string,
   method: string = 'GET',
   body?: any,
   params?: IQueryParams,
 ): Promise<IApiResponse<T>> {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
   try {
     if (!accessToken) {
       throw new Error('Unauthorized');
