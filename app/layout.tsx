@@ -5,7 +5,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { Providers } from '@/app/providers';
+import { Toaster } from '@/app/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'BiteWise - The Meal Planner',
@@ -21,7 +21,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        {children}
+        <Toaster />
       </body>
     </html>
   );

@@ -1,13 +1,14 @@
 import { Button, ButtonProps } from '@/app/components/ui/button';
 import { cn } from '@/app/lib';
 import { LoaderCircle } from 'lucide-react';
+import { PropsWithChildren } from 'react';
 
-interface IProps extends ButtonProps {
+interface IProps extends ButtonProps, PropsWithChildren {
   className?: string;
   loading?: boolean;
 }
 const LoadingButton = (props: IProps) => {
-  const { className, loading, ...rest } = props;
+  const { className, loading, children, ...rest } = props;
   return (
     <Button
       {...rest}
@@ -16,7 +17,7 @@ const LoadingButton = (props: IProps) => {
       })}
       disabled={loading || rest.disabled}
     >
-      {loading ? <LoaderCircle className="animate-spin" /> : <>Sign Up</>}
+      {loading ? <LoaderCircle className="animate-spin" /> : <>{children}</>}
     </Button>
   );
 };

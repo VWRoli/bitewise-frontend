@@ -1,4 +1,4 @@
-'use client'; //TODO: could be server side if logout will be redone to server function
+'use client';
 
 import { Button } from '@/app/components/ui/button';
 import { useRouter } from 'next/navigation';
@@ -6,13 +6,21 @@ import { logout } from '@/app/(modules)/(auth)/api';
 import CustomBreadCrumbs from '@/app/(modules)/dashboard/components/CustomBreadCrumbs';
 import { Bell, CircleUserRound, LogOut } from 'lucide-react';
 import { SidebarTrigger } from '@/app/components/ui/sidebar';
+import LoadingButton from '@/app/components/common/LoadingButton';
+import { useState } from 'react';
 
 const AppBar = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = async () => {
-    await logout();
-    router.push('/');
+    setIsLoading(true);
+    try {
+      await logout();
+      router.push('/');
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -22,10 +30,14 @@ const AppBar = () => {
         <CustomBreadCrumbs />
       </div>
       <div>
-        <Button variant="ghost" onClick={handleLogout}>
+        <LoadingButton
+          variant="ghost"
+          onClick={handleLogout}
+          loading={isLoading}
+        >
           <LogOut className="sm:hidden" />
           <span className="hidden sm:block">Log Out</span>
-        </Button>
+        </LoadingButton>
 
         <Button
           variant="ghost"
