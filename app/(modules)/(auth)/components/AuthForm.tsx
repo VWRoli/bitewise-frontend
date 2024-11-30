@@ -8,10 +8,9 @@ import SignUpForm from '@/app/(modules)/(auth)/components/SignUpForm';
 import SignInForm from '@/app/(modules)/(auth)/components/SignInForm';
 import { AuthView } from '@/app/(modules)/(auth)/enum';
 import { Separator } from '@/app/components/ui/separator';
-import { Button } from '@/app/components/ui/button';
+import SocialLogin from '@/app/(modules)/(auth)/components/SocialLogin';
 import FacebookIcon from '@/app/components/icons/FacebookIcon';
-import AppleIcon from '@/app/components/icons/AppleIcon';
-import GoogleLogin from '@/app/(modules)/(auth)/components/socials/GoogleLogin';
+import GoogleIcon from '@/app/components/icons/GoogleIcon';
 
 const AuthForm = () => {
   return (
@@ -38,13 +37,12 @@ const AuthForm = () => {
         <Separator className="shrink" />
       </div>
       <div className="space-x-4">
-        <Button variant="ghost" size="icon">
-          <AppleIcon />
-        </Button>
-        <Button variant="ghost" size="icon">
+        <SocialLogin url="/auth/facebook/login">
           <FacebookIcon />
-        </Button>
-        <GoogleLogin />
+        </SocialLogin>
+        <SocialLogin url="/auth/google/login">
+          <GoogleIcon />
+        </SocialLogin>
       </div>
       <div className="text-center text-xs">
         BiteWise is your smart meal planner, offering personalized recipes and
