@@ -3,7 +3,7 @@ import IngredientsTable from '@/app/(modules)/dashboard/(pages)/ingredients/comp
 import { IPageProps } from '@/app/(modules)/dashboard/interfaces';
 import { Suspense } from 'react';
 
-export default async function Page(props: IPageProps) {
+export default function Page(props: IPageProps) {
   const pageKey = JSON.stringify(props.searchParams);
 
   return (
