@@ -13,7 +13,7 @@ const Unit = ({ unit }: IProps) => {
   return (
     <div
       className={cn(
-        'px-1 py-0.5 uppercase text-xs rounded-md text-white w-fit font-semibold',
+        'w-fit rounded-md px-1 py-0.5 text-xs font-semibold uppercase text-white',
         isPiece ? pieceClasses : grammClasses,
       )}
     >

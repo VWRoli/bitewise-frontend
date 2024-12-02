@@ -14,9 +14,9 @@ import GoogleIcon from '@/app/components/icons/GoogleIcon';
 
 const AuthForm = () => {
   return (
-    <section className="flex flex-col items-center justify-around h-screen px-8 md:max-w-[80%] md:mx-auto xl:max-h-[704px] xl:border xl:border-slate-400 xl:px-16 xl:border-r-0 xl:rounded-l-lg">
+    <section className="flex h-screen flex-col items-center justify-around px-8 md:mx-auto md:max-w-[80%] xl:max-h-[704px] xl:rounded-l-lg xl:border xl:border-r-0 xl:border-slate-400 xl:px-16">
       <div>Logo</div>
-      <h1 className="text-2xl xl:text-3xl font-bold">Welcome Back</h1>
+      <h1 className="text-2xl font-bold xl:text-3xl">Welcome Back</h1>
       <div>Welcome back, please enter your details</div>
       <Tabs defaultValue={AuthView.SIGN_IN}>
         <TabsList className="grid w-full grid-cols-2">
@@ -31,9 +31,9 @@ const AuthForm = () => {
         </TabsContent>
       </Tabs>
 
-      <div className="flex items-center w-full">
+      <div className="flex w-full items-center">
         <Separator className="shrink" />
-        <p className="flex-shrink-0 mx-4">Or continue with</p>
+        <p className="mx-4 flex-shrink-0">Or continue with</p>
         <Separator className="shrink" />
       </div>
       <div className="space-x-4">

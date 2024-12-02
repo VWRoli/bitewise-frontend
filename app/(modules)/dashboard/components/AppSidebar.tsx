@@ -20,12 +20,12 @@ import MenuItem from '@/app/(modules)/dashboard/components/MenuItem';
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarContent className="flex flex-col justify-between h-full">
+      <SidebarContent className="flex h-full flex-col justify-between">
         <SidebarGroup className="pt-[72px]">
           <UserProfile />
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="px-4 flex flex-col gap-1">
+            <SidebarMenu className="flex flex-col gap-1 px-4">
               {MENU_ITEMS.map((item) => {
                 const route = `/dashboard${item.route}`;
 

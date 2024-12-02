@@ -20,7 +20,7 @@ const StatisticsCard = ({ title, value, icon }: IProps) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <h3 className="font-bold text-2xl">{value}</h3>
+        <h3 className="text-2xl font-bold">{value}</h3>
       </CardContent>
     </Card>
   );

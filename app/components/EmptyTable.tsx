@@ -5,7 +5,7 @@ const EmptyTable = ({ children }: PropsWithChildren) => {
   return (
     <TableRow>
       <TableCell colSpan={8}>
-        <h6 className="text-xl font-bold text-center text-dark">{children}</h6>
+        <h6 className="text-center text-xl font-bold text-dark">{children}</h6>
       </TableCell>
     </TableRow>
   );

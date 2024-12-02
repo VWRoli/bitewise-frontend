@@ -5,7 +5,7 @@ interface IProps {
 }
 const CustomError = ({ result }: IProps) => {
   return (
-    <h6 className="text-xl font-bold text-center text-red-500">
+    <h6 className="text-center text-xl font-bold text-red-500">
       {(result.error as any).message}
     </h6>
   );

@@ -15,8 +15,8 @@ const UserProfile = () => {
   const avatarLetters = getFirstTwoCharacters(user.email);
 
   return (
-    <div className="flex flex-col gap-4 items-center justify-center mb-16">
-      <Avatar className="w-16 h-16">
+    <div className="mb-16 flex flex-col items-center justify-center gap-4">
+      <Avatar className="h-16 w-16">
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>{avatarLetters}</AvatarFallback>
       </Avatar>

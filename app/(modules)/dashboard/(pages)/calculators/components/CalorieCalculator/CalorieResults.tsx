@@ -18,7 +18,7 @@ const CalorieResults = (props: ICalorieResultsProps) => {
       <Button variant="outline" onClick={() => setIsGain((prev) => !prev)}>
         Show {isGain ? 'Loss' : 'Gain'}
       </Button>
-      <Card className="max-w-[90%] mx-auto rounded-none">
+      <Card className="mx-auto max-w-[90%] rounded-none">
         {isGain ? (
           <GainResults results={props.results} />
         ) : (

@@ -21,7 +21,7 @@ const Statistics = async () => {
   const mealPlans = mealPlansResult.data;
 
   return (
-    <section className="flex flex-col lg:flex-row gap-8">
+    <section className="flex flex-col gap-8 lg:flex-row">
       <StatisticsCard
         title="Total Ingredients"
         value={ingredients?.data.length || 0}

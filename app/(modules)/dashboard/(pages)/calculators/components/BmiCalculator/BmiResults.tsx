@@ -17,12 +17,12 @@ const BmiResults = (props: IProps) => {
   const { bmi, bmiCategory } = props.results || {};
 
   return (
-    <Card className="max-w-[90%] mx-auto rounded-none">
+    <Card className="mx-auto max-w-[90%] rounded-none">
       <Table>
-        <TableHeader className="bg-dark text-light font-bold">
+        <TableHeader className="bg-dark font-bold text-light">
           <TableRow>
-            <TableHead className="text-light font-bold">Metric</TableHead>
-            <TableHead className="text-light font-bold">Value</TableHead>
+            <TableHead className="font-bold text-light">Metric</TableHead>
+            <TableHead className="font-bold text-light">Value</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

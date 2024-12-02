@@ -50,13 +50,13 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
             Add
           </Button>
         </div>
-        <div className="border rounded-md min-h-[2.5rem] overflow-y-auto p-2 flex gap-2 flex-wrap items-center">
+        <div className="flex min-h-[2.5rem] flex-wrap items-center gap-2 overflow-y-auto rounded-md border p-2">
           {value.map((item: string, idx: number) => (
             <Badge key={idx} variant="secondary">
               {item}
               <button
                 type="button"
-                className="w-3 ml-2"
+                className="ml-2 w-3"
                 onClick={() => {
                   onChange(value.filter((i: string) => i !== item));
                 }}

@@ -51,7 +51,7 @@ const SignInForm = () => {
   return (
     <Form {...form}>
       <form
-        className="flex flex-col gap-4 w-full"
+        className="flex w-full flex-col gap-4"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         {isFirstStep ? (

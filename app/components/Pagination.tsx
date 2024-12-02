@@ -31,10 +31,10 @@ export const Pagination = async (props: IProps) => {
             href={`?page=${currentPage - 1}`}
             aria-disabled={currentPage === 1}
             className={cn(
-              'px-4 py-2 rounded-md transition-colors',
+              'rounded-md px-4 py-2 transition-colors',
               currentPage === 1
                 ? 'pointer-events-none bg-gray-200 text-gray-400'
-                : 'hover:bg-gray-100 bg-white text-black',
+                : 'bg-white text-black hover:bg-gray-100',
             )}
           />
         </PaginationItem>
@@ -43,10 +43,10 @@ export const Pagination = async (props: IProps) => {
             <PaginationLink
               href={`?page=${page}`}
               className={cn(
-                'px-4 py-2 rounded-md transition-colors',
+                'rounded-md px-4 py-2 transition-colors',
                 page === currentPage
-                  ? 'bg-primary text-white font-semibold'
-                  : 'hover:bg-gray-100 bg-white text-black',
+                  ? 'bg-primary font-semibold text-white'
+                  : 'bg-white text-black hover:bg-gray-100',
               )}
             >
               {page}
@@ -59,10 +59,10 @@ export const Pagination = async (props: IProps) => {
             href={`?page=${currentPage + 1}`}
             aria-disabled={!hasNextPage}
             className={cn(
-              'px-4 py-2 rounded-md transition-colors',
+              'rounded-md px-4 py-2 transition-colors',
               !hasNextPage
                 ? 'pointer-events-none bg-gray-200 text-gray-400'
-                : 'hover:bg-gray-100 bg-white text-black',
+                : 'bg-white text-black hover:bg-gray-100',
             )}
           />
         </PaginationItem>
