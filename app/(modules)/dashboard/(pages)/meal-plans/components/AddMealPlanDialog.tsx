@@ -65,9 +65,9 @@ const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
   //   options.find((option) => option.value === mealId),
   // );
 
-  useEffect(() => {
-    console.log(form.formState.errors);
-  }, [form.formState.errors]);
+  // useEffect(() => {
+  //   console.log(form.formState.errors);
+  // }, [form.formState.errors]);
 
   // const selectedMeals = mealsWithDuplicates.filter(
   //   (meal) => meal !== undefined,
