@@ -1,9 +1,9 @@
+'server-only';
 'use server';
 
 import { IApiResponse } from '@/app/(modules)/dashboard/interfaces';
-import { getErrorMessage } from '@/app/(modules)/dashboard/utils/api.client.helper';
 import { API_URL } from '@/app/utils/config';
-import { buildQueryParams } from '@/app/utils/helpers';
+import { buildQueryParams, getErrorMessage } from '@/app/utils/helpers';
 import { IQueryParams } from '@/app/utils/interfaces';
 import { cookies } from 'next/headers';
 

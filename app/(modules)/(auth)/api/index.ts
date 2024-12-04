@@ -1,8 +1,11 @@
+"client-only"
+
 import { ISignIn, ISignUp } from '@/app/(modules)/(auth)/interfaces';
 import { API_URL } from '@/app/utils/config';
 import { IUser } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
 import axios from 'axios';
 import axiosInstance from '@/app/lib/axios';
+import { handleAxiosError } from '@/app/utils/helpers/api.client.helpers';
 
 export const login = async (userData: ISignIn): Promise<IUser> => {
   try {
@@ -18,13 +21,7 @@ export const login = async (userData: ISignIn): Promise<IUser> => {
 
     return response.data as IUser;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || error?.message || 'Login failed.',
-      );
-    } else {
-      throw new Error('Login failed.');
-    }
+    return handleAxiosError(error, 'Login failed')
   }
 };
 
@@ -42,11 +39,7 @@ export const register = async (userData: ISignUp) => {
 
     return response.data as IUser;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message || 'Registration failed.');
-    } else {
-      throw new Error('Registration failed.');
-    }
+    return handleAxiosError(error, 'Registration failed')
   }
 };
 
@@ -60,10 +53,7 @@ export const logout = async () => {
       throw new Error(message);
     }
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message || 'Logout failed.');
-    } else {
-      throw new Error('Logout failed.');
-    }
-  }
+    return handleAxiosError(error, 'Logout failed')
+ 
+  } 
 };

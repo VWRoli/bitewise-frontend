@@ -1,3 +1,4 @@
+'server-only';
 'use server';
 
 import {
