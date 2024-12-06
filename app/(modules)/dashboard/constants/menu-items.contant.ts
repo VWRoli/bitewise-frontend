@@ -17,7 +17,7 @@ export const MENU_ITEMS: IMenuItem[] = [
   },
   {
     label: 'ingredients',
-    route: `/ingredients?page=1&orderBy=calories&orderDirection=${EOrderDirection.ASC}`,
+    route: `/ingredients?page=1&orderBy=createTimeStamp&orderDirection=${EOrderDirection.DESC}`,
     icon: ShoppingBasket,
   },
   {

@@ -11,13 +11,19 @@ import { Pagination } from '@/app/components/Pagination';
 import TableFrame from '@/app/components/Table/TableFrame';
 import { IError } from '@/app/utils/interfaces/error.interface';
 import { TableBody } from '@/app/components/ui/table';
+import { EOrderDirection } from '@/app/utils/enums';
+import { IQueryParams } from '@/app/utils/interfaces';
 
 const MealPlansTable = async (props: IPageProps) => {
   const pageNumber = Number(props?.searchParams?.page || 1);
 
-  const params = {
+  const params: IQueryParams = {
     limit: PAGE_SIZE,
     offset: (pageNumber - 1) * PAGE_SIZE,
+    orderBy: props?.searchParams?.orderBy as string | undefined,
+    orderDirection: props?.searchParams?.orderDirection as
+      | EOrderDirection
+      | undefined,
   };
 
   const [mealPlansResult, mealsResult] = await Promise.all([
@@ -28,13 +34,13 @@ const MealPlansTable = async (props: IPageProps) => {
   const total = mealPlansResult.data?.count || 0;
 
   const metadata = {
-    hasNextPage: params.offset + PAGE_SIZE < total,
+    hasNextPage: (params.offset as number) + PAGE_SIZE < total,
     totalPages: Math.ceil(total / PAGE_SIZE),
   };
 
   if (mealPlansResult.error) {
     return (
-      <div className="p-2 md:p-4 xl:p-8 mt-8">
+      <div className="mt-8 p-2 md:p-4 xl:p-8">
         <section className="flex flex-col gap-4">
           <CustomError result={mealPlansResult as IError} />
         </section>
@@ -48,7 +54,7 @@ const MealPlansTable = async (props: IPageProps) => {
     <>
       <TableFrame
         title={`Meal Plans (${mealPlansResult.data?.count})`}
-        tableHead={<MealPlanTableHead />}
+        tableHead={<MealPlanTableHead {...props.searchParams} />}
         addModal={<AddMealPlanDialog allMeals={mealsResult.data?.data || []} />}
       >
         <TableBody>

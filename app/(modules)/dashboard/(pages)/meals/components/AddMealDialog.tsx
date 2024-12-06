@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   ICreateMeal,
   IMeal,
@@ -60,10 +60,6 @@ const AddMealDialog = (props: IProps) => {
   const addIngredient = () => {
     append({ ingredientId: 0, quantity: 0 });
   };
-
-  useEffect(() => {
-    console.log(form.formState.errors);
-  }, [form.formState.errors]);
 
   const onSubmit = async (values: TMealSchema) => {
     let result;
