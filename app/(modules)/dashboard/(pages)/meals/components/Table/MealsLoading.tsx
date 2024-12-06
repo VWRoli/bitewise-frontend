@@ -18,12 +18,12 @@ const MealsLoading = () => {
         {rows.map((_, index) => (
           <TableRow
             key={index}
-            className="border-b last:border-b-0 lg:table-row block lg:border-none text-left"
+            className="block border-b text-left last:border-b-0 lg:table-row lg:border-none"
           >
-            <TableCell className="lg:table-cell block text-dark lg:py-4 py-2 px-4 lg:text-right">
-              <Skeleton className="w-[80%] h-6" />
-              <Skeleton className="w-[80%] h-6" />
-              <Skeleton className="w-[80%] h-6" />
+            <TableCell className="block px-4 py-2 text-dark lg:table-cell lg:py-4 lg:text-right">
+              <Skeleton className="h-6 w-4/5" />
+              <Skeleton className="h-6 w-4/5" />
+              <Skeleton className="h-6 w-4/5" />
             </TableCell>
             <MealsLoadingCell />
             <MealsLoadingCell />
@@ -31,10 +31,10 @@ const MealsLoading = () => {
             <MealsLoadingCell />
             <MealsLoadingCell />
 
-            <TableCell className="lg:table-cell block text-dark lg:py-4 py-2 px-4 lg:text-right">
+            <TableCell className="block px-4 py-2 text-dark lg:table-cell lg:py-4 lg:text-right">
               <div className="flex lg:justify-end">
-                <Skeleton className="w-10 h-6" />
-                <Skeleton className="w-10 h-6" />
+                <Skeleton className="h-6 w-10" />
+                <Skeleton className="h-6 w-10" />
               </div>
             </TableCell>
             <TableCell></TableCell>

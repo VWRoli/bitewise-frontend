@@ -10,14 +10,19 @@ import { Pagination } from '@/app/components/Pagination';
 import TableFrame from '@/app/components/Table/TableFrame';
 import { IError } from '@/app/utils/interfaces/error.interface';
 import { TableBody } from '@/app/components/ui/table';
-import React from 'react';
+import { IQueryParams } from '@/app/utils/interfaces';
+import { EOrderDirection } from '@/app/utils/enums';
 
 const IngredientsTable = async (props: IPageProps) => {
   const pageNumber = Number(props?.searchParams?.page || 1);
 
-  const params = {
+  const params: IQueryParams = {
     limit: INGREDTENTS_PAGE_SIZE,
     offset: (pageNumber - 1) * INGREDTENTS_PAGE_SIZE,
+    orderBy: props?.searchParams?.orderBy as string | undefined,
+    orderDirection: props?.searchParams?.orderDirection as
+      | EOrderDirection
+      | undefined,
   };
 
   const result = await fetchIngredients(params);
@@ -25,13 +30,13 @@ const IngredientsTable = async (props: IPageProps) => {
   const total = result.data?.count || 0;
 
   const metadata = {
-    hasNextPage: params.offset + INGREDTENTS_PAGE_SIZE < total,
+    hasNextPage: (params.offset as number) + INGREDTENTS_PAGE_SIZE < total,
     totalPages: Math.ceil(total / INGREDTENTS_PAGE_SIZE),
   };
 
   if (result.error) {
     return (
-      <div className="p-2 md:p-4 xl:p-8 mt-8">
+      <div className="mt-8 p-2 md:p-4 xl:p-8">
         <section className="flex flex-col gap-4">
           <CustomError result={result as IError} />
         </section>
@@ -45,7 +50,7 @@ const IngredientsTable = async (props: IPageProps) => {
     <>
       <TableFrame
         title={`Ingredients (${result.data?.count})`}
-        tableHead={<IngredientTableHead />}
+        tableHead={<IngredientTableHead {...props.searchParams} />}
         addModal={<AddIngredientDialog />}
       >
         <TableBody>

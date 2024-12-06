@@ -1,12 +1,12 @@
 import { ITableHeadData } from '@/app/utils/interfaces';
 
 export const INGREDIENT_TABLE_HEAD_DATA: ITableHeadData[] = [
-  { id: 'name', label: 'Name', align: 'left' },
-  { id: 'calories', label: 'Calories', align: 'right' },
-  { id: 'protein', label: 'Protein', align: 'right' },
-  { id: 'fat', label: 'Fat (Saturated)', align: 'right' },
-  { id: 'carbs', label: 'Carbs (Sugar)', align: 'right' },
-  { id: 'fiber', label: 'Fiber', align: 'right' },
-  { id: 'unit', label: 'Unit', align: 'right' },
-  { id: 'actions', label: '', align: 'right' },
+  { id: 'name', label: 'Name', align: 'justify-start' },
+  { id: 'calories', label: 'Calories', align: 'justify-end' },
+  { id: 'protein', label: 'Protein', align: 'justify-end' },
+  { id: 'totalFat', label: 'Fat (Saturated)', align: 'justify-end' },
+  { id: 'totalCarbohydrates', label: 'Carbs (Sugar)', align: 'justify-end' },
+  { id: 'dietaryFiber', label: 'Fiber', align: 'justify-end' },
+  { id: 'unit', label: 'Unit', align: 'justify-end' },
+  { id: 'actions', label: '', align: 'justify-end' },
 ];

@@ -1,4 +1,5 @@
 import { IMenuItem } from '@/app/(modules)/dashboard/interfaces';
+import { EOrderDirection } from '@/app/utils/enums';
 import {
   LayoutDashboard,
   ShoppingBasket,
@@ -16,17 +17,17 @@ export const MENU_ITEMS: IMenuItem[] = [
   },
   {
     label: 'ingredients',
-    route: '/ingredients',
+    route: `/ingredients?page=1&orderBy=calories&orderDirection=${EOrderDirection.ASC}`,
     icon: ShoppingBasket,
   },
   {
     label: 'meals',
-    route: '/meals',
+    route: `/meals?page=1&orderBy=name&orderDirection=${EOrderDirection.ASC}`,
     icon: HandPlatter,
   },
   {
     label: 'mealPlans',
-    route: '/meal-plans',
+    route: `/meal-plans?page=1&orderBy=name&orderDirection=${EOrderDirection.ASC}`,
     icon: NotebookPen,
   },
 ];
