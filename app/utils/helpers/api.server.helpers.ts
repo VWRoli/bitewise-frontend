@@ -37,7 +37,7 @@ export async function apiRequest<T>(
     if (!res.ok) {
       throw new Error(`${res.status} ${res.statusText}`);
     }
-
+    // eslint-disable-next-line
     if (res.status === 204) {
       return { data: undefined as T extends void ? undefined : T };
     }

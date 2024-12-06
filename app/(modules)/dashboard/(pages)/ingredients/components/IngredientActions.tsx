@@ -37,7 +37,7 @@ const IngredientActions = ({ ingredient }: IProps) => {
   };
 
   return (
-    <Menubar className="w-fit border-none bg-red-400 bg-transparent shadow-none">
+    <Menubar className="w-fit border-none bg-transparent shadow-none">
       <MenubarMenu>
         <MenubarTrigger className="hover:cursor-pointer">
           <EllipsisVertical />

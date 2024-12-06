@@ -47,7 +47,7 @@ export const register = async (userData: ISignUp) => {
 export const logout = async () => {
   try {
     const response = await axios.get(`/api/logout`);
-
+    // eslint-disable-next-line
     if (response.status !== 200) {
       const message = `Error: ${response.data.message} (Status code: ${response.status})`;
 

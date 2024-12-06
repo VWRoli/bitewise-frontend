@@ -25,6 +25,6 @@ export const calculateMealValue = (
     },
     [0, 0],
   );
-
+  // eslint-disable-next-line
   return totals.map((total) => Math.round(total * 10) / 10);
 };

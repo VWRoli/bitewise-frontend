@@ -49,14 +49,18 @@ const AppBar = () => {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => console.log('// TODO: notifications')}
+          onClick={() => {
+            // TODO: notifications'
+          }}
         >
           <Bell />
         </Button>
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => console.log('// TODO: account')}
+          onClick={() => {
+            // TODO: account
+          }}
         >
           <CircleUserRound />
         </Button>

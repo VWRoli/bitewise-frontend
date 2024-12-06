@@ -5,3 +5,5 @@ export const defaultSignUpValues: ISignUp = {
   password: '',
   confirmPassword: '',
 };
+
+export const PASSWORD_MIN_LENGTH = 8;

@@ -40,14 +40,14 @@ import {
   FormMessage,
 } from '@/app/components/ui/form';
 import { EActionType } from '@/app/utils/enums';
-import { convertToOptions, createOrUpdateToasts } from '@/app/utils/helpers';
-import { IOption } from '@/app/utils/interfaces';
+import { createOrUpdateToasts } from '@/app/utils/helpers';
+//import { IOption } from '@/app/utils/interfaces';
 
 interface IProps {
   allMeals: IMeal[];
   mealPlanEditValues?: IMealPlan | null;
 }
-const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
+const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const initialMeals = mealPlanEditValues?.meals.map((el) => el.id) || [];
@@ -60,7 +60,7 @@ const AddMealPlanDialog = ({ mealPlanEditValues, allMeals }: IProps) => {
     },
   });
 
-  const options: IOption[] = convertToOptions(allMeals);
+  //const options: IOption[] = convertToOptions(allMeals);
 
   // const mealsWithDuplicates = meals.map((mealId) =>
   //   options.find((option) => option.value === mealId),
