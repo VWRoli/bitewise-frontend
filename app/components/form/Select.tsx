@@ -1,3 +1,6 @@
+import { PropsWithChildren } from 'react';
+import { UseFormReturn } from 'react-hook-form';
+
 import {
   FormControl,
   FormField,
@@ -11,8 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/components/ui/select';
-import { PropsWithChildren } from 'react';
-import { UseFormReturn } from 'react-hook-form';
 
 interface IProps extends PropsWithChildren {
   form: UseFormReturn<any, any, undefined>;

@@ -1,13 +1,14 @@
 'server-only';
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import {
   ICreateIngredient,
   IIngredient,
 } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import { apiRequest } from '@/app/utils/helpers';
 import { IQueryParams } from '@/app/utils/interfaces';
-import { revalidatePath } from 'next/cache';
 
 export async function fetchIngredients(params: IQueryParams) {
   return apiRequest<{ data: IIngredient[]; count: number }>(

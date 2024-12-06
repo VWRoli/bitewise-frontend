@@ -1,5 +1,6 @@
-import { ESignInSteps } from '@/app/(modules)/(auth)/enum';
 import { z } from 'zod';
+
+import { ESignInSteps } from '@/app/(modules)/(auth)/enum';
 
 const step1Schema = z.object({
   email: z.string().email('Invalid email address').min(1, 'Email is required'),

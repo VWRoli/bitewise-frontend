@@ -1,10 +1,12 @@
 'use client';
 
-import DeleteDialog from '@/app/components/DeleteDialog';
-import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import EditMealPlanDialog from '@/app/(modules)/dashboard/(pages)/meal-plans/components/EditMealPlanDialog';
+import { EllipsisVertical } from 'lucide-react';
+
 import { deleteMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
+import EditMealPlanDialog from '@/app/(modules)/dashboard/(pages)/meal-plans/components/EditMealPlanDialog';
+import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import DeleteDialog from '@/app/components/DeleteDialog';
 import {
   Menubar,
   MenubarContent,
@@ -12,7 +14,6 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from '@/app/components/ui/menubar';
-import { EllipsisVertical } from 'lucide-react';
 
 interface IProps {
   mealPlan: IMealPlan;

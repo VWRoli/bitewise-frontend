@@ -1,9 +1,9 @@
-import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import { TableCell, TableRow } from '@/app/components/ui/table';
-import Unit from '@/app/(modules)/dashboard/components/Unit';
+import { fetchIngredients } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
 import MealActions from '@/app/(modules)/dashboard/(pages)/meals/components/MealActions';
 import MealTableCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealTableCell';
-import { fetchIngredients } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
+import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import Unit from '@/app/(modules)/dashboard/components/Unit';
+import { TableCell, TableRow } from '@/app/components/ui/table';
 
 interface IProps {
   row: IMeal;
@@ -51,11 +51,11 @@ const MealTableRow = async ({ row }: IProps) => {
         unit="g"
       />
       <MealTableCell mealIngredients={mealIngredients} column="quantity" />
-      <TableCell className="lg:table-cell flex gap-2 items-center lg:text-right">
+      <TableCell className="flex items-center gap-2 lg:table-cell lg:text-right">
         {mealIngredients.map((mealIngredient) => (
           <div
             key={mealIngredient.id}
-            className="lg:flex flex-1 lg:justify-end block"
+            className="block flex-1 lg:flex lg:justify-end"
           >
             <Unit unit={mealIngredient.unit} />
           </div>
@@ -63,7 +63,7 @@ const MealTableRow = async ({ row }: IProps) => {
         <div className="h-7"></div>
       </TableCell>
 
-      <TableCell className="lg:table-cell block text-right">
+      <TableCell className="block text-right lg:table-cell">
         <MealActions
           meal={row}
           ingredients={ingredientsResult.data?.data || []}

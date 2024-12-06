@@ -1,8 +1,9 @@
+import { z } from 'zod';
+
 import {
   EActivityLevel,
   EGender,
 } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
-import { z } from 'zod';
 
 export const calorieSchema = z.object({
   gender: z.nativeEnum(EGender),

@@ -1,9 +1,9 @@
-import { TableCell, TableBody, TableRow } from '@/app/components/ui/table';
-import { Skeleton } from '@/app/components/ui/skeleton';
 import IngredientsLoadingCell from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientsLoadingCell';
 import IngredientTableHead from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableHead';
-import TableFrame from '@/app/components/Table/TableFrame';
 import { INGREDTENTS_PAGE_SIZE } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
+import TableFrame from '@/app/components/Table/TableFrame';
+import { Skeleton } from '@/app/components/ui/skeleton';
+import { TableBody, TableCell, TableRow } from '@/app/components/ui/table';
 
 const IngredientsLoading = () => {
   const rows = Array.from({ length: INGREDTENTS_PAGE_SIZE });
@@ -20,7 +20,7 @@ const IngredientsLoading = () => {
             key={index}
             className="block border-b text-left last:border-b-0 lg:table-row lg:border-none"
           >
-            <TableCell className="lg:py-4.5 block px-4 py-2 text-dark lg:table-cell lg:w-[28%] lg:text-right">
+            <TableCell className="block px-4 py-2 text-dark lg:table-cell lg:w-[28%] lg:py-4.5 lg:text-right">
               <Skeleton className="h-4 w-2/3" />
             </TableCell>
             <IngredientsLoadingCell />

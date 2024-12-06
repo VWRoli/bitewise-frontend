@@ -1,13 +1,14 @@
 'use client';
 
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import { IMenuItem } from '@/app/(modules)/dashboard/interfaces';
 import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/app/components/ui/sidebar';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { cn } from '@/app/lib';
-import { IMenuItem } from '@/app/(modules)/dashboard/interfaces';
 
 interface IProps {
   route: string;

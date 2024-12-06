@@ -1,8 +1,11 @@
 'use client';
 
+import { EllipsisVertical } from 'lucide-react';
+
+import { deleteIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
+import EditIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/EditIngredientDialog';
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import DeleteDialog from '@/app/components/DeleteDialog';
-import { deleteIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
 import {
   Menubar,
   MenubarContent,
@@ -10,8 +13,6 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from '@/app/components/ui/menubar';
-import { EllipsisVertical } from 'lucide-react';
-import EditIngredientDialog from '@/app/(modules)/dashboard/(pages)/ingredients/components/EditIngredientDialog';
 import { useToast } from '@/app/hooks/use-toast';
 
 interface IProps {

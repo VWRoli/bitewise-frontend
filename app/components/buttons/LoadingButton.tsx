@@ -1,7 +1,8 @@
-import { Button, ButtonProps } from '@/app/components/ui/button';
-import { cn } from '@/app/lib';
 import { LoaderCircle } from 'lucide-react';
 import { PropsWithChildren } from 'react';
+
+import { Button, ButtonProps } from '@/app/components/ui/button';
+import { cn } from '@/app/lib';
 
 interface IProps extends ButtonProps, PropsWithChildren {
   className?: string;

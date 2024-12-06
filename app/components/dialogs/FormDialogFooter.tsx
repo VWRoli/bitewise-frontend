@@ -1,7 +1,8 @@
+import { UseFormReturn } from 'react-hook-form';
+
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { Button } from '@/app/components/ui/button';
 import { DialogClose, DialogFooter } from '@/app/components/ui/dialog';
-import { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
   form: UseFormReturn<any, any, undefined>;

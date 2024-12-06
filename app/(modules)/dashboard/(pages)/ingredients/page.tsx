@@ -1,7 +1,8 @@
+import { Suspense } from 'react';
+
 import IngredientsLoading from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientsLoading';
 import IngredientsTable from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientsTable';
 import { IPageProps } from '@/app/(modules)/dashboard/interfaces';
-import { Suspense } from 'react';
 
 export default function Page(props: IPageProps) {
   const pageKey = JSON.stringify(props.searchParams);

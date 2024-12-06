@@ -1,9 +1,10 @@
+import React, { useMemo } from 'react';
+
 import MealIngredientCell from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealIngredientCell';
 import { calculateColumnSum } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
 import { IMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import { cn } from '@/app/lib';
 import { TableCell } from '@/app/components/ui/table';
-import React, { useMemo } from 'react';
+import { cn } from '@/app/lib';
 
 interface IProps {
   mealIngredients: IMealIngredient[];
@@ -35,7 +36,7 @@ const MealTableCell = ({
   return (
     <TableCell
       className={cn(
-        'lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2 lg:text-right',
+        'mx-2 flex items-center gap-2 px-2 py-2 text-dark lg:table-cell lg:py-4 lg:text-right',
         className,
       )}
     >
@@ -49,7 +50,7 @@ const MealTableCell = ({
         />
       ))}
       {mainValue > 0 && column !== 'quantity' ? (
-        <div className="bg-dark text-light font-bold shadow-sm px-1 lg:px-2 py-1 rounded-lg">
+        <div className="rounded-lg bg-dark p-1 font-bold text-light shadow-sm lg:px-2">
           <span>{mainValue}</span>
           {!isNaN(subValue) && <span>({subValue})</span>}{' '}
           {unit && <span>{unit}</span>}
@@ -59,7 +60,7 @@ const MealTableCell = ({
       )}
       {column === 'quantity' && <div className="h-7"></div>}
       {mealName && (
-        <div className="flex-1 bg-dark text-light font-bold shadow-sm px-1 lg:px-2 py-1 rounded-lg">
+        <div className="flex-1 rounded-lg bg-dark p-1 font-bold text-light shadow-sm lg:px-2">
           {mealName}
         </div>
       )}

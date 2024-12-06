@@ -1,10 +1,17 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
+import CalculatorFooter from '@/app/(modules)/dashboard/(pages)/calculators/components/CalculatorFooter';
+import GenderField from '@/app/(modules)/dashboard/(pages)/calculators/components/GenderField';
 import {
   BMI_CALCULATOR_INPUTS,
   DEFAULT_BMI_VALUES,
 } from '@/app/(modules)/dashboard/(pages)/calculators/constants';
 import { IBmiValues } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
+import { bmiSchema } from '@/app/(modules)/dashboard/(pages)/calculators/validations';
 import {
   Form,
   FormControl,
@@ -14,12 +21,6 @@ import {
   FormMessage,
 } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import GenderField from '@/app/(modules)/dashboard/(pages)/calculators/components/GenderField';
-import CalculatorFooter from '@/app/(modules)/dashboard/(pages)/calculators/components/CalculatorFooter';
-import { bmiSchema } from '@/app/(modules)/dashboard/(pages)/calculators/validations';
 
 interface IProps {
   handleCalculate: (values: IBmiValues) => void;

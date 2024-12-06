@@ -1,5 +1,8 @@
+import { House } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import React from 'react';
+
 import { removeDashFromString } from '@/app/(modules)/dashboard/utils';
 import {
   Breadcrumb,
@@ -9,8 +12,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/app/components/ui/breadcrumb';
-import { House } from 'lucide-react';
-import React from 'react';
 
 const CustomBreadCrumbs = () => {
   const fullPathName = usePathname();

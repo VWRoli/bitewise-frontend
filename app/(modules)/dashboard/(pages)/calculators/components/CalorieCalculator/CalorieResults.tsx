@@ -1,11 +1,12 @@
 'use client';
 
-import { ICalorieResults } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 import React, { useState } from 'react';
-import LossResults from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/LossResults';
+
 import GainResults from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/GainResults';
-import { Card } from '@/app/components/ui/card';
+import LossResults from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/LossResults';
+import { ICalorieResults } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 import { Button } from '@/app/components/ui/button';
+import { Card } from '@/app/components/ui/card';
 
 export interface ICalorieResultsProps {
   results: ICalorieResults | null;

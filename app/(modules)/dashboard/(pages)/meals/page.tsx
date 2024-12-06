@@ -1,7 +1,8 @@
+import { Suspense } from 'react';
+
 import MealsLoading from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealsLoading';
 import MealsTable from '@/app/(modules)/dashboard/(pages)/meals/components/Table/MealsTable';
 import { IPageProps } from '@/app/(modules)/dashboard/interfaces';
-import { Suspense } from 'react';
 
 export default function Page(props: IPageProps) {
   const pageKey = JSON.stringify(props.searchParams);

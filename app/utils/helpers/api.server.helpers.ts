@@ -1,11 +1,12 @@
 'server-only';
 'use server';
 
+import { cookies } from 'next/headers';
+
 import { IApiResponse } from '@/app/(modules)/dashboard/interfaces';
 import { API_URL } from '@/app/utils/config';
 import { buildQueryParams, getErrorMessage } from '@/app/utils/helpers';
 import { IQueryParams } from '@/app/utils/interfaces';
-import { cookies } from 'next/headers';
 
 export async function apiRequest<T>(
   endpoint: string,

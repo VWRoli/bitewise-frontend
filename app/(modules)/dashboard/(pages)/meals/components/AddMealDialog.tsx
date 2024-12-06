@@ -1,20 +1,28 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
-import {
-  ICreateMeal,
-  IMeal,
-} from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import MealIngredient from '@/app/(modules)/dashboard/(pages)/meals/components/MealIngredient';
-import { DEFAULT_MEAL } from '@/app/(modules)/dashboard/(pages)/meals/constants';
+import { useFieldArray, useForm } from 'react-hook-form';
+
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import {
   createMeal,
   updateMeal,
 } from '@/app/(modules)/dashboard/(pages)/meals/actions';
+import MealIngredient from '@/app/(modules)/dashboard/(pages)/meals/components/MealIngredient';
+import { DEFAULT_MEAL } from '@/app/(modules)/dashboard/(pages)/meals/constants';
+import {
+  ICreateMeal,
+  IMeal,
+} from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import {
+  mealSchema,
+  TMealSchema,
+} from '@/app/(modules)/dashboard/(pages)/meals/validations';
 import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
-import { createOrUpdateToasts } from '@/app/utils/helpers';
-import { EActionType } from '@/app/utils/enums';
+import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
+import InputField from '@/app/components/form/InputField';
+import { Button } from '@/app/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -23,16 +31,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/app/components/ui/dialog';
-import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
-import { useFieldArray, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  TMealSchema,
-  mealSchema,
-} from '@/app/(modules)/dashboard/(pages)/meals/validations';
-import InputField from '@/app/components/form/InputField';
-import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
+import { EActionType } from '@/app/utils/enums';
+import { createOrUpdateToasts } from '@/app/utils/helpers';
 
 interface IProps {
   ingredients: IIngredient[];

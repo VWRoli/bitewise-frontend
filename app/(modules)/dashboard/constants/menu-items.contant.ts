@@ -1,13 +1,14 @@
-import { IMenuItem } from '@/app/(modules)/dashboard/interfaces';
-import { EOrderDirection } from '@/app/utils/enums';
 import {
-  LayoutDashboard,
-  ShoppingBasket,
-  HandPlatter,
-  NotebookPen,
   Calculator,
   CreditCard,
+  HandPlatter,
+  LayoutDashboard,
+  NotebookPen,
+  ShoppingBasket,
 } from 'lucide-react';
+
+import { IMenuItem } from '@/app/(modules)/dashboard/interfaces';
+import { EOrderDirection } from '@/app/utils/enums';
 
 export const MENU_ITEMS: IMenuItem[] = [
   {

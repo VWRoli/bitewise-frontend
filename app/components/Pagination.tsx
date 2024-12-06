@@ -1,5 +1,3 @@
-import { getPagesToShow } from '@/app/utils/helpers';
-import { cn } from '@/app/lib';
 import {
   Pagination as ShadcnPagination,
   PaginationContent,
@@ -8,7 +6,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/app/components/ui/pagination';
+import { cn } from '@/app/lib';
 import { EOrderDirection } from '@/app/utils/enums';
+import { getPagesToShow } from '@/app/utils/helpers';
 
 interface IProps {
   page?: string;

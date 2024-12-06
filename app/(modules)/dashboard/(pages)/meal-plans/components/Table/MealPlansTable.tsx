@@ -9,10 +9,10 @@ import EmptyTable from '@/app/components/EmptyTable';
 import CustomError from '@/app/components/Error';
 import { Pagination } from '@/app/components/Pagination';
 import TableFrame from '@/app/components/Table/TableFrame';
-import { IError } from '@/app/utils/interfaces/error.interface';
 import { TableBody } from '@/app/components/ui/table';
 import { EOrderDirection } from '@/app/utils/enums';
 import { IQueryParams } from '@/app/utils/interfaces';
+import { IError } from '@/app/utils/interfaces/error.interface';
 
 const MealPlansTable = async (props: IPageProps) => {
   const pageNumber = Number(props?.searchParams?.page || 1);

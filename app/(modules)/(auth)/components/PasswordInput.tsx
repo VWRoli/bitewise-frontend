@@ -1,3 +1,7 @@
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import { useState } from 'react';
+import { UseFormReturn } from 'react-hook-form';
+
 import { Button } from '@/app/components/ui/button';
 import {
   FormControl,
@@ -7,9 +11,6 @@ import {
   FormMessage,
 } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
-import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import { useState } from 'react';
-import { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
   form: UseFormReturn<any, any, undefined>;
@@ -43,9 +44,9 @@ const PasswordInput = ({ form, label, name }: IProps) => {
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? (
-                  <EyeIcon className="h-4 w-4" aria-hidden="true" />
+                  <EyeIcon className="size-4" aria-hidden="true" />
                 ) : (
-                  <EyeOffIcon className="h-4 w-4" aria-hidden="true" />
+                  <EyeOffIcon className="size-4" aria-hidden="true" />
                 )}
                 <span className="sr-only">
                   {showPassword ? 'Hide password' : 'Show password'}

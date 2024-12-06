@@ -1,19 +1,21 @@
 'use client';
 
-import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
-import { useRouter } from 'next/navigation';
-import * as api from '../api';
-import {
-  TSignupSchema,
-  signupSchema,
-} from '@/app/(modules)/(auth)/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form } from '@/app/components/ui/form';
-import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import InputField from '@/app/components/form/InputField';
+
+import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
+import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
+import {
+  signupSchema,
+  TSignupSchema,
+} from '@/app/(modules)/(auth)/validations';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
+import InputField from '@/app/components/form/InputField';
+import { Form } from '@/app/components/ui/form';
 import { useToast } from '@/app/hooks/use-toast';
+
+import * as api from '../api';
 
 const SignUpForm = () => {
   const router = useRouter();

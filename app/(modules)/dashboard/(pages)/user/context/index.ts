@@ -1,5 +1,6 @@
-import { IUser } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
 import React, { useContext } from 'react';
+
+import { IUser } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
 
 interface IDefaultValues {
   user: IUser;

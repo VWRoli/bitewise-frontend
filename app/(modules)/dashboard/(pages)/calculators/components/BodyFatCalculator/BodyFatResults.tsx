@@ -1,14 +1,14 @@
+import BodyFatTooltipTable from '@/app/(modules)/dashboard/(pages)/calculators/components/BodyFatCalculator/BodyFatTooltipTable';
 import { IBodyFatResults } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
+import { Card } from '@/app/components/ui/card';
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
-  TableRow,
   TableHeader,
+  TableRow,
 } from '@/app/components/ui/table';
-import { Card } from '@/app/components/ui/card';
-import BodyFatTooltipTable from '@/app/(modules)/dashboard/(pages)/calculators/components/BodyFatCalculator/BodyFatTooltipTable';
 
 interface IProps {
   results: IBodyFatResults | null;

@@ -1,5 +1,6 @@
-import { EUnit } from '@/app/(modules)/dashboard/(pages)/ingredients/enums';
 import { z } from 'zod';
+
+import { EUnit } from '@/app/(modules)/dashboard/(pages)/ingredients/enums';
 
 export const ingredientSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),

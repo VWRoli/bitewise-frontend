@@ -1,19 +1,27 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import {
-  ICreateMealPlan,
-  IMealPlan,
-} from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import { convertToOptions, createOrUpdateToasts } from '@/app/utils/helpers';
-import { IOption } from '@/app/utils/interfaces';
-import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import {
   createMealPlan,
   updateMealPlan,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
-import { EActionType } from '@/app/utils/enums';
+import {
+  ICreateMealPlan,
+  IMealPlan,
+} from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
+import {
+  mealPlanSchema,
+  TMealPlanSchema,
+} from '@/app/(modules)/dashboard/(pages)/meal-plans/validations';
+import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
+import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
+import InputField from '@/app/components/form/InputField';
+import { InputTags } from '@/app/components/form/InputTags';
+import { Button } from '@/app/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -22,7 +30,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/app/components/ui/dialog';
-import { Button } from '@/app/components/ui/button';
 import {
   Form,
   FormControl,
@@ -32,15 +39,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/app/components/ui/form';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  TMealPlanSchema,
-  mealPlanSchema,
-} from '@/app/(modules)/dashboard/(pages)/meal-plans/validations';
-import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
-import InputField from '@/app/components/form/InputField';
-import { InputTags } from '@/app/components/form/InputTags';
+import { EActionType } from '@/app/utils/enums';
+import { convertToOptions, createOrUpdateToasts } from '@/app/utils/helpers';
+import { IOption } from '@/app/utils/interfaces';
 
 interface IProps {
   allMeals: IMeal[];

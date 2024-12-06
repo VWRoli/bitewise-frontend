@@ -1,11 +1,12 @@
 import { Info } from 'lucide-react';
+
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
-  TableRow,
   TableHeader,
+  TableRow,
 } from '@/app/components/ui/table';
 import {
   Tooltip,

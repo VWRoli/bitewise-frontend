@@ -1,5 +1,6 @@
-import { EGender } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
 import { z } from 'zod';
+
+import { EGender } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
 
 export const bodyFatSchema = z.object({
   gender: z.nativeEnum(EGender),

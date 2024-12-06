@@ -1,13 +1,13 @@
-import { IBmiResults } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 import BmiTooltipTable from '@/app/(modules)/dashboard/(pages)/calculators/components/BmiCalculator/BmiTooltipTable';
+import { IBmiResults } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 import { Card } from '@/app/components/ui/card';
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
-  TableRow,
   TableHeader,
+  TableRow,
 } from '@/app/components/ui/table';
 
 interface IProps {

@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
+
+import CalorieForm from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/CalorieForm';
+import CalorieResults from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/CalorieResults';
+import ResultsWrapper from '@/app/(modules)/dashboard/(pages)/calculators/components/ResultsWrapper';
+import { calculateWeightChangeCalories } from '@/app/(modules)/dashboard/(pages)/calculators/helpers/calorie.helpers';
 import {
   ICalorieResults,
   ICalorieValues,
 } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
-import CalorieForm from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/CalorieForm';
-import CalorieResults from '@/app/(modules)/dashboard/(pages)/calculators/components/CalorieCalculator/CalorieResults';
-import { calculateWeightChangeCalories } from '@/app/(modules)/dashboard/(pages)/calculators/helpers/calorie.helpers';
-import ResultsWrapper from '@/app/(modules)/dashboard/(pages)/calculators/components/ResultsWrapper';
 
 const CalorieCalculator = () => {
   const [results, setResults] = useState<ICalorieResults | null>(null);

@@ -15,7 +15,7 @@ const UserProfile = () => {
 
   return (
     <div className="mb-16 flex flex-col items-center justify-center gap-4">
-      <Avatar className="h-16 w-16">
+      <Avatar className="size-16">
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>{avatarLetters}</AvatarFallback>
       </Avatar>

@@ -1,6 +1,7 @@
+import React, { useMemo } from 'react';
+
 import { calculateMealIngredientValue } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
 import { IMealIngredient } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
-import React, { useMemo } from 'react';
 
 interface IProps {
   mealIngredient: IMealIngredient;
@@ -38,7 +39,7 @@ const MealIngredientCell = ({
     );
   };
 
-  return <div className="pb-1 px-2 flex-1">{renderColumnContent()}</div>;
+  return <div className="flex-1 px-2 pb-1">{renderColumnContent()}</div>;
 };
 
 export default MealIngredientCell;

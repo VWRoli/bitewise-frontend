@@ -1,7 +1,10 @@
 'use client';
 
+import React, { useState } from 'react';
+
 import BodyFatForm from '@/app/(modules)/dashboard/(pages)/calculators/components/BodyFatCalculator/BodyFatForm';
 import BodyFatResults from '@/app/(modules)/dashboard/(pages)/calculators/components/BodyFatCalculator/BodyFatResults';
+import ResultsWrapper from '@/app/(modules)/dashboard/(pages)/calculators/components/ResultsWrapper';
 import {
   calculateBodyFatMass,
   calculateBodyFatPercentage,
@@ -13,8 +16,6 @@ import {
   IBodyFatResults,
   IBodyFatValues,
 } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
-import React, { useState } from 'react';
-import ResultsWrapper from '@/app/(modules)/dashboard/(pages)/calculators/components/ResultsWrapper';
 
 const BodyFatCalculator = () => {
   const [results, setResults] = useState<IBodyFatResults | null>(null);

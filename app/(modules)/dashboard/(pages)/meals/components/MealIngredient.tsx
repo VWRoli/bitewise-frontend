@@ -1,13 +1,14 @@
 'use client';
 
-import { convertToOptions } from '@/app/utils/helpers';
-import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import { Delete } from 'lucide-react';
-import { Button } from '@/app/components/ui/button';
 import { UseFormReturn } from 'react-hook-form';
+
+import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import { Combobox } from '@/app/components/Combobox';
-import { Label } from '@/app/components/ui/label';
 import InputField from '@/app/components/form/InputField';
+import { Button } from '@/app/components/ui/button';
+import { Label } from '@/app/components/ui/label';
+import { convertToOptions } from '@/app/utils/helpers';
 
 interface IProps {
   index: number;
@@ -26,7 +27,7 @@ const MealIngredient = ({
   const options = convertToOptions(allIngredients);
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex items-center gap-4">
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor={`mealIngredients.${index}.ingredientId`}>
           Ingredient

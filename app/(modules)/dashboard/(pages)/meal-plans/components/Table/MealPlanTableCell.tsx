@@ -1,3 +1,5 @@
+import React, { useMemo } from 'react';
+
 import {
   calculateMealValue,
   flatMealIngredients,
@@ -5,7 +7,6 @@ import {
 import { calculateColumnSum } from '@/app/(modules)/dashboard/(pages)/meals/helpers';
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import { TableCell } from '@/app/components/ui/table';
-import React, { useMemo } from 'react';
 
 interface IProps {
   meals: IMeal[];
@@ -26,7 +27,7 @@ const MealPlanTableCell = ({ meals, column, unit, subColumn }: IProps) => {
   );
 
   return (
-    <TableCell className="lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2 lg:text-right">
+    <TableCell className="mx-2 flex items-center gap-2 p-2 text-dark lg:table-cell lg:py-4 lg:text-right">
       <div className="flex flex-col gap-2">
         {mealValues.map((value, index) => (
           <div key={index} className="px-1 lg:px-2">
@@ -34,7 +35,7 @@ const MealPlanTableCell = ({ meals, column, unit, subColumn }: IProps) => {
             {unit && <span>{unit}</span>}
           </div>
         ))}
-        <div className="bg-dark text-light font-bold shadow-sm px-1 lg:px-2 py-1 rounded-lg">
+        <div className="rounded-lg bg-dark p-1 font-bold text-light shadow-sm lg:px-2">
           {mainValue} {unit && <span>{unit}</span>}
         </div>
       </div>

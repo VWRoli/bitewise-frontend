@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
+
 import BmiForm from '@/app/(modules)/dashboard/(pages)/calculators/components/BmiCalculator/BmiForm';
-import {
-  IBmiResults,
-  IBmiValues,
-} from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 import BmiResults from '@/app/(modules)/dashboard/(pages)/calculators/components/BmiCalculator/BmiResults';
+import ResultsWrapper from '@/app/(modules)/dashboard/(pages)/calculators/components/ResultsWrapper';
 import {
   bmiCategoryCalculator,
   calculateBMI,
 } from '@/app/(modules)/dashboard/(pages)/calculators/helpers';
-import ResultsWrapper from '@/app/(modules)/dashboard/(pages)/calculators/components/ResultsWrapper';
+import {
+  IBmiResults,
+  IBmiValues,
+} from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
 
 const BmiCalculator = () => {
   const [results, setResults] = useState<IBmiResults | null>(null);

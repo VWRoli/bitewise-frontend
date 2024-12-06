@@ -1,5 +1,13 @@
 'use client';
 
+import Link from 'next/link';
+
+import MenuItem from '@/app/(modules)/dashboard/components/MenuItem';
+import UserProfile from '@/app/(modules)/dashboard/components/UserProfile';
+import {
+  MENU_ITEMS,
+  SUB_MENU_ITEMS,
+} from '@/app/(modules)/dashboard/constants';
 import {
   Sidebar,
   SidebarContent,
@@ -10,13 +18,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/app/components/ui/sidebar';
-import {
-  MENU_ITEMS,
-  SUB_MENU_ITEMS,
-} from '@/app/(modules)/dashboard/constants';
-import Link from 'next/link';
-import UserProfile from '@/app/(modules)/dashboard/components/UserProfile';
-import MenuItem from '@/app/(modules)/dashboard/components/MenuItem';
 
 export function AppSidebar() {
   return (

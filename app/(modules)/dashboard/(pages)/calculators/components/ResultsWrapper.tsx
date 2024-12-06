@@ -1,6 +1,7 @@
-import { Button } from '@/app/components/ui/button';
 import { ListRestart } from 'lucide-react';
 import React, { PropsWithChildren } from 'react';
+
+import { Button } from '@/app/components/ui/button';
 
 interface IProps extends PropsWithChildren {
   reset: () => void;

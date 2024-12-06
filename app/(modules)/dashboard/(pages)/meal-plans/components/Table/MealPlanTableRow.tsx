@@ -1,8 +1,8 @@
+import MealPlanActions from '@/app/(modules)/dashboard/(pages)/meal-plans/components/MealPlanAction';
+import MealPlanTableCell from '@/app/(modules)/dashboard/(pages)/meal-plans/components/Table/MealPlanTableCell';
+import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
 import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
 import { TableCell, TableRow } from '@/app/components/ui/table';
-import { IMealPlan } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import MealPlanTableCell from '@/app/(modules)/dashboard/(pages)/meal-plans/components/Table/MealPlanTableCell';
-import MealPlanActions from '@/app/(modules)/dashboard/(pages)/meal-plans/components/MealPlanAction';
 
 interface IProps {
   row: IMealPlan;
@@ -12,14 +12,14 @@ const MealPlanTableRow = ({ row }: IProps) => {
   const { meals } = row;
   return (
     <TableRow key={row.id}>
-      <TableCell className="lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2">
+      <TableCell className="mx-2 flex items-center gap-2 p-2 text-dark lg:table-cell lg:py-4">
         <div className="flex flex-col gap-2">
           {meals.map((meal: IMeal, index) => (
             <div key={index} className="px-1 lg:px-2">
               {meal.name}
             </div>
           ))}
-          <div className="bg-dark text-light font-bold shadow-sm px-1 lg:px-2 py-1 rounded-lg">
+          <div className="rounded-lg bg-dark p-1 font-bold text-light shadow-sm lg:px-2">
             {row.name}
           </div>
         </div>
@@ -40,7 +40,7 @@ const MealPlanTableRow = ({ row }: IProps) => {
       />
       <MealPlanTableCell meals={meals} column="dietaryFiber" unit="g" />
 
-      <TableCell className="lg:table-cell flex items-center gap-2 text-dark lg:py-4 py-2 px-2 mx-2 lg:text-right">
+      <TableCell className="mx-2 flex items-center gap-2 p-2 text-dark lg:table-cell lg:py-4 lg:text-right">
         <MealPlanActions mealPlan={row} allMeals={[]} />
       </TableCell>
     </TableRow>

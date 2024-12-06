@@ -1,20 +1,18 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 import CalculatorFooter from '@/app/(modules)/dashboard/(pages)/calculators/components/CalculatorFooter';
 import GenderField from '@/app/(modules)/dashboard/(pages)/calculators/components/GenderField';
 import {
   CALORIE_CALCULATOR_INPUTS,
   DEFAULT_CALORIE_VALUES,
 } from '@/app/(modules)/dashboard/(pages)/calculators/constants';
-import {
-  EActivityLevel,
-  EGender,
-} from '@/app/(modules)/dashboard/(pages)/calculators/enums';
+import { EActivityLevel } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
 import { ICalorieValues } from '@/app/(modules)/dashboard/(pages)/calculators/interfaces';
-import { makeStringReadable } from '@/app/utils/helpers';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { calorieSchema } from '@/app/(modules)/dashboard/(pages)/calculators/validations';
 import {
   Form,
   FormControl,
@@ -24,7 +22,6 @@ import {
   FormMessage,
 } from '@/app/components/ui/form';
 import { Input } from '@/app/components/ui/input';
-import { calorieSchema } from '@/app/(modules)/dashboard/(pages)/calculators/validations';
 import {
   Select,
   SelectContent,
@@ -32,6 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/components/ui/select';
+import { makeStringReadable } from '@/app/utils/helpers';
 
 interface IProps {
   handleCalculate: (values: ICalorieValues) => void;

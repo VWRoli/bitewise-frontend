@@ -1,3 +1,5 @@
+import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
+
 import { EGender } from '@/app/(modules)/dashboard/(pages)/calculators/enums';
 import {
   FormControl,
@@ -7,7 +9,6 @@ import {
   FormMessage,
 } from '@/app/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
-import { FieldValues, UseFormReturn, Path } from 'react-hook-form';
 
 interface IProps<T extends FieldValues> {
   form: UseFormReturn<T>;

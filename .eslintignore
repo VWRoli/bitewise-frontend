@@ -3,4 +3,4 @@ node_modules
 app/components/ui
 app/hooks/use-mobile.tsx
 app/hooks/use-toast.ts
-app/lib/utils
+app/lib/utils.ts

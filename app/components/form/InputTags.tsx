@@ -1,9 +1,10 @@
+import { XIcon } from 'lucide-react';
+import { Dispatch, forwardRef, SetStateAction, useState } from 'react';
+import { ControllerRenderProps } from 'react-hook-form';
+
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
-import { XIcon } from 'lucide-react';
-import { Dispatch, SetStateAction, forwardRef, useState } from 'react';
-import { ControllerRenderProps } from 'react-hook-form';
 
 type InputTagsProps = ControllerRenderProps & {
   value: string[];
@@ -50,7 +51,7 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
             Add
           </Button>
         </div>
-        <div className="flex min-h-[2.5rem] flex-wrap items-center gap-2 overflow-y-auto rounded-md border p-2">
+        <div className="flex min-h-10 flex-wrap items-center gap-2 overflow-y-auto rounded-md border p-2">
           {value.map((item: string, idx: number) => (
             <Badge key={idx} variant="secondary">
               {item}

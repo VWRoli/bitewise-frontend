@@ -1,9 +1,10 @@
-import { INGREDIENT_TABLE_HEAD_DATA } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
-import { TableHeader, TableHead, TableRow } from '@/app/components/ui/table';
-import { cn } from '@/app/lib';
-import { EOrderDirection } from '@/app/utils/enums';
 import { ArrowDownAZ, ArrowUpAZ } from 'lucide-react';
 import Link from 'next/link';
+
+import { INGREDIENT_TABLE_HEAD_DATA } from '@/app/(modules)/dashboard/(pages)/ingredients/constants';
+import { TableHead, TableHeader, TableRow } from '@/app/components/ui/table';
+import { cn } from '@/app/lib';
+import { EOrderDirection } from '@/app/utils/enums';
 
 interface IProps {
   page?: string;

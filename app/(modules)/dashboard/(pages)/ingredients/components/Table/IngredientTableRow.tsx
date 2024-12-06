@@ -1,8 +1,8 @@
-import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
-import { TableRow } from '@/app/components/ui/table';
-import Unit from '@/app/(modules)/dashboard/components/Unit';
 import IngredientActions from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientActions';
 import IngredientTableCell from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableCell';
+import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
+import Unit from '@/app/(modules)/dashboard/components/Unit';
+import { TableRow } from '@/app/components/ui/table';
 
 interface IProps {
   row: IIngredient;

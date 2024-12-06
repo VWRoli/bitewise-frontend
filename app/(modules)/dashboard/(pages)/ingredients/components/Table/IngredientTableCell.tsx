@@ -1,5 +1,5 @@
-import { cn } from '@/app/lib';
 import { TableCell } from '@/app/components/ui/table';
+import { cn } from '@/app/lib';
 
 interface IProps {
   className?: string;

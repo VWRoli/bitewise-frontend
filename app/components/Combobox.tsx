@@ -1,7 +1,9 @@
 'use client';
 
-import * as React from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
+import * as React from 'react';
+import { Controller, UseFormReturn } from 'react-hook-form';
+
 import { Button } from '@/app/components/ui/button';
 import {
   Command,
@@ -17,7 +19,6 @@ import {
   PopoverTrigger,
 } from '@/app/components/ui/popover';
 import { IOption } from '@/app/utils/interfaces';
-import { Controller, UseFormReturn } from 'react-hook-form';
 
 interface IProps {
   options: IOption[];

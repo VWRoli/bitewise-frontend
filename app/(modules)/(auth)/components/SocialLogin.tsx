@@ -1,7 +1,8 @@
 'use client';
+import { PropsWithChildren } from 'react';
+
 import { Button } from '@/app/components/ui/button';
 import { API_URL } from '@/app/utils/config';
-import { PropsWithChildren } from 'react';
 
 interface IProps extends PropsWithChildren {
   url: string;

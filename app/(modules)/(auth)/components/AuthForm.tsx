@@ -1,16 +1,16 @@
+import SignInForm from '@/app/(modules)/(auth)/components/SignInForm';
+import SignUpForm from '@/app/(modules)/(auth)/components/SignUpForm';
+import SocialLogin from '@/app/(modules)/(auth)/components/SocialLogin';
+import { AuthView } from '@/app/(modules)/(auth)/enum';
+import FacebookIcon from '@/app/components/icons/FacebookIcon';
+import GoogleIcon from '@/app/components/icons/GoogleIcon';
+import { Separator } from '@/app/components/ui/separator';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@/app/components/ui/tabs';
-import SignUpForm from '@/app/(modules)/(auth)/components/SignUpForm';
-import SignInForm from '@/app/(modules)/(auth)/components/SignInForm';
-import { AuthView } from '@/app/(modules)/(auth)/enum';
-import { Separator } from '@/app/components/ui/separator';
-import SocialLogin from '@/app/(modules)/(auth)/components/SocialLogin';
-import FacebookIcon from '@/app/components/icons/FacebookIcon';
-import GoogleIcon from '@/app/components/icons/GoogleIcon';
 
 const AuthForm = () => {
   return (
@@ -33,7 +33,7 @@ const AuthForm = () => {
 
       <div className="flex w-full items-center">
         <Separator className="shrink" />
-        <p className="mx-4 flex-shrink-0">Or continue with</p>
+        <p className="mx-4 shrink-0">Or continue with</p>
         <Separator className="shrink" />
       </div>
       <div className="space-x-4">
