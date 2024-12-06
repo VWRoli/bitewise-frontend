@@ -11,11 +11,11 @@ const IngredientTableCell = ({ className, rowValue, rowName }: IProps) => {
   return (
     <TableCell
       className={cn(
-        'lg:table-cell block text-dark px-4 lg:text-right py-2',
+        'block px-4 py-2 text-dark lg:table-cell lg:text-right',
         className,
       )}
     >
-      <span className="lg:hidden font-semibold text-gray-700">{rowName}: </span>
+      <span className="font-semibold text-gray-700 lg:hidden">{rowName}: </span>
       {rowValue}
     </TableCell>
   );
