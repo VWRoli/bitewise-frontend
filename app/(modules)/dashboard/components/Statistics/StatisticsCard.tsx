@@ -4,7 +4,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/components/ui/card';
-import React from 'react';
 
 interface IProps {
   title: string;

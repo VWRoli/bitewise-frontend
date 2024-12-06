@@ -1,6 +1,5 @@
 import { getPagesToShow } from '@/app/utils/helpers';
 import { cn } from '@/app/lib';
-import React from 'react';
 import {
   Pagination as ShadcnPagination,
   PaginationContent,

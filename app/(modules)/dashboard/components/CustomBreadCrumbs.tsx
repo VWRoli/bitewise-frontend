@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 import { usePathname } from 'next/navigation';
 import { removeDashFromString } from '@/app/(modules)/dashboard/utils';
 import {
@@ -11,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from '@/app/components/ui/breadcrumb';
 import { House } from 'lucide-react';
+import React from 'react';
 
 const CustomBreadCrumbs = () => {
   const fullPathName = usePathname();

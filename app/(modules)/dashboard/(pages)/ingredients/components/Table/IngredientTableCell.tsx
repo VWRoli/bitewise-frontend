@@ -1,6 +1,5 @@
 import { cn } from '@/app/lib';
 import { TableCell } from '@/app/components/ui/table';
-import React from 'react';
 
 interface IProps {
   className?: string;

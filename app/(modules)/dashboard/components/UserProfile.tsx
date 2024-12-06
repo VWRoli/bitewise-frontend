@@ -7,7 +7,6 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/app/components/ui/avatar';
-import React from 'react';
 
 const UserProfile = () => {
   const { user } = useUserContext();

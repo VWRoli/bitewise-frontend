@@ -1,6 +1,5 @@
 import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
 import { TableRow } from '@/app/components/ui/table';
-import React from 'react';
 import Unit from '@/app/(modules)/dashboard/components/Unit';
 import IngredientActions from '@/app/(modules)/dashboard/(pages)/ingredients/components/IngredientActions';
 import IngredientTableCell from '@/app/(modules)/dashboard/(pages)/ingredients/components/Table/IngredientTableCell';
@@ -13,7 +12,7 @@ const IngredientTableRow = async ({ row }: IProps) => {
   return (
     <TableRow
       key={row.id}
-      className="border-b last:border-b-0 lg:table-row block lg:border-none text-left"
+      className="block border-b text-left last:border-b-0 lg:table-row lg:border-none"
     >
       <IngredientTableCell
         rowName="Name"
@@ -42,14 +41,14 @@ const IngredientTableRow = async ({ row }: IProps) => {
         rowName="Unit"
         className="flex items-center gap-1"
         rowValue={
-          <div className="lg:flex justify-end block">
+          <div className="block justify-end lg:flex">
             <Unit unit={row.unit} />
           </div>
         }
       />
       <IngredientTableCell
         rowName="Actions"
-        className="text-right flex justify-end"
+        className="flex justify-end text-right"
         rowValue={<IngredientActions ingredient={row} />}
       />
     </TableRow>

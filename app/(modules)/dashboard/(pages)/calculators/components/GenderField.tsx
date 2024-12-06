@@ -7,7 +7,6 @@ import {
   FormMessage,
 } from '@/app/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
-import React from 'react';
 import { FieldValues, UseFormReturn, Path } from 'react-hook-form';
 
 interface IProps<T extends FieldValues> {
