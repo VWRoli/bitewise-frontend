@@ -5,7 +5,7 @@ import {
   ICreateMealPlan,
   IMealPlan,
 } from '@/app/(modules)/dashboard/(pages)/meal-plans/interfaces';
-import { apiRequest } from '@/app/(modules)/dashboard/utils';
+import { apiRequest } from '@/app/utils/helpers';
 import { IQueryParams } from '@/app/utils/interfaces';
 import { revalidatePath } from 'next/cache';
 
