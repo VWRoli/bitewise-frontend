@@ -1,0 +1,6 @@
+node_modules
+*.d.ts
+app/components/ui
+app/hooks/use-mobile.tsx
+app/hooks/use-toast.ts
+app/lib/utils

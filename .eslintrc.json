@@ -1,8 +1,80 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:tailwindcss/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["simple-import-sort", "unused-imports"],
   "rules": {
+    // React Specific Rules
+    // Disable exhaustive dependency checking in React hooks
     "react-hooks/exhaustive-deps": "off",
+
+    // TypeScript Specific Rules
+    // Allow usage of "any" type in TypeScript
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": "off"
+    // Disable rule for unused variables in TypeScript
+    "@typescript-eslint/no-unused-vars": "off",
+    //TODO: Disable enforced naming conventions in TypeScript
+    "@typescript-eslint/naming-convention": "off",
+
+    // TailwindCSS Specific Rules
+    // Error on unnecessary arbitrary values in TailwindCSS
+    "tailwindcss/no-unnecessary-arbitrary-value": "error",
+    // Enforce shorthand syntax in TailwindCSS
+    "tailwindcss/enforces-shorthand": "error",
+    // Enforce ordered classnames in TailwindCSS
+    "tailwindcss/classnames-order": "error",
+    // Error on migration issues from TailwindCSS version 2
+    "tailwindcss/migration-from-tailwind-2": "error",
+    // Allow custom classnames not restricted to TailwindCSS
+    "tailwindcss/no-custom-classname": ["off"],
+
+    // Import/Export Rules
+    // Allow named exports without preferring default exports
+    "import/prefer-default-export": "off",
+    // Enforce sorted imports using simple-import-sort
+    "simple-import-sort/imports": "error",
+    // Enforce sorted exports using simple-import-sort
+    "simple-import-sort/exports": "error",
+
+    // Unused Imports/Variables Rules
+    // Disable unused variables rule as it is handled by unused-imports plugin
+    "no-unused-vars": "off",
+    // Automatically remove unused imports
+    "unused-imports/no-unused-imports": "error",
+    // Warn for all unused variables, with exceptions for those starting with an underscore
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+
+    // Enforce no use of `console` except for `warn` and `error` methods.
+    // This helps to avoid leaving unnecessary log statements in production code.
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+
+    // Enforce no "magic numbers" (unnamed numerical values) in the code.
+    // Allows `0` and `1` to be exceptions (e.g., for array indexing or booleans), and ignores array index values.
+    "no-magic-numbers": [
+      "error",
+      {
+        "ignore": [0, 1], // Allow `0` and `1` to be used directly in code (common for loops or boolean values).
+        "ignoreArrayIndexes": true // Allow array index values to be "magic numbers" (commonly used in loops).
+      }
+    ],
+
+    // Warn about usage of `setTimeout` or `setInterval`, which can cause issues with timing or asynchronous operations.
+    // It's generally better to use promises or async/await for async behavior.
+    "no-set-timeout-set-interval": "warn",
+
+    // Prevent the use of inline styles in JSX.
+    // Inline styles can reduce the flexibility and maintainability of your React components.
+    "react/forbid-inline-styles": "error"
   }
 }
