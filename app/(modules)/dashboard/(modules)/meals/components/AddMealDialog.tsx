@@ -32,7 +32,7 @@ import { IIngredient } from '@/app/(modules)/dashboard/(modules)/ingredients/int
 import InputField from '@/app/components/form/InputField';
 import MealIngredient from '@/app/(modules)/dashboard/(modules)/meals/components/MealIngredient';
 import { createOrUpdateToasts } from '@/app/utils/helpers';
-import { useUserContext } from '@/app/(modules)/dashboard/(modules)/user/context';
+import { useUserContext } from '@/app/(modules)/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps {

@@ -8,7 +8,7 @@ import {
 import { Button } from '@/app/components/ui/button';
 import { Edit } from 'lucide-react';
 import InfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/InfoBox';
-import { fetchMe } from '@/app/(modules)/dashboard/(modules)/user/actions';
+import { fetchMe } from '@/app/(modules)/dashboard/(modules)/_user/actions';
 
 const PersonalInformation = async () => {
   const user = await fetchMe();

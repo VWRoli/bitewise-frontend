@@ -3,7 +3,7 @@
 import { ISignIn, ISignUp } from '@/app/(modules)/(auth)/interfaces';
 
 import { API_URL } from '@/app/utils/config';
-import { IUser } from '@/app/(modules)/dashboard/(modules)/user/interfaces';
+import { IUser } from '@/app/(modules)/dashboard/(modules)/_user/interfaces';
 import axios from 'axios';
 import axiosInstance from '@/app/lib/axios';
 import { handleAxiosError } from '@/app/utils/helpers/api.client.helpers';

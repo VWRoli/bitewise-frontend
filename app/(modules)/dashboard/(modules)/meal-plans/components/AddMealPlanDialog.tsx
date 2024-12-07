@@ -39,7 +39,7 @@ import InputField from '@/app/components/form/InputField';
 import { InputTags } from '@/app/components/form/InputTags';
 import { createOrUpdateToasts } from '@/app/utils/helpers';
 import { useForm } from 'react-hook-form';
-import { useUserContext } from '@/app/(modules)/dashboard/(modules)/user/context';
+import { useUserContext } from '@/app/(modules)/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 //import { IOption } from '@/app/utils/interfaces';

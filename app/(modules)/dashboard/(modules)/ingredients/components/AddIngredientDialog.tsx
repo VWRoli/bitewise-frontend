@@ -36,7 +36,7 @@ import SelectField from '@/app/components/form/Select';
 import { SelectItem } from '@/app/components/ui/select';
 import { createOrUpdateToasts } from '@/app/utils/helpers';
 import { useForm } from 'react-hook-form';
-import { useUserContext } from '@/app/(modules)/dashboard/(modules)/user/context';
+import { useUserContext } from '@/app/(modules)/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps {

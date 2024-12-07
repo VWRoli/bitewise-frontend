@@ -6,7 +6,7 @@ import {
   AvatarImage,
 } from '@/app/components/ui/avatar';
 
-import { useUserContext } from '@/app/(modules)/dashboard/(modules)/user/context';
+import { useUserContext } from '@/app/(modules)/dashboard/(modules)/_user/context';
 
 const UserProfile = () => {
   const { user } = useUserContext();

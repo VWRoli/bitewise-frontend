@@ -1,4 +1,4 @@
-import { IUser } from '@/app/(modules)/dashboard/(modules)/user/interfaces';
+import { IUser } from '@/app/(modules)/dashboard/(modules)/_user/interfaces';
 import { apiRequest } from '@/app/utils/helpers';
 
 export async function fetchMe() {
