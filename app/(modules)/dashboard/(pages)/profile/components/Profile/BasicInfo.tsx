@@ -12,12 +12,8 @@ import {
 import { Edit } from 'lucide-react';
 
 import { Button } from '@/app/components/ui/button';
-import { IUser } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
 
-export interface IProfileProps {
-  user: IUser;
-}
-const BasicInfo = ({ user }: IProfileProps) => {
+const BasicInfo = () => {
   return (
     <Card className="flex w-full items-center justify-between p-6">
       <div className="flex items-center">
