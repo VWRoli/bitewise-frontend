@@ -1,5 +1,5 @@
-import { IIngredient } from '@/app/(modules)/dashboard/(pages)/ingredients/interfaces';
-import { IMeal } from '@/app/(modules)/dashboard/(pages)/meals/interfaces';
+import { IIngredient } from '@/app/(modules)/dashboard/(modules)/ingredients/interfaces';
+import { IMeal } from '@/app/(modules)/dashboard/(modules)/meals/interfaces';
 import { IOption } from '@/app/utils/interfaces';
 
 export const convertToOptions = (

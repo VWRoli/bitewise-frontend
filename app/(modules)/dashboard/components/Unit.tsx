@@ -1,4 +1,4 @@
-import { EUnit } from '@/app/(modules)/dashboard/(pages)/ingredients/enums';
+import { EUnit } from '@/app/(modules)/dashboard/(modules)/ingredients/enums';
 import { cn } from '@/app/lib';
 
 interface IProps {

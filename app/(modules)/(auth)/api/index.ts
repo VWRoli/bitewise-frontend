@@ -1,11 +1,11 @@
 'client-only';
 
-import axios from 'axios';
-
 import { ISignIn, ISignUp } from '@/app/(modules)/(auth)/interfaces';
-import { IUser } from '@/app/(modules)/dashboard/(pages)/user/interfaces';
-import axiosInstance from '@/app/lib/axios';
+
 import { API_URL } from '@/app/utils/config';
+import { IUser } from '@/app/(modules)/dashboard/(modules)/user/interfaces';
+import axios from 'axios';
+import axiosInstance from '@/app/lib/axios';
 import { handleAxiosError } from '@/app/utils/helpers/api.client.helpers';
 
 export const login = async (userData: ISignIn): Promise<IUser> => {

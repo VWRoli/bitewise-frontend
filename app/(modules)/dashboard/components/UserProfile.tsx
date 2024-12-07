@@ -1,11 +1,12 @@
 'use client';
 
-import { useUserContext } from '@/app/(modules)/dashboard/(pages)/user/context';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from '@/app/components/ui/avatar';
+
+import { useUserContext } from '@/app/(modules)/dashboard/(modules)/user/context';
 
 const UserProfile = () => {
   const { user } = useUserContext();

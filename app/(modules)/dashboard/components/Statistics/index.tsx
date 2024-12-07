@@ -5,10 +5,10 @@ import {
   ShoppingBasket,
 } from 'lucide-react';
 
-import { fetchIngredients } from '@/app/(modules)/dashboard/(pages)/ingredients/actions';
-import { fetchMealPlans } from '@/app/(modules)/dashboard/(pages)/meal-plans/actions';
-import { fetchMeals } from '@/app/(modules)/dashboard/(pages)/meals/actions';
 import StatisticsCard from '@/app/(modules)/dashboard/components/Statistics/StatisticsCard';
+import { fetchIngredients } from '@/app/(modules)/dashboard/(modules)/ingredients/actions';
+import { fetchMealPlans } from '@/app/(modules)/dashboard/(modules)/meal-plans/actions';
+import { fetchMeals } from '@/app/(modules)/dashboard/(modules)/meals/actions';
 
 const Statistics = async () => {
   const [ingredientsResult, mealsResult, mealPlansResult] = await Promise.all([
