@@ -1,6 +1,5 @@
-import Image from 'next/image';
-
 import AuthImage from '@/app/assets/bitewise.webp';
+import Image from 'next/image';
 
 const AuthImageFrame = () => {
   return (

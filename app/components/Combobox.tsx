@@ -1,10 +1,8 @@
 'use client';
 
-import { Check, ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
-import { Controller, UseFormReturn } from 'react-hook-form';
 
-import { Button } from '@/app/components/ui/button';
+import { Check, ChevronsUpDown } from 'lucide-react';
 import {
   Command,
   CommandEmpty,
@@ -13,11 +11,14 @@ import {
   CommandItem,
   CommandList,
 } from '@/app/components/ui/command';
+import { Controller, UseFormReturn } from 'react-hook-form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/app/components/ui/popover';
+
+import { Button } from '@/app/components/ui/button';
 import { IOption } from '@/app/utils/interfaces';
 
 interface IProps {

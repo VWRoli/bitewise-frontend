@@ -9,9 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/components/ui/card';
-import { Edit } from 'lucide-react';
 
 import { Button } from '@/app/components/ui/button';
+import { Edit } from 'lucide-react';
 
 const BasicInfo = () => {
   return (

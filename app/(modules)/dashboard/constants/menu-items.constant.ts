@@ -7,8 +7,8 @@ import {
   ShoppingBasket,
 } from 'lucide-react';
 
-import { IMenuItem } from '@/app/(modules)/dashboard/interfaces';
 import { EOrderDirection } from '@/app/utils/enums';
+import { IMenuItem } from '@/app/(modules)/dashboard/interfaces';
 
 export const MENU_ITEMS: IMenuItem[] = [
   {

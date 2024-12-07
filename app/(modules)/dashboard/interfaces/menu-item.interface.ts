@@ -1,5 +1,6 @@
-import { LucideProps } from 'lucide-react';
 import { ForwardRefExoticComponent, RefAttributes } from 'react';
+
+import { LucideProps } from 'lucide-react';
 
 export interface IMenuItem {
   label: string;

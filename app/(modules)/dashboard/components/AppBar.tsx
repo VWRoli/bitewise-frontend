@@ -1,15 +1,15 @@
 'use client';
 
 import { Bell, CircleUserRound, LogOut } from 'lucide-react';
+
+import { Button } from '@/app/components/ui/button';
+import CustomBreadCrumbs from '@/app/(modules)/dashboard/components/CustomBreadCrumbs';
 import Link from 'next/link';
+import LoadingButton from '@/app/components/buttons/LoadingButton';
+import { SidebarTrigger } from '@/app/components/ui/sidebar';
+import { logout } from '@/app/(modules)/(auth)/api';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
-import { logout } from '@/app/(modules)/(auth)/api';
-import CustomBreadCrumbs from '@/app/(modules)/dashboard/components/CustomBreadCrumbs';
-import LoadingButton from '@/app/components/buttons/LoadingButton';
-import { Button } from '@/app/components/ui/button';
-import { SidebarTrigger } from '@/app/components/ui/sidebar';
 import { useToast } from '@/app/hooks/use-toast';
 
 const AppBar = () => {

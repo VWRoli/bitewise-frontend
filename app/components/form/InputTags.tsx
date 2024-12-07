@@ -1,10 +1,10 @@
-import { XIcon } from 'lucide-react';
-import { Dispatch, forwardRef, SetStateAction, useState } from 'react';
-import { ControllerRenderProps } from 'react-hook-form';
+import { Dispatch, SetStateAction, forwardRef, useState } from 'react';
 
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
+import { ControllerRenderProps } from 'react-hook-form';
 import { Input } from '@/app/components/ui/input';
+import { XIcon } from 'lucide-react';
 
 type InputTagsProps = ControllerRenderProps & {
   value: string[];

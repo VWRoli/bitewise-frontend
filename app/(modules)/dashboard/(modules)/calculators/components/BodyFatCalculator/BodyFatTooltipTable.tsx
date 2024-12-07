@@ -1,5 +1,3 @@
-import { Info } from 'lucide-react';
-
 import {
   Table,
   TableBody,
@@ -14,6 +12,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/app/components/ui/tooltip';
+
+import { Info } from 'lucide-react';
 
 const BodyFatTooltipTable = () => {
   return (

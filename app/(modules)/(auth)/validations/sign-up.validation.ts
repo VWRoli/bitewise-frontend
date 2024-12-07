@@ -1,6 +1,5 @@
-import { z } from 'zod';
-
 import { PASSWORD_MIN_LENGTH } from '@/app/(modules)/(auth)/constants';
+import { z } from 'zod';
 
 export const signupSchema = z
   .object({

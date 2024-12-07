@@ -3,8 +3,9 @@ import {
   TVariant,
   VARIANTS,
 } from '@/app/components/Typography/variants.constants';
-import { cn } from '@/app/lib';
+
 import React from 'react';
+import { cn } from '@/app/lib';
 
 interface IProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TVariant;

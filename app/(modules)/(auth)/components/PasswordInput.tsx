@@ -1,8 +1,4 @@
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import { useState } from 'react';
-import { UseFormReturn } from 'react-hook-form';
-
-import { Button } from '@/app/components/ui/button';
 import {
   FormControl,
   FormField,
@@ -10,7 +6,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/app/components/ui/form';
+
+import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
+import { UseFormReturn } from 'react-hook-form';
+import { useState } from 'react';
 
 interface IProps {
   form: UseFormReturn<any, any, undefined>;

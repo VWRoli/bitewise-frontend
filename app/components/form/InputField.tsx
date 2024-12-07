@@ -1,6 +1,3 @@
-import { forwardRef, HTMLInputTypeAttribute } from 'react';
-import { UseFormReturn } from 'react-hook-form';
-
 import {
   FormControl,
   FormField,
@@ -8,7 +5,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/app/components/ui/form';
+import { HTMLInputTypeAttribute, forwardRef } from 'react';
+
 import { Input } from '@/app/components/ui/input';
+import { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
   form: UseFormReturn<any, any, undefined>;

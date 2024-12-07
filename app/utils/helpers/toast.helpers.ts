@@ -1,5 +1,5 @@
-import { toast } from '@/app/hooks/use-toast';
 import { EActionType } from '@/app/utils/enums';
+import { toast } from '@/app/hooks/use-toast';
 
 export const createOrUpdateToasts = (action: EActionType, result: any) => {
   const actionStr = action === EActionType.UPDATE ? 'Updated' : 'Added';

@@ -9,15 +9,10 @@
     "plugin:tailwindcss/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["simple-import-sort", "import", "unused-imports"],
+  "plugins": ["unused-imports"],
   "rules": {
     //Import / export sorting
-    //TODO: should add a sorting extension and another eslint package
-    //"simple-import-sort/imports": "error", // Enforce sorted imports using simple-import-sort
-    // "simple-import-sort/exports": "error", // Enforce sorted exports using simple-import-sort
-    "import/first": "error", //makes sure all imports are at the top of the file. (autofixable)
-    "import/newline-after-import": "error", // makes sure there’s a newline after the imports. (autofixable)
-    "import/no-duplicates": "error", // merges import statements of the same file. (autofixable, mostly)
+    "sort-imports": ["error"],
 
     // Handle unused stuff
     "no-unused-vars": "off",

@@ -1,13 +1,14 @@
 import {
-  Pagination as ShadcnPagination,
   PaginationContent,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  Pagination as ShadcnPagination,
 } from '@/app/components/ui/pagination';
-import { cn } from '@/app/lib';
+
 import { EOrderDirection } from '@/app/utils/enums';
+import { cn } from '@/app/lib';
 import { getPagesToShow } from '@/app/utils/helpers';
 
 interface IProps {

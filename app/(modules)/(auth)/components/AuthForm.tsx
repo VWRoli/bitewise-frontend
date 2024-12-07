@@ -1,16 +1,17 @@
-import SignInForm from '@/app/(modules)/(auth)/components/SignInForm';
-import SignUpForm from '@/app/(modules)/(auth)/components/SignUpForm';
-import SocialLogin from '@/app/(modules)/(auth)/components/SocialLogin';
-import { AuthView } from '@/app/(modules)/(auth)/enum';
-import FacebookIcon from '@/app/components/icons/FacebookIcon';
-import GoogleIcon from '@/app/components/icons/GoogleIcon';
-import { Separator } from '@/app/components/ui/separator';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@/app/components/ui/tabs';
+
+import { AuthView } from '@/app/(modules)/(auth)/enum';
+import FacebookIcon from '@/app/components/icons/FacebookIcon';
+import GoogleIcon from '@/app/components/icons/GoogleIcon';
+import { Separator } from '@/app/components/ui/separator';
+import SignInForm from '@/app/(modules)/(auth)/components/SignInForm';
+import SignUpForm from '@/app/(modules)/(auth)/components/SignUpForm';
+import SocialLogin from '@/app/(modules)/(auth)/components/SocialLogin';
 
 const AuthForm = () => {
   return (
