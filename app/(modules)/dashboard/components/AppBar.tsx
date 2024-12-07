@@ -1,6 +1,7 @@
 'use client';
 
 import { Bell, CircleUserRound, LogOut } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -55,14 +56,10 @@ const AppBar = () => {
         >
           <Bell />
         </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => {
-            // TODO: account
-          }}
-        >
-          <CircleUserRound />
+        <Button variant="ghost" size="icon">
+          <Link href="/dashboard/user">
+            <CircleUserRound />
+          </Link>
         </Button>
       </div>
     </header>
