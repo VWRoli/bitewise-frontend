@@ -57,7 +57,7 @@ const AppBar = () => {
           <Bell />
         </Button>
         <Button variant="ghost" size="icon">
-          <Link href="/dashboard/user">
+          <Link href="/dashboard/profile">
             <CircleUserRound />
           </Link>
         </Button>

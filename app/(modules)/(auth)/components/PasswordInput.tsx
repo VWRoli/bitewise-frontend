@@ -1,3 +1,5 @@
+'use client';
+
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import {
   FormControl,
