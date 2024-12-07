@@ -1,4 +1,4 @@
-export enum AUTH_ACTION_TYPES {
+export enum EAuthActionType {
   LOGIN_START = 'LOGIN_START',
   LOGIN_SUCCESS = 'LOGIN_SUCCESS',
   LOGIN_ERROR = 'LOGIN_ERROR',

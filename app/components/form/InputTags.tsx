@@ -6,12 +6,12 @@ import { ControllerRenderProps } from 'react-hook-form';
 import { Input } from '@/app/components/ui/input';
 import { XIcon } from 'lucide-react';
 
-type InputTagsProps = ControllerRenderProps & {
+type TInputTagsProps = ControllerRenderProps & {
   value: string[];
   onChange: Dispatch<SetStateAction<string[]>>;
 };
 
-export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
+export const InputTags = forwardRef<HTMLInputElement, TInputTagsProps>(
   ({ value, onChange, ...props }, ref) => {
     const [pendingDataPoint, setPendingDataPoint] = useState('');
 

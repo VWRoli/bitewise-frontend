@@ -5,7 +5,7 @@ import {
   TabsTrigger,
 } from '@/app/components/ui/tabs';
 
-import { AuthView } from '@/app/(modules)/(auth)/enum';
+import { EAuthView } from '@/app/(modules)/(auth)/enum';
 import FacebookIcon from '@/app/components/icons/FacebookIcon';
 import GoogleIcon from '@/app/components/icons/GoogleIcon';
 import { Separator } from '@/app/components/ui/separator';
@@ -19,15 +19,15 @@ const AuthForm = () => {
       <div>Logo</div>
       <h1 className="text-2xl font-bold xl:text-3xl">Welcome Back</h1>
       <div>Welcome back, please enter your details</div>
-      <Tabs defaultValue={AuthView.SIGN_IN}>
+      <Tabs defaultValue={EAuthView.SIGN_IN}>
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value={AuthView.SIGN_IN}>Sign In</TabsTrigger>
-          <TabsTrigger value={AuthView.SIGN_UP}>Sign Up</TabsTrigger>
+          <TabsTrigger value={EAuthView.SIGN_IN}>Sign In</TabsTrigger>
+          <TabsTrigger value={EAuthView.SIGN_UP}>Sign Up</TabsTrigger>
         </TabsList>
-        <TabsContent value={AuthView.SIGN_IN}>
+        <TabsContent value={EAuthView.SIGN_IN}>
           <SignInForm />
         </TabsContent>
-        <TabsContent value={AuthView.SIGN_UP}>
+        <TabsContent value={EAuthView.SIGN_UP}>
           <SignUpForm />
         </TabsContent>
       </Tabs>

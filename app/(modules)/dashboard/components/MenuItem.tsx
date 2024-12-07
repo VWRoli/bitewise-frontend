@@ -25,9 +25,7 @@ const MenuItem = ({ item, route }: IProps) => {
         asChild
         className={cn(
           'transition-all duration-150 hover:bg-primary-gradient hover:text-white',
-          {
-            'bg-primary-gradient text-white': isActive,
-          },
+          isActive && 'bg-primary-gradient text-white',
         )}
       >
         <Link href={route}>

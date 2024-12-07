@@ -1,6 +1,6 @@
-import { AUTH_ACTION_TYPES } from '@/app/(modules)/(auth)/enum';
+import { EAuthActionType } from '@/app/(modules)/(auth)/enum';
 
 export interface IAuthActionType<T = unknown> {
-  type: AUTH_ACTION_TYPES;
+  type: EAuthActionType;
   payload?: T;
 }

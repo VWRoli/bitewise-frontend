@@ -13,9 +13,7 @@ const LoadingButton = (props: IProps) => {
   return (
     <Button
       {...rest}
-      className={cn('', className, {
-        'pointer-events-none': loading,
-      })}
+      className={cn('', className, loading && 'pointer-events-none')}
       disabled={loading || rest.disabled}
     >
       {loading ? <LoaderCircle className="animate-spin" /> : <>{children}</>}
