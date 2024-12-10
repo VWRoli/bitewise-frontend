@@ -1,4 +1,7 @@
 import ChangePassword from '@/app/(modules)/dashboard/(modules)/profile/components/Security/ChangePassword';
+import RecoveryCodes from '@/app/(modules)/dashboard/(modules)/profile/components/Security/RecoveryCodes';
+import { Separator } from '@/app/components/ui/separator';
+import Sessions from '@/app/(modules)/dashboard/(modules)/profile/components/Security/Sessions';
 import TwoFa from '@/app/(modules)/dashboard/(modules)/profile/components/Security/TwoFa';
 
 const Security = () => {
@@ -6,6 +9,9 @@ const Security = () => {
     <div className="space-y-8">
       <ChangePassword />
       <TwoFa />
+      <RecoveryCodes />
+      <Separator />
+      <Sessions />
     </div>
   );
 };
