@@ -8,7 +8,7 @@ import {
 import { EProfileView } from '@/app/(modules)/dashboard/(modules)/profile/enum';
 import Notifications from '@/app/(modules)/dashboard/(modules)/profile/components/Notifications';
 import PlansAndBilling from '@/app/(modules)/dashboard/(modules)/profile/components/PlansAndBilling';
-import Preferences from '@/app/(modules)/dashboard/(modules)/profile/components/Preferences';
+import Preferences from '@/app/(modules)/dashboard/(modules)/profile/components/Appearance';
 import Profile from '@/app/(modules)/dashboard/(modules)/profile/components/Profile';
 import Security from '@/app/(modules)/dashboard/(modules)/profile/components/Security';
 
