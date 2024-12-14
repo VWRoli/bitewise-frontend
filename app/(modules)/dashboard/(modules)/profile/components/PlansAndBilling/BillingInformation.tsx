@@ -22,7 +22,7 @@ const BillingInformation = () => {
           <Edit /> Edit
         </Button>
       </CardHeader>
-      <CardContent className="">
+      <CardContent>
         <Typography>Street address</Typography>
         <Typography>City, Province, zip code</Typography>
         <Typography>Country</Typography>

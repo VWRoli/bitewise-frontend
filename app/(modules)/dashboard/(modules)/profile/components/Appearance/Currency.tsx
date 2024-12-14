@@ -22,7 +22,7 @@ const Currency = () => {
           <Edit /> Edit
         </Button>
       </CardHeader>
-      <CardContent className="grid grid-cols-2 gap-y-4 xl:w-3/5">
+      <CardContent>
         <Typography>EUR</Typography>
       </CardContent>
     </Card>
