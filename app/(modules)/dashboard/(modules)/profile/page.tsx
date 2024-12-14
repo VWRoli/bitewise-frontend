@@ -5,9 +5,9 @@ import {
   TabsTrigger,
 } from '@/app/components/ui/tabs';
 
-import BillingInformation from '@/app/(modules)/dashboard/(modules)/profile/components/BillingInformation';
 import { EProfileView } from '@/app/(modules)/dashboard/(modules)/profile/enum';
 import Notifications from '@/app/(modules)/dashboard/(modules)/profile/components/Notifications';
+import PlansAndBilling from '@/app/(modules)/dashboard/(modules)/profile/components/PlansAndBilling';
 import Preferences from '@/app/(modules)/dashboard/(modules)/profile/components/Preferences';
 import Profile from '@/app/(modules)/dashboard/(modules)/profile/components/Profile';
 import Security from '@/app/(modules)/dashboard/(modules)/profile/components/Security';
@@ -24,7 +24,7 @@ export default async function Page() {
             </TabsTrigger>
             <TabsTrigger value={EProfileView.SECURITY}>Security</TabsTrigger>
             <TabsTrigger value={EProfileView.BILLING}>
-              Billing Information
+              Plans and Billing
             </TabsTrigger>
             <TabsTrigger value={EProfileView.NOTIFICATIONS}>
               Notifications
@@ -41,7 +41,7 @@ export default async function Page() {
               <Security />
             </TabsContent>
             <TabsContent value={EProfileView.BILLING}>
-              <BillingInformation />
+              <PlansAndBilling />
             </TabsContent>
             <TabsContent value={EProfileView.NOTIFICATIONS}>
               <Notifications />

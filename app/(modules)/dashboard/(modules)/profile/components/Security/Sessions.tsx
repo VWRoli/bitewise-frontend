@@ -9,6 +9,7 @@ import {
 import { Button } from '@/app/components/ui/button';
 import { LogOut } from 'lucide-react';
 import SessionItem from '@/app/(modules)/dashboard/(modules)/profile/components/Security/SessionItem';
+import Typography from '@/app/components/Typography';
 
 const Sessions = () => {
   return (
@@ -21,13 +22,13 @@ const Sessions = () => {
           </Button>
         </div>
         <CardDescription>
-          Places where you&apos;re logged into the app
+          Places where you're logged into the app
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
         <SessionItem isCurrent />
 
-        <div>3 other sessions</div>
+        <Typography variant="p">3 other sessions</Typography>
         <SessionItem />
         <SessionItem />
         <SessionItem />

@@ -103,6 +103,7 @@
         "ignoreArrayIndexes": true // Allow array index values to be "magic numbers" (commonly used in loops).
       }
     ],
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "react/no-unescaped-entities": "off"
   }
 }

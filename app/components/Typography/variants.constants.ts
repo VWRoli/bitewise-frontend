@@ -1,9 +1,9 @@
 export const VARIANTS = {
   h1: `text-4xl font-extrabold lg:text-5xl`,
-  h2: `border-b pb-2 text-3xl font-semibold first:mt-0`,
+  h2: `text-3xl font-semibold first:mt-0`,
   h3: `text-2xl font-semibold`,
   h4: `text-xl font-semibold`,
-  p: `text-base leading-7 [&:not(:first-child)]:mt-6`,
+  p: `text-base leading-7`,
   blockquote: `mt-6 border-l-2 pl-6 italic`,
   code: `relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold`,
   lead: `text-xl text-muted-foreground`,
