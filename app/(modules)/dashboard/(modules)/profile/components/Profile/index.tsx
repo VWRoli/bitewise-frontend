@@ -1,5 +1,5 @@
 import BasicInfo from '@/app/(modules)/dashboard/(modules)/profile/components/Profile/BasicInfo';
-import { Button } from '@/app/components/ui/button';
+import DeleteAccount from '@/app/(modules)/dashboard/(modules)/profile/components/Profile/DeleteAccount';
 import PersonalInformation from '@/app/(modules)/dashboard/(modules)/profile/components/Profile/PersonalInformation';
 import SocialProfiles from '@/app/(modules)/dashboard/(modules)/profile/components/Profile/SocialProfiles';
 
@@ -9,7 +9,7 @@ const Profile = () => {
       <BasicInfo />
       <PersonalInformation />
       <SocialProfiles />
-      <Button variant="destructive">Delete account</Button>
+      <DeleteAccount />
     </div>
   );
 };
