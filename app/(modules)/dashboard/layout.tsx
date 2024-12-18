@@ -18,7 +18,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <UserProvider user={user.data as IUser}>
+    <UserProvider authUser={user.data as IUser}>
       <SidebarProvider>
         <AppSidebar />
         <main className="w-full">

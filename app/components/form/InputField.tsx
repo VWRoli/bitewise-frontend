@@ -12,7 +12,7 @@ import { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
   form: UseFormReturn<any, any, undefined>;
-  label: string;
+  label?: string;
   name: string;
   type: HTMLInputTypeAttribute;
   id?: string;
@@ -27,9 +27,11 @@ const InputField = forwardRef<HTMLInputElement, IProps>(
         name={name}
         render={({ field }) => (
           <FormItem>
-            <FormLabel asChild htmlFor={htmlFor}>
-              <p className="first-letter:uppercase">{label}</p>
-            </FormLabel>
+            {label && (
+              <FormLabel asChild htmlFor={htmlFor}>
+                <p className="first-letter:uppercase">{label}</p>
+              </FormLabel>
+            )}
             <FormControl>
               <Input
                 id={id}

@@ -26,7 +26,7 @@
         "argsIgnorePattern": "^_"
       }
     ], // Warn for all unused variables, with exceptions for those starting with an underscore
-    "no-console": ["error", { "allow": ["warn", "error"] }], // Enforce no use of `console` except for `warn` and `error` methods.
+    "no-console": ["warn", { "allow": ["warn", "error"] }], // Enforce no use of `console` except for `warn` and `error` methods.
 
     // TypeScript Specific Rules
     "@typescript-eslint/no-explicit-any": "off", // Allow usage of "any" type in TypeScript

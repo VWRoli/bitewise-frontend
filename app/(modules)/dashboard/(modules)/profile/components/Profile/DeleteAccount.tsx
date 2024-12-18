@@ -13,7 +13,7 @@ import {
 } from '@/app/components/ui/alert-dialog';
 
 import { Button } from '@/app/components/ui/button';
-import { deleteUser } from '@/app/(modules)/dashboard/(modules)/profile/api';
+import { deleteUser } from '@/app/(modules)/dashboard/(modules)/profile/actions';
 
 const DeleteAccount = () => {
   const handleDeleteUser = async () => {
