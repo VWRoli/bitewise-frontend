@@ -4,7 +4,7 @@ export const profileInformationSchema = z.object({
   userName: z.string().optional(),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
-  phone: z.string().optional(),
+  phoneNumber: z.string().optional(),
   // dateOfBirth: z
   //   .string()
   //   .regex(/^\d{4}-\d{2}-\d{2}$/)

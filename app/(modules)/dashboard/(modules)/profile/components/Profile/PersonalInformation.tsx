@@ -17,7 +17,6 @@ import { Form } from '@/app/components/ui/form';
 import { IUser } from '@/app/(modules)/dashboard/(modules)/_user/interfaces';
 import InfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/InfoBox';
 import { handleError } from '@/app/utils/helpers';
-import { toast } from '@/app/hooks/use-toast';
 import { updateUser } from '@/app/(modules)/dashboard/(modules)/profile/actions';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
@@ -90,8 +89,8 @@ const PersonalInformation = () => {
             />
             <InfoBox
               label="Phone"
-              name="phone"
-              info={user?.personalInformation?.phone || ''}
+              name="phoneNumber"
+              info={user?.personalInformation?.phoneNumber || ''}
               isEditable={isEditable}
               form={form}
             />

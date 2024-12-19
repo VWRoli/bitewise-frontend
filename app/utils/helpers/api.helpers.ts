@@ -21,7 +21,7 @@ export const getErrorMessage = async (res: Response): Promise<string> => {
   return errorMessage;
 };
 
-export const handleError = (error: unknown): string => {
+export const handleError = (error: unknown) => {
   let message: string;
 
   if (error instanceof Error) {
