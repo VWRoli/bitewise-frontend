@@ -4,10 +4,11 @@ import DatePicker from '@/app/components/form/DatePicker';
 import { TProfileInfoSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations/profile-information.validation';
 import Typography from '@/app/components/Typography';
 import { UseFormReturn } from 'react-hook-form';
+import { format } from 'date-fns';
 
 interface IProps {
   label: string;
-  info?: string;
+  info?: Date;
   isEditable?: boolean;
   form: UseFormReturn<TProfileInfoSchema, any, undefined>;
 }
@@ -20,7 +21,9 @@ const DateInfoBox = ({ label, info, isEditable, form }: IProps) => {
           <DatePicker form={form} name="dateOfBirth" />
         </div>
       ) : (
-        <Typography variant="large">{info || '-'}</Typography>
+        <Typography variant="large">
+          {format(info as Date, 'PPP') || '-'}
+        </Typography>
       )}
     </article>
   );

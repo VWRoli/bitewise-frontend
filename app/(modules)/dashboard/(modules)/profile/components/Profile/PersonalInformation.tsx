@@ -18,6 +18,7 @@ import { Form } from '@/app/components/ui/form';
 import { IUser } from '@/app/(modules)/dashboard/(modules)/_user/interfaces';
 import InfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/InfoBox';
 import PhoneInfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/Profile/PhoneInfoBox';
+import { getDefaultValues } from '@/app/(modules)/dashboard/(modules)/profile/helpers';
 import { handleError } from '@/app/utils/helpers';
 import { set } from 'date-fns';
 import { updateUser } from '@/app/(modules)/dashboard/(modules)/profile/actions';
@@ -32,7 +33,7 @@ const PersonalInformation = () => {
 
   const form = useForm<TProfileInfoSchema>({
     resolver: zodResolver(profileInformationSchema),
-    defaultValues: user?.personalInformation || {},
+    defaultValues: getDefaultValues(user),
   });
 
   async function onSubmit(values: TProfileInfoSchema) {
@@ -102,7 +103,10 @@ const PersonalInformation = () => {
             />
             <DateInfoBox
               label="Date of birth"
-              info={user?.personalInformation?.dateOfBirth?.toString() || ''}
+              info={
+                user?.personalInformation?.dateOfBirth &&
+                new Date(user?.personalInformation?.dateOfBirth)
+              }
               isEditable={isEditable}
               form={form}
             />
