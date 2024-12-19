@@ -13,9 +13,11 @@ import {
 } from '@/app/(modules)/dashboard/(modules)/profile/validations/profile-information.validation';
 
 import { Button } from '@/app/components/ui/button';
+import DateInfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/Profile/DateInfobox';
 import { Form } from '@/app/components/ui/form';
 import { IUser } from '@/app/(modules)/dashboard/(modules)/_user/interfaces';
 import InfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/InfoBox';
+import PhoneInfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/Profile/PhoneInfoBox';
 import { handleError } from '@/app/utils/helpers';
 import { set } from 'date-fns';
 import { updateUser } from '@/app/(modules)/dashboard/(modules)/profile/actions';
@@ -92,20 +94,17 @@ const PersonalInformation = () => {
               isEditable={isEditable}
               form={form}
             />
-            <InfoBox
+            <PhoneInfoBox
               label="Phone"
-              name="phoneNumber"
               info={user?.personalInformation?.phoneNumber || ''}
               isEditable={isEditable}
               form={form}
             />
-            <InfoBox
+            <DateInfoBox
               label="Date of birth"
-              name="dateOfBirth"
               info={user?.personalInformation?.dateOfBirth?.toString() || ''}
               isEditable={isEditable}
               form={form}
-              isDate
             />
 
             {isEditable && (
