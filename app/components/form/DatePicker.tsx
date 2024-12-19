@@ -13,20 +13,21 @@ import {
 import { Button } from '@/app/components/ui/button';
 import { Calendar } from '@/app/components/ui/calendar';
 import { CalendarIcon } from 'lucide-react';
-import { TProfileInfoSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations/personal-information.validation';
+import { FROM_YEAR } from '@/app/utils/constants';
+import { TPersonalInfoSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations/personal-information.validation';
 import { UseFormReturn } from 'react-hook-form';
 import { cn } from '@/app/lib';
 import { format } from 'date-fns';
 
 interface IProps {
-  form: UseFormReturn<TProfileInfoSchema, any, undefined>;
+  form: UseFormReturn<TPersonalInfoSchema, any, undefined>;
   name: string;
 }
 const DatePicker = ({ form, name }: IProps) => {
   return (
     <FormField
       control={form.control}
-      name={name as keyof TProfileInfoSchema}
+      name={name as keyof TPersonalInfoSchema}
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <Popover>
@@ -51,12 +52,15 @@ const DatePicker = ({ form, name }: IProps) => {
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
+                captionLayout="dropdown-buttons"
                 selected={new Date(field.value as string)}
                 onSelect={field.onChange}
                 disabled={(date) =>
                   date > new Date() || date < new Date('1900-01-01')
                 }
                 initialFocus
+                fromYear={FROM_YEAR}
+                toYear={new Date().getFullYear()}
               />
             </PopoverContent>
           </Popover>
