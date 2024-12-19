@@ -4,3 +4,9 @@ export const PASSWORD_VALIDATION_MESSAGES = {
   lowercase: 'Password must contain at least one lowercase letter',
   number: 'Password must contain at least one number',
 };
+
+export const CHANGE_PASSWORD_DEFAULT_VALUES = {
+  oldPassword: '',
+  password: '',
+  confirmPassword: '',
+};

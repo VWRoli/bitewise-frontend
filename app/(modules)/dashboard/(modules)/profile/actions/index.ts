@@ -2,6 +2,7 @@
 'server-only';
 
 import { IUser } from '@/app/(modules)/dashboard/(modules)/_user/interfaces';
+import { TChangePasswordSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations';
 import { apiRequest } from '@/app/utils/helpers';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -23,4 +24,8 @@ export async function updateUser(user: Partial<IUser>) {
   const result = await apiRequest<IUser>(`users/me`, 'PATCH', user);
 
   return result;
+}
+
+export async function changePassword(data: TChangePasswordSchema) {
+  await apiRequest<void>(`auth/change-password`, 'POST', data);
 }

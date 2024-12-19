@@ -1,5 +1,9 @@
 'use client';
 
+import {
+  CHANGE_PASSWORD_DEFAULT_VALUES,
+  PASSWORD_VALIDATION_MESSAGES,
+} from '@/app/(modules)/dashboard/(modules)/profile/constants';
 import { Card, CardContent } from '@/app/components/ui/card';
 import {
   TChangePasswordSchema,
@@ -8,9 +12,10 @@ import {
 
 import { Form } from '@/app/components/ui/form';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
-import { PASSWORD_VALIDATION_MESSAGES } from '@/app/(modules)/dashboard/(modules)/profile/constants';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
 import Typography from '@/app/components/Typography';
+import { changePassword } from '@/app/(modules)/dashboard/(modules)/profile/actions';
+import { handleError } from '@/app/utils/helpers';
 import { toast } from '@/app/hooks/use-toast';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,18 +23,19 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const ChangePassword = () => {
   const form = useForm<TChangePasswordSchema>({
     resolver: zodResolver(changePasswordSchema),
-    defaultValues: {},
+    defaultValues: CHANGE_PASSWORD_DEFAULT_VALUES,
   });
 
   async function onSubmit(values: TChangePasswordSchema) {
     try {
-      // await api.register(values);
-      // router.push('/dashboard');
-    } catch (error: any) {
+      await changePassword(values);
       toast({
-        variant: 'error',
-        description: error.message,
+        variant: 'success',
+        description: 'Password changed successfully',
       });
+      form.reset();
+    } catch (error: unknown) {
+      handleError(error);
     }
   }
   return (
@@ -65,15 +71,15 @@ const ChangePassword = () => {
                   </li>
                 ))}
               </ul>
-              <div className="absolute bottom-0 right-0 flex w-full justify-end">
-                <LoadingButton
-                  variant="default"
-                  type="submit"
-                  loading={form.formState.isSubmitting}
-                >
-                  Change Password
-                </LoadingButton>
-              </div>
+
+              <LoadingButton
+                variant="default"
+                type="submit"
+                className="absolute bottom-0 right-0 flex w-fit justify-end"
+                loading={form.formState.isSubmitting}
+              >
+                Change Password
+              </LoadingButton>
             </article>
           </form>
         </Form>
