@@ -16,6 +16,7 @@ import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
 import { IUser } from '@/app/(modules)/dashboard/(modules)/_user/interfaces';
 import InfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/InfoBox';
+import { handleError } from '@/app/utils/helpers';
 import { toast } from '@/app/hooks/use-toast';
 import { updateUser } from '@/app/(modules)/dashboard/(modules)/profile/actions';
 import { useForm } from 'react-hook-form';
@@ -33,18 +34,14 @@ const PersonalInformation = () => {
   });
 
   async function onSubmit(values: TProfileInfoSchema) {
-    const result = await updateUser({ personalInformation: values });
+    try {
+      const result = await updateUser({ personalInformation: values });
 
-    if (result.error) {
-      toast({
-        variant: 'error',
-        description:
-          result.error || 'An error occurred while updating your information',
-      });
-      return;
-    } else {
       setUser(result.data as IUser);
+    } catch (error: unknown) {
+      handleError(error);
     }
+
     setIsEditable(false);
   }
 

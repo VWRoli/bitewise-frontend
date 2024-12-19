@@ -1,4 +1,27 @@
-export const getErrorMessage = (error: unknown): string => {
+import { toast } from '@/app/hooks/use-toast';
+
+export const getErrorMessage = async (res: Response): Promise<string> => {
+  let errorMessage = `${res.status} ${res.statusText}`;
+
+  try {
+    const errorResponse = await res.json();
+
+    if (errorResponse?.message) {
+      if (Array.isArray(errorResponse.message)) {
+        errorMessage = errorResponse.message.join(', ');
+      } else if (typeof errorResponse.message === 'string') {
+        errorMessage = errorResponse.message;
+      }
+    } else if (errorResponse?.error) {
+      errorMessage = errorResponse.error;
+    }
+  } catch (jsonError) {
+    console.error(jsonError);
+  }
+  return errorMessage;
+};
+
+export const handleError = (error: unknown): string => {
   let message: string;
 
   if (error instanceof Error) {
@@ -10,6 +33,8 @@ export const getErrorMessage = (error: unknown): string => {
   } else {
     message = 'Something went wrong';
   }
-
-  return message;
+  toast({
+    variant: 'error',
+    description: message,
+  });
 };

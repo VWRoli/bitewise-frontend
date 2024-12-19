@@ -35,7 +35,9 @@ export async function apiRequest<T>(
     });
 
     if (!res.ok) {
-      throw new Error(`${res.status} ${res.statusText}`);
+      const errorMessage = await getErrorMessage(res);
+
+      throw new Error(errorMessage);
     }
     // eslint-disable-next-line
     if (res.status === 204) {
@@ -45,8 +47,6 @@ export async function apiRequest<T>(
     const data = await res.json();
     return { data };
   } catch (error: unknown) {
-    return {
-      error: getErrorMessage(error),
-    };
+    throw error;
   }
 }
