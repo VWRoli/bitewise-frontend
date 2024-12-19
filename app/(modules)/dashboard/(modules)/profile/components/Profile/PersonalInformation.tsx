@@ -17,6 +17,7 @@ import { Form } from '@/app/components/ui/form';
 import { IUser } from '@/app/(modules)/dashboard/(modules)/_user/interfaces';
 import InfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/InfoBox';
 import { handleError } from '@/app/utils/helpers';
+import { set } from 'date-fns';
 import { updateUser } from '@/app/(modules)/dashboard/(modules)/profile/actions';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
@@ -33,6 +34,10 @@ const PersonalInformation = () => {
   });
 
   async function onSubmit(values: TProfileInfoSchema) {
+    if (values.dateOfBirth) {
+      values.dateOfBirth = set(values.dateOfBirth, { hours: 12 });
+    }
+
     try {
       const result = await updateUser({ personalInformation: values });
 
@@ -94,13 +99,14 @@ const PersonalInformation = () => {
               isEditable={isEditable}
               form={form}
             />
-            {/* <InfoBox
+            <InfoBox
               label="Date of birth"
               name="dateOfBirth"
-              info={user?.personalInformation?.dateOfBirth || ''}
+              info={user?.personalInformation?.dateOfBirth?.toString() || ''}
               isEditable={isEditable}
               form={form}
-            /> */}
+              isDate
+            />
 
             {isEditable && (
               <Button className="absolute bottom-6 right-6" type="submit">

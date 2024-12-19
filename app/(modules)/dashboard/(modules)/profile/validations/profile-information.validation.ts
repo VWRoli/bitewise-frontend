@@ -5,10 +5,7 @@ export const profileInformationSchema = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   phoneNumber: z.string().optional(),
-  // dateOfBirth: z
-  //   .string()
-  //   .regex(/^\d{4}-\d{2}-\d{2}$/)
-  //   .optional(), //TODO: Matches 'YYYY-MM-DD' format
+  dateOfBirth: z.date().optional(),
 });
 
 export type TProfileInfoSchema = z.infer<typeof profileInformationSchema>;
