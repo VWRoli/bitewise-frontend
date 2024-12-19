@@ -17,10 +17,11 @@ interface IProps {
   type: HTMLInputTypeAttribute;
   id?: string;
   htmlFor?: string;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
 }
 
 const InputField = forwardRef<HTMLInputElement, IProps>(
-  ({ id, label, form, name, htmlFor, type = 'text', ...rest }, ref) => {
+  ({ id, label, form, name, htmlFor, type = 'text', onBlur, ...rest }, ref) => {
     return (
       <FormField
         control={form.control}
@@ -38,6 +39,7 @@ const InputField = forwardRef<HTMLInputElement, IProps>(
                 type={type}
                 {...field}
                 {...rest}
+                onBlur={onBlur}
                 ref={ref}
                 onChange={(event) =>
                   field.onChange(

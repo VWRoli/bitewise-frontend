@@ -1,34 +1,33 @@
 'use client';
 
-import DatePicker from '@/app/components/form/DatePicker';
-import InputField from '@/app/components/form/InputField';
-import { TProfileInfoSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations/profile-information.validation';
-import Typography from '@/app/components/Typography';
-import { UseFormReturn } from 'react-hook-form';
+import { FieldValues, UseFormReturn } from 'react-hook-form';
 
-interface IProps {
+import InputField from '@/app/components/form/InputField';
+import Typography from '@/app/components/Typography';
+
+interface IProps<T extends FieldValues> {
   label: string;
   info?: string;
   isEditable?: boolean;
   name: string;
-  form: UseFormReturn<TProfileInfoSchema, any, undefined>;
-  isDate?: boolean;
+  form: UseFormReturn<T, any, undefined>;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
 }
-const InfoBox = ({ label, info, isEditable, form, name, isDate }: IProps) => {
+
+const InfoBox = <T extends FieldValues>({
+  label,
+  info,
+  isEditable,
+  form,
+  name,
+  onBlur,
+}: IProps<T>) => {
   return (
     <article>
       <Typography variant="p">{label}</Typography>
       {isEditable ? (
         <div className="max-w-[200px]">
-          {isDate ? (
-            <DatePicker form={form} name={name as keyof TProfileInfoSchema} />
-          ) : (
-            <InputField
-              form={form}
-              name={name as keyof TProfileInfoSchema}
-              type={'text'}
-            />
-          )}
+          <InputField form={form} name={name} type={'text'} onBlur={onBlur} />
         </div>
       ) : (
         <Typography variant="large">{info || '-'}</Typography>

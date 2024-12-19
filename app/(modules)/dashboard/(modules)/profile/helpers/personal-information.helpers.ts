@@ -1,6 +1,6 @@
 import { DEFAULT_PERSONAL_INFORMATION } from '@/app/(modules)/dashboard/(modules)/profile/constants';
 import { IUser } from '@/app/(modules)/dashboard/(modules)/_user/interfaces';
-import { TProfileInfoSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations/profile-information.validation';
+import { TPersonalInfoSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations/personal-information.validation';
 
 export const getDefaultDateOfBirth = (
   dateOfBirth: Date | undefined,
@@ -9,7 +9,7 @@ export const getDefaultDateOfBirth = (
   return new Date(dateOfBirth);
 };
 
-export const getDefaultValues = (user: IUser): TProfileInfoSchema => {
+export const getDefaultValues = (user: IUser): TPersonalInfoSchema => {
   return user?.personalInformation
     ? {
         ...user.personalInformation,

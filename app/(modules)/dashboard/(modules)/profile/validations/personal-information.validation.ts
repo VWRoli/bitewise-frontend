@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const profileInformationSchema = z.object({
+export const personalInformationSchema = z.object({
   userName: z.string().optional(),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
@@ -8,4 +8,4 @@ export const profileInformationSchema = z.object({
   dateOfBirth: z.date().optional(),
 });
 
-export type TProfileInfoSchema = z.infer<typeof profileInformationSchema>;
+export type TPersonalInfoSchema = z.infer<typeof personalInformationSchema>;

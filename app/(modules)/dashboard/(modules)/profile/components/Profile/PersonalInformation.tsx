@@ -8,9 +8,9 @@ import {
 } from '@/app/components/ui/card';
 import { Edit, Save } from 'lucide-react';
 import {
-  TProfileInfoSchema,
-  profileInformationSchema,
-} from '@/app/(modules)/dashboard/(modules)/profile/validations/profile-information.validation';
+  TPersonalInfoSchema,
+  personalInformationSchema,
+} from '@/app/(modules)/dashboard/(modules)/profile/validations/personal-information.validation';
 
 import { Button } from '@/app/components/ui/button';
 import DateInfoBox from '@/app/(modules)/dashboard/(modules)/profile/components/Profile/DateInfobox';
@@ -31,12 +31,12 @@ const PersonalInformation = () => {
   const [isEditable, setIsEditable] = useState(false);
   const { user, setUser } = useUserContext();
 
-  const form = useForm<TProfileInfoSchema>({
-    resolver: zodResolver(profileInformationSchema),
+  const form = useForm<TPersonalInfoSchema>({
+    resolver: zodResolver(personalInformationSchema),
     defaultValues: getDefaultValues(user),
   });
 
-  async function onSubmit(values: TProfileInfoSchema) {
+  async function onSubmit(values: TPersonalInfoSchema) {
     if (values.dateOfBirth) {
       values.dateOfBirth = set(values.dateOfBirth, { hours: 12 });
     }
@@ -52,43 +52,36 @@ const PersonalInformation = () => {
     setIsEditable(false);
   }
 
-  const handleClicked = () => {
-    if (isEditable) {
-      setIsEditable(false);
-    } else {
-      setIsEditable(true);
-    }
-  };
-
   return (
     <Card>
       <Form {...form}>
-        <form
-          className="relative flex flex-col gap-2 px-4 pb-4"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
+        <form className="relative" onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Personal Information</CardTitle>
-            <Button variant="outline" type={'button'} onClick={handleClicked}>
+            <Button
+              variant="outline"
+              type={'button'}
+              onClick={() => setIsEditable((prev) => !prev)}
+            >
               <Edit /> {isEditable ? 'Cancel' : 'Edit'}
             </Button>
           </CardHeader>
           <CardContent className="grid grid-cols-2 gap-y-4 xl:w-3/5">
-            <InfoBox
+            <InfoBox<TPersonalInfoSchema>
               label="First Name"
               info={user?.personalInformation?.firstName || ''}
               name="firstName"
               isEditable={isEditable}
               form={form}
             />
-            <InfoBox
+            <InfoBox<TPersonalInfoSchema>
               label="Last Name"
               name="lastName"
               info={user?.personalInformation?.lastName || ''}
               isEditable={isEditable}
               form={form}
             />
-            <InfoBox
+            <InfoBox<TPersonalInfoSchema>
               label="Username"
               name="userName"
               info={user?.personalInformation?.userName || ''}

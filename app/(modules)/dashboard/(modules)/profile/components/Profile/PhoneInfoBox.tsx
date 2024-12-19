@@ -3,7 +3,7 @@
 import 'react-phone-number-input/style.css';
 
 import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
-import { TProfileInfoSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations/profile-information.validation';
+import { TPersonalInfoSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations';
 import Typography from '@/app/components/Typography';
 import { UseFormReturn } from 'react-hook-form';
 
@@ -11,7 +11,7 @@ interface IProps {
   label: string;
   info?: string;
   isEditable?: boolean;
-  form: UseFormReturn<TProfileInfoSchema, any, undefined>;
+  form: UseFormReturn<TPersonalInfoSchema, any, undefined>;
 }
 const PhoneInfoBox = ({ label, info, isEditable, form }: IProps) => {
   return (
