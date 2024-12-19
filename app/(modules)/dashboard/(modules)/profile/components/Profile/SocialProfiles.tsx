@@ -65,7 +65,7 @@ const SocialProfiles = () => {
               type={'button'}
               onClick={() => setIsEditable((prev) => !prev)}
             >
-              <Edit /> {isEditable ? 'Cancel' : 'Edit'}
+              {!isEditable && <Edit />} {isEditable ? 'Cancel' : 'Edit'}
             </Button>
           </CardHeader>
           <CardContent className="grid grid-cols-2 gap-y-4 xl:w-3/5">
