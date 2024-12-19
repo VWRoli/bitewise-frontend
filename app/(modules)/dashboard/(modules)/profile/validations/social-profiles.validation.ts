@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
 export const socialProfilesSchema = z.object({
-  facebook: z.union([z.literal(''), z.string().trim().url()]),
-  twitter: z.union([z.literal(''), z.string().trim().url()]),
-  instagram: z.union([z.literal(''), z.string().trim().url()]),
-  linkedin: z.union([z.literal(''), z.string().trim().url()]),
+  facebook: z.string().url().optional().or(z.literal('')),
+  twitter: z.string().url().optional().or(z.literal('')),
+  instagram: z.string().url().optional().or(z.literal('')),
+  linkedin: z.string().url().optional().or(z.literal('')),
 });
 
 export type TSocialProfilesSchema = z.infer<typeof socialProfilesSchema>;

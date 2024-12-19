@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Avatar,
   AvatarFallback,
@@ -12,8 +14,11 @@ import {
 
 import { Button } from '@/app/components/ui/button';
 import { Edit } from 'lucide-react';
+import { useUserContext } from '@/app/(modules)/dashboard/(modules)/_user/context';
 
 const BasicInfo = () => {
+  const { user } = useUserContext();
+
   return (
     <Card className="flex w-full items-center justify-between p-6">
       <div className="flex items-center">
@@ -26,9 +31,10 @@ const BasicInfo = () => {
 
         <CardHeader>
           <CardTitle className="flex items-center justify-between font-medium">
-            User Name
+            {user?.personalInformation?.firstName}{' '}
+            {user?.personalInformation?.lastName}
           </CardTitle>
-          <CardDescription>@username</CardDescription>
+          <CardDescription>{user?.email}</CardDescription>
         </CardHeader>
       </div>
       <div>
