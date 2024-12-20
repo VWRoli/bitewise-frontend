@@ -22,7 +22,7 @@ const DateInfoBox = ({ label, info, isEditable, form }: IProps) => {
         </div>
       ) : (
         <Typography variant="large">
-          {format(info as Date, 'PPP') || '-'}
+          {info ? format(info, 'PPP') : '-'}
         </Typography>
       )}
     </article>

@@ -17,7 +17,7 @@ import {
 } from '@/app/components/ui/select';
 
 import { Button } from '@/app/components/ui/button';
-import { ELanguages } from '@/app/(modules)/dashboard/(modules)/profile/enum';
+import { ELanguage } from '@/app/(modules)/dashboard/(modules)/profile/enum';
 import Typography from '@/app/components/Typography';
 import { useState } from 'react';
 
@@ -46,11 +46,11 @@ const Language = () => {
               <SelectValue placeholder="Language" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ELanguages.ENGLISH}>English</SelectItem>
-              <SelectItem value={ELanguages.SPANISH}>Spanish</SelectItem>
-              <SelectItem value={ELanguages.FRENCH}>French</SelectItem>
-              <SelectItem value={ELanguages.GERMAN}>German</SelectItem>
-              <SelectItem value={ELanguages.HUNGARIAN}>Hungarian</SelectItem>
+              <SelectItem value={ELanguage.ENGLISH}>English</SelectItem>
+              <SelectItem value={ELanguage.SPANISH}>Spanish</SelectItem>
+              <SelectItem value={ELanguage.FRENCH}>French</SelectItem>
+              <SelectItem value={ELanguage.GERMAN}>German</SelectItem>
+              <SelectItem value={ELanguage.HUNGARIAN}>Hungarian</SelectItem>
             </SelectContent>
           </Select>
         ) : (

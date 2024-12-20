@@ -53,6 +53,7 @@ const DatePicker = ({ form, name }: IProps) => {
               <Calendar
                 mode="single"
                 captionLayout="dropdown-buttons"
+                weekStartsOn={1}
                 selected={new Date(field.value as string)}
                 onSelect={field.onChange}
                 disabled={(date) =>
