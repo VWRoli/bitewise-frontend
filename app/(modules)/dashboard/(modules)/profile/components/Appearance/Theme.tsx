@@ -25,7 +25,7 @@ import { useTheme } from 'next-themes';
 const Theme = () => {
   const [isEditable, setIsEditable] = useState(false);
 
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
 
   return (
     <Card className="relative">
@@ -46,7 +46,7 @@ const Theme = () => {
         {isEditable ? (
           <Select onValueChange={(value) => setTheme(value)}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" />
+              <SelectValue placeholder={theme || 'Theme'} />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={ETheme.LIGHT}>Light</SelectItem>
@@ -58,7 +58,11 @@ const Theme = () => {
           <Typography>System</Typography>
         )}
         {isEditable && (
-          <Button className="absolute bottom-6 right-6" type="submit">
+          <Button
+            className="absolute bottom-6 right-6"
+            type="button"
+            onClick={() => setIsEditable(false)}
+          >
             <Save /> Save
           </Button>
         )}
