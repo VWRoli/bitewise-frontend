@@ -1,7 +1,7 @@
 export enum ELanguage {
-  ENGLISH = 'English',
-  SPANISH = 'Spanish',
-  FRENCH = 'French',
-  GERMAN = 'German',
-  HUNGARIAN = 'Hungarian',
+  ENGLISH = 'en',
+  SPANISH = 'es',
+  FRENCH = 'fr',
+  GERMAN = 'de',
+  HUNGARIAN = 'hu',
 }

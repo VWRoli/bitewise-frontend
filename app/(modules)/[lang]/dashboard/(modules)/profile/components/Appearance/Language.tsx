@@ -15,14 +15,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/components/ui/select';
+import { useParams, useRouter } from 'next/navigation';
 
 import { Button } from '@/app/components/ui/button';
 import { ELanguage } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/enum';
 import Typography from '@/app/components/Typography';
+import { getLanguageText } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
 import { useState } from 'react';
 
 const Language = () => {
+  const router = useRouter();
+  const params = useParams();
+
   const [isEditable, setIsEditable] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState<string>(
+    (params.lang as string) || ELanguage.ENGLISH,
+  );
+
+  const handleChange = (value: ELanguage) => {
+    setCurrentLanguage(value);
+  };
+
+  const handleSave = () => {
+    router.push(`/${currentLanguage}/dashboard/profile`);
+  };
 
   return (
     <Card>
@@ -41,7 +57,7 @@ const Language = () => {
       </CardHeader>
       <CardContent className="relative">
         {isEditable ? (
-          <Select onValueChange={() => {}}>
+          <Select onValueChange={handleChange}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Language" />
             </SelectTrigger>
@@ -54,10 +70,14 @@ const Language = () => {
             </SelectContent>
           </Select>
         ) : (
-          <Typography>English</Typography>
+          <Typography>{getLanguageText(currentLanguage)}</Typography>
         )}
         {isEditable && (
-          <Button className="absolute bottom-6 right-6" type="submit">
+          <Button
+            className="absolute bottom-6 right-6"
+            type="button"
+            onClick={handleSave}
+          >
             <Save /> Save
           </Button>
         )}
