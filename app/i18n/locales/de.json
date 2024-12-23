@@ -1,0 +1,23 @@
+{
+  "dashboard": {
+    "statistics": {
+      "totalIngredients": "Gesamtzutaten",
+      "totalRecipes": "Gesamtrezepte",
+      "totalMeals": "Gesamtmahlzeiten",
+      "totalMealPlans": "Gesamtessenspläne"
+    },
+    "appbar": {
+      "logout": "Abmelden"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "ingredients": "Zutaten",
+      "recipes": "Rezepte",
+      "meals": "Mahlzeiten",
+      "mealPlans": "Essenspläne",
+      "other": "Sonstiges",
+      "calculators": "Rechner",
+      "paymentPlans": "Zahlungspläne"
+    }
+  }
+}

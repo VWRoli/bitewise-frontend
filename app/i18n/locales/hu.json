@@ -1,0 +1,23 @@
+{
+  "dashboard": {
+    "statistics": {
+      "totalIngredients": "Összes hozzávaló",
+      "totalRecipes": "Összes recept",
+      "totalMeals": "Összes étel",
+      "totalMealPlans": "Összes étrend"
+    },
+    "appbar": {
+      "logout": "Kijelentkezés"
+    },
+    "sidebar": {
+      "dashboard": "Vezérlőpult",
+      "ingredients": "Hozzávalók",
+      "recipes": "Receptek",
+      "meals": "Ételek",
+      "mealPlans": "Étrendek",
+      "other": "Egyéb",
+      "calculators": "Kalkulátorok",
+      "paymentPlans": "Fizetési tervek"
+    }
+  }
+}

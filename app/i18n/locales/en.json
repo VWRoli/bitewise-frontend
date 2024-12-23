@@ -1,0 +1,23 @@
+{
+  "dashboard": {
+    "statistics": {
+      "totalIngredients": "Total Ingredients",
+      "totalRecipes": "Total Recipes",
+      "totalMeals": "Total Meals",
+      "totalMealPlans": "Total Meal Plans"
+    },
+    "appbar": {
+      "logout": "Logout"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "ingredients": "Ingredients",
+      "recipes": "Recipes",
+      "meals": "Meals",
+      "mealPlans": "Meal Plans",
+      "other": "Other",
+      "calculators": "Calculators",
+      "paymentPlans": "Payment Plans"
+    }
+  }
+}

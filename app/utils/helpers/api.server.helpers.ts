@@ -4,7 +4,7 @@
 import { buildQueryParams, getErrorMessage } from '@/app/utils/helpers';
 
 import { API_URL } from '@/app/utils/config';
-import { IApiResponse } from '@/app/(modules)/dashboard/interfaces';
+import { IApiResponse } from '@/app/(modules)/[lang]/dashboard/interfaces';
 import { IQueryParams } from '@/app/utils/interfaces';
 import { cookies } from 'next/headers';
 

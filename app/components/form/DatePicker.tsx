@@ -14,7 +14,7 @@ import { Button } from '@/app/components/ui/button';
 import { Calendar } from '@/app/components/ui/calendar';
 import { CalendarIcon } from 'lucide-react';
 import { FROM_YEAR } from '@/app/utils/constants';
-import { TPersonalInfoSchema } from '@/app/(modules)/dashboard/(modules)/profile/validations/personal-information.validation';
+import { TPersonalInfoSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations/personal-information.validation';
 import { UseFormReturn } from 'react-hook-form';
 import { cn } from '@/app/lib';
 import { format } from 'date-fns';
