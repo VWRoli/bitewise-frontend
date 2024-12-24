@@ -8,9 +8,9 @@ export const createNotificationSettingsSchema = (
       .string()
       .email(dictionary['emailInvalid'])
       .optional(),
-    communicationEmails: z.boolean().optional(),
-    marketingEmails: z.boolean().optional(),
-    secutiryEmails: z.boolean().optional(),
+    communicationEmail: z.boolean().optional(),
+    marketingEmail: z.boolean().optional(),
+    securityEmail: z.boolean().optional(),
   });
 
 export type TNotificationSettingsSchema = z.infer<

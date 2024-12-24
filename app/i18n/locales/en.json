@@ -104,12 +104,13 @@
       "defaultEmailDesc": "Choose where you'd like emails to be sent.",
       "emailNotifications": "Email Notifications",
       "emailNotificationsDesc": "Get emails to find out what's going on when you're not online.",
-      "communicationsEmail": "Communications Email",
-      "communicationsEmailDesc": "Receive emails about your account activity.",
+      "communicationEmail": "Communications Email",
+      "communicationEmailDesc": "Receive emails about your account activity.",
       "marketingEmail": "Marketing Email",
       "marketingEmailDesc": "Receive emails about new products, features, and more.",
       "securityEmail": "Security Email",
-      "securityEmailDesc": "Receive emails about your account activity and security."
+      "securityEmailDesc": "Receive emails about your account activity and security.",
+      "updateSuccess": "Notifications updated successfully"
     }
   }
 }
