@@ -8,16 +8,17 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/app/components/ui/breadcrumb';
+import { useParams, usePathname } from 'next/navigation';
 
 import { BREADCRUMBS_STARTING_INDEX } from '@/app/(modules)/[lang]/dashboard/constants';
 import { House } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import { removeDashFromString } from '@/app/(modules)/[lang]/dashboard/utils';
-import { usePathname } from 'next/navigation';
 
 const CustomBreadCrumbs = () => {
   const fullPathName = usePathname();
+  const params = useParams();
 
   const breadcrumbs = fullPathName
     .split('/')
@@ -29,14 +30,14 @@ const CustomBreadCrumbs = () => {
         {breadcrumbs.map((breadcrumb, index) => {
           const isDashboard = breadcrumb === 'dashboard';
           const isLast = index === breadcrumbs.length - 1;
-          const href = `/${breadcrumbs.slice(0, index + 1).join('/')}`;
+          const href = `/${params.lang}/${breadcrumbs.slice(0, index + 1).join('/')}`;
 
           return (
             <React.Fragment key={index}>
               <BreadcrumbItem>
                 {isDashboard ? (
                   <BreadcrumbLink asChild>
-                    <Link href={`/dashboard`}>
+                    <Link href={`/${params.lang}/dashboard`}>
                       <House size={16} />
                     </Link>
                   </BreadcrumbLink>

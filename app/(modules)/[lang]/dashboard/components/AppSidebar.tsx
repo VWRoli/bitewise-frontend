@@ -18,8 +18,11 @@ import {
 import Link from 'next/link';
 import MenuItem from '@/app/(modules)/[lang]/dashboard/components/MenuItem';
 import UserProfile from '@/app/(modules)/[lang]/dashboard/components/UserProfile';
+import { useParams } from 'next/navigation';
 
 export function AppSidebar() {
+  const params = useParams();
+
   return (
     <Sidebar>
       <SidebarContent className="flex h-full flex-col justify-between">
@@ -29,7 +32,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col gap-1 px-4">
               {MENU_ITEMS.map((item) => {
-                const route = `/dashboard${item.route}`;
+                const route = `/${params.lang}/dashboard${item.route}`;
 
                 return <MenuItem key={item.label} item={item} route={route} />;
               })}
@@ -41,7 +44,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {SUB_MENU_ITEMS.map((item) => {
-                const route = `/dashboard${item.route}`;
+                const route = `/${params.lang}/dashboard${item.route}`;
 
                 return (
                   <SidebarMenuItem key={item.label}>
