@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,6 +9,7 @@ import {
   BreadcrumbSeparator,
 } from '@/app/components/ui/breadcrumb';
 
+import { BREADCRUMBS_STARTING_INDEX } from '@/app/(modules)/[lang]/dashboard/constants';
 import { House } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
@@ -16,7 +19,9 @@ import { usePathname } from 'next/navigation';
 const CustomBreadCrumbs = () => {
   const fullPathName = usePathname();
 
-  const breadcrumbs = fullPathName.split('/').splice(1);
+  const breadcrumbs = fullPathName
+    .split('/')
+    .splice(BREADCRUMBS_STARTING_INDEX);
 
   return (
     <Breadcrumb>
