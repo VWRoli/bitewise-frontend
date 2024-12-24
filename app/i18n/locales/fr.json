@@ -19,5 +19,80 @@
       "calculators": "Calculatrices",
       "paymentPlans": "Plans de paiement"
     }
+  },
+  "common": {
+    "edit": "Modifier",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "disabled": "Désactivé",
+    "generated": "Généré",
+    "lastSeen": "Dernière vue",
+    "ago": "il y a",
+    "minutes": "minutes",
+    "hours": "heures",
+    "continue": "Continuer"
+  },
+  "profile": {
+    "menuOptions": {
+      "profile": "Mon Profil",
+      "security": "Sécurité",
+      "billing": "Plans et Facturation",
+      "notifications": "Notifications",
+      "preferences": "Préférences"
+    },
+    "deleteAccount": {
+      "title": "Supprimer le compte",
+      "description": "Cette action est irréversible. Cela supprimera définitivement votre compte et supprimera vos données de nos serveurs.",
+      "verification": "Êtes-vous absolument sûr?"
+    },
+    "personalInformation": {
+      "title": "Informations personnelles",
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "phoneNumber": "Numéro de téléphone",
+      "username": "Nom d'utilisateur",
+      "dob": "Date de naissance"
+    },
+    "socialProfiles": {
+      "title": "Profils sociaux"
+    },
+    "security": {
+      "oldPassword": "Ancien mot de passe",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "changePassword": "Changer le mot de passe",
+      "passwordRules": {
+        "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+        "passwordUppercase": "Le mot de passe doit contenir au moins une lettre majuscule",
+        "passwordLowercase": "Le mot de passe doit contenir au moins une lettre minuscule",
+        "passwordNumberRequired": "Le mot de passe doit contenir au moins un chiffre",
+        "passwordRequired": "Le mot de passe est requis",
+        "passwordMatch": "Les mots de passe doivent correspondre",
+        "oldPasswordRequired": "Ancien mot de passe requis",
+        "confirmPasswordRequired": "Confirmer le mot de passe est requis"
+      },
+      "twoFactorAuth": "Vérification en 2 étapes",
+      "twoFactorAuthDescription": "Ajoutez une couche de sécurité supplémentaire à votre compte en activant la vérification en 2 étapes",
+      "recoveryCodes": "Codes de récupération",
+      "sessions": "Sessions",
+      "sessionsDescription": "Endroits où vous êtes connecté à l'application",
+      "logoutAllSessions": "Déconnecter toutes les sessions",
+      "passwordChanged": "Mot de passe modifié avec succès",
+      "toggleVisibility": "Basculer la visibilité du mot de passe"
+    },
+    "appearance": {
+      "language": "Langue",
+      "languageDesc": "Langue par défaut pour le tableau de bord",
+      "english": "Anglais",
+      "spanish": "Espagnol",
+      "german": "Allemand",
+      "french": "Français",
+      "hungarian": "Hongrois",
+      "theme": "Thème",
+      "themeDesc": "Thème par défaut pour le tableau de bord",
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    }
   }
 }

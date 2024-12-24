@@ -14,8 +14,11 @@ import {
 
 import { Button } from '@/app/components/ui/button';
 import { deleteUser } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 
 const DeleteAccount = () => {
+  const { common, profile } = useDictionary();
+
   const handleDeleteUser = async () => {
     await deleteUser();
   };
@@ -23,20 +26,21 @@ const DeleteAccount = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive">Delete account</Button>
+        <Button variant="destructive">{profile.deleteAccount.title}</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>
+            {profile.deleteAccount.verification}
+          </AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            {profile.deleteAccount.description}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>{common.cancel}</AlertDialogCancel>
           <AlertDialogAction onClick={handleDeleteUser}>
-            Continue
+            {common.continue}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

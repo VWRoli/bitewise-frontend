@@ -1,22 +1,25 @@
 import { PASSWORD_MIN_LENGTH } from '@/app/(modules)/(auth)/constants';
-import { PASSWORD_VALIDATION_MESSAGES } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
 import { z } from 'zod';
 
-export const changePasswordSchema = z
-  .object({
-    oldPassword: z.string(),
-    password: z
-      .string()
-      .min(PASSWORD_MIN_LENGTH, PASSWORD_VALIDATION_MESSAGES.minLength)
-      .regex(/[A-Z]/, PASSWORD_VALIDATION_MESSAGES.uppercase)
-      .regex(/[a-z]/, PASSWORD_VALIDATION_MESSAGES.lowercase)
-      .regex(/\d/, PASSWORD_VALIDATION_MESSAGES.number)
-      .min(1, 'Password is required'),
-    confirmPassword: z.string().min(1, 'Confirm password is required'),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords must match',
-    path: ['confirmPassword'],
-  });
+export const createChangePasswordSchema = (
+  dictionary: Record<string, string>,
+) =>
+  z
+    .object({
+      oldPassword: z.string().min(1, dictionary['oldPasswordRequired']),
+      password: z
+        .string()
+        .min(PASSWORD_MIN_LENGTH, dictionary['passwordMinLength'])
+        .regex(/[A-Z]/, dictionary['passwordUppercase'])
+        .regex(/[a-z]/, dictionary['passwordLowercase'])
+        .regex(/\d/, dictionary['passwordNumberRequired']),
+      confirmPassword: z.string().min(1, dictionary['confirmPasswordRequired']),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: dictionary['passwordsMustMatch'],
+      path: ['confirmPassword'],
+    });
 
-export type TChangePasswordSchema = z.infer<typeof changePasswordSchema>;
+export type TChangePasswordSchema = z.infer<
+  ReturnType<typeof createChangePasswordSchema>
+>;

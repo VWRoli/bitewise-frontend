@@ -19,12 +19,14 @@ import InfoBox from '@/app/(modules)/[lang]/dashboard/(modules)/profile/componen
 import { addHttps } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
 import { handleError } from '@/app/utils/helpers';
 import { updateUser } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const SocialProfiles = () => {
+  const { common, profile } = useDictionary();
   const [isEditable, setIsEditable] = useState(false);
   const { user, setUser } = useUserContext();
 
@@ -59,13 +61,14 @@ const SocialProfiles = () => {
       <Form {...form}>
         <form className="relative" onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Social Profiles</CardTitle>
+            <CardTitle>{profile.socialProfiles.title}</CardTitle>
             <Button
               variant="outline"
               type={'button'}
               onClick={() => setIsEditable((prev) => !prev)}
             >
-              {!isEditable && <Edit />} {isEditable ? 'Cancel' : 'Edit'}
+              {!isEditable && <Edit />}
+              {isEditable ? common.cancel : common.edit}
             </Button>
           </CardHeader>
           <CardContent className="grid grid-cols-2 gap-y-4 xl:w-3/5">
@@ -103,7 +106,7 @@ const SocialProfiles = () => {
             />
             {isEditable && (
               <Button className="absolute bottom-6 right-6" type="submit">
-                <Save /> Save
+                <Save /> {common.save}
               </Button>
             )}
           </CardContent>

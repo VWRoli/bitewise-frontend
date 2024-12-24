@@ -2,12 +2,12 @@
 
 import {
   CHANGE_PASSWORD_DEFAULT_VALUES,
-  PASSWORD_VALIDATION_MESSAGES,
+  PASSWORD_RULES_LENGTH,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
 import { Card, CardContent } from '@/app/components/ui/card';
 import {
   TChangePasswordSchema,
-  changePasswordSchema,
+  createChangePasswordSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
 
 import { Form } from '@/app/components/ui/form';
@@ -17,10 +17,18 @@ import Typography from '@/app/components/Typography';
 import { changePassword } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { handleError } from '@/app/utils/helpers';
 import { toast } from '@/app/hooks/use-toast';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const ChangePassword = () => {
+  const dict = useDictionary();
+  const { profile } = dict;
+
+  const changePasswordSchema = createChangePasswordSchema(
+    dict.profile.security.passwordRules,
+  );
+
   const form = useForm<TChangePasswordSchema>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: CHANGE_PASSWORD_DEFAULT_VALUES,
@@ -31,7 +39,7 @@ const ChangePassword = () => {
       await changePassword(values);
       toast({
         variant: 'success',
-        description: 'Password changed successfully',
+        description: profile.security.passwordChanged,
       });
       form.reset();
     } catch (error: unknown) {
@@ -49,27 +57,33 @@ const ChangePassword = () => {
             <article className="w-1/2 space-y-6">
               <PasswordInput
                 form={form}
-                label="Old Password"
+                label={profile.security.oldPassword}
                 name="oldPassword"
               />
-              <PasswordInput form={form} label="Password" name="password" />
+              <PasswordInput
+                form={form}
+                label={profile.security.password}
+                name="password"
+              />
 
               <PasswordInput
                 form={form}
-                label="Confirm Password"
+                label={profile.security.confirmPassword}
                 name="confirmPassword"
               />
             </article>
 
             <article className="flex w-1/2 flex-col items-center justify-center">
               <ul className="list-disc space-y-3">
-                {Object.values(PASSWORD_VALIDATION_MESSAGES).map((val) => (
-                  <li key={val}>
-                    <Typography variant="p" className="font-medium">
-                      {val}
-                    </Typography>
-                  </li>
-                ))}
+                {Object.values(profile.security.passwordRules)
+                  .slice(0, PASSWORD_RULES_LENGTH)
+                  .map((val) => (
+                    <li key={val}>
+                      <Typography variant="p" className="font-medium">
+                        {val}
+                      </Typography>
+                    </li>
+                  ))}
               </ul>
 
               <LoadingButton
@@ -78,7 +92,7 @@ const ChangePassword = () => {
                 className="absolute bottom-0 right-0 flex w-fit justify-end"
                 loading={form.formState.isSubmitting}
               >
-                Change Password
+                {profile.security.changePassword}
               </LoadingButton>
             </article>
           </form>

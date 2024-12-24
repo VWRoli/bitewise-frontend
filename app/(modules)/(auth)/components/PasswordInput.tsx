@@ -12,6 +12,7 @@ import {
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { UseFormReturn } from 'react-hook-form';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useState } from 'react';
 
 interface IProps {
@@ -20,6 +21,7 @@ interface IProps {
   name: string;
 }
 const PasswordInput = ({ form, label, name }: IProps) => {
+  const { profile } = useDictionary();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -42,6 +44,7 @@ const PasswordInput = ({ form, label, name }: IProps) => {
                 type="button"
                 variant="ghost"
                 size="sm"
+                title={profile.security.toggleVisibility}
                 className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                 onClick={() => setShowPassword((prev) => !prev)}
               >

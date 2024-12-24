@@ -22,12 +22,14 @@ import { getDefaultValues } from '@/app/(modules)/[lang]/dashboard/(modules)/pro
 import { handleError } from '@/app/utils/helpers';
 import { set } from 'date-fns';
 import { updateUser } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const PersonalInformation = () => {
+  const { common, profile } = useDictionary();
   const [isEditable, setIsEditable] = useState(false);
   const { user, setUser } = useUserContext();
 
@@ -57,45 +59,46 @@ const PersonalInformation = () => {
       <Form {...form}>
         <form className="relative" onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Personal Information</CardTitle>
+            <CardTitle>{profile.personalInformation.title}</CardTitle>
             <Button
               variant="outline"
               type={'button'}
               onClick={() => setIsEditable((prev) => !prev)}
             >
-              {!isEditable && <Edit />} {isEditable ? 'Cancel' : 'Edit'}
+              {!isEditable && <Edit />}
+              {isEditable ? common.cancel : common.edit}
             </Button>
           </CardHeader>
           <CardContent className="grid grid-cols-2 gap-y-4 xl:w-3/5">
             <InfoBox<TPersonalInfoSchema>
-              label="First Name"
+              label={profile.personalInformation.firstName}
               info={user?.personalInformation?.firstName || ''}
               name="firstName"
               isEditable={isEditable}
               form={form}
             />
             <InfoBox<TPersonalInfoSchema>
-              label="Last Name"
+              label={profile.personalInformation.lastName}
               name="lastName"
               info={user?.personalInformation?.lastName || ''}
               isEditable={isEditable}
               form={form}
             />
             <InfoBox<TPersonalInfoSchema>
-              label="Username"
+              label={profile.personalInformation.username}
               name="userName"
               info={user?.personalInformation?.userName || ''}
               isEditable={isEditable}
               form={form}
             />
             <PhoneInfoBox
-              label="Phone"
+              label={profile.personalInformation.phoneNumber}
               info={user?.personalInformation?.phoneNumber || ''}
               isEditable={isEditable}
               form={form}
             />
             <DateInfoBox
-              label="Date of birth"
+              label={profile.personalInformation.dob}
               info={
                 user?.personalInformation?.dateOfBirth &&
                 new Date(user?.personalInformation?.dateOfBirth)
@@ -106,7 +109,7 @@ const PersonalInformation = () => {
 
             {isEditable && (
               <Button className="absolute bottom-6 right-6" type="submit">
-                <Save /> Save
+                <Save /> {common.save}
               </Button>
             )}
           </CardContent>

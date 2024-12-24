@@ -21,9 +21,11 @@ import { Button } from '@/app/components/ui/button';
 import { ELanguage } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/enum';
 import Typography from '@/app/components/Typography';
 import { getLanguageText } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useState } from 'react';
 
 const Language = () => {
+  const { common, profile } = useDictionary();
   const router = useRouter();
   const params = useParams();
 
@@ -39,38 +41,52 @@ const Language = () => {
   const handleSave = () => {
     router.push(`/${currentLanguage}/dashboard/profile`);
   };
+  const currentLanguageText = getLanguageText(
+    currentLanguage,
+    profile.appearance,
+  );
 
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div className="space-y-2">
-          <CardTitle>Language</CardTitle>
-          <CardDescription>Default language for dashboard</CardDescription>
+          <CardTitle>{profile.appearance.language}</CardTitle>
+          <CardDescription>{profile.appearance.languageDesc}</CardDescription>
         </div>
         <Button
           variant="outline"
           type={'button'}
           onClick={() => setIsEditable((prev) => !prev)}
         >
-          {!isEditable && <Edit />} {isEditable ? 'Cancel' : 'Edit'}
+          {!isEditable && <Edit />} {isEditable ? common.cancel : common.edit}
         </Button>
       </CardHeader>
       <CardContent className="relative">
         {isEditable ? (
           <Select onValueChange={handleChange}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Language" />
+              <SelectValue placeholder={currentLanguageText} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ELanguage.ENGLISH}>English</SelectItem>
-              <SelectItem value={ELanguage.SPANISH}>Spanish</SelectItem>
-              <SelectItem value={ELanguage.FRENCH}>French</SelectItem>
-              <SelectItem value={ELanguage.GERMAN}>German</SelectItem>
-              <SelectItem value={ELanguage.HUNGARIAN}>Hungarian</SelectItem>
+              <SelectItem value={ELanguage.ENGLISH}>
+                {profile.appearance.english}
+              </SelectItem>
+              <SelectItem value={ELanguage.SPANISH}>
+                {profile.appearance.spanish}
+              </SelectItem>
+              <SelectItem value={ELanguage.FRENCH}>
+                {profile.appearance.french}
+              </SelectItem>
+              <SelectItem value={ELanguage.GERMAN}>
+                {profile.appearance.german}
+              </SelectItem>
+              <SelectItem value={ELanguage.HUNGARIAN}>
+                {profile.appearance.hungarian}
+              </SelectItem>
             </SelectContent>
           </Select>
         ) : (
-          <Typography>{getLanguageText(currentLanguage)}</Typography>
+          <Typography>{currentLanguageText}</Typography>
         )}
         {isEditable && (
           <Button
@@ -78,7 +94,7 @@ const Language = () => {
             type="button"
             onClick={handleSave}
           >
-            <Save /> Save
+            <Save /> {common.save}
           </Button>
         )}
       </CardContent>

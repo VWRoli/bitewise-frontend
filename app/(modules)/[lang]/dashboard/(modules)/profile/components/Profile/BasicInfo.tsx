@@ -14,9 +14,11 @@ import {
 
 import { Button } from '@/app/components/ui/button';
 import { Edit } from 'lucide-react';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 
 const BasicInfo = () => {
+  const dict = useDictionary();
   const { user } = useUserContext();
 
   return (
@@ -39,7 +41,7 @@ const BasicInfo = () => {
       </div>
       <div>
         <Button variant="outline">
-          <Edit /> Edit
+          <Edit /> {dict.common.edit}
         </Button>
       </div>
     </Card>

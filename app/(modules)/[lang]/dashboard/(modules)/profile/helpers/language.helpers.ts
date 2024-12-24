@@ -1,19 +1,22 @@
 import { ELanguage } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/enum';
 
-export const getLanguageText = (value: string) => {
+export const getLanguageText = (
+  value: string,
+  dictionary: Record<string, string>,
+) => {
   switch (value) {
     case ELanguage.ENGLISH:
-      return 'English';
+      return dictionary.english;
     case ELanguage.SPANISH:
-      return 'Spanish';
+      return dictionary.spanish;
     case ELanguage.FRENCH:
-      return 'French';
+      return dictionary.french;
     case ELanguage.GERMAN:
-      return 'German';
+      return dictionary.german;
     case ELanguage.HUNGARIAN:
-      return 'Hungarian';
+      return dictionary.hungarian;
 
     default:
-      return 'English';
+      return dictionary.english;
   }
 };

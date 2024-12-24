@@ -19,5 +19,94 @@
       "calculators": "Calculators",
       "paymentPlans": "Payment Plans"
     }
+  },
+  "common": {
+    "edit": "Edit",
+    "save": "Save",
+    "cancel": "Cancel",
+    "disabled": "Disabled",
+    "generated": "Generated",
+    "lastSeen": "Last Seen",
+    "ago": "ago",
+    "minutes": "minutes",
+    "hours": "hours",
+    "continue": "Continue"
+  },
+  "profile": {
+    "menuOptions": {
+      "profile": "My Profile",
+      "security": "Security",
+      "billing": "Plans and Billing",
+      "notifications": "Notifications",
+      "preferences": "Preferences"
+    },
+    "deleteAccount": {
+      "title": "Delete Account",
+      "description": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+      "verification": "Are you absolutely sure?"
+    },
+    "personalInformation": {
+      "title": "Personal Information",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "phoneNumber": "Phone Number",
+      "username": "Username",
+      "dob": "Date of Birth"
+    },
+    "socialProfiles": {
+      "title": "Social Profiles"
+    },
+    "security": {
+      "oldPassword": "Old Password",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "changePassword": "Change Password",
+      "passwordRules": {
+        "passwordMinLength": "Password must be at least 8 characters long",
+        "passwordUppercase": "Password must contain at least one uppercase letter",
+        "passwordLowercase": "Password must contain at least one lowercase letter",
+        "passwordNumberRequired": "Password must contain at least one number",
+        "passwordRequired": "Password is required",
+        "passwordMatch": "Passwords must match",
+        "oldPasswordRequired": "Old password is required",
+        "confirmPasswordRequired": "Confirm password is required"
+      },
+      "twoFactorAuth": "2-step Verification",
+      "twoFactorAuthDescription": "Add an extra layer of security to your account by enabling 2-step verification",
+      "recoveryCodes": "Recovery Codes",
+      "sessions": "Sessions",
+      "sessionsDescription": "Places where you're logged into the app",
+      "logoutAllSessions": "Logout of all sessions",
+      "passwordChanged": "Password changed successfully",
+      "toggleVisibility": "Toggle password visibility"
+    },
+    "appearance": {
+      "language": "Language",
+      "languageDesc": "Default language for dashboard",
+      "english": "English",
+      "spanish": "Spanish",
+      "german": "German",
+      "french": "French",
+      "hungarian": "Hungarian",
+      "theme": "Theme",
+      "themeDesc": "Default theme for dashboard",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System",
+      "currency": "Currency",
+      "currencyDesc": "Default currency for dashboard"
+    },
+    "notifications": {
+      "defaultEmail": "Default Email Notifications",
+      "defaultEmailDesc": "Choose where you'd like emails to be sent.",
+      "emailNotifications": "Email Notifications",
+      "emailNotificationsDesc": "Get emails to find out what's going on when you're not online.",
+      "communicationsEmail": "Communications Email",
+      "communicationsEmailDesc": "Receive emails about your account activity.",
+      "marketingEmail": "Marketing Email",
+      "marketingEmailDesc": "Receive emails about new products, features, and more.",
+      "securityEmail": "Security Email",
+      "securityEmailDesc": "Receive emails about your account activity and security."
+    }
   }
 }
