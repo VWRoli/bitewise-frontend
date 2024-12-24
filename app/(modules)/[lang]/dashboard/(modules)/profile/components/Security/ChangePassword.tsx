@@ -48,7 +48,7 @@ const ChangePassword = () => {
   }
   return (
     <Card>
-      <CardContent className="">
+      <CardContent>
         <Form {...form}>
           <form
             className="relative flex flex-col gap-8 pt-6 xl:flex-row"

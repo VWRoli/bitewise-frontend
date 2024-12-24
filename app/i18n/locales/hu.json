@@ -32,6 +32,9 @@
     "hours": "óra",
     "continue": "Folytatás"
   },
+  "validation": {
+    "emailInvalid": "Érvénytelen e-mail"
+  },
   "profile": {
     "menuOptions": {
       "profile": "Profilom",

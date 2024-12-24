@@ -8,21 +8,57 @@ import {
   CardTitle,
 } from '@/app/components/ui/card';
 import { Edit, Save } from 'lucide-react';
+import {
+  TNotificationSettingsSchema,
+  createNotificationSettingsSchema,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations/notification-settings.validation';
 
 import { Button } from '@/app/components/ui/button';
+import { Form } from '@/app/components/ui/form';
+import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
+import InputField from '@/app/components/form/InputField';
 import Typography from '@/app/components/Typography';
+import { handleError } from '@/app/utils/helpers';
+import { updateUser } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { useDictionary } from '@/app/providers/dictionary-provider';
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const DefaultEmail = () => {
-  const { common, profile } = useDictionary();
-  const { user } = useUserContext();
+  const { common, profile, validation } = useDictionary();
+  const { user, setUser } = useUserContext();
+
+  const currentEmail =
+    user?.notificationSettings?.defaultEmailAddress || user?.email;
+
+  const notificationSettingsSchema =
+    createNotificationSettingsSchema(validation);
+
+  const form = useForm<TNotificationSettingsSchema>({
+    resolver: zodResolver(notificationSettingsSchema),
+    defaultValues: {
+      defaultEmailAddress: currentEmail,
+    },
+  });
+
+  async function onSubmit(values: TNotificationSettingsSchema) {
+    try {
+      const result = await updateUser({ notificationSettings: values });
+
+      setUser(result.data as IUser);
+    } catch (error: unknown) {
+      handleError(error);
+    }
+
+    setIsEditable(false);
+  }
 
   const [isEditable, setIsEditable] = useState(false);
 
   return (
-    <Card className="relative">
+    <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div className="space-y-2">
           <CardTitle>{profile.notifications.defaultEmail}</CardTitle>
@@ -40,12 +76,26 @@ const DefaultEmail = () => {
         </Button>
       </CardHeader>
       <CardContent>
-        <Typography>{user?.email}</Typography>
-        {isEditable && (
-          <Button className="absolute bottom-6 right-6" type="submit">
-            <Save /> {common.save}
-          </Button>
-        )}
+        <Form {...form}>
+          <form className="relative" onSubmit={form.handleSubmit(onSubmit)}>
+            {isEditable ? (
+              <div className="max-w-[200px]">
+                <InputField
+                  form={form}
+                  name="defaultEmailAddress"
+                  type={'email'}
+                />
+              </div>
+            ) : (
+              <Typography variant="p">{currentEmail}</Typography>
+            )}
+            {isEditable && (
+              <Button className="absolute bottom-0 right-0" type="submit">
+                <Save /> {common.save}
+              </Button>
+            )}
+          </form>
+        </Form>
       </CardContent>
     </Card>
   );
