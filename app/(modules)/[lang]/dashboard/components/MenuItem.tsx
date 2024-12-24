@@ -8,6 +8,7 @@ import {
 import { IMenuItem } from '@/app/(modules)/[lang]/dashboard/interfaces';
 import Link from 'next/link';
 import { cn } from '@/app/lib';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { usePathname } from 'next/navigation';
 
 interface IProps {
@@ -16,8 +17,12 @@ interface IProps {
 }
 const MenuItem = ({ item, route }: IProps) => {
   const pathname = usePathname();
+  const { dashboard } = useDictionary();
 
   const isActive = route === pathname;
+
+  const labelText =
+    dashboard.sidebar[item.label as keyof typeof dashboard.sidebar];
 
   return (
     <SidebarMenuItem key={item.label}>
@@ -30,7 +35,7 @@ const MenuItem = ({ item, route }: IProps) => {
       >
         <Link href={route}>
           <item.icon />
-          <span className="first-letter:uppercase">{item.label}</span>
+          <span className="first-letter:uppercase">{labelText}</span>
         </Link>
       </SidebarMenuButton>
     </SidebarMenuItem>

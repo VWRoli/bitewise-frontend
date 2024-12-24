@@ -6,13 +6,17 @@ import {
 } from '@/app/components/ui/tabs';
 
 import { EProfileView } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/enum';
+import { IPageProps } from '@/app/utils/interfaces';
 import Notifications from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Notifications';
 import PlansAndBilling from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/PlansAndBilling';
 import Preferences from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Appearance';
 import Profile from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile';
 import Security from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Security';
+import { getDictionary } from '@/app/i18n/dictionaries';
 
-export default async function Page() {
+export default async function Page(props: IPageProps) {
+  const { profile } = await getDictionary(props.params.lang);
+
   return (
     <div className="mt-8 p-2 md:p-4 xl:p-8">
       <nav></nav>
@@ -20,17 +24,19 @@ export default async function Page() {
         <Tabs defaultValue={EProfileView.MY_PROFILE}>
           <TabsList className="">
             <TabsTrigger value={EProfileView.MY_PROFILE}>
-              My Profile
+              {profile.menuOptions.profile}
             </TabsTrigger>
-            <TabsTrigger value={EProfileView.SECURITY}>Security</TabsTrigger>
+            <TabsTrigger value={EProfileView.SECURITY}>
+              {profile.menuOptions.security}
+            </TabsTrigger>
             <TabsTrigger value={EProfileView.BILLING}>
-              Plans and Billing
+              {profile.menuOptions.billing}
             </TabsTrigger>
             <TabsTrigger value={EProfileView.NOTIFICATIONS}>
-              Notifications
+              {profile.menuOptions.notifications}
             </TabsTrigger>
             <TabsTrigger value={EProfileView.PREFERENCES}>
-              Preferences
+              {profile.menuOptions.preferences}
             </TabsTrigger>
           </TabsList>
           <div className="pt-8">

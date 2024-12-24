@@ -40,7 +40,7 @@ export const SUB_MENU_ITEMS: IMenuItem[] = [
     icon: Calculator,
   },
   {
-    label: 'payment plans',
+    label: 'paymentPlans',
     route: '/payment-plans',
     icon: CreditCard,
   },

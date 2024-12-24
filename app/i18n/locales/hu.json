@@ -10,6 +10,7 @@
       "logout": "Kijelentkezés"
     },
     "sidebar": {
+      "app": "Alkalmazás",
       "dashboard": "Vezérlőpult",
       "ingredients": "Hozzávalók",
       "recipes": "Receptek",
