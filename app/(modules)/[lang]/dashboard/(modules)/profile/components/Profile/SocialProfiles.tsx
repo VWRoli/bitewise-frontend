@@ -9,7 +9,7 @@ import {
 import { Edit, Save } from 'lucide-react';
 import {
   TSocialProfilesSchema,
-  socialProfilesSchema,
+  createSocialProfilesSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
 
 import { Button } from '@/app/components/ui/button';
@@ -26,9 +26,11 @@ import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const SocialProfiles = () => {
-  const { common, profile } = useDictionary();
+  const { common, profile, validation } = useDictionary();
   const [isEditable, setIsEditable] = useState(false);
   const { user, setUser } = useUserContext();
+
+  const socialProfilesSchema = createSocialProfilesSchema(validation);
 
   const form = useForm<TSocialProfilesSchema>({
     resolver: zodResolver(socialProfilesSchema),

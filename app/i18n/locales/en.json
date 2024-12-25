@@ -40,7 +40,9 @@
     "emailInvalid": "Invalid email",
     "imageRequired": "Please update or add new image.",
     "imageType": ".jpg, .jpeg, .png and .webp files are accepted.",
-    "imageSize": "Max file size is 5MB."
+    "imageSize": "Max file size is 5MB.",
+    "required": "This field is required",
+    "invalidUrl": "Invalid URL"
   },
   "profile": {
     "menuOptions": {

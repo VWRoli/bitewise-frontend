@@ -40,7 +40,9 @@
     "emailInvalid": "Érvénytelen e-mail",
     "imageRequired": "Kép kötelező",
     "imageType": "Csak .jpg, .jpeg vagy .png fájlok engedélyezettek",
-    "imageSize": "A kép mérete nem lehet nagyobb, mint 5 MB"
+    "imageSize": "A kép mérete nem lehet nagyobb, mint 5 MB",
+    "required": "Ez a mező kötelező",
+    "invalidUrl": "Érvénytelen URL"
   },
   "profile": {
     "menuOptions": {
