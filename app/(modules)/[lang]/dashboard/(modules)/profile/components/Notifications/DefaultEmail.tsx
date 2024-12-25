@@ -11,7 +11,7 @@ import { Edit, Save } from 'lucide-react';
 import {
   TNotificationSettingsSchema,
   createNotificationSettingsSchema,
-} from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations/notification-settings.validation';
+} from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
 
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';

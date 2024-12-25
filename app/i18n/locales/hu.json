@@ -31,7 +31,9 @@
     "ago": "ezelőtt",
     "minutes": "perc",
     "hours": "óra",
-    "continue": "Folytatás"
+    "continue": "Folytatás",
+    "upload": "Feltöltés",
+    "loading": "Betöltés"
   },
   "validation": {
     "emailInvalid": "Érvénytelen e-mail"

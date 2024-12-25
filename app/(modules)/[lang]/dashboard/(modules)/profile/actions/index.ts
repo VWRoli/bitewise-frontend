@@ -29,3 +29,9 @@ export async function updateUser(user: Partial<IUser>) {
 export async function changePassword(data: TChangePasswordSchema) {
   await apiRequest<void>(`auth/change-password`, 'POST', data);
 }
+
+export async function updateProfilePicture(formData: FormData) {
+  const result = await apiRequest<IUser>(`users/me/avatar`, 'POST', formData);
+
+  return result;
+}

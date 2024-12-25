@@ -31,10 +31,15 @@
     "ago": "ago",
     "minutes": "minutes",
     "hours": "hours",
-    "continue": "Continue"
+    "continue": "Continue",
+    "upload": "Upload",
+    "loading": "Loading"
   },
   "validation": {
-    "emailInvalid": "Invalid email"
+    "emailInvalid": "Invalid email",
+    "imageRequired": "Please update or add new image.",
+    "imageType": ".jpg, .jpeg, .png and .webp files are accepted.",
+    "imageSize": "Max file size is 5MB."
   },
   "profile": {
     "menuOptions": {

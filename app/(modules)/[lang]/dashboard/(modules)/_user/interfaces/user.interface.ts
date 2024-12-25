@@ -1,9 +1,8 @@
 import {
+  TNotificationSettingsSchema,
   TPersonalInfoSchema,
   TSocialProfilesSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
-
-import { TNotificationSettingsSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations/notification-settings.validation';
 
 export interface IUser {
   id: number;
@@ -11,4 +10,5 @@ export interface IUser {
   personalInformation?: TPersonalInfoSchema;
   socialProfiles?: TSocialProfilesSchema;
   notificationSettings?: TNotificationSettingsSchema;
+  avatarUrl?: string;
 }

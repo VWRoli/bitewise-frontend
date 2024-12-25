@@ -14,23 +14,15 @@ export async function apiRequest<T>(
   body?: any,
   params?: IQueryParams,
 ): Promise<IApiResponse<T>> {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get('accessToken')?.value;
+  const accessToken = getAccessToken();
   try {
-    if (!accessToken) {
-      throw new Error('Unauthorized');
-    }
-
-    const queryString = params ? `?${buildQueryParams(params)}` : '';
-    const url = `${API_URL}/${endpoint}${queryString}`;
+    const url = createUrl(endpoint, params);
+    const headers = createHeaders(accessToken, body);
 
     const res = await fetch(url, {
       method,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: body ? JSON.stringify(body) : undefined,
+      headers,
+      body: body instanceof FormData ? body : JSON.stringify(body),
       cache: method === 'GET' ? 'no-store' : undefined,
     });
 
@@ -49,4 +41,35 @@ export async function apiRequest<T>(
   } catch (error: unknown) {
     throw error;
   }
+}
+
+function createHeaders(
+  accessToken: string,
+  body?: any,
+): Record<string, string> {
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  if (!(body instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  return headers;
+}
+
+function createUrl(endpoint: string, params?: IQueryParams): string {
+  const queryString = params ? `?${buildQueryParams(params)}` : '';
+  return `${API_URL}/${endpoint}${queryString}`;
+}
+
+function getAccessToken(): string {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+
+  if (!accessToken) {
+    throw new Error('Unauthorized');
+  }
+
+  return accessToken;
 }
