@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/components/ui/card';
-import { Edit, Loader, Upload } from 'lucide-react';
+import { Edit, Upload } from 'lucide-react';
 import {
   TImageSchema,
   createImageSchema,
@@ -19,10 +19,10 @@ import {
 
 import { ACCEPTED_IMAGE_TYPES } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
 import { Button } from '@/app/components/ui/button';
+import FileUploadFormField from '@/app/components/form/FileUploadFormField';
 import { Form } from '@/app/components/ui/form';
 import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
-import { Input } from '@/app/components/ui/input';
-import { Label } from '@/app/components/ui/label';
+import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { handleError } from '@/app/utils/helpers';
 import { updateProfilePicture } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { useDictionary } from '@/app/providers/dictionary-provider';
@@ -80,34 +80,24 @@ const BasicInfo = () => {
         <Form {...form}>
           <form className="relative" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex items-end gap-4">
-              <div>
-                <Label htmlFor="avatar">Avatar</Label>
-                <Input
-                  id="avatar"
-                  name="file"
-                  type="file"
-                  accept={ACCEPTED_IMAGE_TYPES.join(',')}
-                  onChange={(e) => {
-                    const selectedFile = e.target.files?.[0] || null;
-                    form.setValue('file', selectedFile);
-                  }}
-                />
-              </div>
-              <Button
+              <FileUploadFormField
+                id="avatar"
+                name="file"
+                form={form}
+                label={common.profileImage}
+                accept={ACCEPTED_IMAGE_TYPES.join(',')}
+                changeHandler={(e) => {
+                  const selectedFile = e.target.files?.[0] || null;
+                  form.setValue('file', selectedFile);
+                }}
+              />
+              <LoadingButton
                 variant="outline"
-                type="submit"
-                disabled={form.formState.isSubmitting}
+                type={'submit'}
+                loading={form.formState.isSubmitting}
               >
-                {form.formState.isSubmitting ? (
-                  <>
-                    <Loader className="animate-spin" /> {common.loading}
-                  </>
-                ) : (
-                  <>
-                    <Upload /> {common.upload}
-                  </>
-                )}
-              </Button>
+                <Upload /> {common.upload}
+              </LoadingButton>
             </div>
           </form>
         </Form>

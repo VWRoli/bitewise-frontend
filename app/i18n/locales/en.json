@@ -33,7 +33,8 @@
     "hours": "hours",
     "continue": "Continue",
     "upload": "Upload",
-    "loading": "Loading"
+    "loading": "Loading",
+    "profileImage": "Profile Image"
   },
   "validation": {
     "emailInvalid": "Invalid email",

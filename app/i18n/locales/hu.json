@@ -33,10 +33,14 @@
     "hours": "óra",
     "continue": "Folytatás",
     "upload": "Feltöltés",
-    "loading": "Betöltés"
+    "loading": "Betöltés",
+    "profileImage": "Profilkép"
   },
   "validation": {
-    "emailInvalid": "Érvénytelen e-mail"
+    "emailInvalid": "Érvénytelen e-mail",
+    "imageRequired": "Kép kötelező",
+    "imageType": "Csak .jpg, .jpeg vagy .png fájlok engedélyezettek",
+    "imageSize": "A kép mérete nem lehet nagyobb, mint 5 MB"
   },
   "profile": {
     "menuOptions": {
