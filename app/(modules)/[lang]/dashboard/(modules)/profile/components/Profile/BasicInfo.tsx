@@ -22,6 +22,7 @@ import { Button } from '@/app/components/ui/button';
 import FileUploadFormField from '@/app/components/form/FileUploadFormField';
 import { Form } from '@/app/components/ui/form';
 import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
+import ImageCropDialog from '@/app/components/dialogs/ImageCropDialog';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { handleError } from '@/app/utils/helpers';
 import { updateProfilePicture } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
@@ -36,6 +37,7 @@ const BasicInfo = () => {
   const { user, setUser } = useUserContext();
 
   const [isEditable, setIsEditable] = useState(false);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
 
   const imageSchema = createImageSchema(validation);
 
@@ -55,11 +57,20 @@ const BasicInfo = () => {
       handleError(error);
     }
 
+    setImagePreviewUrl(null);
     setIsEditable(false);
   }
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0] || null;
+    form.setValue('file', selectedFile);
+    if (selectedFile) {
+      setImagePreviewUrl(URL.createObjectURL(selectedFile));
+    }
+  };
+
   return (
-    <Card className="flex min-h-32 w-full items-center justify-between p-6">
+    <Card className="relative flex min-h-32 w-full items-center justify-between p-6">
       {!isEditable ? (
         <div className="flex items-center">
           <Avatar className="size-16">
@@ -86,18 +97,25 @@ const BasicInfo = () => {
                 form={form}
                 label={common.profileImage}
                 accept={ACCEPTED_IMAGE_TYPES.join(',')}
-                changeHandler={(e) => {
-                  const selectedFile = e.target.files?.[0] || null;
-                  form.setValue('file', selectedFile);
-                }}
+                changeHandler={handleImageChange}
               />
               <LoadingButton
                 variant="outline"
                 type={'submit'}
+                disabled={!imagePreviewUrl}
                 loading={form.formState.isSubmitting}
               >
                 <Upload /> {common.upload}
               </LoadingButton>
+              {imagePreviewUrl && (
+                <ImageCropDialog
+                  file={imagePreviewUrl}
+                  onSave={(croppedFile) => {
+                    form.setValue('file', croppedFile);
+                    setImagePreviewUrl(URL.createObjectURL(croppedFile));
+                  }}
+                />
+              )}
             </div>
           </form>
         </Form>
@@ -106,7 +124,10 @@ const BasicInfo = () => {
       <Button
         variant="outline"
         type={'button'}
-        onClick={() => setIsEditable((prev) => !prev)}
+        onClick={() => {
+          setImagePreviewUrl(null);
+          setIsEditable((prev) => !prev);
+        }}
         disabled={form.formState.isSubmitting}
       >
         {!isEditable && <Edit />}

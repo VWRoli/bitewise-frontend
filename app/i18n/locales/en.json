@@ -34,7 +34,8 @@
     "continue": "Continue",
     "upload": "Upload",
     "loading": "Loading",
-    "profileImage": "Profile Image"
+    "profileImage": "Profile Image",
+    "crop": "Crop"
   },
   "validation": {
     "emailInvalid": "Invalid email",
@@ -45,6 +46,10 @@
     "invalidUrl": "Invalid URL"
   },
   "profile": {
+    "basic": {
+      "cropImage": "Crop Image",
+      "cropImageDesc": "Adjust and crop your profile image"
+    },
     "menuOptions": {
       "profile": "My Profile",
       "security": "Security",

@@ -34,7 +34,8 @@
     "continue": "Folytatás",
     "upload": "Feltöltés",
     "loading": "Betöltés",
-    "profileImage": "Profilkép"
+    "profileImage": "Profilkép",
+    "crop": "Vágás"
   },
   "validation": {
     "emailInvalid": "Érvénytelen e-mail",
@@ -45,6 +46,10 @@
     "invalidUrl": "Érvénytelen URL"
   },
   "profile": {
+    "basic": {
+      "cropImage": "Kép vágása",
+      "cropImageDesc": "Állítsa be és vágja le a profilképét"
+    },
     "menuOptions": {
       "profile": "Profilom",
       "security": "Biztonság",
